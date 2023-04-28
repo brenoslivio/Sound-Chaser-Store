@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Chaser - Home</title>
+    <style>
+        html, body {
+            margin:0;
+            padding:0;
+            height:100%;
+            width:100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #B583B3;
+        }
+
+        header img {
+            width:10vw;
+            margin-top: 2vw;
+            margin-left: 4vw;
+        }
+
+        #search {
+            width: 10vw;
+            padding: 1vw 6vw;
+            font-size: 1vw;
+            border: none;
+            border-radius: 2vw;
+            background-color: #ddd;
+        }
+
+        #search:focus {
+            outline: none;
+            background-color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #B583B3;
+            padding-bottom: 2vw;
+        }
+
+        nav a {
+            margin: 0 4%;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1vw;
+            font-weight: bold;
+            text-shadow: 0px 1px #000;
+        }
+
+        #login {
+            margin-right: 5vw;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1vw;
+            font-weight: bold;
+            text-shadow: 0px 1px #000;
+        }
+
+        #cart {
+            margin-right: 5vw;
+            font-size: 1vw;
+            color: #270606;
+        }
+
+
+        .layer {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+        }
+
+        .banner {
+            height: 30vw;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: #000;
+        }
+
+        .banner-img {
+            height: 100%;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("imgs/bgs/blocks-T3mKJXfdims-unsplash.jpg");
+            opacity: 0.4;
+        }
+
+        footer {
+            display:flex;
+            height: 5vw;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            background-color: #464646;
+            font-size: 1vw;
+        }
+
+        main {
+            height: 50vw;
+            width: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+        }
+
+      </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="imgs/logo.png" alt="Logo">
+        </div>
+        <div>
+            <form>
+                <input type="text" id="search" placeholder="Search...">
+            </form>
+        </div>
+        <div>
+            <a href="#" id="login">Login</a>
+            <span id="cart">&#128722;</span>
+        </div>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Store</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    <div class="banner">
+        <div class="banner-img">
+        </div>
+    </div>
+
+
+    <main>
+        <div class="layer">
+
+        </div>
+        
+    </main>
+    <footer>
+        Breno L. S. de Almeida &copy; ICMC - USP 2023/1
+    </footer>
+
+</body>
+</html>
