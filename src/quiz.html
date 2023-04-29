@@ -89,7 +89,7 @@
 
         main {
             width: 100%;
-            height: 80vw;
+            height: 86vw;
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -105,11 +105,10 @@
         .quiz {
             position: absolute;
             width: 80vw;
-            height: 72vw;
+            height: 78vw;
             left: 10%;
             top: 14vw;
             background: rgba(114, 54, 111, 0.9);
-
             border-radius: 2vw;
         }
 
@@ -121,7 +120,120 @@
             color: #ffffff;
         }
 
+        .quiz .description {
+            position: absolute;
+            font-size: 2vw;
+            top: 11vw; 
+            left: 19vw;
+            color: #ffffff;
+        }
 
+        input[type=radio] {
+            width: 2vw;
+            height: 2vw;
+            accent-color: #72366F;
+        }
+
+        label {
+            font-size: 2vw;
+            margin: 0 3vw;
+        }
+
+        .question-options {
+            position: relative;
+            top: 14vw; 
+            left: 14.5vw;
+            padding: 1vw 1vw;
+            border-radius: 2vw;
+            background-color: #B583B3;
+            color: #72366F;
+        }
+
+        #question1 {
+            position: absolute;
+            top: 6vw; 
+        }
+
+        #question1-text {
+            position: absolute;
+            font-size: 2vw;
+            top: 10vw;
+            left: 34vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        #question2 {
+            position: absolute;font-size: 2vw;
+            top: 16vw; 
+        }
+
+        #question2-text {
+            position: absolute;
+            font-size: 2vw;
+            top: 10vw;
+            left: 27vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        #question3 {
+            position: absolute;
+            top: 26vw; 
+        }
+
+        #question3-text {
+            position: absolute;
+            font-size: 2vw;
+            top: 10vw;
+            left: 29vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        #question4 {
+            position: absolute;
+            top: 36vw; 
+        }
+
+        #question4-text {
+            position: absolute;
+            font-size: 2vw;
+            top: 10vw;
+            left: 29vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        #question5 {
+            position: absolute;
+            top: 46vw; 
+        }
+
+        #question5-text {
+            position: absolute;
+            font-size: 2vw;
+            top: 10vw;
+            left: 33vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        #quiz-btn {
+            position: absolute;
+            font-size: 2vw;
+            left: 33vw;
+            bottom: 5vw;
+            padding: 1vw 6vw;
+            border: none;
+            border-radius: 2vw;
+            color: #fff;
+            background-color: #B583B3;
+        }
+
+        /* #quiz-btn:focus {
+
+        } */
 
       </style>
 </head>
@@ -152,7 +264,89 @@
         <div class="layer">
             <div class="quiz">
                 <div class="title"> Quiz </div>
+                <div class="description"> Rate from 1 to 5 each one of the following descriptions: </div>
+                
+                <div id="question1">
+                    <div id="question1-text"> Your mood today </div>
+                    <div class="question-options">
+                        <input type="radio" name="group1" id="q1_1" value=1 />
+                        <label for="q1_1">1</label>
+                        <input type="radio" name="group1" id="q1_2" value=2 />
+                        <label for="q1_2">2</label>
+                        <input type="radio" name="group1" id="q1_3" value=3 />
+                        <label for="q1_3">3</label>
+                        <input type="radio" name="group1" id="q1_4" value=4 />
+                        <label for="q1_4">4</label>
+                        <input type="radio" name="group1" id="q1_5" value=5 />
+                        <label for="q1_5">5</label>
+                    </div>
+                </div>
 
+                <div id="question2">
+                    <div id="question2-text"> Importance of song's lyrics to you </div>
+                    <div class="question-options">
+                        <input type="radio" name="group2" id="q2_1" value=1 />
+                        <label for="q2_1">1</label>
+                        <input type="radio" name="group2" id="q2_2" value=2 />
+                        <label for="q2_2">2</label>
+                        <input type="radio" name="group2" id="q2_3" value=3 />
+                        <label for="q2_3">3</label>
+                        <input type="radio" name="group2" id="q2_4" value=4 />
+                        <label for="q2_4">4</label>
+                        <input type="radio" name="group2" id="q2_5" value=5 />
+                        <label for="q2_5">5</label>
+                    </div>
+                </div>
+
+                <div id="question3">
+                    <div id="question3-text"> Comfortable with long songs  </div>
+                    <div class="question-options">
+                        <input type="radio" name="group3" id="q3_1" value=1 />
+                        <label for="q3_1">1</label>
+                        <input type="radio" name="group3" id="q3_2" value=2 />
+                        <label for="q3_2">2</label>
+                        <input type="radio" name="group3" id="q3_3" value=3 />
+                        <label for="q3_3">3</label>
+                        <input type="radio" name="group3" id="q3_4" value=4 />
+                        <label for="q3_4">4</label>
+                        <input type="radio" name="group3" id="q3_5" value=5 />
+                        <label for="q3_5">5</label>
+                    </div>
+                </div>
+
+                <div id="question4">
+                    <div id="question4-text"> Constantly dancing to songs  </div>
+                    <div class="question-options">
+                        <input type="radio" name="group4" id="q4_1" value=1 />
+                        <label for="q4_1">1</label>
+                        <input type="radio" name="group4" id="q4_2" value=2 />
+                        <label for="q4_2">2</label>
+                        <input type="radio" name="group4" id="q4_3" value=3 />
+                        <label for="q4_3">3</label>
+                        <input type="radio" name="group4" id="q4_4" value=4 />
+                        <label for="q4_4">4</label>
+                        <input type="radio" name="group4" id="q4_5" value=5 />
+                        <label for="q4_5">5</label>
+                    </div>
+                </div>
+
+                <div id="question5">
+                    <div id="question5-text"> Like virtuoso artists  </div>
+                    <div class="question-options">
+                        <input type="radio" name="group5" id="q5_1" value=1 />
+                        <label for="q5_1">1</label>
+                        <input type="radio" name="group5" id="q5_2" value=2 />
+                        <label for="q5_2">2</label>
+                        <input type="radio" name="group5" id="q5_3" value=3 />
+                        <label for="q5_3">3</label>
+                        <input type="radio" name="group5" id="q5_4" value=4 />
+                        <label for="q5_4">4</label>
+                        <input type="radio" name="group5" id="q5_5" value=5 />
+                        <label for="q5_5">5</label>
+                    </div>
+                </div>
+
+                <button id="quiz-btn">Send</button>
             </div>
         </div>
         
