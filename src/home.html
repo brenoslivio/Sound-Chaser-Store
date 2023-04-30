@@ -77,6 +77,99 @@
             margin-right: 6vw;
         }
 
+        .arrow-up {
+            position: absolute;
+            top: 5.1vw;
+            right: 13vw;
+            border-left: 1vw solid transparent;
+            border-right: 1vw solid transparent;
+            border-bottom: 1vw solid rgba(114, 54, 111, 0.8);
+            backdrop-filter: blur(0.5vw);
+        }
+        
+        .login-form {
+            position: absolute;
+            width: 20vw;
+            height: 20vw;
+            top: 6vw;
+            right: 10vw;
+            z-index: 1;
+            border-radius: 2vw;
+            background-color: rgba(114, 54, 111, 0.8);
+            backdrop-filter: blur(0.5vw);
+        }
+
+        #login_mail {
+            position: relative;
+            display: block;
+            font-size: 1vw;
+            margin: 0 auto;
+            width: 14vw;
+            top: 2vw;
+            color:rgb(255, 255, 255);
+            outline: 0;
+            border-width: 0 0 0.1vw;
+            border-color: rgb(255, 255, 255);
+            background-color:transparent;
+        }
+
+        #login_password {
+            position: relative;
+            display: block;
+            font-size: 1vw;
+            margin: 0 auto;
+            width: 14vw;
+            top: 3vw;
+            color:rgb(255, 255, 255);
+            outline: 0;
+            border-width: 0 0 0.1vw;
+            border-color: rgb(255, 255, 255);
+            background-color:transparent;
+        }
+
+        .login-form .forgot {
+            position: relative;
+            top: 4vw;
+            left: 8vw;
+            color: #fff;
+            font-size: 1vw;
+        }
+
+        #login-btn {
+            position: relative;
+            font-size: 1vw;
+            top: 5vw;
+            left: 4vw;
+            width: 12vw;
+            height: 3vw;
+            border: none;
+            border-radius: 2vw;
+            color: #fff;
+            background-color: #B583B3;
+        }
+
+        .login-form .register {
+            position: relative;
+            top: 6vw;
+            left: 5vw;
+            color: #fff;
+            font-size: 1vw;
+        }
+
+        #register-btn {
+            position: relative;
+            font-size: 1vw;
+            top: 7vw;
+            left: 4vw;
+            width: 12vw;
+            height: 3vw;
+            /* padding: 1vw 5vw; */
+            border: none;
+            border-radius: 2vw;
+            color: #fff;
+            background-color: #B583B3;
+        }
+
         .banner {
             height: 30vw;
             width: 100%;
@@ -94,6 +187,7 @@
             background-size: cover;
             background-image: url("imgs/bgs/blocks-T3mKJXfdims-unsplash.jpg");
             opacity: 0.4;
+            filter: blur(0.1vw);
         }
 
         footer {
@@ -151,8 +245,8 @@
             height: 72vw;
             left: 10%;
             top: 44vw;
-            background: rgba(255, 255, 255, 0.6);
-
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(0.5vw);
             border-radius: 2vw;
         }
 
@@ -221,6 +315,7 @@
       </style>
 </head>
 <body>
+
     <header>
         <div>
             <img src="imgs/logo.png" alt="Logo">
@@ -235,6 +330,23 @@
             </svg>
         </div>
     </header>
+    <div class="login-container">
+        <div class="arrow-up"></div>
+        <div class="login-form">
+            <input type="text" id="login_mail" placeholder="E-mail">
+            <input type="text" id="login_password" placeholder="Password">
+            <div class="forgot">
+                Forgot your password?
+            </div>
+            <button id="login-btn">Login</button>
+            <div class="register">
+                I don't have an accout yet
+            </div>
+            <button id="register-btn">Register</button>
+            
+        </div>
+    </div>
+
     <nav>
         <a href="#">Home</a>
         <a href="#">Store</a>
@@ -335,5 +447,25 @@
         Breno L. S. de Almeida &copy; ICMC - USP 2023/1
     </footer>
 </body>
-  
+  <script>
+    document.getElementsByClassName('login-container')[0].style.display = 'none';
+    
+    const loginButton = document.getElementById("login");
+
+    loginButton.addEventListener('click', () => {
+        if (document.getElementsByClassName('login-container')[0].style.display === "none") {
+            document.getElementsByClassName('login-container')[0].style.display = "block";
+        } else {
+            document.getElementsByClassName('login-container')[0].style.display = "none";
+        }
+    });
+
+    document.addEventListener('mouseup', function(e) {
+        var container = document.getElementsByClassName('login-container')[0];
+        if (!container.contains(e.target)) {
+            container.style.display = 'none';
+        }
+    });
+
+  </script>
 </html>
