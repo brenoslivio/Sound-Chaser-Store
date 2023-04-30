@@ -103,7 +103,10 @@
         }
 
         .quiz {
+            display: flex;
             position: absolute;
+            justify-content: center;
+            text-align: center;
             width: 80vw;
             height: 78vw;
             left: 10%;
@@ -116,15 +119,13 @@
             position: absolute;
             font-size: 4vw;
             top: 4vw; 
-            left: 36vw;
             color: #ffffff;
         }
 
         .quiz .description {
             position: absolute;
             font-size: 2vw;
-            top: 11vw; 
-            left: 19vw;
+            top: 10vw;
             color: #ffffff;
         }
 
@@ -139,11 +140,16 @@
             margin: 0 3vw;
         }
 
-        .question-options {
+        .question-text {
             position: relative;
-            top: 14vw; 
-            left: 14.5vw;
-            padding: 1vw 1vw;
+            font-size: 2vw;
+            top: -1vw;
+            white-space: nowrap;
+            color: #ffffff;
+        }
+
+        .question-options {
+            padding: 1vw 4vw;
             border-radius: 2vw;
             background-color: #B583B3;
             color: #72366F;
@@ -151,78 +157,32 @@
 
         #question1 {
             position: absolute;
-            top: 6vw; 
-        }
-
-        #question1-text {
-            position: absolute;
-            font-size: 2vw;
-            top: 10vw;
-            left: 34vw;
-            white-space: nowrap;
-            color: #ffffff;
-        }
-
-        #question2 {
-            position: absolute;font-size: 2vw;
             top: 16vw; 
         }
 
-        #question2-text {
-            position: absolute;
-            font-size: 2vw;
-            top: 10vw;
-            left: 27vw;
-            white-space: nowrap;
-            color: #ffffff;
-        }
-
-        #question3 {
+        #question2 {
             position: absolute;
             top: 26vw; 
         }
 
-        #question3-text {
-            position: absolute;
-            font-size: 2vw;
-            top: 10vw;
-            left: 29vw;
-            white-space: nowrap;
-            color: #ffffff;
-        }
-
-        #question4 {
+        #question3 {
             position: absolute;
             top: 36vw; 
         }
 
-        #question4-text {
-            position: absolute;
-            font-size: 2vw;
-            top: 10vw;
-            left: 29vw;
-            white-space: nowrap;
-            color: #ffffff;
-        }
-
-        #question5 {
+        #question4 {
             position: absolute;
             top: 46vw; 
         }
 
-        #question5-text {
+        #question5 {
             position: absolute;
-            font-size: 2vw;
-            top: 10vw;
-            left: 33vw;
-            white-space: nowrap;
-            color: #ffffff;
+            top: 56vw; 
         }
 
         #quiz-btn {
             position: absolute;
             font-size: 2vw;
-            left: 33vw;
             bottom: 5vw;
             padding: 1vw 6vw;
             border: none;
@@ -230,10 +190,6 @@
             color: #fff;
             background-color: #B583B3;
         }
-
-        /* #quiz-btn:focus {
-
-        } */
 
       </style>
 </head>
@@ -267,7 +223,7 @@
                 <div class="description"> Rate from 1 to 5 each one of the following descriptions: </div>
                 
                 <div id="question1">
-                    <div id="question1-text"> Your mood today </div>
+                    <div class="question-text"> Your mood today </div>
                     <div class="question-options">
                         <input type="radio" name="group1" id="q1_1" value=1 />
                         <label for="q1_1">1</label>
@@ -283,7 +239,7 @@
                 </div>
 
                 <div id="question2">
-                    <div id="question2-text"> Importance of song's lyrics to you </div>
+                    <div class="question-text"> Importance of song's lyrics to you </div>
                     <div class="question-options">
                         <input type="radio" name="group2" id="q2_1" value=1 />
                         <label for="q2_1">1</label>
@@ -299,7 +255,7 @@
                 </div>
 
                 <div id="question3">
-                    <div id="question3-text"> Comfortable with long songs  </div>
+                    <div class="question-text"> Comfortable with long songs  </div>
                     <div class="question-options">
                         <input type="radio" name="group3" id="q3_1" value=1 />
                         <label for="q3_1">1</label>
@@ -315,7 +271,7 @@
                 </div>
 
                 <div id="question4">
-                    <div id="question4-text"> Constantly dancing to songs  </div>
+                    <div class="question-text"> Constantly dancing to songs  </div>
                     <div class="question-options">
                         <input type="radio" name="group4" id="q4_1" value=1 />
                         <label for="q4_1">1</label>
@@ -331,7 +287,7 @@
                 </div>
 
                 <div id="question5">
-                    <div id="question5-text"> Like virtuoso artists  </div>
+                    <div class="question-text"> Like virtuoso artists  </div>
                     <div class="question-options">
                         <input type="radio" name="group5" id="q5_1" value=1 />
                         <label for="q5_1">1</label>

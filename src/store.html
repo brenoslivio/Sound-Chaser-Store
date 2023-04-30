@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Chaser</title>
+    <link rel="icon" href="imgs/icon.png">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/univers">
+    <style>
+        * {
+            font-family: "Univers", "Helvetica", sans-serif;
+        }
+
+        html, body {
+            margin:0;
+            padding:0;
+            height:100%;
+            width:100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #B583B3;
+        }
+
+        header img {
+            width:12vw;
+            margin-top: 1vw;
+            margin-left: 4vw;
+        }
+
+        #search {
+            width: 6vw;
+            padding: 0.75vw 10vw;
+            font-size: 0.75vw;
+            border: none;
+            border-radius: 0.5vw;
+            background-color: #ddd;
+        }
+
+        #search:focus {
+            outline: none;
+            background-color: #fff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #B583B3;
+            padding-bottom: 1vw;
+        }
+
+        nav a {
+            margin: 0 4%;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.5vw;
+            font-weight: bold;
+            text-shadow: 0px 1px #000;
+        }
+
+        #login {
+            margin-right: 5vw;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.5vw;
+            font-weight: bold;
+            text-shadow: 0px 1px #000;
+        }
+
+        .cart {
+            width: 1.5vw;
+            margin-right: 6vw;
+        }
+
+        footer {
+            display:flex;
+            height: 4vw;
+            color: #fff;
+            justify-content: center;
+            align-items: center;
+            background-color: #464646;
+            font-size: 1vw;
+        }
+
+        main {
+            width: 100%;
+            height: 64vw;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-image: url("imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+        }
+
+        .layer {
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+        }
+
+        .filter {
+            width: 25%;
+            height: 100%;
+            background-color: rgba(114, 54, 111, 0.9);
+        }
+
+        .genres {
+            position: relative;
+            top: 2vw;
+            left: 2vw;
+            font-size: 1.5vw;
+            color: #fff;
+        }
+
+        .genres .title {
+            font-size: 3vw;
+        }
+
+        input[type=checkbox] {
+            width: 2vw;
+            height: 2vw;
+            accent-color: #72366F;
+        }
+
+        input[type=text] {
+            width: 6vw;
+            height: 2vw;
+            font-size: 1.5vw;
+            border: none;
+            border-radius: 0.5vw;
+            accent-color: #72366F;
+        }
+
+        #filter-btn {
+            position: relative;
+            font-size: 2vw;
+            top: 2vw;
+            left: 2.5vw;
+            padding: 1vw 6vw;
+            border: none;
+            border-radius: 2vw;
+            color: #fff;
+            background-color: #B583B3;
+        }
+
+        .albums {
+            position: absolute;
+            width: 71%;
+            height: 60vw;
+            left: 27vw;
+            top: 12vw;
+            border-radius: 1vw;
+            background-color: rgba(181, 131, 179, 0.4);
+        }
+
+        #container1 {
+            position: absolute;
+            top: 4vw;
+            left: 4vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container1:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        #container2 {
+            position: absolute;
+            top: 4vw;
+            left: 26vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container2:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        #container3 {
+            position: absolute;
+            top: 4vw;
+            left: 48vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container3:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        #container4 {
+            position: absolute;
+            top: 32vw;
+            left: 4vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container4:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        #container5 {
+            position: absolute;
+            top: 32vw;
+            left: 26vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container5:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        #container6 {
+            position: absolute;
+            top: 32vw;
+            left: 48vw; 
+            width: 18vw;
+            height: 24vw;
+            border-radius: 1vw;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: outline 0.1s linear;
+        }
+
+        #container6:hover {
+            outline: 0.5vw solid #72366F;
+        }
+
+        .album img {
+            display: block;
+            width: 100%;
+        }
+
+        .card {
+            position: absolute;
+            width: 50%;
+            top: 2vw;
+            left: 4.5vw;
+        }
+
+        .card .text{
+            position: relative;
+            top: 3vw;
+            text-align: center;
+            font-size: 1.25vw;
+        }
+
+      </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="imgs/logo.png" alt="Logo">
+        </div>
+        <div>
+            <input type="text" id="search" placeholder="Search...">
+        </div>
+        <div>
+            <a href="#" id="login">Login</a>
+            <svg class="cart" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-cart4" viewBox="0 0 16 16">
+                <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+            </svg>
+
+        </div>
+    </header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Store</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </nav>
+    
+    <main>
+        <div class="layer">
+            <div class="filter">
+                <div class="genres">
+                    <div class="title">Genres</div>
+                    <br>
+                    <input type="checkbox" id="classic_rock" name="classic_rock" value="classic_rock">
+                    <label for="classic_rock"> Classic Rock </label><br>
+                    <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative_rock">
+                    <label for="alternative_rock"> Alternative Rock </label><br>
+                    <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive_rock">
+                    <label for="progressive_rock"> Progressive Rock </label><br>
+                    <input type="checkbox" id="jazz" name="jazz" value="jazz">
+                    <label for="jazz"> Jazz </label><br>
+                    <input type="checkbox" id="classical" name="classical" value="classical">
+                    <label for="classical"> Classical Music </label><br>
+                    <input type="checkbox" id="pop" name="pop" value="pop">
+                    <label for="pop"> Pop </label><br>
+                    <input type="checkbox" id="rap" name="rap" value="rap">
+                    <label for="rap"> Rap </label><br>
+                    <br>
+                    <div class="title">Price range</div>
+                    <br>
+                    <input type="text" id="price_min" name="price_min" placeholder="Min">
+                    |
+                    <input type="text" id="price_max" name="price_max" placeholder="Max">
+                    <br>
+                    <br>
+                    <div class="title">Album year</div>
+                    <br>
+                    <input type="text" id="price_min" name="price_min" placeholder="Min">
+                    |
+                    <input type="text" id="price_max" name="price_max" placeholder="Max">
+                    <br>
+                    <br>
+                    <button id="filter-btn">Filter</button>
+                </div>
+            </div>
+            <div class="albums">
+
+                <div id="container1">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/traffic_circle.png" alt="Traffic Circle"/>
+                        </div>
+                        <div class="text">
+                            Traffic Circle (1971) <br>
+                            No <br>
+                            <br>
+                            $49.99
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container2">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/kind_of_pink.png" alt="Kind of Pink"/>
+                        </div>
+                        <div class="text">
+                            Kind of Pink (1969) <br>
+                            The Cool Jazz Trio <br>
+                            <br>
+                            $49.99
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container3">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/rated_m.png" alt="Rated M"/>
+                        </div>
+                        <div class="text">
+                            Rated M (2009) <br>
+                            Rihaha <br>
+                            <br>
+                            $39.99
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container4">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/zero.png" alt="Zero"/>
+                        </div>
+                        <div class="text">
+                            Zero (1968) <br>
+                            Hard Machine <br>
+                            <br>
+                            $19.99
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container5">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/you_got_it.png" alt="you got it."/>
+                        </div>
+                        <div class="text">
+                            you got it. (2017) <br>
+                            Magi-dami <br>
+                            <br>
+                            $39.99
+                        </div>
+                    </div>
+                </div>
+
+                <div id="container6">
+                    <div class="card">
+                        <div class="album">
+                            <img src="imgs/albums/2012.png" alt="2012"/>
+                        </div>
+                        <div class="text">
+                            2012 (1976) <br>
+                            Rash <br>
+                            <br>
+                            $39.99
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+    </main>
+    <footer>
+        Breno L. S. de Almeida &copy; ICMC - USP 2023/1
+    </footer>
+</body>
+  
+</html>
