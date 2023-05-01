@@ -1,0 +1,201 @@
+/* Fonts and initial config */
+
+* {
+    font-family: "Univers", "Helvetica", sans-serif;
+}
+
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+    width:100%;
+}
+
+/* Header and navbar */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #B583B3;
+}
+
+header img {
+    width:12vw;
+    margin-top: 1vw;
+    margin-left: 4vw;
+}
+
+/* Search bar */
+
+#search {
+    width: 6vw;
+    padding: 0.75vw 10vw;
+    font-size: 0.75vw;
+    border: none;
+    border-radius: 0.5vw;
+    background-color: #ddd;
+}
+
+#search:focus {
+    outline: none;
+    background-color: #fff;
+}
+
+/* Cart */
+
+.cart {
+    width: 1.5vw;
+    margin-right: 6vw;
+}
+
+/* Login option and overlay */
+
+#login {
+    margin-right: 5vw;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5vw;
+    font-weight: bold;
+    text-shadow: 0px 1px #000;
+}
+
+.arrow-up {
+    position: absolute;
+    top: 5.1vw;
+    right: 13vw;
+    border-left: 1vw solid transparent;
+    border-right: 1vw solid transparent;
+    border-bottom: 1vw solid rgba(114, 54, 111, 0.8);
+    backdrop-filter: blur(0.5vw);
+}
+
+.login-form {
+    position: absolute;
+    width: 20vw;
+    height: 20vw;
+    top: 6vw;
+    right: 10vw;
+    z-index: 1;
+    border-radius: 2vw;
+    background-color: rgba(114, 54, 111, 0.8);
+    backdrop-filter: blur(0.5vw);
+}
+
+#login_mail {
+    position: relative;
+    display: block;
+    font-size: 1vw;
+    margin: 0 auto;
+    width: 14vw;
+    top: 2vw;
+    color:rgb(255, 255, 255);
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: rgb(255, 255, 255);
+    background-color:transparent;
+}
+
+#login_password {
+    position: relative;
+    display: block;
+    font-size: 1vw;
+    margin: 0 auto;
+    width: 14vw;
+    top: 3vw;
+    color:rgb(255, 255, 255);
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: rgb(255, 255, 255);
+    background-color:transparent;
+}
+
+.login-form .forgot {
+    position: relative;
+    top: 4vw;
+    left: 8vw;
+    color: #fff;
+    font-size: 1vw;
+}
+
+#login-btn {
+    position: relative;
+    font-size: 1vw;
+    top: 5vw;
+    left: 4vw;
+    width: 12vw;
+    height: 3vw;
+    border: none;
+    border-radius: 2vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+#login-btn:hover {
+    background-color: #583257;
+}
+
+#login-btn:active {
+    background-color: #350808;
+}
+
+.login-form .register {
+    position: relative;
+    top: 6vw;
+    left: 5vw;
+    color: #fff;
+    font-size: 1vw;
+}
+
+#register-btn {
+    position: relative;
+    font-size: 1vw;
+    top: 7vw;
+    left: 4vw;
+    width: 12vw;
+    height: 3vw;
+    /* padding: 1vw 5vw; */
+    border: none;
+    border-radius: 2vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+#register-btn:hover {
+    background-color: #583257;
+}
+
+#register-btn:active {
+    background-color: #350808;
+}
+
+/* Nav bar */
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #B583B3;
+    padding-bottom: 1vw;
+}
+
+nav a {
+    margin: 0 4%;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.5vw;
+    font-weight: bold;
+    text-shadow: 0px 1px #000;
+}
+
+/* Webpage footer */
+
+footer {
+    display:flex;
+    height: 4vw;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    background-color: #464646;
+    font-size: 1vw;
+}

@@ -7,265 +7,11 @@
     <title>Sound Chaser</title>
     <link rel="icon" href="imgs/icon.png">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/univers">
-    <style>
-        * {
-            font-family: "Univers", "Helvetica", sans-serif;
-        }
-
-        html, body {
-            margin:0;
-            padding:0;
-            height:100%;
-            width:100%;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #B583B3;
-        }
-
-        header img {
-            width:12vw;
-            margin-top: 1vw;
-            margin-left: 4vw;
-        }
-
-        #search {
-            width: 6vw;
-            padding: 0.75vw 10vw;
-            font-size: 0.75vw;
-            border: none;
-            border-radius: 0.5vw;
-            background-color: #ddd;
-        }
-
-        #search:focus {
-            outline: none;
-            background-color: #fff;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #B583B3;
-            padding-bottom: 1vw;
-        }
-
-        nav a {
-            margin: 0 4%;
-            text-decoration: none;
-            color: #ffffff;
-            font-size: 1.5vw;
-            font-weight: bold;
-            text-shadow: 0px 1px #000;
-        }
-
-        #login {
-            margin-right: 5vw;
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.5vw;
-            font-weight: bold;
-            text-shadow: 0px 1px #000;
-        }
-
-        .cart {
-            width: 1.5vw;
-            margin-right: 6vw;
-        }
-
-        footer {
-            display:flex;
-            height: 4vw;
-            color: #fff;
-            justify-content: center;
-            align-items: center;
-            background-color: #464646;
-            font-size: 1vw;
-        }
-
-        main {
-            width: 100%;
-            height: 64vw;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: url("imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
-        }
-
-        .layer {
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
-        }
-
-        #filter-btn {
-            position: relative;
-            font-size: 2vw;
-            top: 2vw;
-            left: 2.5vw;
-            padding: 1vw 6vw;
-            border: none;
-            border-radius: 2vw;
-            color: #fff;
-            background-color: #B583B3;
-        }
-
-        .albums {
-            position: absolute;
-            width: 95%;
-            height: 60vw;
-            left: 2.5%;
-            top: 12vw;
-            border-radius: 1vw;
-            background-color: rgba(181, 131, 179, 0.4);
-            backdrop-filter: blur(0.5vw);
-        }
-
-        .product {
-            position: absolute;
-            width: 95%;
-            height: 27vw;
-            top: 2vw;
-            left: 2vw; 
-            border-radius: 1vw;
-            background-color: rgba(255, 255, 255, 0.7);
-            transition: outline 0.1s linear;
-        }
-
-        .related {
-            position: absolute;
-            width: 95%;
-            height: 27vw;
-            top: 31vw;
-            left: 2vw; 
-            
-            border-radius: 1vw;
-            background-color: rgba(255, 255, 255, 0.7);
-            transition: outline 0.1s linear;
-        }
-
-        .product .album {
-            position: relative;
-            width: 20%;
-            left: 4%;
-            top: 4vw;
-        }
-
-        .album img {
-            display: block;
-            width: 100%;
-        }
-
-        .product .title {
-            position: absolute;
-            width: 20%;
-            left: 28%;
-            top: 2vw;
-            font-size: 2vw;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .product .genre {
-            position: absolute;
-            width: 20%;
-            left: 28%;
-            top: 5vw;
-            font-size: 1.5vw;
-            white-space: nowrap;
-            color: #464646;
-        }
-
-        .product .description {
-            position: absolute;
-            width: 40%;
-            left: 28%;
-            top: 9vw;
-            font-size: 1.25vw;
-        }
-
-        .product .price {
-            position: absolute;
-            width: 30%;
-            left: 88%;
-            top: 2vw;
-            font-size: 3vw;
-        }
-
-        .product .quantity {
-            position: absolute;
-            width: 16vw;
-            height: 4vw;
-            bottom: 14vw;
-            right: 4vw;
-            font-size: 1.5vw;
-        }
-
-        select {
-            width: 4vw;
-            height: 3vw;
-            font-size: 1.5vw;
-        }
-
-        option {
-            font-size: 1.5vw;
-            width: 3vw;
-        }
-
-        .product .product-btn {
-            position: absolute;
-            width: 16vw;
-            height: 4vw;
-            bottom: 3vw;
-            right: 4vw;
-            font-size: 1.5vw;
-            border: none;
-        }
-
-        .related .title {
-            position: relative;
-            top: 2vw;
-            left: 2vw;
-            font-size: 2vw;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        #related-album1 {
-            position: absolute;
-            width: 12%;
-            left: 6vw;
-            top: 6vw;
-        }
-
-        #related-album2 {
-            position: absolute;
-            width: 12%;
-            left: 24vw;
-            top: 6vw;
-        }
-
-        #related-album1 .text {
-            position: relative;
-            text-align: center;
-            top: 1vw;
-            font-size: 1.5vw;
-        }
-
-        #related-album2 .text {
-            position: relative;
-            text-align: center;
-            top: 1vw;
-            font-size: 1.5vw;
-        }
-
-      </style>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/product.css">
 </head>
 <body>
+    <!-- Header with logo, search bar, login and cart options -->
     <header>
         <div>
             <img src="imgs/logo.png" alt="Logo">
@@ -281,6 +27,26 @@
 
         </div>
     </header>
+
+    <!-- Login options -->
+    <div class="login-container">
+        <div class="arrow-up"></div>
+        <div class="login-form">
+            <input type="text" id="login_mail" placeholder="E-mail">
+            <input type="text" id="login_password" placeholder="Password">
+            <div class="forgot">
+                Forgot your password?
+            </div>
+            <button id="login-btn">Login</button>
+            <div class="register">
+                I don't have an accout yet
+            </div>
+            <button id="register-btn">Register</button>
+            
+        </div>
+    </div>
+
+    <!-- Nav bar -->
     <nav>
         <a href="#">Home</a>
         <a href="#">Store</a>
@@ -370,5 +136,5 @@
         Breno L. S. de Almeida &copy; ICMC - USP 2023/1
     </footer>
 </body>
-  
+<script src="scripts/login-overlay.js"></script>
 </html>
