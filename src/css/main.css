@@ -57,7 +57,7 @@ header img {
     color: #fff;
     font-size: 1.5vw;
     font-weight: bold;
-    text-shadow: 0px 1px #000;
+    text-shadow: 0vw 0.1vw #000;
 }
 
 .arrow-up {
@@ -185,7 +185,13 @@ nav a {
     color: #ffffff;
     font-size: 1.5vw;
     font-weight: bold;
-    text-shadow: 0px 1px #000;
+    text-shadow: 0vw 0.1vw #000;
+    border-bottom: 0.2vw solid transparent;
+    transition: border-bottom 0.3s linear;
+}
+
+nav a:hover {
+    border-bottom: 0.2vw solid #72366F;
 }
 
 /* Webpage footer */
