@@ -15,9 +15,9 @@ main {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
 }
 
-/* Container for quiz portion */
+/* Container for register portion */
 
-.quiz {
+.register-container {
     display: flex;
     position: absolute;
     justify-content: center;
@@ -31,81 +31,45 @@ main {
     backdrop-filter: blur(0.5vw);
 }
 
-.quiz .title {
+.register-container .title {
     position: absolute;
     font-size: 4vw;
     top: 4vw; 
     color: #ffffff;
 }
 
-.quiz .description {
+.icon-register {
     position: absolute;
-    font-size: 2vw;
-    top: 10vw;
-    color: #ffffff;
+    width: 15vw;
+    top: 15vw;
 }
 
-/* Custom radio buttons */
-
-input[type=radio] {
-    width: 2vw;
-    height: 2vw;
-    accent-color: #72366F;
-}
-
-label {
-    font-size: 2vw;
-    margin: 0 3vw;
-}
-
-.question-text {
+.register-container .form {
     position: relative;
     font-size: 2vw;
-    top: -1vw;
-    white-space: nowrap;
+    width: 60vw;
+    height: 40vw;
+    top: 34vw;
     color: #ffffff;
 }
 
-.question-options {
-    padding: 1vw 4vw;
-    border-radius: 2vw;
-    background-color: #B583B3;
-    color: #72366F;
+#register_name, #register_mail, #register_phone, #register_password, #register_confirm {
+    position: relative;
+    display: block;
+    font-size: 2vw;
+    margin: 2vw auto;
+    width: 35vw;
+    color:rgb(255, 255, 255);
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: rgb(255, 255, 255);
+    background-color:transparent;
 }
 
-/* Quiz questions */
-
-#question1 {
-    position: absolute;
-    top: 16vw; 
-}
-
-#question2 {
-    position: absolute;
-    top: 26vw; 
-}
-
-#question3 {
-    position: absolute;
-    top: 36vw; 
-}
-
-#question4 {
-    position: absolute;
-    top: 46vw; 
-}
-
-#question5 {
-    position: absolute;
-    top: 56vw; 
-}
-
-/* Quiz button */
-
-#quiz-btn {
-    position: absolute;
+#form-register-btn {
+    position: relative;
     font-size: 2.5vw;
-    bottom: 5vw;
+    top: 5vw;
     width: 25vw;
     height: 6vw;
     border: none;
@@ -114,10 +78,10 @@ label {
     background-color: #B583B3;
 }
 
-#quiz-btn:hover {
+#form-register-btn:hover {
     background-color: #583257;
 }
 
-#quiz-btn:active {
+#form-register-btn:active {
     background-color: #350808;
 }

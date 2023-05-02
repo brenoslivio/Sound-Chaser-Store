@@ -14,7 +14,7 @@
     <!-- Header with logo, search bar, login and cart options -->
     <header>
         <div>
-            <img src="imgs/logo.png" alt="Logo">
+            <a href="home.html" id="logo-link"><img src="imgs/logo.png" alt="Logo"></a>
         </div>
         <div>
             <input type="text" id="search" placeholder="Search...">
@@ -38,10 +38,9 @@
             </div>
             <button id="login-btn">Login</button>
             <div class="register">
-                I don't have an accout yet
+                I don't have an account yet
             </div>
-            <button id="register-btn">Register</button>
-            
+            <button onclick="location.href='register.html';" style="cursor: pointer;" id="register-btn">Register</button>
         </div>
     </div>
 
@@ -64,10 +63,7 @@
             Answer our quiz, and we will recommend <br>
             the best kinds of music to your taste!
         </div>
-        <form action="quiz.html">
-            <button class="banner-btn">Take the quiz!</button>
-        </form>
-        
+        <button onclick="location.href='quiz.html';" style="cursor: pointer;" class="banner-btn">Take the quiz!</button>
     </div>
     
     <!-- Main portion with latest additions -->
@@ -80,7 +76,7 @@
                 <!-- Albums cards -->
 
                 <div class="card">
-                    <div class="album">
+                    <div class="album" onclick="location.href='product.html';" style="cursor: pointer;">
                         <img src="imgs/albums/traffic_circle.png" alt="Traffic Circle"/>
                     </div>
                     <div class="card-text">

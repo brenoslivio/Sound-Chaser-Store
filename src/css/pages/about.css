@@ -15,7 +15,7 @@ main {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
 }
 
-/* Container for quiz portion */
+/* Container for about portion */
 
 .about {
     display: flex;
@@ -67,6 +67,6 @@ main {
 .creators .text {
     position: relative;
     font-size: 2vw;
-    top: 44vw;
+    top: 46vw;
     color: #ffffff;
 }

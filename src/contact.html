@@ -14,7 +14,7 @@
     <!-- Header with logo, search bar, login and cart options -->
     <header>
         <div>
-            <img src="imgs/logo.png" alt="Logo">
+            <a href="home.html" id="logo-link"><img src="imgs/logo.png" alt="Logo"></a>
         </div>
         <div>
             <input type="text" id="search" placeholder="Search...">
@@ -38,10 +38,9 @@
             </div>
             <button id="login-btn">Login</button>
             <div class="register">
-                I don't have an accout yet
+                I don't have an account yet
             </div>
-            <button id="register-btn">Register</button>
-            
+            <button onclick="location.href='register.html';" style="cursor: pointer;" id="register-btn">Register</button>
         </div>
     </div>
 
@@ -53,7 +52,7 @@
         <a href="contact.html">Contact</a>
     </nav>
     
-    <!-- Main portion for quiz -->
+    <!-- Main portion for contact -->
     <main>
         <div class="layer">
             <div class="contact">

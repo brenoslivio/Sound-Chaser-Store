@@ -8,7 +8,7 @@
     <link rel="icon" href="imgs/icon.png">
     <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/univers">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/pages/about.css">
+    <link rel="stylesheet" href="css/pages/register.css">
 </head>
 <body>
     <!-- Header with logo, search bar, login and cart options -->
@@ -52,32 +52,29 @@
         <a href="contact.html">Contact</a>
     </nav>
     
-    <!-- Main portion for about -->
+    <!-- Main portion for register -->
     <main>
         <div class="layer">
-            <div class="about">
-                <div class="title"> About </div>
-                <div class="description"> 
-                    Website created for the class SCC0219 - Introduction to Web Development.
-                    <br><br>
-                    In publishing and graphic design, Lorem ipsum is a placeholder text commonly 
-                    used to demonstrate the visual form of a document or a typeface without 
-                    relying on meaningful content. Lorem ipsum may be used as a placeholder 
-                    before final copy is available. It is also used to temporarily replace text in 
-                    a process called greeking, which allows designers to consider the form of 
-                    a webpage or publication, without the meaning of the text influencing the design. 
+            <div class="register-container">
+                <div class="title"> Register </div>
+                <div class="icon-register">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                    </svg>
                 </div>
                 
-                <div class="creators">
-                    <div class="photo">
-                        <img src="imgs/profile.jpg" alt="Creator's photo"/>
-                    </div>
-                    <div class="text">
-                        Creator
-                        <br><br>
-                        Breno L. S. de Almeida
-                    </div>
+                <div class="form"> 
+                    
+                    <input type="text" id="register_name" placeholder="Name">
+                    <input type="text" id="register_mail" placeholder="E-mail">
+                    <input type="text" id="register_phone" placeholder="Phone number">
+                    <input type="text" id="register_password" placeholder="Password">
+                    <input type="text" id="register_confirm" placeholder="Confirm your password">
+                
+                    <button id="form-register-btn">Register</button>
                 </div>
+
             </div>
         </div>
         
