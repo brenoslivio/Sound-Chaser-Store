@@ -98,3 +98,9 @@ This following Figma Prototype can be used to interact with the screens created 
 Several HTML5/CSS3 files were created considering the project requirements and mockups.
 
 ### 2.3 Navigation Diagram
+
+We created the following navigation diagram considering how the aapplication will work with separate interfaces for the customer and administrators:
+
+![Nav Diagram](./src/imgs/nav_diagram.png)
+
+Considering how the navigation bar is presented, we have bidirectional navigation occurring throughout the application (i.e. we can go back and forth in these portions).
