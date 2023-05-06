@@ -136,3 +136,5 @@ Considering how the navigation bar is presented, we have bidirectional navigatio
 For the first milestone, we created several HTML5/CSS3 files to develop the screens for the Single Page Application (SPA). 
 
 To properly adapt to different devices of different sizes, we adopted [viewport units](https://web.dev/viewport-units/) for the proper scaling of objects with CSS.
+
+Also, JavaScript was only used for login form overlay.
