@@ -97,7 +97,7 @@ main {
 
 .product .price {
     position: absolute;
-    width: 30%;
+    width: 10vw;
     left: 88%;
     top: 2vw;
     font-size: 3vw;
