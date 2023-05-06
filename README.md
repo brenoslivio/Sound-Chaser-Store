@@ -12,6 +12,10 @@
 
 Breno Lívio Silva de Almeida, NUSP: 10276675.
 
+**Quick demos:**
+
+[Project Milestone 1: Store Mockups](https://brenoslivio.github.io/Sound-Chaser-Store/src/home.html)
+
 ---
 
 ## Summary 
