@@ -28,10 +28,11 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
 
     - [2.1. Mockups](#2.1)
 
-    - [2.2. Initial Code - Milestone 1](#2.2)
+    - [2.2. Navigation Diagram](#2.2)
 
-    - [2.3. Navigation Diagram](#2.3)
+- [3. Comments About the Code](#3)
 
+    - [3.1. Milestone 1](#3.1)
 ---
 
 ## <a id="1" /> 1. System Requirements
@@ -111,14 +112,23 @@ Mockups for the online record store can be found here: [Figma](https://www.figma
 
 The following Figma Prototype can be used to interact with the screens created (as a customer or administrator): [Prototype](https://www.figma.com/proto/3NG7gNkuU3mJkgFEOOjkbA/Sound-Chaser---Web-Page?node-id=2-5&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=2%3A5&show-proto-sidebar=1)
 
-### <a id="2.2" /> 2.2. Initial Code - Milestone 1
-
 Several HTML5/CSS3 files were created considering the project requirements and mockups.
 
-### <a id="2.3" /> 2.3. Navigation Diagram
+### <a id="2.2" /> 2.2. Navigation Diagram
 
-We created the following navigation diagram considering how the application will work with separate interfaces for the customer and administrators:
+We created the following navigation diagrams considering how the application will work with separate interfaces for the customer and administrators:
 
-![Nav Diagram](./src/imgs/nav_diagram.png)
+![Nav Diagram Customer](./src/imgs/nav_diagram_customer.png)
+
+![Nav Diagram Admin](./src/imgs/nav_diagram_admin.png)
 
 Considering how the navigation bar is presented, we have bidirectional navigation occurring throughout the application (i.e. we can go back and forth in these portions).
+
+## <a id="3" /> 3. Comments About the Code
+
+
+### <a id="3.1" /> 3.1. Milestone 1
+
+For the first milestone, we created several HTML5/CSS3 files to develop the screens for the Single Page Application (SPA). 
+
+To properly adapt to different devices of different sizes, we adopted [viewport units](https://web.dev/viewport-units/) for the proper scaling of objects with CSS.
