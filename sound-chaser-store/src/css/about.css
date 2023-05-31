@@ -1,0 +1,72 @@
+main {
+    width: 100%;
+    height: 86vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for about portion */
+
+.about {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 78vw;
+    left: 10%;
+    top: 14vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.about .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.about .description {
+    position: relative;
+    font-size: 2vw;
+    width: 60vw;
+    height: 60vw;
+    top: 15vw;
+    color: #ffffff;
+}
+
+.creators {
+    position: absolute;
+}
+
+.creators .photo {
+    position: relative;
+    top: 42vw;
+    width: 20vw;
+    height: 20vw;
+}
+
+.photo img {
+    display: block;
+    width: 100%;
+    border-radius: 100%;
+}
+
+.creators .text {
+    position: relative;
+    font-size: 2vw;
+    top: 46vw;
+    color: #ffffff;
+}

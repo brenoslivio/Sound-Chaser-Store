@@ -1,0 +1,66 @@
+main {
+    width: 100%;
+    height: 86vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for contact portion */
+
+.contact {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    width: 80vw;
+    height: 78vw;
+    left: 10%;
+    top: 14vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.contact .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.contact .address {
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    height: 20vw;
+    font-size: 2vw;
+    top: 15vw;
+    color: #ffffff;
+}
+
+.address .icon-address {
+    width: 2vw;
+}
+
+.contact .phone {
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+    height: 20vw;
+    font-size: 2vw;
+    top: 15vw;
+    color: #ffffff;
+}
+
+.phone .icon-phone {
+    width: 2vw;
+}

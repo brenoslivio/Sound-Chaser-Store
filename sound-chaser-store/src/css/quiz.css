@@ -1,0 +1,123 @@
+main {
+    width: 100%;
+    height: 86vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for quiz portion */
+
+.quiz {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 78vw;
+    left: 10%;
+    top: 14vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.quiz .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.quiz .description {
+    position: absolute;
+    font-size: 2vw;
+    top: 10vw;
+    color: #ffffff;
+}
+
+/* Custom radio buttons */
+
+input[type=radio] {
+    width: 2vw;
+    height: 2vw;
+    accent-color: #72366F;
+}
+
+label {
+    font-size: 2vw;
+    margin: 0 3vw;
+}
+
+.question-text {
+    position: relative;
+    font-size: 2vw;
+    top: -1vw;
+    white-space: nowrap;
+    color: #ffffff;
+}
+
+.question-options {
+    padding: 1vw 4vw;
+    border-radius: 2vw;
+    background-color: #B583B3;
+    color: #72366F;
+}
+
+/* Quiz questions */
+
+#question1 {
+    position: absolute;
+    top: 16vw; 
+}
+
+#question2 {
+    position: absolute;
+    top: 26vw; 
+}
+
+#question3 {
+    position: absolute;
+    top: 36vw; 
+}
+
+#question4 {
+    position: absolute;
+    top: 46vw; 
+}
+
+#question5 {
+    position: absolute;
+    top: 56vw; 
+}
+
+/* Quiz button */
+
+#quiz-btn {
+    position: absolute;
+    font-size: 2.5vw;
+    bottom: 5vw;
+    width: 25vw;
+    height: 6vw;
+    border: none;
+    border-radius: 5vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+#quiz-btn:hover {
+    background-color: #583257;
+}
+
+#quiz-btn:active {
+    background-color: #350808;
+}

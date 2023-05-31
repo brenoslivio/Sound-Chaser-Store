@@ -1,0 +1,175 @@
+main {
+    width: 100%;
+    height: 64vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for product and related albums */
+
+.albums {
+    position: absolute;
+    width: 95%;
+    height: 60vw;
+    left: 2.5%;
+    top: 12vw;
+    border-radius: 1vw;
+    background-color: rgba(181, 131, 179, 0.4);
+    backdrop-filter: blur(0.5vw);
+}
+
+/* Container for product */
+
+.product {
+    position: absolute;
+    width: 95%;
+    height: 27vw;
+    top: 2vw;
+    left: 2vw; 
+    border-radius: 1vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: outline 0.1s linear;
+}
+
+/* Container for related albums */
+
+.related {
+    position: absolute;
+    width: 95%;
+    height: 27vw;
+    top: 31vw;
+    left: 2vw; 
+    
+    border-radius: 1vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    transition: outline 0.1s linear;
+}
+
+.product .album {
+    position: relative;
+    width: 20%;
+    left: 4%;
+    top: 4vw;
+}
+
+.album img {
+    display: block;
+    width: 100%;
+}
+
+.product .title {
+    position: absolute;
+    width: 20%;
+    left: 28%;
+    top: 2vw;
+    font-size: 2vw;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.product .genre {
+    position: absolute;
+    width: 20%;
+    left: 28%;
+    top: 5vw;
+    font-size: 1.5vw;
+    white-space: nowrap;
+    color: #464646;
+}
+
+.product .description {
+    position: absolute;
+    width: 40%;
+    left: 28%;
+    top: 9vw;
+    font-size: 1.25vw;
+}
+
+.product .price {
+    position: absolute;
+    width: 10vw;
+    left: 88%;
+    top: 2vw;
+    font-size: 3vw;
+}
+
+.product .quantity {
+    position: absolute;
+    width: 16vw;
+    height: 4vw;
+    bottom: 14vw;
+    right: 4vw;
+    font-size: 1.5vw;
+}
+
+/* Custom select box size */
+
+select {
+    width: 4vw;
+    height: 3vw;
+    font-size: 1.5vw;
+}
+
+option {
+    font-size: 1.5vw;
+    width: 3vw;
+}
+
+.product .product-btn {
+    position: absolute;
+    width: 16vw;
+    height: 4vw;
+    bottom: 3vw;
+    right: 4vw;
+    font-size: 1.5vw;
+    border: none;
+}
+
+.related .title {
+    position: relative;
+    top: 2vw;
+    left: 2vw;
+    font-size: 2vw;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Related albums */
+
+#related-album1 {
+    position: absolute;
+    width: 12%;
+    left: 6vw;
+    top: 6vw;
+}
+
+#related-album2 {
+    position: absolute;
+    width: 12%;
+    left: 24vw;
+    top: 6vw;
+}
+
+#related-album1 .text {
+    position: relative;
+    text-align: center;
+    top: 1vw;
+    font-size: 1.5vw;
+}
+
+#related-album2 .text {
+    position: relative;
+    text-align: center;
+    top: 1vw;
+    font-size: 1.5vw;
+}
