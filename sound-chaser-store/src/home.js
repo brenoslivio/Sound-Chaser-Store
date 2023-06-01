@@ -1,25 +1,32 @@
 import './css/home.css';
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import img1 from "./imgs/albums/traffic_circle.png";
 
 function home(){
+    let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+      let path = "quiz"; 
+      navigate(path);
+    }
 
     return (
         <div>
-            {/* Call to action for quiz  */}
-            <div class="banner">
-                <div class="banner-img"></div>
-                <div class="title"> Discover music lost to time...</div>
-                <div class="text"> 
+
+            <div className="banner">
+                <div className="banner-img"></div>
+                <div className="title"> Discover music lost to time...</div>
+                <div className="text"> 
                     From avant-garde jazz to <br/>
                     progressive rock, we have everything! <br/>
                     <br/>
                     Answer our quiz, and we will recommend <br/>
                     the best kinds of music to your taste!
                 </div>
-                <button class="banner-btn">Take the quiz!</button>
+                <button onClick={routeChange} className="banner-btn">Take the quiz!</button>
             </div>
-            <main>
+
+            <div className="home-page">
                 <div className="layer">
                     <div className="additions">
                         <div className="title"> Latest additions </div>
@@ -89,7 +96,7 @@ function home(){
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     )
 }

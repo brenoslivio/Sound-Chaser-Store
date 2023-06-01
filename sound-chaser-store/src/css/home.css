@@ -22,6 +22,7 @@
 
 .banner .banner-btn {
     position: absolute;
+    cursor: pointer;
     font-size: 1vw;
     top: 34vw; 
     left: 6vw;
@@ -44,7 +45,7 @@
     color: #fff;
 }
 
-main {
+.home-page {
     width: 100%;
     height: 78vw;
     background-position: center;

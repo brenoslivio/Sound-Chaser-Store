@@ -1,10 +1,10 @@
-main {
+.store-page {
     width: 100%;
-    height: 64vw;
+    height: 68vw;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+    background-image: url("../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
 }
 
 /* Gradient layer */
@@ -186,7 +186,6 @@ input[type=checkbox] {
     position: absolute;
     width: 50%;
     top: 2vw;
-    left: 4.5vw;
 }
 
 .card .text{

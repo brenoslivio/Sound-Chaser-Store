@@ -1,21 +1,49 @@
 import './css/main.css';
 import React from 'react';
+import { Link } from "react-router-dom";
 import logo from "./imgs/logo.png";
 
+let login_form = false;
+
+function showLogin(){
+
+    if (login_form === false) {
+        document.getElementsByClassName('login-container')[0].style.display = 'none';
+        login_form = true;
+    }
+    
+    if (document.getElementsByClassName('login-container')[0].style.display === "none") {
+        document.getElementsByClassName('login-container')[0].style.display = "block";
+    } else {
+        document.getElementsByClassName('login-container')[0].style.display = "none";
+    }
+}
+
 function header(){
+    console.log()
+    
+
+    document.addEventListener('mouseup', function(e) {
+        const container = document.getElementsByClassName('login-container')[0];
+        const loginButton = document.getElementById("login");
+        if (!container.contains(e.target) && !loginButton.contains(e.target)) {
+            container.style.display = 'none';
+        }
+    });
 
     return (
         <div>
             <header>
                 <div>
-                    <a href="home.html" id="logo-link"><img src={logo} alt="Logo"/></a>
+                    <Link to="/" id="logo-link"><img src={logo} alt="Logo"/></Link>
                 </div>
                 <div>
                     <input type="text" id="search" placeholder="Search..."/>
                 </div>
                 <div>
-                    <a href="#" id="login">Login</a>
-                    <svg class="cart" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewBox="0 0 16 16">
+                    <button onClick={showLogin} id="login"> Login </button>
+                    
+                    <svg className="cart" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewBox="0 0 16 16">
                         <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 
                         6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 
                         2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 
@@ -26,10 +54,10 @@ function header(){
             </header>
 
             <nav>
-                <a href="home.html">Home</a>
-                <a href="store.html">Store</a>
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
+                <Link to="/">Home</Link>
+                <Link to="/store">Store</Link>
+                <Link to="/about">About</Link>
+                <Link to="/contact">Contact</Link>
             </nav>
 
         </div>
