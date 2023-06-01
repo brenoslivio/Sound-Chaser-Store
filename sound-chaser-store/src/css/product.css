@@ -4,7 +4,7 @@ main {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
 }
 
 /* Gradient layer */
@@ -17,7 +17,7 @@ main {
 
 /* Container for product and related albums */
 
-.albums {
+.product-albums {
     position: absolute;
     width: 95%;
     height: 60vw;
@@ -37,7 +37,7 @@ main {
     top: 2vw;
     left: 2vw; 
     border-radius: 1vw;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
     transition: outline 0.1s linear;
 }
 
@@ -49,20 +49,19 @@ main {
     height: 27vw;
     top: 31vw;
     left: 2vw; 
-    
     border-radius: 1vw;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.5);
     transition: outline 0.1s linear;
 }
 
-.product .album {
+.product .product-album {
     position: relative;
     width: 20%;
     left: 4%;
     top: 4vw;
 }
 
-.album img {
+.product-album img {
     display: block;
     width: 100%;
 }
@@ -125,6 +124,12 @@ option {
     width: 3vw;
 }
 
+.quantity label {
+    position: relative;
+    bottom: 1vw;
+    right: 3vw;
+}
+
 .product .product-btn {
     position: absolute;
     width: 16vw;
@@ -149,15 +154,15 @@ option {
 #related-album1 {
     position: absolute;
     width: 12%;
-    left: 6vw;
-    top: 6vw;
+    left: 8vw;
+    top: 8vw;
 }
 
 #related-album2 {
     position: absolute;
     width: 12%;
-    left: 24vw;
-    top: 6vw;
+    left: 28vw;
+    top: 8vw;
 }
 
 #related-album1 .text {
@@ -173,3 +178,32 @@ option {
     top: 1vw;
     font-size: 1.5vw;
 }
+
+#related-album3 {
+    position: absolute;
+    width: 12%;
+    left: 50vw;
+    top: 8vw;
+}
+
+#related-album4 {
+    position: absolute;
+    width: 12%;
+    left: 72vw;
+    top: 8vw;
+}
+
+#related-album3 .text {
+    position: relative;
+    text-align: center;
+    top: 1vw;
+    font-size: 1.5vw;
+}
+
+#related-album4 .text {
+    position: relative;
+    text-align: center;
+    top: 1vw;
+    font-size: 1.5vw;
+}
+
