@@ -19,8 +19,6 @@ function showLogin(){
 }
 
 function Header(){
-    console.log()
-    
 
     document.addEventListener('mouseup', function(e) {
         const container = document.getElementsByClassName('login-container')[0];

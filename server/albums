@@ -11,7 +11,7 @@
             "price": 49.99,
             "stock": 10,
             "sold": 1,
-            "date_added": "2015-10-01"
+            "date_added": "2020-10-01"
         },
         {
             "id": 1,
@@ -24,7 +24,7 @@
             "price": 49.99,
             "stock": 5,
             "sold": 0,
-            "date_added": "2015-08-08"
+            "date_added": "2022-08-08"
         },
         {
             "id": 2,
@@ -51,6 +51,32 @@
             "stock": 1,
             "sold": 0,
             "date_added": "2015-10-02"
+        },
+        {
+            "id": 4,
+            "name": "you got it.",
+            "artist": "Magi-dami",
+            "year": 2017,
+            "genre": "Pop",
+            "img": "/imgs/albums/you_got_it.png",
+            "description": "",
+            "price": 39.99,
+            "stock": 5,
+            "sold": 0,
+            "date_added": "2019-11-02"
+        },
+        {
+            "id": 5,
+            "name": "2012",
+            "artist": "Rash",
+            "year": 1976,
+            "genre": "Progressive Rock",
+            "img": "/imgs/albums/2012.png",
+            "description": "",
+            "price": 39.99,
+            "stock": 1,
+            "sold": 0,
+            "date_added": "2022-10-02"
         }
     ]
 }
