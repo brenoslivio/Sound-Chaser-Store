@@ -1,0 +1,56 @@
+{
+    "albums":[
+        {
+            "id": 0,
+            "name": "Traffic Circle",
+            "artist": "No",
+            "year": 1971,
+            "genre": "Progressive Rock",
+            "img": "./imgs/albums/traffic_circle.png",
+            "description": "",
+            "price": 49.99,
+            "stock": 10,
+            "sold": 1,
+            "date_added": "2015-10-01"
+        },
+        {
+            "id": 1,
+            "name": "Kind of Pink",
+            "artist": "The Cool Jazz Trio",
+            "year": 1969,
+            "genre": "Jazz",
+            "img": "./imgs/albums/kind_of_pink.png",
+            "description": "",
+            "price": 49.99,
+            "stock": 5,
+            "sold": 0,
+            "date_added": "2015-08-08"
+        },
+        {
+            "id": 2,
+            "name": "Rated M",
+            "artist": "Rihaha",
+            "year": 2009,
+            "genre": "Pop",
+            "img": "./imgs/albums/rated_m.png",
+            "description": "",
+            "price": 39.99,
+            "stock": 8,
+            "sold": 3,
+            "date_added": "2015-10-12"
+        },
+        {
+            "id": 3,
+            "name": "Zero",
+            "artist": "Hard Machine",
+            "year": 1968,
+            "genre": "Jazz",
+            "img": "./imgs/albums/zero.png",
+            "description": "",
+            "price": 19.99,
+            "stock": 1,
+            "sold": 0,
+            "date_added": "2015-10-02"
+        }
+    ]
+}

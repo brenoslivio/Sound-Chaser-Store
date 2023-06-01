@@ -2,7 +2,7 @@ import './css/main.css';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-function login(){
+function Login(){
     let navigate = useNavigate(); 
     const routeChange = () =>{ 
       let path = "register"; 
@@ -27,4 +27,4 @@ function login(){
     )
 }
 
-export default login;
+export default Login;

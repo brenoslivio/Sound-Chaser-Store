@@ -19,7 +19,7 @@ function showLogin(){
     }
 }
 
-function header(){
+function Header(){
     console.log()
     
 
@@ -64,4 +64,4 @@ function header(){
     )
 }
 
-export default header;
+export default Header;

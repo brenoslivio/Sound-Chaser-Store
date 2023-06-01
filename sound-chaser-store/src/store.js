@@ -1,7 +1,7 @@
 import './css/store.css';
 import React from 'react';
 
-function store(){
+function Store(){
 
     return (
         <div className="store-page">
@@ -134,4 +134,4 @@ function store(){
     )
 }
 
-export default store;
+export default Store;

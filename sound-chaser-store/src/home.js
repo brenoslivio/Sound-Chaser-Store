@@ -1,18 +1,42 @@
 import './css/home.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import img1 from "./imgs/albums/traffic_circle.png";
 
-function home(){
+function date_sort(b, a) {
+    return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
+}
+
+async function getLatestAdditions() {
+    const products = await fetch("http://localhost:8000/products")
+                        .then(response => response.json());
+
+    let sortedAlbums = products.albums.sort(date_sort).slice(0, 4);
+    console.log(sortedAlbums);
+    
+    return sortedAlbums;
+}
+
+function Home(){
+    const [latestAdditions, setLatestAdditions] = useState([]);
     let navigate = useNavigate(); 
+
     const routeChange = () =>{ 
       let path = "quiz"; 
       navigate(path);
     }
 
+    useEffect(() => {
+        getLatestAdditions()
+        .then(additions => setLatestAdditions(additions))
+        .catch(error => console.error(error));
+    }, []);
+
+    if (latestAdditions.length === 0) {
+        return <div className="page">Loading...</div>;
+    }
+
     return (
         <div>
-
             <div className="banner">
                 <div className="banner-img"></div>
                 <div className="title"> Discover music lost to time...</div>
@@ -33,64 +57,64 @@ function home(){
 
                         <div className="card">
                             <div className="album">
-                                <img src={img1} alt="Traffic Circle"/>
+                                <img src={require("" + latestAdditions[0].img)} alt={latestAdditions[0].name}/>
                             </div>
                             <div className="card-text">
-                                <b>Album:</b> Traffic Circle <br/>
-                                <b>Artist:</b> No <br/>
-                                <b>Year:</b> 1971 <br/>
-                                <b>Genre:</b> Progressive Rock <br/>
+                                <b>Album:</b> {latestAdditions[0].name} <br/>
+                                <b>Artist:</b> {latestAdditions[0].artist} <br/>
+                                <b>Year:</b> {latestAdditions[0].year} <br/>
+                                <b>Genre:</b> {latestAdditions[0].genre} <br/>
                             </div>
                             <div className="card-price">
-                                $49.99
+                                ${latestAdditions[0].price}
                             </div>
                             <button className="card-btn">Add to cart</button>
                         </div>
 
                         <div className="card">
                             <div className="album">
-                                <img src="imgs/albums/kind_of_pink.png" alt="Kind of Pink"/>
+                                <img src={require("" + latestAdditions[1].img)} alt={latestAdditions[1].name}/>
                             </div>
                             <div className="card-text">
-                                <b>Album:</b> Kind of Pink <br/>
-                                <b>Artist:</b> The Cool Jazz Trio <br/>
-                                <b>Year:</b> 1969 <br/>
-                                <b>Genre:</b> Jazz <br/>
+                                <b>Album:</b> {latestAdditions[1].name} <br/>
+                                <b>Artist:</b> {latestAdditions[1].artist} <br/>
+                                <b>Year:</b> {latestAdditions[1].year} <br/>
+                                <b>Genre:</b> {latestAdditions[1].genre} <br/>
                             </div>
                             <div className="card-price">
-                                $49.99
+                                ${latestAdditions[1].price}
                             </div>
                             <button className="card-btn">Add to cart</button>
                         </div>
 
                         <div className="card">
                             <div className="album">
-                                <img src="imgs/albums/rated_m.png" alt="Rated M"/>
+                                <img src={require("" + latestAdditions[2].img)} alt={latestAdditions[2].name}/>
                             </div>
                             <div className="card-text">
-                                <b>Album:</b> Rated M <br/>
-                                <b>Artist:</b> Rihaha <br/>
-                                <b>Year:</b> 2009 <br/>
-                                <b>Genre:</b> Pop <br/>
+                                <b>Album:</b> {latestAdditions[2].name} <br/>
+                                <b>Artist:</b> {latestAdditions[2].artist} <br/>
+                                <b>Year:</b> {latestAdditions[2].year} <br/>
+                                <b>Genre:</b> {latestAdditions[2].genre} <br/>
                             </div>
                             <div className="card-price">
-                                $39.99
+                                ${latestAdditions[2].price}
                             </div>
                             <button className="card-btn">Add to cart</button>
                         </div>
 
                         <div className="card">
                             <div className="album">
-                                <img src="imgs/albums/zero.png" alt="Zero"/>
+                                <img src={require("" + latestAdditions[3].img)} alt={latestAdditions[3].name}/>
                             </div>
                             <div className="card-text">
-                                <b>Album:</b> Zero <br/>
-                                <b>Artist:</b> Hard Machine <br/>
-                                <b>Year:</b> 1968 <br/>
-                                <b>Genre:</b> Jazz <br/>
+                                <b>Album:</b> {latestAdditions[3].name} <br/>
+                                <b>Artist:</b> {latestAdditions[3].artist} <br/>
+                                <b>Year:</b> {latestAdditions[3].year} <br/>
+                                <b>Genre:</b> {latestAdditions[3].genre} <br/>
                             </div>
                             <div className="card-price">
-                                $19.99
+                                ${latestAdditions[3].price}
                             </div>
                             <button className="card-btn">Add to cart</button>
                         </div>
@@ -101,4 +125,4 @@ function home(){
     )
 }
 
-export default home;
+export default Home;

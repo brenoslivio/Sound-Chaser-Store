@@ -1,7 +1,7 @@
 import './css/quiz.css';
 import React from 'react';
 
-function quiz(){
+function Quiz(){
 
     return (
         <div className="quiz-page">
@@ -97,4 +97,4 @@ function quiz(){
     )
 }
 
-export default quiz;
+export default Quiz;

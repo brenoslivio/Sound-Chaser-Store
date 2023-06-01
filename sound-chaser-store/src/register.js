@@ -1,7 +1,7 @@
 import './css/register.css';
 import React from 'react';
 
-function register(){
+function Register(){
 
     return (
         <div className="register-page">
@@ -32,4 +32,4 @@ function register(){
     )
 }
 
-export default register;
+export default Register;
