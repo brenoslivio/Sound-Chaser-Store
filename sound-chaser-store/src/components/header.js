@@ -1,7 +1,6 @@
-import './css/main.css';
+import '../css/main.css';
 import React from 'react';
 import { Link } from "react-router-dom";
-import logo from "./imgs/logo.png";
 
 let login_form = false;
 
@@ -35,7 +34,7 @@ function Header(){
         <div>
             <header>
                 <div>
-                    <Link to="/" id="logo-link"><img src={logo} alt="Logo"/></Link>
+                    <Link to="/" id="logo-link"><img src="/imgs/logo.png" alt="Logo"/></Link>
                 </div>
                 <div>
                     <input type="text" id="search" placeholder="Search..."/>

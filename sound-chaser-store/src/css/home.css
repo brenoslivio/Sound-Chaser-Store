@@ -15,7 +15,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../imgs/bgs/blocks-T3mKJXfdims-unsplash.jpg");
+    background-image: url("/imgs/bgs/blocks-T3mKJXfdims-unsplash.jpg");
     opacity: 0.4;
     filter: blur(0.1vw);
 }
@@ -51,7 +51,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
 }
 
 /* Gradient layer above background */

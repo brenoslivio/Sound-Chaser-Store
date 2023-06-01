@@ -1,4 +1,4 @@
-import './css/home.css';
+import '../css/home.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +7,7 @@ function date_sort(b, a) {
 }
 
 async function getLatestAdditions() {
-    const products = await fetch("http://localhost:8000/products")
+    const products = await fetch("http://localhost:8000/albums")
                         .then(response => response.json());
 
     let sortedAlbums = products.albums.sort(date_sort).slice(0, 4);
@@ -57,7 +57,7 @@ function Home(){
 
                         <div className="card">
                             <div className="album">
-                                <img src={require("" + latestAdditions[0].img)} alt={latestAdditions[0].name}/>
+                                <img src={latestAdditions[0].img} alt={latestAdditions[0].name}/>
                             </div>
                             <div className="card-text">
                                 <b>Album:</b> {latestAdditions[0].name} <br/>
@@ -73,7 +73,7 @@ function Home(){
 
                         <div className="card">
                             <div className="album">
-                                <img src={require("" + latestAdditions[1].img)} alt={latestAdditions[1].name}/>
+                                <img src={latestAdditions[1].img} alt={latestAdditions[1].name}/>
                             </div>
                             <div className="card-text">
                                 <b>Album:</b> {latestAdditions[1].name} <br/>
@@ -89,7 +89,7 @@ function Home(){
 
                         <div className="card">
                             <div className="album">
-                                <img src={require("" + latestAdditions[2].img)} alt={latestAdditions[2].name}/>
+                                <img src={latestAdditions[2].img} alt={latestAdditions[2].name}/>
                             </div>
                             <div className="card-text">
                                 <b>Album:</b> {latestAdditions[2].name} <br/>
@@ -105,7 +105,7 @@ function Home(){
 
                         <div className="card">
                             <div className="album">
-                                <img src={require("" + latestAdditions[3].img)} alt={latestAdditions[3].name}/>
+                                <img src={latestAdditions[3].img} alt={latestAdditions[3].name}/>
                             </div>
                             <div className="card-text">
                                 <b>Album:</b> {latestAdditions[3].name} <br/>

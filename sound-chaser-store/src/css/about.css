@@ -4,7 +4,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url("../imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
 }
 
 /* Gradient layer */
@@ -60,7 +60,6 @@
 
 .photo img {
     display: block;
-    content:url("../imgs/profile.jpg");
     width: 100%;
     border-radius: 100%;
 }

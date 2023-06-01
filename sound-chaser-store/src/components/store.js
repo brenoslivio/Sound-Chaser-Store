@@ -1,4 +1,4 @@
-import './css/store.css';
+import '../css/store.css';
 import React from 'react';
 
 function Store(){

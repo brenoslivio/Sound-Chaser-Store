@@ -1,13 +1,13 @@
 import React from 'react'
-import Home from './home';
-import Store from './store';
-import About from './about';
-import Contact from './contact';
-import Header from './header';
-import Login from './login';
-import Quiz from './quiz';
-import Register from './register';
-import Footer from './footer';
+import Home from './components/home';
+import Store from './components/store';
+import About from './components/about';
+import Contact from './components/contact';
+import Header from './components/header';
+import Login from './components/login';
+import Quiz from './components/quiz';
+import Register from './components/register';
+import Footer from './components/footer';
 import './App.css';
 
 import {

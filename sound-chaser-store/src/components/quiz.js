@@ -1,4 +1,4 @@
-import './css/quiz.css';
+import '../css/quiz.css';
 import React from 'react';
 
 function Quiz(){

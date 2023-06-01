@@ -1,4 +1,4 @@
-import './css/register.css';
+import '../css/register.css';
 import React from 'react';
 
 function Register(){

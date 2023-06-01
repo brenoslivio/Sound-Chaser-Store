@@ -1,4 +1,4 @@
-import './css/about.css';
+import '../css/about.css';
 import React from 'react';
 
 function about(){
@@ -21,7 +21,7 @@ function about(){
                     
                     <div className="creators">
                         <div className="photo">
-                            <img alt="Creator"/>
+                            <img src="/imgs/profile.jpg" alt="Creator"/>
                         </div>
                         <div className="text">
                             Creator
