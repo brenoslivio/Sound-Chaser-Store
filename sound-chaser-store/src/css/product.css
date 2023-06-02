@@ -170,6 +170,7 @@ option {
     text-align: center;
     top: 1vw;
     font-size: 1.5vw;
+    color: black;
 }
 
 #related-album2 .text {
@@ -177,6 +178,7 @@ option {
     text-align: center;
     top: 1vw;
     font-size: 1.5vw;
+    color: black;
 }
 
 #related-album3 {
@@ -198,6 +200,7 @@ option {
     text-align: center;
     top: 1vw;
     font-size: 1.5vw;
+    color: black;
 }
 
 #related-album4 .text {
@@ -205,5 +208,6 @@ option {
     text-align: center;
     top: 1vw;
     font-size: 1.5vw;
+    color: black;
 }
 

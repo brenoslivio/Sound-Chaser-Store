@@ -191,6 +191,7 @@ input[type=checkbox] {
 
 .card .text{
     position: relative;
+    color: black;
     top: 3vw;
     text-align: center;
     font-size: 1.25vw;

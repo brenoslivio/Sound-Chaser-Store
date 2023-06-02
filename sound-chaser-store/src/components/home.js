@@ -1,6 +1,6 @@
 import '../css/home.css';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function date_sort(b, a) {
     return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
@@ -78,15 +78,17 @@ function Home(){
                         <div className="title"> Latest additions </div>
 
                         <div className="main-card">
-                            <div className="main-album">
-                                <img src={latestAdditions[0].img} alt={latestAdditions[0].name}/>
-                            </div>
-                            <div className="main-card-text">
-                                <b>Album:</b> {latestAdditions[0].name} <br/>
-                                <b>Artist:</b> {latestAdditions[0].artist} <br/>
-                                <b>Year:</b> {latestAdditions[0].year} <br/>
-                                <b>Genre:</b> {latestAdditions[0].genre} <br/>
-                            </div>
+                            <Link to={"/product/" + latestAdditions[0].id}>
+                                <div className="main-album">
+                                    <img src={latestAdditions[0].img} alt={latestAdditions[0].name}/>
+                                </div>
+                                <div className="main-card-text">
+                                    <b>Album:</b> {latestAdditions[0].name} <br/>
+                                    <b>Artist:</b> {latestAdditions[0].artist} <br/>
+                                    <b>Year:</b> {latestAdditions[0].year} <br/>
+                                    <b>Genre:</b> {latestAdditions[0].genre} <br/>
+                                </div>
+                            </Link>
                             <div className="main-card-price">
                                 ${latestAdditions[0].price}
                             </div>
@@ -94,15 +96,17 @@ function Home(){
                         </div>
 
                         <div className="main-card">
-                            <div className="main-album">
-                                <img src={latestAdditions[1].img} alt={latestAdditions[1].name}/>
-                            </div>
-                            <div className="main-card-text">
-                                <b>Album:</b> {latestAdditions[1].name} <br/>
-                                <b>Artist:</b> {latestAdditions[1].artist} <br/>
-                                <b>Year:</b> {latestAdditions[1].year} <br/>
-                                <b>Genre:</b> {latestAdditions[1].genre} <br/>
-                            </div>
+                            <Link to={"/product/" + latestAdditions[1].id}>
+                                <div className="main-album">
+                                    <img src={latestAdditions[1].img} alt={latestAdditions[1].name}/>
+                                </div>
+                                <div className="main-card-text">
+                                    <b>Album:</b> {latestAdditions[1].name} <br/>
+                                    <b>Artist:</b> {latestAdditions[1].artist} <br/>
+                                    <b>Year:</b> {latestAdditions[1].year} <br/>
+                                    <b>Genre:</b> {latestAdditions[1].genre} <br/>
+                                </div>
+                            </Link>
                             <div className="main-card-price">
                                 ${latestAdditions[1].price}
                             </div>
@@ -110,15 +114,17 @@ function Home(){
                         </div>
 
                         <div className="main-card">
-                            <div className="main-album">
-                                <img src={latestAdditions[2].img} alt={latestAdditions[2].name}/>
-                            </div>
-                            <div className="main-card-text">
-                                <b>Album:</b> {latestAdditions[2].name} <br/>
-                                <b>Artist:</b> {latestAdditions[2].artist} <br/>
-                                <b>Year:</b> {latestAdditions[2].year} <br/>
-                                <b>Genre:</b> {latestAdditions[2].genre} <br/>
-                            </div>
+                            <Link to={"/product/" + latestAdditions[2].id}>
+                                <div className="main-album">
+                                    <img src={latestAdditions[2].img} alt={latestAdditions[2].name}/>
+                                </div>
+                                <div className="main-card-text">
+                                    <b>Album:</b> {latestAdditions[2].name} <br/>
+                                    <b>Artist:</b> {latestAdditions[2].artist} <br/>
+                                    <b>Year:</b> {latestAdditions[2].year} <br/>
+                                    <b>Genre:</b> {latestAdditions[2].genre} <br/>
+                                </div>
+                            </Link>
                             <div className="main-card-price">
                                 ${latestAdditions[2].price}
                             </div>
@@ -126,15 +132,17 @@ function Home(){
                         </div>
 
                         <div className="main-card">
-                            <div className="main-album">
-                                <img src={latestAdditions[3].img} alt={latestAdditions[3].name}/>
-                            </div>
-                            <div className="main-card-text">
-                                <b>Album:</b> {latestAdditions[3].name} <br/>
-                                <b>Artist:</b> {latestAdditions[3].artist} <br/>
-                                <b>Year:</b> {latestAdditions[3].year} <br/>
-                                <b>Genre:</b> {latestAdditions[3].genre} <br/>
-                            </div>
+                            <Link to={"/product/" + latestAdditions[3].id}>
+                                <div className="main-album">
+                                    <img src={latestAdditions[3].img} alt={latestAdditions[3].name}/>
+                                </div>
+                                <div className="main-card-text">
+                                    <b>Album:</b> {latestAdditions[3].name} <br/>
+                                    <b>Artist:</b> {latestAdditions[3].artist} <br/>
+                                    <b>Year:</b> {latestAdditions[3].year} <br/>
+                                    <b>Genre:</b> {latestAdditions[3].genre} <br/>
+                                </div>
+                            </Link>
                             <div className="main-card-price">
                                 ${latestAdditions[3].price}
                             </div>

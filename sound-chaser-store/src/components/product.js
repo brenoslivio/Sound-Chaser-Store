@@ -1,6 +1,6 @@
 import '../css/product.css';
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 function date_sort(b, a) {
     return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
@@ -39,10 +39,17 @@ function getRelatedAlbums(albums, album) {
     return relatedAlbums;
 }
 
+function getLinkId(id){
+    if (id !== ""){
+        return "/product/" + id
+    }
+
+    return ""
+}
+
 function Product(){
 
     const params = useParams();
-    console.log(params.id);
 
     const [albums, setAlbums] = useState([]);
 
@@ -112,46 +119,54 @@ function Product(){
                             <div class="title">
                                 Related albums
                             </div>
-                            <div id="related-album1">
-                                <div class="product-album">
-                                    <img src={relatedAlbums[0].img} alt={relatedAlbums[0].name}/>
+                            <Link to={getLinkId(relatedAlbums[0].id)}>
+                                <div id="related-album1">
+                                    <div class="product-album">
+                                        <img src={relatedAlbums[0].img} alt={relatedAlbums[0].name}/>
+                                    </div>
+                                    <div class="text">
+                                        {relatedAlbums[0].name} <br/>
+                                        {relatedAlbums[0].artist} <br/>
+                                        <br/>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    {relatedAlbums[0].name} <br/>
-                                    {relatedAlbums[0].artist} <br/>
-                                    <br/>
+                            </Link>
+                            <Link to={getLinkId(relatedAlbums[1].id)}>
+                                <div id="related-album2">
+                                    <div class="product-album">
+                                        <img src={relatedAlbums[1].img} alt={relatedAlbums[1].name}/>
+                                    </div>
+                                    <div class="text">
+                                        {relatedAlbums[1].name} <br/>
+                                        {relatedAlbums[1].artist} <br/>
+                                        <br/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="related-album2">
-                                <div class="product-album">
-                                    <img src={relatedAlbums[1].img} alt={relatedAlbums[1].name}/>
+                            </Link>
+                            <Link to={getLinkId(relatedAlbums[2].id)}>
+                                <div id="related-album3">
+                                    <div class="product-album">
+                                        <img src={relatedAlbums[2].img} alt={relatedAlbums[2].name}/>
+                                    </div>
+                                    <div class="text">
+                                        {relatedAlbums[2].name} <br/>
+                                        {relatedAlbums[2].artist} <br/>
+                                        <br/>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    {relatedAlbums[1].name} <br/>
-                                    {relatedAlbums[1].artist} <br/>
-                                    <br/>
+                            </Link>
+                            <Link to={getLinkId(relatedAlbums[3].id)}>
+                                <div id="related-album4">
+                                    <div class="product-album">
+                                        <img src={relatedAlbums[3].img} alt={relatedAlbums[3].name}/>
+                                    </div>
+                                    <div class="text">
+                                        {relatedAlbums[3].name} <br/>
+                                        {relatedAlbums[3].artist} <br/>
+                                        <br/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="related-album3">
-                                <div class="product-album">
-                                    <img src={relatedAlbums[2].img} alt={relatedAlbums[2].name}/>
-                                </div>
-                                <div class="text">
-                                    {relatedAlbums[2].name} <br/>
-                                    {relatedAlbums[2].artist} <br/>
-                                    <br/>
-                                </div>
-                            </div>
-                            <div id="related-album4">
-                                <div class="product-album">
-                                    <img src={relatedAlbums[3].img} alt={relatedAlbums[3].name}/>
-                                </div>
-                                <div class="text">
-                                    {relatedAlbums[3].name} <br/>
-                                    {relatedAlbums[3].artist} <br/>
-                                    <br/>
-                                </div>
-                            </div>
+                            </Link>
                     </div>
 
                 </div>
