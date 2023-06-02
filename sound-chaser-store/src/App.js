@@ -6,6 +6,10 @@ import About from './components/about';
 import Contact from './components/contact';
 import Header from './components/header';
 import Login from './components/login';
+import UserInformation from './components/userInformation';
+import UserOrders from './components/userOrders';
+import UserPayment from './components/userPayment';
+import UserAddresses from './components/userAddresses';
 import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
@@ -41,6 +45,12 @@ function App() {
           <Route path="/product/:id" element={<Product />}/>
           <Route path="/about" element={<About />}/>
           <Route path="/contact" element={<Contact />}/>
+
+          <Route path="/user" element={<UserInformation />}/>
+          <Route path="/user/orders" element={<UserOrders />}/>
+          <Route path="/user/payment" element={<UserPayment />}/>
+          <Route path="/user/addresses" element={<UserAddresses />}/>
+
         </Routes>
         <Footer />
     </BrowserRouter>
