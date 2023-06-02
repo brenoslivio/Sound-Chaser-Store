@@ -1,0 +1,14 @@
+{
+    "users":[
+        {
+            "id": 0,
+            "name": "Breno",
+            "email": "brenoslivio@usp.br",
+            "phone": "011999999999",
+            "addresses": ["Av. Trab. São Carlense, 400 - Centro, São Carlos - SP, 13566-590"],
+            "orders": [""],
+            "cards": ["1234567812349999"],
+            "password": "password"
+        }
+    ]
+}

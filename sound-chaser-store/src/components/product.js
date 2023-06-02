@@ -76,11 +76,11 @@ function Product(){
     if (albums.length === 0) {
         return (
             <main>
-                <div class="layer">
-                    <div class="product-albums">
-                        <div class="product">
+                <div className="layer">
+                    <div className="product-albums">
+                        <div className="product">
                         </div>
-                        <div class="related">
+                        <div className="related">
                         </div>
                     </div>
                 </div>
@@ -94,44 +94,44 @@ function Product(){
 
     return (
         <main>
-            <div class="layer">
-                <div class="product-albums">
-                    <div class="product">
-                        <div class="product-album">
+            <div className="layer">
+                <div className="product-albums">
+                    <div className="product">
+                        <div className="product-album">
                             <img src={album.img} alt={album.name}/>
                         </div>
-                        <div class="title">
+                        <div className="title">
                             {album.name} ({album.year}) - {album.artist}
                         </div>
-                        <div class="genre">
+                        <div className="genre">
                             {album.genre}
                         </div>
-                        <div class="description">
+                        <div className="description">
                             {album.description}
                         </div>
-                        <div class="price">
+                        <div className="price">
                             ${album.price}
                         </div>
-                        <div class="quantity">
-                            <label for="qnt">Quantity:</label>
+                        <div className="quantity">
+                            <label htmlFor="qnt">Quantity:</label>
                             <select name="qnt" id="qnt">
                                 {optionsAvailable(album.stock)}
                             </select>
                             <br/>
                             <br/>
-                            <div class="stock">
+                            <div className="stock">
                                 ({album.stock} in stock)     
                             </div>
                         </div>
-                        <button class="product-btn">Add to cart</button>
+                        <button className="product-btn">Add to cart</button>
                     </div>
 
-                    <div class="related">
-                            <div class="title">
+                    <div className="related">
+                            <div className="title">
                                 Related albums
                             </div>
                             {relatedAlbums.slice(0, 4).map((relatedAlbum, index) => (
-                                <Link to={getLinkId(relatedAlbum.id)}>
+                                <Link to={getLinkId(relatedAlbum.id)} key={index}>
                                     <div id={`related-album${index + 1}`}>
                                     <div className="product-album">
                                         <img src={relatedAlbum.img} alt={relatedAlbum.name} />

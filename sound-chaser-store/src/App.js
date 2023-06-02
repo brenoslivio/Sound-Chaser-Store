@@ -18,16 +18,21 @@ import {
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
+  const [user, setUser] = useState('');
 
   const handleSearch = (value) => {
     setSearchValue(value);
   };
 
+  const handleUser = (value) => {
+    setUser(value);
+  };
+
   return (
       <div>
     <BrowserRouter>
-        <Header onSearch={handleSearch}/>
-        <Login />
+        <Header onSearch={handleSearch} userLogin={user}/>
+        <Login onLogin={handleUser}/>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/quiz" element={<Quiz />}/>

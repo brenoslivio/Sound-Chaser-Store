@@ -77,17 +77,17 @@ function Home(){
                     <div className="additions">
                         <div className="title"> Latest additions </div>
 
-                        {latestAdditions.map((album) => (
-                            <div className="main-card">
+                        {latestAdditions.map((album, index) => (
+                            <div className="main-card" key={index}>
                                 <Link to={'/product/' + album.id}>
                                 <div className="main-album">
                                     <img src={album.img} alt={album.name} />
                                 </div>
                                 <div className="main-card-text">
-                                    <b>Album:</b> {album.name} <br />
-                                    <b>Artist:</b> {album.artist} <br />
-                                    <b>Year:</b> {album.year} <br />
-                                    <b>Genre:</b> {album.genre} <br />
+                                    <b>Album:</b> {album.name} <br/>
+                                    <b>Artist:</b> {album.artist} <br/>
+                                    <b>Year:</b> {album.year} <br/>
+                                    <b>Genre:</b> {album.genre} <br/>
                                 </div>
                                 </Link>
                                 <div className="main-card-price">${album.price}</div>

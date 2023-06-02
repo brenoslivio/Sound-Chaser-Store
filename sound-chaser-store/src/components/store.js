@@ -8,7 +8,7 @@ function date_sort(b, a) {
 
 async function getAlbums() {
     const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                        .then(response => response.json());
+                            .then(response => response.json());
 
     let sortedAlbums = products.albums.sort(date_sort);
     
@@ -122,11 +122,11 @@ function Store({ searchValue }){
                                 <div className="card">
                                     <div className="album">
                                         <img src={album.img} alt={album.name} />
-                                        </div>
-                                        <div className="text">
+                                    </div>
+                                    <div className="text">
                                         {album.name} ({album.year}) <br />
                                         {album.artist} <br />
-                                        <br />
+                                    <br />
                                         ${album.price}
                                     </div>
                                 </div>

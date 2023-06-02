@@ -131,6 +131,7 @@ header img {
 #login-btn {
     position: relative;
     display: block;
+    cursor: pointer;
     font-size: 1vw;
     top: 5vw;
     left: 4vw;
