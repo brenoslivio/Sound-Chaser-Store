@@ -77,77 +77,23 @@ function Home(){
                     <div className="additions">
                         <div className="title"> Latest additions </div>
 
-                        <div className="main-card">
-                            <Link to={"/product/" + latestAdditions[0].id}>
+                        {latestAdditions.map((album) => (
+                            <div className="main-card">
+                                <Link to={'/product/' + album.id}>
                                 <div className="main-album">
-                                    <img src={latestAdditions[0].img} alt={latestAdditions[0].name}/>
+                                    <img src={album.img} alt={album.name} />
                                 </div>
                                 <div className="main-card-text">
-                                    <b>Album:</b> {latestAdditions[0].name} <br/>
-                                    <b>Artist:</b> {latestAdditions[0].artist} <br/>
-                                    <b>Year:</b> {latestAdditions[0].year} <br/>
-                                    <b>Genre:</b> {latestAdditions[0].genre} <br/>
+                                    <b>Album:</b> {album.name} <br />
+                                    <b>Artist:</b> {album.artist} <br />
+                                    <b>Year:</b> {album.year} <br />
+                                    <b>Genre:</b> {album.genre} <br />
                                 </div>
-                            </Link>
-                            <div className="main-card-price">
-                                ${latestAdditions[0].price}
+                                </Link>
+                                <div className="main-card-price">${album.price}</div>
+                                <button className="card-btn">Add to cart</button>
                             </div>
-                            <button className="card-btn">Add to cart</button>
-                        </div>
-
-                        <div className="main-card">
-                            <Link to={"/product/" + latestAdditions[1].id}>
-                                <div className="main-album">
-                                    <img src={latestAdditions[1].img} alt={latestAdditions[1].name}/>
-                                </div>
-                                <div className="main-card-text">
-                                    <b>Album:</b> {latestAdditions[1].name} <br/>
-                                    <b>Artist:</b> {latestAdditions[1].artist} <br/>
-                                    <b>Year:</b> {latestAdditions[1].year} <br/>
-                                    <b>Genre:</b> {latestAdditions[1].genre} <br/>
-                                </div>
-                            </Link>
-                            <div className="main-card-price">
-                                ${latestAdditions[1].price}
-                            </div>
-                            <button className="card-btn">Add to cart</button>
-                        </div>
-
-                        <div className="main-card">
-                            <Link to={"/product/" + latestAdditions[2].id}>
-                                <div className="main-album">
-                                    <img src={latestAdditions[2].img} alt={latestAdditions[2].name}/>
-                                </div>
-                                <div className="main-card-text">
-                                    <b>Album:</b> {latestAdditions[2].name} <br/>
-                                    <b>Artist:</b> {latestAdditions[2].artist} <br/>
-                                    <b>Year:</b> {latestAdditions[2].year} <br/>
-                                    <b>Genre:</b> {latestAdditions[2].genre} <br/>
-                                </div>
-                            </Link>
-                            <div className="main-card-price">
-                                ${latestAdditions[2].price}
-                            </div>
-                            <button className="card-btn">Add to cart</button>
-                        </div>
-
-                        <div className="main-card">
-                            <Link to={"/product/" + latestAdditions[3].id}>
-                                <div className="main-album">
-                                    <img src={latestAdditions[3].img} alt={latestAdditions[3].name}/>
-                                </div>
-                                <div className="main-card-text">
-                                    <b>Album:</b> {latestAdditions[3].name} <br/>
-                                    <b>Artist:</b> {latestAdditions[3].artist} <br/>
-                                    <b>Year:</b> {latestAdditions[3].year} <br/>
-                                    <b>Genre:</b> {latestAdditions[3].genre} <br/>
-                                </div>
-                            </Link>
-                            <div className="main-card-price">
-                                ${latestAdditions[3].price}
-                            </div>
-                            <button className="card-btn">Add to cart</button>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

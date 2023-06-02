@@ -13,9 +13,10 @@ async function getAlbums() {
     let sortedAlbums = products.albums.sort(date_sort);
     
     return sortedAlbums;
-}
+} 
 
-function Store(){
+function Store({ searchValue }){
+
     const [albums, setAlbums] = useState([]);
 
     useEffect(() => {
@@ -69,6 +70,12 @@ function Store(){
         )
     }
 
+    const filteredItems = albums.filter((album) =>
+        album.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    console.log(filteredItems);
+
     return (
         <div className="store-page">
             <div className="layer">
@@ -109,103 +116,23 @@ function Store(){
                     </div>
                 </div>
                 <div className="albums">
-
-                    <Link to={"/product/" + albums[0].id}>
-                        <div id="container1">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[0].img} alt={albums[0].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[0].name} ({albums[0].year}) <br/>
-                                    {albums[0].artist} <br/>
-                                    <br/>
-                                    ${albums[0].price}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"/product/" + albums[1].id}>
-                        <div id="container2">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[1].img} alt={albums[1].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[1].name} ({albums[1].year}) <br/>
-                                    {albums[1].artist} <br/>
-                                    <br/>
-                                    ${albums[1].price}
+                    {filteredItems.map((album, index) => (
+                        <Link to={"/product/" + album.id}>
+                            <div id={`container${index + 1}`}>
+                                <div className="card">
+                                    <div className="album">
+                                        <img src={album.img} alt={album.name} />
+                                        </div>
+                                        <div className="text">
+                                        {album.name} ({album.year}) <br />
+                                        {album.artist} <br />
+                                        <br />
+                                        ${album.price}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"/product/" + albums[2].id}>
-                        <div id="container3">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[2].img} alt={albums[2].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[2].name} ({albums[2].year}) <br/>
-                                    {albums[2].artist} <br/>
-                                    <br/>
-                                    ${albums[2].price}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"/product/" + albums[3].id}>
-                        <div id="container4">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[3].img} alt={albums[3].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[3].name} ({albums[3].year}) <br/>
-                                    {albums[3].artist} <br/>
-                                    <br/>
-                                    ${albums[3].price}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"/product/" + albums[4].id}>
-                        <div id="container5">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[4].img} alt={albums[4].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[4].name} ({albums[4].year}) <br/>
-                                    {albums[4].artist} <br/>
-                                    <br/>
-                                    ${albums[4].price}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
-                    <Link to={"/product/" + albums[5].id}>
-                        <div id="container6">
-                            <div className="card">
-                                <div className="album">
-                                    <img src={albums[5].img} alt={albums[5].name}/>
-                                </div>
-                                <div className="text">
-                                    {albums[5].name} ({albums[5].year}) <br/>
-                                    {albums[5].artist} <br/>
-                                    <br/>
-                                    ${albums[5].price}
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import '../css/main.css';
-import React from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
 
 let login_form = false;
 
@@ -18,7 +18,18 @@ function showLogin(){
     }
 }
 
-function Header(){
+function Header({ onSearch }){
+
+    let navigate = useNavigate(); 
+
+    const [searchValue, setSearchValue] = useState('');
+
+    const handleKeyPress = (event) => {
+        if (event.keyCode === 13) {
+            onSearch(searchValue); 
+            navigate("store");
+        }
+    };
 
     document.addEventListener('mouseup', function(e) {
         const container = document.getElementsByClassName('login-container')[0];
@@ -35,7 +46,8 @@ function Header(){
                     <Link to="/" id="logo-link"><img src="/imgs/logo.png" alt="Logo"/></Link>
                 </div>
                 <div>
-                    <input type="text" id="search" placeholder="Search..."/>
+                    <input type="text" id="search" placeholder="Search..." value={searchValue} 
+                    onChange={(e) => setSearchValue(e.target.value)} onKeyDown={handleKeyPress}/>
                 </div>
                 <div>
                     <button onClick={showLogin} id="login"> Login </button>

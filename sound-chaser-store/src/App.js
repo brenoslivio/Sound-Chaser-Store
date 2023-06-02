@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Home from './components/home';
 import Store from './components/store';
 import Product from './components/product';
@@ -17,16 +17,22 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (value) => {
+    setSearchValue(value);
+  };
+
   return (
       <div>
     <BrowserRouter>
-        <Header />
+        <Header onSearch={handleSearch}/>
         <Login />
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/quiz" element={<Quiz />}/>
           <Route path="/register" element={<Register />}/>
-          <Route path="/store" element={<Store />}/>
+          <Route path="/store" element={<Store searchValue={searchValue}/>}/>
           <Route path="/product/:id" element={<Product />}/>
           <Route path="/about" element={<About />}/>
           <Route path="/contact" element={<Contact />}/>

@@ -47,6 +47,20 @@ function getLinkId(id){
     return ""
 }
 
+function optionsAvailable(stock){
+
+    const quantityOptions = [];
+    const minimumQuantity = Math.min(stock, 5);
+
+    for (let i = 1; i <= minimumQuantity; i++) {
+        quantityOptions.push(
+            <option value={i}>{i}</option>
+        );
+    }
+
+    return quantityOptions;
+}
+
 function Product(){
 
     const params = useParams();
@@ -61,20 +75,22 @@ function Product(){
 
     if (albums.length === 0) {
         return (
-            <div> Loading </div>
+            <main>
+                <div class="layer">
+                    <div class="product-albums">
+                        <div class="product">
+                        </div>
+                        <div class="related">
+                        </div>
+                    </div>
+                </div>
+            </main>
         )
     }
 
     let album = getAlbumById(albums, params.id);
 
     let relatedAlbums = getRelatedAlbums(albums, album);
-
-    let numberRelated = relatedAlbums.length;
-
-    for (let i = numberRelated; i < 4; i++) {
-        let emptyAlbum = {"id": "", "name": "", "year": "", "artist": "", "price": ""}
-        relatedAlbums.push(emptyAlbum);
-    }
 
     return (
         <main>
@@ -99,11 +115,7 @@ function Product(){
                         <div class="quantity">
                             <label for="qnt">Quantity:</label>
                             <select name="qnt" id="qnt">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                {optionsAvailable(album.stock)}
                             </select>
                             <br/>
                             <br/>
@@ -114,59 +126,24 @@ function Product(){
                         <button class="product-btn">Add to cart</button>
                     </div>
 
-
                     <div class="related">
                             <div class="title">
                                 Related albums
                             </div>
-                            <Link to={getLinkId(relatedAlbums[0].id)}>
-                                <div id="related-album1">
-                                    <div class="product-album">
-                                        <img src={relatedAlbums[0].img} alt={relatedAlbums[0].name}/>
+                            {relatedAlbums.slice(0, 4).map((relatedAlbum, index) => (
+                                <Link to={getLinkId(relatedAlbum.id)}>
+                                    <div id={`related-album${index + 1}`}>
+                                    <div className="product-album">
+                                        <img src={relatedAlbum.img} alt={relatedAlbum.name} />
                                     </div>
-                                    <div class="text">
-                                        {relatedAlbums[0].name} <br/>
-                                        {relatedAlbums[0].artist} <br/>
-                                        <br/>
+                                    <div className="text">
+                                        {relatedAlbum.name} <br />
+                                        {relatedAlbum.artist} <br />
+                                        <br />
                                     </div>
-                                </div>
-                            </Link>
-                            <Link to={getLinkId(relatedAlbums[1].id)}>
-                                <div id="related-album2">
-                                    <div class="product-album">
-                                        <img src={relatedAlbums[1].img} alt={relatedAlbums[1].name}/>
                                     </div>
-                                    <div class="text">
-                                        {relatedAlbums[1].name} <br/>
-                                        {relatedAlbums[1].artist} <br/>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link to={getLinkId(relatedAlbums[2].id)}>
-                                <div id="related-album3">
-                                    <div class="product-album">
-                                        <img src={relatedAlbums[2].img} alt={relatedAlbums[2].name}/>
-                                    </div>
-                                    <div class="text">
-                                        {relatedAlbums[2].name} <br/>
-                                        {relatedAlbums[2].artist} <br/>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </Link>
-                            <Link to={getLinkId(relatedAlbums[3].id)}>
-                                <div id="related-album4">
-                                    <div class="product-album">
-                                        <img src={relatedAlbums[3].img} alt={relatedAlbums[3].name}/>
-                                    </div>
-                                    <div class="text">
-                                        {relatedAlbums[3].name} <br/>
-                                        {relatedAlbums[3].artist} <br/>
-                                        <br/>
-                                    </div>
-                                </div>
-                            </Link>
+                                </Link>
+                            ))}
                     </div>
 
                 </div>
