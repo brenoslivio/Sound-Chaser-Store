@@ -8,7 +8,7 @@ function date_sort(b, a) {
 
 async function getAlbums() {
     const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                        .then(response => response.json());
+                            .then(response => response.json());
 
     let sortedAlbums = products.albums.sort(date_sort);
     
@@ -37,14 +37,6 @@ function getRelatedAlbums(albums, album) {
     }
 
     return relatedAlbums;
-}
-
-function getLinkId(id){
-    if (id !== ""){
-        return "/product/" + id
-    }
-
-    return ""
 }
 
 function optionsAvailable(stock){
@@ -131,7 +123,7 @@ function Product(){
                                 Related albums
                             </div>
                             {relatedAlbums.slice(0, 4).map((relatedAlbum, index) => (
-                                <Link to={getLinkId(relatedAlbum.id)} key={index}>
+                                <Link to={"/product/" + relatedAlbum.id} key={index}>
                                     <div id={`related-album${index + 1}`}>
                                     <div className="product-album">
                                         <img src={relatedAlbum.img} alt={relatedAlbum.name} />

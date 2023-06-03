@@ -114,11 +114,9 @@
 .cart-product1 .text {
     position: absolute;
     left: 32%;
-    bottom: 0%;
-    width: 8vw;
-    height: 8vw;
+    top: 40%;
     white-space: nowrap;
-    font-size: 2.2vw;
+    font-size: 1.5vw;
     color: #72366f;
 }
 
@@ -168,11 +166,9 @@
 .cart-product2 .text {
     position: absolute;
     left: 32%;
-    bottom: 0%;
-    width: 8vw;
-    height: 8vw;
+    top: 40%;
     white-space: nowrap;
-    font-size: 2.2vw;
+    font-size: 1.5vw;
     color: #72366f;
 }
 

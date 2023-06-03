@@ -9,7 +9,7 @@
             "img": "/imgs/albums/traffic_circle.png",
             "description": "Traffic Circle takes the listener on a journey through intricate and mesmerizing musical arrangements that blend progressive rock, jazz, and psychedelic influences.",
             "price": 49.99,
-            "stock": 10,
+            "stock": 0,
             "sold": 1,
             "date_added": "2020-10-01"
         },
