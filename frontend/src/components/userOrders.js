@@ -30,9 +30,7 @@ function UserOrders({ userLogin, signOut}){
 
                     <button onClick={() => navigate("/user/orders")} className="orders-btn">Orders</button>
 
-                    <button onClick={() => navigate("/user/payment")} className="payment-btn">Payment methods</button>
-
-                    <button onClick={() => navigate("/user/addresses")} className="addresses-btn">Addresses</button>
+                    <button onClick={() => navigate("/user/payment")} className="payment-btn">Payment and address</button>
 
                     <button onClick={() => handleSignOut()} className="signout-btn">Sign out</button>
 

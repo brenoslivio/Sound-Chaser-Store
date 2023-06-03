@@ -1,6 +1,6 @@
 .userpayment-page {
     width: 100%;
-    height: 75vw;
+    height: 73vw;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -25,7 +25,7 @@
     width: 92vw;
     height: 67vw;
     left: 4%;
-    top: 14vw;
+    top: 12vw;
     background: rgba(114, 54, 111, 0.8);
     border-radius: 2vw;
     backdrop-filter: blur(0.5vw);
@@ -73,7 +73,7 @@
     width: 15vw;
     padding: 1vw;
     left: 4%;
-    top: 32%;
+    top: 52%;
     border: none;
     color: white;
     background: none;
@@ -94,7 +94,7 @@
     width: 15vw;
     padding: 1vw;
     left: 4%;
-    top: 44%;
+    top: 36%;
     border-radius: 0.5vw;
     border: none;
     color: white;
@@ -102,27 +102,6 @@
     font-size: 1.5vw;
     transition: border-bottom 0.2s linear;
     cursor: pointer;
-}
-
-.userpayment .addresses-btn {
-    display: flex;
-    position: absolute;
-    justify-content: left;
-    text-align: center;
-    width: 15vw;
-    padding: 1vw;
-    left: 4%;
-    top: 56%;
-    border: none;
-    color: white;
-    background: none;
-    font-size: 1.5vw;
-    transition: border-bottom 0.2s linear;
-    cursor: pointer;
-}
-
-.userpayment .addresses-btn:hover {
-    border-bottom: 0.2vw solid #72366F;
 }
 
 .userpayment .signout-btn {
@@ -146,4 +125,153 @@
     border-bottom: 0.2vw solid #72366F;
 }
 
+.userpayment label {
+    position: absolute;
+    color: #72366f;
+    bottom: 3vw;
+    left: -4vw;
+    font-size: 1.5vw;
+    white-space: nowrap;
+}
 
+.userpayment .input-card {
+    position: absolute;
+    left: 15%;
+    top: 25%;
+}
+
+.input-card input {
+    width: 20vw;
+    font-size: 1.5vw;
+    color: #72366f;
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: #72366f;
+    background-color:transparent;
+}
+
+.userpayment .input-holder {
+    position: absolute;
+    left: 55%;
+    top: 25%;
+}
+
+.input-holder input {
+    width: 20vw;
+    font-size: 1.5vw;
+    color: #72366f;
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: #72366f;
+    background-color:transparent;
+}
+
+.userpayment .input-security {
+    position: absolute;
+    left: 55%;
+    top: 40%;
+}
+
+.input-security input {
+    width: 20vw;
+    font-size: 1.5vw;
+    color: #72366f;
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: #72366f;
+    background-color:transparent;
+}
+
+.userpayment .input-expiration {
+    position: absolute;
+    left: 15%;
+    top: 40%;
+}
+
+.input-expiration input {
+    width: 20vw;
+    font-size: 1.5vw;
+    color: #72366f;
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: #72366f;
+    background-color:transparent;
+}
+
+.userpayment .input-address {
+    position: absolute;
+    left: 15%;
+    top: 70%;
+}
+
+.input-address textarea {
+    width: 20vw;
+
+    color: #72366f;
+    resize: none;
+    border-color: #72366f;
+    background-color:white;
+}
+
+.input-address label {
+    position: absolute;
+    color: #72366f;
+    bottom: 10vw;
+    left: -5vw;
+}
+
+.userpayment .input-receiver {
+    position: absolute;
+    left: 55%;
+    top: 70%;
+}
+
+.input-receiver input {
+    width: 20vw;
+    font-size: 1.5vw;
+    color: #72366f;
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: #72366f;
+    background-color:transparent;
+}
+
+.userpayment .card-title {
+    position: absolute;
+    left: 10%;
+    top: 5%;
+    font-size: 2.5vw;
+    color: #72366f;
+    text-decoration: underline;
+}
+
+.userpayment .address-title {
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    font-size: 2.5vw;
+    color: #72366f;
+    text-decoration: underline;
+}
+
+.userpayment .save-btn {
+    position: absolute;
+    right: 11%;
+    top: 84%;
+    width: 14vw;
+    height: 4vw;
+    cursor: pointer;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 2vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+.userpayment .save-btn:hover {
+    background-color: #583257;
+}
+
+.userpayment .save-btn:active {
+    background-color: #350808;
+}

@@ -30,7 +30,7 @@ function UserInformation({ userLogin, signOut }){
                         </div>
 
                         <div className="input-phone">
-                            <label htmlFor="phone">Phone Number:</label>
+                            <label htmlFor="phone">Phone number:</label>
                             <input placeholder={userLogin.phone} type="tel" id="phone" name="phone" />
                         </div>
 
@@ -42,17 +42,17 @@ function UserInformation({ userLogin, signOut }){
                         <p className="change"> Change password: </p>
 
                         <div className="input-currentpassword">
-                            <label htmlFor="currentPassword">Current Password:</label>
+                            <label htmlFor="currentPassword">Current password:</label>
                             <input type="password" id="currentPassword" name="currentPassword" />
                         </div>
 
                         <div className="input-newpassword">
-                            <label htmlFor="newPassword">New Password:</label>
+                            <label htmlFor="newPassword">New password:</label>
                             <input type="password" id="newPassword" name="newPassword" />
                         </div>
 
                         <div className="input-confirmnewpassword">
-                            <label htmlFor="confirmPassword">Confirm New Password:</label>
+                            <label htmlFor="confirmPassword">Confirm new password:</label>
                             <input type="password" id="confirmPassword" name="confirmPassword" />
                         </div>
 
@@ -64,9 +64,7 @@ function UserInformation({ userLogin, signOut }){
 
                     <button onClick={() => navigate("/user/orders")} className="orders-btn">Orders</button>
 
-                    <button onClick={() => navigate("/user/payment")} className="payment-btn">Payment methods</button>
-
-                    <button onClick={() => navigate("/user/addresses")} className="addresses-btn">Addresses</button>
+                    <button onClick={() => navigate("/user/payment")} className="payment-btn">Payment and address</button>
 
                     <button onClick={() => handleSignOut()} className="signout-btn">Sign out</button>
 

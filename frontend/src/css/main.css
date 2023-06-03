@@ -32,7 +32,7 @@ header img {
 
 #search {
     position: relative;
-    left: 34vw;
+    left: 35vw;
     width: 6vw;
     padding: 0.75vw 10vw;
     font-size: 0.75vw;
@@ -54,6 +54,7 @@ header img {
     top: 2.5vw;
     width: 1.5vw;
     margin-right: 6vw;
+    cursor: pointer;
 }
 
 /* Login option and overlay */
@@ -89,7 +90,7 @@ header img {
     position: absolute;
     display: block;
     top: 5.1vw;
-    right: 16vw;
+    right: 12vw;
     border-left: 1vw solid transparent;
     border-right: 1vw solid transparent;
     border-bottom: 1vw solid rgba(114, 54, 111, 0.8);
@@ -102,7 +103,7 @@ header img {
     width: 20vw;
     height: 20vw;
     top: 6vw;
-    right: 14vw;
+    right: 10vw;
     z-index: 1;
     border-radius: 2vw;
     background-color: rgba(114, 54, 111, 0.8);

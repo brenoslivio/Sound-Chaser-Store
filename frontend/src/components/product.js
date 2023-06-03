@@ -1,6 +1,6 @@
 import '../css/product.css';
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 function date_sort(b, a) {
     return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
@@ -53,11 +53,13 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function Product(){
+function Product({ userLogin }){
 
     const params = useParams();
 
     const [albums, setAlbums] = useState([]);
+
+    let navigate = useNavigate(); 
 
     useEffect(() => {
         getAlbums()
@@ -78,6 +80,14 @@ function Product(){
                 </div>
             </main>
         )
+    }
+
+    const addCart = () =>{ 
+        if (userLogin){
+            navigate("../cart", {replace: true});
+        } else {
+            alert("Login required to add to cart.");
+        }
     }
 
     let album = getAlbumById(albums, params.id);
@@ -115,7 +125,7 @@ function Product(){
                                 ({album.stock} in stock)     
                             </div>
                         </div>
-                        <button className="product-btn">Add to cart</button>
+                        <button onClick={addCart} className="product-btn">Add to cart</button>
                     </div>
 
                     <div className="related">

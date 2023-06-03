@@ -9,7 +9,6 @@ import Login from './components/login';
 import UserInformation from './components/userInformation';
 import UserOrders from './components/userOrders';
 import UserPayment from './components/userPayment';
-import UserAddresses from './components/userAddresses';
 import Cart from './components/cart';
 import Quiz from './components/quiz';
 import Register from './components/register';
@@ -40,14 +39,14 @@ function App() {
   return (
       <div>
     <BrowserRouter>
-        <Header onSearch={handleSearch} userLogin={user}/>
+        <Header onSearch={handleSearch} userLogin={user} />
         <Login onLogin={handleUser}/>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home userLogin={user} />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/register" element={<Register />} />
               <Route path="/store" element={<Store searchValue={searchValue} />} />
-              <Route path="/product/:id" element={<Product />} />
+              <Route path="/product/:id" element={<Product userLogin={user} />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
@@ -56,7 +55,6 @@ function App() {
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
               <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} />} />
-              <Route path="/user/addresses" element={<UserAddresses userLogin={user} signOut={handleSignOut} />} />
             </Routes>
         <Footer />
     </BrowserRouter>

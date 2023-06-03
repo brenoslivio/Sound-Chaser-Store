@@ -15,13 +15,12 @@ async function getLatestAdditions() {
     return sortedAlbums;
 }
 
-function Home(){
+function Home({ userLogin }){
     const [latestAdditions, setLatestAdditions] = useState([]);
     let navigate = useNavigate(); 
 
     const routeChange = () =>{ 
-      let path = "quiz"; 
-      navigate(path);
+      navigate("quiz");
     }
 
     useEffect(() => {
@@ -29,6 +28,14 @@ function Home(){
         .then(additions => setLatestAdditions(additions))
         .catch(error => console.error(error));
     }, []);
+
+    const addCart = () =>{ 
+        if (userLogin){
+            navigate("cart");
+        } else {
+            alert("Login required to add to cart.");
+        }
+    }
 
     if (latestAdditions.length === 0) {
         return (
@@ -91,7 +98,7 @@ function Home(){
                                 </div>
                                 </Link>
                                 <div className="main-card-price">${album.price}</div>
-                                <button className="card-btn">Add to cart</button>
+                                <button onClick={addCart} className="card-btn">Add to cart</button>
                             </div>
                         ))}
                     </div>
