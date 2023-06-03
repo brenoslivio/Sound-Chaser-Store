@@ -32,26 +32,29 @@ function App() {
     setUser(value);
   };
 
+  const handleSignOut = () => {
+    setUser("");
+  };
+
   return (
       <div>
     <BrowserRouter>
         <Header onSearch={handleSearch} userLogin={user}/>
         <Login onLogin={handleUser}/>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/quiz" element={<Quiz />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/store" element={<Store searchValue={searchValue}/>}/>
-          <Route path="/product/:id" element={<Product />}/>
-          <Route path="/about" element={<About />}/>
-          <Route path="/contact" element={<Contact />}/>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/quiz" element={<Quiz />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/store" element={<Store searchValue={searchValue} />} />
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
 
-          <Route path="/user" element={<UserInformation />}/>
-          <Route path="/user/orders" element={<UserOrders />}/>
-          <Route path="/user/payment" element={<UserPayment />}/>
-          <Route path="/user/addresses" element={<UserAddresses />}/>
-
-        </Routes>
+              <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
+              <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
+              <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} />} />
+              <Route path="/user/addresses" element={<UserAddresses userLogin={user} signOut={handleSignOut} />} />
+            </Routes>
         <Footer />
     </BrowserRouter>
 

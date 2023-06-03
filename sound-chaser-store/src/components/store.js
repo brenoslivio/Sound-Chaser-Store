@@ -34,19 +34,19 @@ function Store({ searchValue }){
                             <div className="title">Genres</div>
                             <br/>
                             <input type="checkbox" id="classic_rock" name="classic_rock" value="classic_rock"/>
-                            <label for="classic_rock"> Classic Rock </label><br/>
+                            <label htmlFor="classic_rock"> Classic Rock </label><br/>
                             <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative_rock"/>
-                            <label for="alternative_rock"> Alternative Rock </label><br/>
+                            <label htmlFor="alternative_rock"> Alternative Rock </label><br/>
                             <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive_rock"/>
-                            <label for="progressive_rock"> Progressive Rock </label><br/>
+                            <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
                             <input type="checkbox" id="jazz" name="jazz" value="jazz"/>
-                            <label for="jazz"> Jazz </label><br/>
+                            <label htmlFor="jazz"> Jazz </label><br/>
                             <input type="checkbox" id="classical" name="classical" value="classical"/>
-                            <label for="classical"> Classical Music </label><br/>
+                            <label htmlFor="classical"> Classical Music </label><br/>
                             <input type="checkbox" id="pop" name="pop" value="pop"/>
-                            <label for="pop"> Pop </label><br/>
+                            <label htmlFor="pop"> Pop </label><br/>
                             <input type="checkbox" id="rap" name="rap" value="rap"/>
-                            <label for="rap"> Rap </label><br/>
+                            <label htmlFor="rap"> Rap </label><br/>
                             <br/>
                             <div className="title">Price range</div>
                             <br/>
@@ -84,19 +84,19 @@ function Store({ searchValue }){
                         <div className="title">Genres</div>
                         <br/>
                         <input type="checkbox" id="classic_rock" name="classic_rock" value="classic_rock"/>
-                        <label for="classic_rock"> Classic Rock </label><br/>
+                        <label htmlFor="classic_rock"> Classic Rock </label><br/>
                         <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative_rock"/>
-                        <label for="alternative_rock"> Alternative Rock </label><br/>
+                        <label htmlFor="alternative_rock"> Alternative Rock </label><br/>
                         <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive_rock"/>
-                        <label for="progressive_rock"> Progressive Rock </label><br/>
+                        <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
                         <input type="checkbox" id="jazz" name="jazz" value="jazz"/>
-                        <label for="jazz"> Jazz </label><br/>
+                        <label htmlFor="jazz"> Jazz </label><br/>
                         <input type="checkbox" id="classical" name="classical" value="classical"/>
-                        <label for="classical"> Classical Music </label><br/>
+                        <label htmlFor="classical"> Classical Music </label><br/>
                         <input type="checkbox" id="pop" name="pop" value="pop"/>
-                        <label for="pop"> Pop </label><br/>
+                        <label htmlFor="pop"> Pop </label><br/>
                         <input type="checkbox" id="rap" name="rap" value="rap"/>
-                        <label for="rap"> Rap </label><br/>
+                        <label htmlFor="rap"> Rap </label><br/>
                         <br/>
                         <div className="title">Price range</div>
                         <br/>

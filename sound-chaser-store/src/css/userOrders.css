@@ -62,19 +62,6 @@
 }
 
 .userorders .userinfo-btn:hover {
-    display: flex;
-    position: absolute;
-    justify-content: left;
-    text-align: center;
-    width: 15vw;
-    padding: 1vw;
-    left: 4%;
-    top: 20%;
-    border: none;
-    color: white;
-    background: none;
-    font-size: 1.5vw;
-    cursor: pointer;
     border-bottom: 0.2vw solid #72366F;
 }
 
@@ -113,18 +100,6 @@
 }
 
 .userorders .payment-btn:hover {
-    display: flex;
-    position: absolute;
-    justify-content: left;
-    text-align: center;
-    width: 15vw;
-    padding: 1vw;
-    left: 4%;
-    top: 44%;
-    border: none;
-    color: white;
-    background: none;
-    font-size: 1.5vw;
     border-bottom: 0.2vw solid #72366F;
 }
 
@@ -146,18 +121,6 @@
 }
 
 .userorders .addresses-btn:hover {
-    display: flex;
-    position: absolute;
-    justify-content: left;
-    text-align: center;
-    width: 15vw;
-    padding: 1vw;
-    left: 4%;
-    top: 56%;
-    border: none;
-    color: white;
-    background: none;
-    font-size: 1.5vw;
     border-bottom: 0.2vw solid #72366F;
 }
 
@@ -180,18 +143,6 @@
 }
 
 .userorders .signout-btn:hover {
-    display: flex;
-    position: absolute;
-    justify-content: left;
-    text-align: center;
-    width: 15vw;
-    padding: 1vw;
-    left: 4%;
-    top: 68%;
-    border: none;
-    color: white;
-    background: none;
-    font-size: 1.5vw;
     border-bottom: 0.2vw solid #72366F;
 }
 

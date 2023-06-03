@@ -1,10 +1,21 @@
 import '../css/userAddresses.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function UserAddresses({ userLogin }){
+function UserAddresses({ userLogin, signOut }){
 
-    let navigate = useNavigate(); 
+    let navigate = useNavigate();
+    
+    if (!userLogin) {
+        useEffect(() => {
+            navigate("/");
+        });
+    }
+
+    const handleSignOut = () => {
+        navigate("/");
+        signOut(true);
+    };
 
     return (
         <div className="useraddresses-page">
@@ -21,7 +32,7 @@ function UserAddresses({ userLogin }){
 
                     <button onClick={() => navigate("/user/addresses")} className="addresses-btn">Addresses</button>
 
-                    <button className="signout-btn">Sign out</button>
+                    <button onClick={() => handleSignOut()} className="signout-btn">Sign out</button>
 
                 </div>
             </div>
