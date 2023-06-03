@@ -77,6 +77,19 @@
             "stock": 1,
             "sold": 0,
             "date_added": "2022-10-02"
+        },
+        {
+            "id": 6,
+            "name": "TEST",
+            "artist": "TEST",
+            "year": 1976,
+            "genre": "Progressive Rock",
+            "img": "/imgs/albums/2012.png",
+            "description": "",
+            "price": 39.99,
+            "stock": 1,
+            "sold": 0,
+            "date_added": "2022-10-02"
         }
     ]
 }

@@ -82,9 +82,13 @@ function Product({ userLogin }){
         )
     }
 
-    const addCart = () =>{ 
+    const addCart = (stock) =>{ 
         if (userLogin){
-            navigate("../cart", {replace: true});
+            if (stock > 0) {
+                navigate("../cart", {replace: true});
+            } else {
+                alert("Album out of stock!");
+            }
         } else {
             alert("Login required to add to cart.");
         }
@@ -125,7 +129,7 @@ function Product({ userLogin }){
                                 ({album.stock} in stock)     
                             </div>
                         </div>
-                        <button onClick={addCart} className="product-btn">Add to cart</button>
+                        <button onClick={() => addCart(album.stock)} className="product-btn">Add to cart</button>
                     </div>
 
                     <div className="related">

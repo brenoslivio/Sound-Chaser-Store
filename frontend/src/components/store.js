@@ -18,6 +18,8 @@ async function getAlbums() {
 function Store({ searchValue }){
 
     const [albums, setAlbums] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const albumsPerPage = 6;
 
     useEffect(() => {
         getAlbums()
@@ -76,6 +78,14 @@ function Store({ searchValue }){
 
     console.log(filteredItems);
 
+    const indexOfLastAlbum = currentPage * albumsPerPage;
+    const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
+    const currentAlbums = filteredItems.slice(indexOfFirstAlbum, indexOfLastAlbum);
+  
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     return (
         <div className="store-page">
             <div className="layer">
@@ -116,8 +126,8 @@ function Store({ searchValue }){
                     </div>
                 </div>
                 <div className="albums">
-                    {filteredItems.map((album, index) => (
-                        <Link to={"/product/" + album.id}>
+                    {currentAlbums.map((album, index) => (
+                        <Link to={"/product/" + album.id} key={album.id}>
                             <div id={`container${index + 1}`}>
                                 <div className="card">
                                     <div className="album">
@@ -132,6 +142,17 @@ function Store({ searchValue }){
                                 </div>
                             </div>
                         </Link>
+                    ))}
+                </div>
+                <div className="pagination">
+                    {Array.from({ length: Math.ceil(filteredItems.length / albumsPerPage) }, (_, i) => (
+                    <button
+                        key={i + 1}
+                        onClick={() => handlePageChange(i + 1)}
+                        className={currentPage === i + 1 ? "active" : ""}
+                    >
+                        {i + 1}
+                    </button>
                     ))}
                 </div>
             </div>

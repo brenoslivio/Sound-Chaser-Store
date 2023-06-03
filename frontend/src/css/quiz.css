@@ -47,13 +47,13 @@
 
 /* Custom radio buttons */
 
-input[type=radio] {
+.quiz input[type=radio] {
     width: 2vw;
     height: 2vw;
     accent-color: #72366F;
 }
 
-label {
+.quiz label {
     font-size: 2vw;
     margin: 0 3vw;
 }

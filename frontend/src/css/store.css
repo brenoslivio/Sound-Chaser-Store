@@ -196,3 +196,26 @@ input[type=checkbox] {
     text-align: center;
     font-size: 1.25vw;
 }
+
+.store-page .pagination {
+    position: relative;
+    bottom: 4vw;
+    left: 50vw;
+    width: 50vw;
+}
+
+.pagination button {
+    width: 3.5vw;
+    height: 3.5vw;
+    color: white;
+    background-color: #b583b3;
+    border-radius: 100%;
+    border: none;
+    font-size: 1.25vw;
+    margin: 0vw 0.5vw;
+    cursor: pointer;
+}
+
+.pagination .active {
+    background-color: #72366F;
+}

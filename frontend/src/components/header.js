@@ -33,10 +33,10 @@ function Header({ onSearch, userLogin }){
     const [searchValue, setSearchValue] = useState('');
 
     const handleKeyPress = (event) => {
-        if (event.keyCode === 13) {
-            onSearch(searchValue); 
-            navigate("/store");
-        }
+        const value = event.target.value;
+        setSearchValue(value);
+        onSearch(value);
+        navigate("/store");
     };
 
     if (!userLogin){
@@ -53,7 +53,7 @@ function Header({ onSearch, userLogin }){
                 </div>
                 <div>
                     <input type="text" id="search" placeholder="Search..." value={searchValue} 
-                    onChange={(e) => setSearchValue(e.target.value)} onKeyDown={handleKeyPress}/>
+                    onChange={handleKeyPress}/>
                 </div>
                 <div>
                     {userLogin ? (
@@ -77,6 +77,9 @@ function Header({ onSearch, userLogin }){
                                 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 
                                 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                             </svg>
+                            <div className="items-cart">
+                                {userLogin.cart.length}
+                            </div>
                         </Link>
                     ) : (
                         <svg className="cart" xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" viewBox="0 0 16 16" onClick={showLogin}>
