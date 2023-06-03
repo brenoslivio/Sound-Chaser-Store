@@ -5,10 +5,19 @@
             "name": "Breno",
             "email": "brenoslivio@usp.br",
             "phone": "011999999999",
-            "addresses": ["Av. Trab. São Carlense, 400 - Centro, São Carlos - SP, 13566-590"],
+            "password": "password",
+            "addresses": [
+                {"address": "Av. Trab. São Carlense, 400 - Centro, São Carlos - SP, 13566-590", 
+                "receiver": "Breno"}
+            ],
             "orders": [""],
             "cards": ["1234567812349999"],
-            "password": "password"
+            "cart": [
+                {"id": 0,
+                "quantity": 1},
+                {"id": 1,
+                "quantity": 2}
+            ]
         }
     ]
 }

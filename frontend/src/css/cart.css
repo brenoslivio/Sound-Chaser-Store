@@ -1,0 +1,212 @@
+.cart-page {
+    width: 100%;
+    height: 76vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for about portion */
+
+.cart-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 68vw;
+    left: 10%;
+    top: 14vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.cart-container .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.cart-container .products {
+    position: absolute;
+    width: 68vw;
+    height: 42vw;
+    left: 8%;
+    top: 18%;
+    border-radius: 2vw;
+    background: #d9d9d9;
+}
+
+.cart-container .proceed-btn {
+    position: absolute;
+    right: 7%;
+    bottom: 6%;
+    width: 18vw;
+    height: 6vw;
+    cursor: pointer;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 2vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+.cart-container .proceed-btn:hover {
+    background-color: #583257;
+}
+
+.cart-container .proceed-btn:active {
+    background-color: #350808;
+}
+
+.products .cart-product1 {
+    position: absolute;
+    width: 63vw;
+    height: 12vw;
+    left: 4%;
+    top: 7%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.products .cart-product2 {
+    position: absolute;
+    width: 63vw;
+    height: 12vw;
+    left: 4%;
+    top: 40%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.cart-container .cart-price {
+    position: absolute;
+    right: 5%;
+    top: 74%;
+    font-size: 3.5vw;
+    color: #72366f;
+}
+
+.album img {
+    display: block;
+    width: 100%;
+}
+
+.cart-product1 .album {
+    position: absolute;
+    left: 14%;
+    top: 16%;
+    width: 8vw;
+    height: 8vw;
+}
+
+.cart-product1 .text {
+    position: absolute;
+    left: 32%;
+    bottom: 0%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 2.2vw;
+    color: #72366f;
+}
+
+.cart-product1 .product-price {
+    position: absolute;
+    right: 5%;
+    top: 14%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.cart-product1 .quantity {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.cart-product1 .remove-cart {
+    position: absolute;
+    left: 4%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    display: block;
+    border-radius: 100%;
+    color: white;
+    background-color: #72366f;
+}
+
+.cart-product2 .album {
+    position: absolute;
+    left: 14%;
+    top: 16%;
+    width: 8vw;
+    height: 8vw;
+}
+
+.cart-product2 .text {
+    position: absolute;
+    left: 32%;
+    bottom: 0%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 2.2vw;
+    color: #72366f;
+}
+
+.cart-product2 .product-price {
+    position: absolute;
+    right: 5%;
+    top: 14%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.cart-product2 .quantity {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    width: 8vw;
+    height: 8vw;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.cart-product2 .remove-cart {
+    position: absolute;
+    left: 4%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    display: block;
+    border-radius: 100%;
+    color: white;
+    background-color: #72366f;
+}

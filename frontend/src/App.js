@@ -10,6 +10,7 @@ import UserInformation from './components/userInformation';
 import UserOrders from './components/userOrders';
 import UserPayment from './components/userPayment';
 import UserAddresses from './components/userAddresses';
+import Cart from './components/cart';
 import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
@@ -49,6 +50,8 @@ function App() {
               <Route path="/product/:id" element={<Product />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              
+              <Route path="/cart" element={<Cart userLogin={user} />} />
 
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />

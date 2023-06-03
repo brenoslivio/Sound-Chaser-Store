@@ -1,26 +1,28 @@
-import '../css/userOrders.css';
+import '../css/userAddresses.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function UserOrders({ userLogin, signOut}){
+function UserAddresses({ userLogin, signOut }){
 
     let navigate = useNavigate();
-
+    
     if (!userLogin) {
         useEffect(() => {
             navigate("/");
         });
+        return;
     }
 
     const handleSignOut = () => {
         navigate("/");
-        signOut(true);
+        window.scrollTo(0, 0);
+        signOut();
     };
 
     return (
-        <div className="userorders-page">
+        <div className="useraddresses-page">
             <div className="layer">
-                <div className="userorders">
+                <div className="useraddresses">
                     <div className="container">
                     </div>
 
@@ -40,4 +42,4 @@ function UserOrders({ userLogin, signOut}){
     )
 }
 
-export default UserOrders;
+export default UserAddresses;

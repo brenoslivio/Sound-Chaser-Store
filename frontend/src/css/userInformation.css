@@ -272,7 +272,7 @@
     background-color: #350808;
 }
 
-.userinfo #change {
+.userinfo .change {
     position: absolute;
     left: 10%;
     top: 35%;

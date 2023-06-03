@@ -10,11 +10,13 @@ function UserInformation({ userLogin, signOut }){
         useEffect(() => {
             navigate("/");
         });
+        return;
     }
 
     const handleSignOut = () => {
         navigate("/");
-        signOut(true);
+        window.scrollTo(0, 0);
+        signOut();
     };
 
     return (
@@ -37,7 +39,7 @@ function UserInformation({ userLogin, signOut }){
                             <input placeholder={userLogin.email} type="email" id="email" name="email" />
                         </div>
 
-                        <p id="change"> Change password: </p>
+                        <p className="change"> Change password: </p>
 
                         <div className="input-currentpassword">
                             <label htmlFor="currentPassword">Current Password:</label>

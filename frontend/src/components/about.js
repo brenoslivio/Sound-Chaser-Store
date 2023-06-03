@@ -1,7 +1,7 @@
 import '../css/about.css';
 import React from 'react';
 
-function about(){
+function About(){
 
     return (
         <div className="about-page">
@@ -35,4 +35,4 @@ function about(){
     )
 }
 
-export default about;
+export default About;
