@@ -15,20 +15,24 @@ html, body {
 
 header {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
+    padding: 1.5vw;
     background-color: #B583B3;
 }
 
 header img {
+    position: absolute;
+    left: 5vw;
+    top: 1vw;
     width:12vw;
-    margin-top: 1vw;
-    margin-left: 4vw;
 }
 
 /* Search bar */
 
 #search {
+    position: relative;
+    left: 34vw;
     width: 6vw;
     padding: 0.75vw 10vw;
     font-size: 0.75vw;
@@ -45,6 +49,9 @@ header img {
 /* Cart */
 
 .cart {
+    position: absolute;
+    right: 0vw;
+    top: 2.5vw;
     width: 1.5vw;
     margin-right: 6vw;
 }
@@ -52,6 +59,9 @@ header img {
 /* Login option and overlay */
 
 #login {
+    position: absolute;
+    right: 6vw;
+    top: 2vw;
     border: none;
     background: none;
     cursor: pointer;
@@ -79,7 +89,7 @@ header img {
     position: absolute;
     display: block;
     top: 5.1vw;
-    right: 20vw;
+    right: 16vw;
     border-left: 1vw solid transparent;
     border-right: 1vw solid transparent;
     border-bottom: 1vw solid rgba(114, 54, 111, 0.8);
@@ -92,7 +102,7 @@ header img {
     width: 20vw;
     height: 20vw;
     top: 6vw;
-    right: 18vw;
+    right: 14vw;
     z-index: 1;
     border-radius: 2vw;
     background-color: rgba(114, 54, 111, 0.8);

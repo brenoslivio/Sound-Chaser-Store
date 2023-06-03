@@ -161,7 +161,7 @@
 }
 
 .input-name input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;
@@ -177,7 +177,7 @@
 }
 
 .input-phone input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;
@@ -193,7 +193,7 @@
 }
 
 .input-email input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;
@@ -209,7 +209,7 @@
 }
 
 .input-currentpassword input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;
@@ -225,7 +225,7 @@
 }
 
 .input-newpassword input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;
@@ -241,7 +241,7 @@
 }
 
 .input-confirmnewpassword input {
-    width: 16vw;
+    width: 20vw;
     font-size: 1.5vw;
     color: #72366f;
     outline: 0;

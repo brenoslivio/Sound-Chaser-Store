@@ -2,13 +2,13 @@
     "users":[
         {
             "id": 0,
-            "name": "Breno",
-            "email": "brenoslivio@usp.br",
+            "name": "Antedeguemon",
+            "email": "antedeguemon@tutamail.com",
             "phone": "011999999999",
             "password": "password",
             "addresses": [
                 {"address": "Av. Trab. São Carlense, 400 - Centro, São Carlos - SP, 13566-590", 
-                "receiver": "Breno"}
+                "receiver": "Antedeguemon"}
             ],
             "orders": [""],
             "cards": ["1234567812349999"],
