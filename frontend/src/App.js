@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './components/home';
 import Store from './components/store';
 import Product from './components/product';
@@ -20,19 +20,41 @@ import {
   Route
 } from "react-router-dom";
 
+async function getUser(id) {
+  const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
+                          .then(response => response.json());
+  
+  const user = customers.users.find(cust => cust.id === id);
+
+  return user;
+}
+
 function App() {
   const [searchValue, setSearchValue] = useState('');
+
+  let local_user = JSON.parse(localStorage.getItem("user"));
+
   const [user, setUser] = useState('');
 
+  useEffect(() => {
+    if (local_user){
+      getUser(local_user.id)
+      .then(login => setUser(login))
+      .catch(error => console.error(error));
+    }
+  }, []);
+  
   const handleSearch = (value) => {
     setSearchValue(value);
   };
 
   const handleUser = (value) => {
+    localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
   };
 
   const handleSignOut = () => {
+    localStorage.clear();
     setUser("");
   };
 

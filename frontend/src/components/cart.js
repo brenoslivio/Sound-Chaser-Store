@@ -43,19 +43,26 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function updateAlbumQuantity(products, id) {
-    for (let product of products) {
-        if (product.album.id === id) {
-            var newQuantity = document.getElementsByClassName("qnt" + id)[0].value;
+function removeAlbum(setAlbums, products, id) {
+    const updatedProducts = products.filter(product => product.album.id !== id);
+    setAlbums(updatedProducts);
+}
 
-            console.log(newQuantity);
-            // Milestone 3 - Update cart
-        }
-    }
+function updateAlbumQuantity(setAlbums, products, id, newQuantity) {
+    const updatedProducts = products.map((product) => {
+      if (product.album.id === id) {
+        return { ...product, quantity: newQuantity };
+      }
+      return product;
+    });
+  
+    setAlbums(updatedProducts);
 }
 
 function Cart({ userLogin }){
     const [albums, setAlbums] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const albumsPerPage = 2;
 
     let navigate = useNavigate();
 
@@ -87,6 +94,14 @@ function Cart({ userLogin }){
         )
     }
 
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastAlbum = currentPage * albumsPerPage;
+    const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
+    const currentAlbums = albums.slice(indexOfFirstAlbum, indexOfLastAlbum);
+
     let totalPrice = getTotalPrice(albums);
 
     return (
@@ -95,7 +110,7 @@ function Cart({ userLogin }){
                 <div className="cart-container">
                     <div className="title"> Cart </div>
                         <div className="products">
-                            {albums.slice(0, 2).map((product, index) => (
+                            {currentAlbums.map((product, index) => (
                                 <div className={`cart-product${index + 1}`}>
                                     <Link to={"/product/" + product.album.id} key={index}>
                                         <div className="album">
@@ -109,7 +124,7 @@ function Cart({ userLogin }){
                                         ${product.album.price}/pc
                                     </div>
                                     <div className="quantity">
-                                        <select defaultValue={product.quantity} onChange={() => updateAlbumQuantity(albums, product.album.id)} className={`qnt${product.album.id}`} id="qnt">
+                                        <select value={product.quantity} onChange={(e) => updateAlbumQuantity(setAlbums, albums, product.album.id, parseInt(e.target.value))} className={`qnt${product.album.id}`} id="qnt">
                                             {optionsAvailable(product.album.stock)}
                                         </select>
                                         <br/>
@@ -117,15 +132,25 @@ function Cart({ userLogin }){
                                             ({product.album.stock} in stock)     
                                         </div>
                                     </div>
-                                    <div className="remove-cart">
+                                    <div className="remove-cart" onClick={() => removeAlbum(setAlbums, albums, product.album.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" className="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                         </svg>
                                     </div>
                                 </div>
                             ))}
-                            
-                            <p className="cart-price"> Total: ${totalPrice} </p>
+                            <div className="pagination">
+                                {Array.from({ length: Math.ceil(albums.length / albumsPerPage) }, (_, i) => (
+                                <button
+                                    key={i + 1}
+                                    onClick={() => handlePageChange(i + 1)}
+                                    className={currentPage === i + 1 ? "active" : ""}
+                                >
+                                    {i + 1}
+                                </button>
+                                ))}
+                            </div>
+                            <p className="cart-price"> Total: ${totalPrice.toFixed(2)} </p>
                         </div>
                         <button  className="proceed-btn">Proceed to payment</button>
                 </div>

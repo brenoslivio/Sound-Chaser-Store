@@ -1,5 +1,5 @@
 import '../css/main.css';
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 let login_form = false;
@@ -30,13 +30,12 @@ function Header({ onSearch, userLogin }){
 
     let navigate = useNavigate(); 
 
-    const [searchValue, setSearchValue] = useState('');
-
     const handleKeyPress = (event) => {
         const value = event.target.value;
-        setSearchValue(value);
-        onSearch(value);
-        navigate("/store");
+        if (value.trim() || value === "") {
+            onSearch(value);
+            navigate("/store");
+        }
     };
 
     if (!userLogin){
@@ -52,8 +51,7 @@ function Header({ onSearch, userLogin }){
                     <Link to="/"><img src="/imgs/logo.png" alt="Logo"/></Link>
                 </div>
                 <div>
-                    <input type="text" id="search" placeholder="Search..." value={searchValue} 
-                    onChange={handleKeyPress}/>
+                    <input type="text" id="search" placeholder="Search..." onChange={handleKeyPress}/>
                 </div>
                 <div>
                     {userLogin ? (

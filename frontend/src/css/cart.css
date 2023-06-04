@@ -153,6 +153,7 @@
     border-radius: 100%;
     color: white;
     background-color: #72366f;
+    cursor: pointer;
 }
 
 .cart-product2 .album {
@@ -205,6 +206,7 @@
     border-radius: 100%;
     color: white;
     background-color: #72366f;
+    cursor: pointer;
 }
 
 .cart-page select {
@@ -216,4 +218,10 @@
 .cart-page option {
     font-size: 1.5vw;
     width: 3vw;
+}
+
+.cart-page .pagination {
+    position: absolute;
+    left: 4%;
+    bottom: 20%;
 }

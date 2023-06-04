@@ -18,13 +18,10 @@ async function checkLogin(onLogin) {
     const user = customers.users.find(cust => cust.email === email && cust.password === password);
 
     if (user) {
-        // Login successful
-        // Proceed with your desired login logic
         console.log("Login successful");
         onLogin(user); // Set the user
         document.getElementsByClassName('login-container')[0].style.display = 'none';
     } else {
-        // Invalid email or password
         alert("Invalid email or password.");
     }
 }
