@@ -75,12 +75,13 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
-              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUserUpdate}/>} />
-              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUserUpdate}/>} />
+              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUserUpdate} />} />
+              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUserUpdate} />} />
 
-              <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
+              <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUserUpdate}/>} />
+              <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUserUpdate}/>} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
-              <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} />} />
+              
             </Routes>
         <Footer />
     </BrowserRouter>

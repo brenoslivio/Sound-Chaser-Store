@@ -2,7 +2,104 @@ import '../css/userPayment.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-function UserPayment({ userLogin, signOut }){
+// card holder expiration security address receiver
+function updatePayment(userLogin, userUpdate, navigate){
+    const card = document.getElementById("card").value;
+    const holder = document.getElementById("holder").value;
+    const expiration = document.getElementById("expiration").value;
+    const security = document.getElementById("security").value;
+    const address = document.getElementById("address").value;
+    const receiver = document.getElementById("receiver").value;
+
+    let rules = "";
+    let updated = false;
+
+    if (card.length > 0) {
+        const cardRegex = /^\d+$/; // Only digits allowed
+        if (cardRegex.test(card)) {
+            if (card.length >= 8 && card.length <= 16) {
+                userLogin.card.number = card;
+                updated = true;
+            } else {
+                rules += "Card number must be between 8 and 16 digits.\n";
+            }
+        } else {
+            rules += "Invalid credit card number. Only digits are allowed.\n";
+        }
+    }
+
+    if (holder.length > 0) {
+        if (holder.length >= 5 && holder.length <= 32) {
+            userLogin.card.holder = holder;
+            updated = true;
+        } else {
+            rules += "Holder name must be between 5 and 32 characters.\n";
+        }
+    }
+
+    if (userLogin.card.expiration !== expiration) {
+        if (expiration.length > 0) {
+            const d = new Date(expiration);
+            d.setMonth(d.getMonth() + 1);
+            d.setDate(0);
+            userLogin.card.expiration = d.toISOString().slice(0, 10);
+            updated = true;
+        } else {
+            rules += "Invalid date. Choose month and year properly.\n";
+        }
+    }
+
+    if (security.length > 0) {
+        const securityRegex = /^\d+$/; // Only digits allowed
+        if (securityRegex.test(security)) {
+            if (security.length === 3) {
+                userLogin.card.security = security;
+                updated = true;
+            } else {
+                rules += "Security code must be 3 digits.\n";
+            }
+        } else {
+            rules += "Invalid security code. Only digits are allowed.\n";
+        }
+    }
+
+    if (userLogin.address.address !== address) {
+        if (address.length >= 20 && address.length <= 128) {
+            userLogin.address.address = address;
+            updated = true;
+        } else {
+            rules += "Address name must be between 20 and 128 characters.\n";
+        }
+    }
+
+    if (receiver.length > 0) {
+        if (receiver.length >= 5 && receiver.length <= 32) {
+            userLogin.address.receiver = receiver;
+            updated = true;
+        } else {
+            rules += "Receiver name must be between 5 and 32 characters.\n";
+        }
+    }
+
+    if (rules) {
+        alert(rules);
+    } 
+
+    if (updated) {
+        userUpdate(userLogin);
+        alert("Information updated.")
+        navigate("/user/payment");
+    } else {
+        alert("No information was updated.")
+    }
+
+    document.getElementById("card").value = "";
+    document.getElementById("holder").value = "";
+    document.getElementById("security").value = "";
+    document.getElementById("receiver").value = "";
+}
+
+function UserPayment({ userLogin, signOut, userUpdate }){
 
     let navigate = useNavigate(); 
 
@@ -18,7 +115,7 @@ function UserPayment({ userLogin, signOut }){
         window.scrollTo(0, 0);
         signOut();
     };
-
+    
     return (
         <div className="userpayment-page">
             <div className="layer">
@@ -38,7 +135,7 @@ function UserPayment({ userLogin, signOut }){
 
                         <div className="input-expiration">
                             <label htmlFor="expiration">Expiration date:</label>
-                            <input value={userLogin.card.expiration} type="date" id="expiration" name="expiration" />
+                            <input defaultValue={userLogin.card.expiration} type="date" id="expiration" name="expiration" />
                         </div>
 
                         <div className="input-security">
@@ -50,7 +147,7 @@ function UserPayment({ userLogin, signOut }){
 
                         <div className="input-address">
                             <label htmlFor="address">Address:</label>
-                            <textarea id="address" name="address" rows="5" cols="33">
+                            <textarea id="address" name="address" rows="5" cols="33" maxlength="128">
                                 {userLogin.address.address}
                             </textarea>
                         </div>
@@ -69,7 +166,7 @@ function UserPayment({ userLogin, signOut }){
 
                     <button onClick={() => handleSignOut()} className="signout-btn">Sign out</button>
 
-                    <button onClick={() => console.log("Save changes")} className="save-btn">Save</button>
+                    <button onClick={() => updatePayment(userLogin, userUpdate, navigate)} className="save-btn">Save</button>
 
                 </div>
             </div>
