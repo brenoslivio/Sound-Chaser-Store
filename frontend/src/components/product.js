@@ -53,11 +53,12 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function Product({ userLogin }){
+function Product({ userLogin, userUpdate }){
 
     const params = useParams();
 
     const [albums, setAlbums] = useState([]);
+    const [quantity, setQuantity] = useState(1);
 
     let navigate = useNavigate(); 
 
@@ -82,10 +83,20 @@ function Product({ userLogin }){
         )
     }
 
-    const addCart = (stock) =>{ 
+    const addCart = (id, stock) =>{ 
         if (userLogin){
             if (stock > 0) {
-                navigate("../cart", {replace: true});
+                const item = {id: id, quantity: quantity}
+                const itemExists = userLogin.cart.some((cartItem) => cartItem.id === item.id);
+
+                if (!itemExists) {
+                    userLogin.cart.push(item);
+                    userUpdate(userLogin);
+                    navigate("../cart", {replace: true});
+                } else {
+                    alert("Item already added to the cart!");
+                }
+                
             } else {
                 alert("Album out of stock!");
             }
@@ -120,7 +131,7 @@ function Product({ userLogin }){
                         </div>
                         <div className="quantity">
                             <label htmlFor="qnt">Quantity:</label>
-                            <select name="qnt" id="qnt">
+                            <select name="qnt" id="qnt" onChange={(e) => setQuantity(parseInt(e.target.value))}>
                                 {optionsAvailable(album.stock)}
                             </select>
                             <br/>
@@ -129,7 +140,7 @@ function Product({ userLogin }){
                                 ({album.stock} in stock)     
                             </div>
                         </div>
-                        <button onClick={() => addCart(album.stock)} className="product-btn">Add to cart</button>
+                        <button onClick={() => addCart(album.id, album.stock)} className="product-btn">Add to cart</button>
                     </div>
 
                     <div className="related">

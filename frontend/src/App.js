@@ -35,11 +35,12 @@ function App() {
   let local_user = JSON.parse(localStorage.getItem("user"));
 
   const [user, setUser] = useState('');
+  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     if (local_user){
       getUser(local_user.id)
-      .then(login => setUser(login))
+      .then(login => {setUser(login); setCartCount(login.cart.length)})
       .catch(error => console.error(error));
     }
   }, []);
@@ -51,6 +52,7 @@ function App() {
   const handleUser = (value) => {
     localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
+    setCartCount(value.cart.length);
   };
 
   const handleSignOut = () => {
@@ -58,21 +60,26 @@ function App() {
     setUser("");
   };
 
+  const handleUserUpdate = (value) => {
+    setUser(value);
+    setCartCount(value.cart.length);
+  };
+
   return (
       <div>
     <BrowserRouter>
-        <Header onSearch={handleSearch} userLogin={user} />
+        <Header onSearch={handleSearch} userLogin={user} cartCount={cartCount}/>
         <Login onLogin={handleUser}/>
             <Routes>
               <Route path="/" element={<Home userLogin={user} />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/register" element={<Register />} />
               <Route path="/store" element={<Store searchValue={searchValue} />} />
-              <Route path="/product/:id" element={<Product userLogin={user} />} />
+              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUserUpdate} />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
-              <Route path="/cart" element={<Cart userLogin={user} />} />
+              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUserUpdate}/>} />
 
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />

@@ -10,8 +10,8 @@ async function getAlbums(cart) {
 
     for (const item of cart) {
         const album = products.albums.find((product) => product.id === item.id);
-
-        if (album.stock > 0) {
+        
+        if (album && album.stock > 0) {
             albums.push({ album, quantity: item.quantity });
         }
     }
@@ -43,12 +43,22 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function removeAlbum(setAlbums, products, id) {
+function removeAlbum(userLogin, userUpdate, setAlbums, products, id) {
     const updatedProducts = products.filter(product => product.album.id !== id);
     setAlbums(updatedProducts);
+    
+    const usercart = updatedProducts.map(obj => {
+        return {
+          id: obj.album.id,
+          quantity: obj.quantity
+        };
+    });
+
+    userLogin.cart = usercart;
+    userUpdate(userLogin);
 }
 
-function updateAlbumQuantity(setAlbums, products, id, newQuantity) {
+function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, newQuantity) {
     const updatedProducts = products.map((product) => {
       if (product.album.id === id) {
         return { ...product, quantity: newQuantity };
@@ -57,9 +67,19 @@ function updateAlbumQuantity(setAlbums, products, id, newQuantity) {
     });
   
     setAlbums(updatedProducts);
+
+    const usercart = updatedProducts.map(obj => {
+        return {
+          id: obj.album.id,
+          quantity: obj.quantity
+        };
+    });
+
+    userLogin.cart = usercart;
+    userUpdate(userLogin);
 }
 
-function Cart({ userLogin }){
+function Cart({ userLogin, userUpdate }){
     const [albums, setAlbums] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const albumsPerPage = 2;
@@ -124,7 +144,7 @@ function Cart({ userLogin }){
                                         ${product.album.price}/pc
                                     </div>
                                     <div className="quantity">
-                                        <select value={product.quantity} onChange={(e) => updateAlbumQuantity(setAlbums, albums, product.album.id, parseInt(e.target.value))} className={`qnt${product.album.id}`} id="qnt">
+                                        <select value={product.quantity} onChange={(e) => updateAlbumQuantity(userLogin, userUpdate, setAlbums, albums, product.album.id, parseInt(e.target.value))} className={`qnt${product.album.id}`} id="qnt">
                                             {optionsAvailable(product.album.stock)}
                                         </select>
                                         <br/>
@@ -132,7 +152,7 @@ function Cart({ userLogin }){
                                             ({product.album.stock} in stock)     
                                         </div>
                                     </div>
-                                    <div className="remove-cart" onClick={() => removeAlbum(setAlbums, albums, product.album.id)}>
+                                    <div className="remove-cart" onClick={() => removeAlbum(userLogin, userUpdate, setAlbums, albums, product.album.id)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" className="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                         </svg>
