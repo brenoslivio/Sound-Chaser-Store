@@ -36,8 +36,8 @@ function Store({ searchValue }){
         getAlbums(sortCriteria)
           .then((products) => setAlbums(products))
           .catch((error) => console.error(error));
-      }, [sortCriteria]);      
-
+    }, [sortCriteria]);
+      
     if (albums.length === 0) {
         return (
             <div className="store-page">
@@ -163,11 +163,11 @@ function Store({ searchValue }){
                         <br/>
                         <div className="title">Genres</div>
                         <br/>
-                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic rock" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic rock" onChange={handleGenreChange} />
                         <label htmlFor="classic_rock"> Classic Rock </label><br/>
-                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative rock" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative rock" onChange={handleGenreChange} />
                         <label htmlFor="alternative_rock"> Alternative Rock </label><br/>
-                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive rock" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive rock" onChange={handleGenreChange} />
                         <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
                         <input type="checkbox" id="jazz" name="jazz" value="jazz" onChange={handleGenreChange}/>
                         <label htmlFor="jazz"> Jazz </label><br/>

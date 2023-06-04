@@ -106,29 +106,30 @@ main {
     position: absolute;
     width: 16vw;
     height: 4vw;
-    bottom: 14vw;
+    bottom: 12vw;
     right: 4vw;
     font-size: 1.5vw;
 }
 
 /* Custom select box size */
 
-select {
+.product select {
+    position: absolute;
     width: 4vw;
     height: 3vw;
     font-size: 1.5vw;
 }
 
-option {
+.product option {
     font-size: 1.5vw;
     width: 3vw;
 }
 
 .quantity label {
-    position: relative;
-    bottom: 1vw;
-    right: 3vw;
-}
+    position: absolute;
+    bottom: 5vw;
+    font-size: 2vw;
+} 
 
 .product .product-btn {
     position: absolute;

@@ -206,3 +206,14 @@
     color: white;
     background-color: #72366f;
 }
+
+.cart-page select {
+    width: 4vw;
+    height: 3vw;
+    font-size: 1.5vw;
+}
+
+.cart-page option {
+    font-size: 1.5vw;
+    width: 3vw;
+}
