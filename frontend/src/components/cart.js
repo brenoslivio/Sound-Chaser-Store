@@ -107,7 +107,7 @@ function Cart({ userLogin, userUpdate }){
                         <div className="title"> Cart </div>
                             <div className="products">
                             </div>
-                            <button  className="proceed-btn">Proceed to payment</button>
+                            <button onClick={() => alert("No products added to cart.")} className="proceed-btn">Proceed to payment</button>
                     </div>
                 </div>
             </div>
@@ -123,6 +123,10 @@ function Cart({ userLogin, userUpdate }){
     const currentAlbums = albums.slice(indexOfFirstAlbum, indexOfLastAlbum);
 
     let totalPrice = getTotalPrice(albums);
+
+    const paymentPage = () => {
+        navigate("/cart/payment");
+    };
 
     return (
         <div className="cart-page">
@@ -172,7 +176,7 @@ function Cart({ userLogin, userUpdate }){
                             </div>
                             <p className="cart-price"> Total: ${totalPrice.toFixed(2)} </p>
                         </div>
-                        <button  className="proceed-btn">Proceed to payment</button>
+                        <button onClick={paymentPage} className="proceed-btn">Proceed to payment</button>
                 </div>
             </div>
         </div>

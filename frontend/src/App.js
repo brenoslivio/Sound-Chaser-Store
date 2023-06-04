@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/home';
 import Store from './components/store';
 import Product from './components/product';
@@ -10,15 +11,10 @@ import UserInformation from './components/userInformation';
 import UserOrders from './components/userOrders';
 import UserPayment from './components/userPayment';
 import Cart from './components/cart';
+import Payment from './components/payment';
 import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
-
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom";
 
 async function getUser(id) {
   const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
@@ -71,7 +67,7 @@ function App() {
         <Header onSearch={handleSearch} userLogin={user} cartCount={cartCount}/>
         <Login onLogin={handleUser}/>
             <Routes>
-              <Route path="/" element={<Home userLogin={user} />} />
+              <Route path="/" element={<Home userLogin={user} userUpdate={handleUserUpdate} />} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/register" element={<Register />} />
               <Route path="/store" element={<Store searchValue={searchValue} />} />
@@ -80,6 +76,7 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               
               <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUserUpdate}/>} />
+              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUserUpdate}/>} />
 
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} />} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />

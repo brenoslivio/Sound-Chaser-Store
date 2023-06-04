@@ -15,12 +15,13 @@ async function getLatestAdditions() {
     return sortedAlbums;
 }
 
-function Home({ userLogin }){
+function Home({ userLogin, userUpdate }){
     const [latestAdditions, setLatestAdditions] = useState([]);
     let navigate = useNavigate(); 
 
     const routeChange = () =>{ 
-      navigate("quiz");
+        navigate("quiz");
+        window.scrollTo(0, 0);
     }
 
     useEffect(() => {
@@ -29,9 +30,24 @@ function Home({ userLogin }){
         .catch(error => console.error(error));
     }, []);
 
-    const addCart = () =>{ 
+    const addCart = (id, stock) =>{ 
         if (userLogin){
-            navigate("cart");
+            if (stock > 0) {
+                const item = {id: id, quantity: 1}
+                const itemExists = userLogin.cart.some((cartItem) => cartItem.id === item.id);
+
+                if (!itemExists) {
+                    userLogin.cart.push(item);
+                    userUpdate(userLogin);
+                    navigate("../cart", {replace: true});
+                    window.scrollTo(0, 0);
+                } else {
+                    alert("Item already added to the cart!");
+                }
+                
+            } else {
+                alert("Album out of stock!");
+            }
         } else {
             alert("Login required to add to cart.");
         }
@@ -98,7 +114,7 @@ function Home({ userLogin }){
                                 </div>
                                 </Link>
                                 <div className="main-card-price">${album.price}</div>
-                                <button onClick={addCart} className="card-btn">Add to cart</button>
+                                <button onClick={() => addCart(album.id, album.stock)} className="card-btn">Add to cart</button>
                             </div>
                         ))}
                     </div>

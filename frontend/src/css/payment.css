@@ -1,0 +1,134 @@
+.payment-page {
+    width: 100%;
+    height: 74vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for about portion */
+
+.payment-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 68vw;
+    left: 10%;
+    top: 12vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.payment-container .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.payment-info .payment-address {
+    position: absolute;
+    width: 30vw;
+    height: 30vw;
+    left: 4%;
+    top: 15%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.payment-info .payment-card {
+    position: absolute;
+    width: 30vw;
+    height: 30vw;
+    right: 4%;
+    top: 15%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.payment-info .address-title {
+    position: absolute;
+    left: 4vw;
+    bottom: 35vw;
+    font-size: 2vw;
+    color: #583257;
+}
+
+.payment-info .payment-title {
+    position: absolute;
+    right: 15vw;
+    bottom: 35vw;
+    font-size: 2vw;
+    color: #583257;
+}
+
+.payment-info .payment-text {
+    position: relative;
+    left: 1vw;
+    width: 28vw;
+    text-align: left;
+    font-size: 2vw;
+    text-shadow: 0vw 0.1vw #000;
+    color: white;
+}
+
+.payment-info .change-payment {
+    position: absolute;
+    right: 5%;
+    bottom: 0.5vw;
+    font-size: 1.5vw;
+    color: #583257;
+    cursor: pointer;
+}
+
+.payment-container .payment-info {
+    position: absolute;
+    width: 68vw;
+    height: 42vw;
+    left: 8%;
+    top: 18%;
+    border-radius: 2vw;
+    background: #d9d9d9;
+}
+
+.payment-container .buy-btn {
+    position: absolute;
+    right: 7%;
+    bottom: 6%;
+    width: 18vw;
+    height: 6vw;
+    cursor: pointer;
+    font-size: 1.5vw;
+    border: none;
+    border-radius: 2vw;
+    color: #fff;
+    background-color: #B583B3;
+}
+
+.payment-container .buy-btn:hover {
+    background-color: #583257;
+}
+
+.payment-container .buy-btn:active {
+    background-color: #350808;
+}
+
+.payment-container .payment-price {
+    position: absolute;
+    left: 8%;
+    bottom: 2vw;
+    font-size: 3.5vw;
+    color: white;
+}

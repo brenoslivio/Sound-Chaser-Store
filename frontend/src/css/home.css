@@ -115,6 +115,7 @@
     bottom: 3vw;
     right: 4vw;
     border: none;
+    cursor: pointer;
 }
 
 .main-card-price {
