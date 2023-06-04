@@ -17,6 +17,10 @@
 
 /* Filter options */
 
+.store-page #sorting {
+    width: 15vw;
+}
+
 .filter {
     width: 25%;
     height: 100%;
@@ -50,26 +54,6 @@ input[type=checkbox] {
     border: none;
     border-radius: 0.5vw;
     accent-color: #72366F;
-}
-
-#filter-btn {
-    position: relative;
-    font-size: 2vw;
-    top: 2vw;
-    left: 2.5vw;
-    padding: 1vw 6vw;
-    border: none;
-    border-radius: 2vw;
-    color: #fff;
-    background-color: #B583B3;
-}
-
-#filter-btn:hover {
-    background-color: #583257;
-}
-
-#filter-btn:active {
-    background-color: #350808;
 }
 
 .albums {
@@ -200,7 +184,7 @@ input[type=checkbox] {
 .store-page .pagination {
     position: relative;
     bottom: 4vw;
-    left: 50vw;
+    left: 28vw;
     width: 50vw;
 }
 
@@ -211,7 +195,8 @@ input[type=checkbox] {
     background-color: #b583b3;
     border-radius: 100%;
     border: none;
-    font-size: 1.25vw;
+    font-size: 2vw;
+    
     margin: 0vw 0.5vw;
     cursor: pointer;
 }

@@ -2,30 +2,41 @@ import '../css/store.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 
-function date_sort(b, a) {
-    return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
-}
-
-async function getAlbums() {
+async function getAlbums(sortCriteria) {
     const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
                             .then(response => response.json());
 
-    let sortedAlbums = products.albums.sort(date_sort);
+    let sortedAlbums = products.albums.sort((a, b) => {
+        if (sortCriteria === "date") {
+            return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
+        } else if (sortCriteria === "artist") {
+            return a.artist.localeCompare(b.artist);
+        } else if (sortCriteria === "album") {
+            return a.name.localeCompare(b.name);
+        } else {
+            return a.year - b.year;
+        } 
+    });
     
     return sortedAlbums;
 } 
 
 function Store({ searchValue }){
-
     const [albums, setAlbums] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+    const [priceMin, setPriceMin] = useState("");
+    const [priceMax, setPriceMax] = useState("");
+    const [yearMin, setYearMin] = useState("");
+    const [yearMax, setYearMax] = useState("");
+    const [sortCriteria, setSortCriteria] = useState("date");
     const albumsPerPage = 6;
 
     useEffect(() => {
-        getAlbums()
-        .then(products => setAlbums(products))
-        .catch(error => console.error(error));
-    }, []);
+        getAlbums(sortCriteria)
+          .then((products) => setAlbums(products))
+          .catch((error) => console.error(error));
+      }, [sortCriteria]);      
 
     if (albums.length === 0) {
         return (
@@ -33,6 +44,16 @@ function Store({ searchValue }){
                 <div className="layer">
                     <div className="filter">
                         <div className="genres">
+                            <div className="title">Sorting</div>
+                            <br/>
+                            <select id="sorting">
+                                <option value="date">Sort by date added</option>
+                                <option value="artist">Sort by artist name</option>
+                                <option value="album">Sort by album name</option>
+                                <option value="year">Sort by year</option>
+                            </select>
+                            <br/>
+                            <br/>
                             <div className="title">Genres</div>
                             <br/>
                             <input type="checkbox" id="classic_rock" name="classic_rock" value="classic_rock"/>
@@ -62,9 +83,6 @@ function Store({ searchValue }){
                             <input type="text" id="year_min" name="year_min" placeholder="Min"/>
                             |
                             <input type="text" id="year_max" name="year_max" placeholder="Max"/>
-                            <br/>
-                            <br/>
-                            <button id="filter-btn">Filter</button>
                         </div>
                     </div>
                 </div>
@@ -72,57 +90,106 @@ function Store({ searchValue }){
         )
     }
 
-    const filteredItems = albums.filter((album) =>
-        album.name.toLowerCase().includes(searchValue.toLowerCase())
-    );
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
-    console.log(filteredItems);
+    const handleGenreChange = (e) => {
+        const genre = e.target.value;
+        if (e.target.checked) {
+            setSelectedGenres([...selectedGenres, genre]);
+        } else {
+            setSelectedGenres(selectedGenres.filter((g) => g !== genre));
+        }
+      };
+      
+    const handlePriceChange = (e) => {
+        if (e.target.name === "price_min") {
+            setPriceMin(e.target.value);
+        } else {
+            setPriceMax(e.target.value);
+        }
+    };
+      
+    const handleYearChange = (e) => {
+        if (e.target.name === "year_min") {
+            setYearMin(e.target.value);
+        } else {
+            setYearMax(e.target.value);
+        }
+    };
+
+    const handleSortCriteriaChange = (e) => {
+        setSortCriteria(e.target.value);
+    };
+
+    const filteredItems = albums.filter((album) => {
+        const isMatchedGenre = selectedGenres.length === 0 || selectedGenres.includes(album.genre.toLowerCase());
+        const isWithinPriceRange =
+            (priceMin === "" || album.price >= parseFloat(priceMin)) &&
+            (priceMax === "" || album.price <= parseFloat(priceMax));
+        const isWithinYearRange =
+            (yearMin === "" || album.year >= parseInt(yearMin)) &&
+            (yearMax === "" || album.year <= parseInt(yearMax));
+        const isMatchedSearchValue = album.name.toLowerCase().includes(searchValue.toLowerCase()) 
+            || album.artist.toLowerCase().includes(searchValue.toLowerCase());
+        
+        return (
+            isMatchedGenre &&
+            isWithinPriceRange &&
+            isWithinYearRange &&
+            isMatchedSearchValue
+        );
+    });
 
     const indexOfLastAlbum = currentPage * albumsPerPage;
     const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
     const currentAlbums = filteredItems.slice(indexOfFirstAlbum, indexOfLastAlbum);
-  
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
 
     return (
         <div className="store-page">
             <div className="layer">
                 <div className="filter">
                     <div className="genres">
+                        <div className="title">Sorting</div>
+                        <br/>
+                        <select id="sorting" value={sortCriteria} onChange={handleSortCriteriaChange}>
+                            <option value="date">Sort by date added</option>
+                            <option value="artist">Sort by artist name</option>
+                            <option value="album">Sort by album name</option>
+                            <option value="year">Sort by year</option>
+                        </select>
+                        <br/>
+                        <br/>
                         <div className="title">Genres</div>
                         <br/>
-                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic_rock"/>
+                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic rock" onChange={handleGenreChange}/>
                         <label htmlFor="classic_rock"> Classic Rock </label><br/>
-                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative_rock"/>
+                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative rock" onChange={handleGenreChange}/>
                         <label htmlFor="alternative_rock"> Alternative Rock </label><br/>
-                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive_rock"/>
+                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive rock" onChange={handleGenreChange}/>
                         <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
-                        <input type="checkbox" id="jazz" name="jazz" value="jazz"/>
+                        <input type="checkbox" id="jazz" name="jazz" value="jazz" onChange={handleGenreChange}/>
                         <label htmlFor="jazz"> Jazz </label><br/>
-                        <input type="checkbox" id="classical" name="classical" value="classical"/>
+                        <input type="checkbox" id="classical" name="classical" value="classical" onChange={handleGenreChange}/>
                         <label htmlFor="classical"> Classical Music </label><br/>
-                        <input type="checkbox" id="pop" name="pop" value="pop"/>
+                        <input type="checkbox" id="pop" name="pop" value="pop" onChange={handleGenreChange}/>
                         <label htmlFor="pop"> Pop </label><br/>
-                        <input type="checkbox" id="rap" name="rap" value="rap"/>
+                        <input type="checkbox" id="rap" name="rap" value="rap" onChange={handleGenreChange}/>
                         <label htmlFor="rap"> Rap </label><br/>
                         <br/>
                         <div className="title">Price range</div>
                         <br/>
-                        <input type="text" id="price_min" name="price_min" placeholder="Min"/>
+                        <input type="text" id="price_min" name="price_min" placeholder="Min" onChange={handlePriceChange}/>
                         |
-                        <input type="text" id="price_max" name="price_max" placeholder="Max"/>
+                        <input type="text" id="price_max" name="price_max" placeholder="Max" onChange={handlePriceChange}/>
                         <br/>
                         <br/>
                         <div className="title">Album year</div>
                         <br/>
-                        <input type="text" id="year_min" name="year_min" placeholder="Min"/>
+                        <input type="text" id="year_min" name="year_min" placeholder="Min" onChange={handleYearChange}/>
                         |
-                        <input type="text" id="year_max" name="year_max" placeholder="Max"/>
-                        <br/>
-                        <br/>
-                        <button id="filter-btn">Filter</button>
+                        <input type="text" id="year_max" name="year_max" placeholder="Max" onChange={handleYearChange}/>
                     </div>
                 </div>
                 <div className="albums">
