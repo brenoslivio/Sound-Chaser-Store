@@ -124,4 +124,118 @@
     border-bottom: 0.2vw solid #72366F;
 }
 
+.userorders .orders-title {
+    position: absolute;
+    left: 10%;
+    top: 2%;
+    font-size: 2.5vw;
+    color: #72366f;
+    text-decoration: underline;
+}
+
+/* <p className="text-order-number"> Order number </p>
+<p className="text-order-date"> Date </p>
+<p className="text-order-status"> Payment status </p>
+<p className="text-order-total"> Total </p> */
+
+.userorders .text-order-number {
+    position: absolute;
+    left: 10%;
+    top: 13%;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.userorders .text-order-date {
+    position: absolute;
+    left: 30%;
+    top: 13%;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.userorders .text-order-status {
+    position: absolute;
+    left: 55%;
+    top: 13%;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.userorders .text-order-total {
+    position: absolute;
+    left: 82%;
+    top: 13%;
+    font-size: 1.5vw;
+    color: #72366f;
+}
+
+.userorders .order-number {
+    position: absolute;
+    left: 5%;
+    top: 40%;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.userorders .order-date {
+    position: absolute;
+    left: 28%;
+    top: 40%;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.userorders .order-status {
+    position: absolute;
+    left: 55%;
+    top: 40%;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.userorders .order-total {
+    position: absolute;
+    left: 85%;
+    top: 40%;
+    font-size: 2vw;
+    color: #72366f;
+}
+
+.userorders .order-record1 {
+    position: absolute;
+    width: 60vw;
+    height: 12vw;
+    left: 5%;
+    top: 20%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.userorders .order-record2 {
+    position: absolute;
+    width: 60vw;
+    height: 12vw;
+    left: 5%;
+    top: 42%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.userorders .order-record3 {
+    position: absolute;
+    width: 60vw;
+    height: 12vw;
+    left: 5%;
+    top: 64%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.userorders .pagination {
+    position: absolute;
+    bottom: 4vw;
+    right: 34vw;
+    width: 50vw;
+}
 

@@ -70,7 +70,7 @@ input[type=checkbox] {
 .albums {
     position: absolute;
     width: 71%;
-    height: 60vw;
+    height: 63vw;
     left: 27vw;
     top: 10vw;
     border-radius: 1vw;
@@ -194,7 +194,7 @@ input[type=checkbox] {
 
 .store-page .pagination {
     position: relative;
-    bottom: 4vw;
+    bottom: 6vw;
     left: 28vw;
     width: 50vw;
 }

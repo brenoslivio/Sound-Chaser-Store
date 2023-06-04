@@ -30,10 +30,15 @@ function getTotalPrice(products) {
     return totalPrice;
 }
 
-function emptyCart(userLogin, userUpdate, navigate){
+function emptyCart(userLogin, userUpdate, navigate, totalPrice){
+    const orderCompleted = {number: userLogin.orders.slice(-1)[0].number + 1, date: new Date().toISOString().slice(0, 10), status: "finished", total: parseFloat(totalPrice)};
+
+    userLogin.orders.push(orderCompleted);
     userLogin.cart = [];
+
     userUpdate(userLogin);
     alert("Successful payment!")
+
     navigate("/");
     window.scrollTo(0, 0);
 }
@@ -95,7 +100,7 @@ function Payment({ userLogin, userUpdate }){
                             </Link>
                         </div>
                         <p className="payment-price"> Total: ${totalPrice.toFixed(2)} </p>
-                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate)} className="buy-btn">Buy</button>
+                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate, totalPrice.toFixed(2))} className="buy-btn">Buy</button>
                 </div>
             </div>
         </div>

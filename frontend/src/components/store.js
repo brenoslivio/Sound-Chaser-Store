@@ -19,7 +19,7 @@ async function getAlbums(sortCriteria) {
     });
     
     return sortedAlbums;
-} 
+}
 
 function Store({ searchValue }){
     const [albums, setAlbums] = useState([]);
