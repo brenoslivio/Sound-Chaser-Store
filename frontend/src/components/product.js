@@ -1,19 +1,6 @@
 import '../css/product.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-
-function date_sort(b, a) {
-    return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
-}
-
-async function getAlbums() {
-    const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                            .then(response => response.json());
-
-    let sortedAlbums = products.albums.sort(date_sort);
-    
-    return sortedAlbums;
-}
 
 function getAlbumById(albums, id) {
     for (let i = 0; i < albums.length; i++) {
@@ -53,20 +40,13 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function Product({ userLogin, userUpdate }){
+function Product({ userLogin, userUpdate, albums }){
 
     const params = useParams();
 
-    const [albums, setAlbums] = useState([]);
     const [quantity, setQuantity] = useState(1);
 
     let navigate = useNavigate(); 
-
-    useEffect(() => {
-        getAlbums()
-        .then(products => setAlbums(products))
-        .catch(error => console.error(error));
-    }, []);
 
     if (albums.length === 0) {
         return (

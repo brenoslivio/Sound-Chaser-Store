@@ -16,6 +16,17 @@ import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
 
+async function getAlbums() {
+  const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                          .then(response => response.json());
+
+  let sortedAlbums = products.albums.sort((b, a) => {
+          return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
+  });
+  
+  return sortedAlbums;
+}
+
 async function getUser(id) {
   const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
                             .then(response => response.json());
@@ -31,6 +42,7 @@ function App() {
   let local_user = JSON.parse(localStorage.getItem("user"));
 
   const [user, setUser] = useState('');
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     if (local_user){
@@ -38,6 +50,9 @@ function App() {
       .then(login => {setUser(login);})
       .catch(error => console.error(error));
     }
+    getAlbums()
+    .then(products => {setAlbums(products);})
+    .catch(error => console.error(error));
   }, []);
   
   const handleSearch = (value) => {
@@ -47,6 +62,10 @@ function App() {
   const handleUser = (value) => {
     localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
+  };
+
+  const handleAlbums = (value) => {
+    setAlbums(value);
   };
 
   const handleSignOut = () => {
@@ -60,16 +79,16 @@ function App() {
         <Header onSearch={handleSearch} userLogin={user} />
         <Login onLogin={handleUser}/>
             <Routes>
-              <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} />} />
+              <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} albums={albums}/>} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/register" element={<Register newUser={handleUser}/>} />
-              <Route path="/store" element={<Store searchValue={searchValue} />} />
-              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} />} />
+              <Route path="/store" element={<Store searchValue={searchValue} albums={albums}/>} />
+              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} albums={albums}/>} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
-              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} />} />
-              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} />} />
+              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} albums={albums}/>} />
+              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} albums={albums} albumUpdate={handleAlbums}/>} />
 
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
               <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />

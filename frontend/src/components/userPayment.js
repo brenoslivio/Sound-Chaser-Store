@@ -2,7 +2,6 @@ import '../css/userPayment.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
-// card holder expiration security address receiver
 function updatePayment(userLogin, userUpdate, navigate){
     const card = document.getElementById("card").value;
     const holder = document.getElementById("holder").value;

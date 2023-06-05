@@ -2,21 +2,18 @@ import '../css/payment.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-async function getAlbums(cart) {
-    const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                            .then(response => response.json());
-
-    let albums = [];
+function getAlbums(cart, albums) {
+    let cartAlbums = [];
 
     for (const item of cart) {
-        const album = products.albums.find((product) => product.id === item.id);
+        const album = albums.find((product) => product.id === item.id);
         
         if (album && album.stock > 0) {
-            albums.push({ album, quantity: item.quantity });
+            cartAlbums.push({ album, quantity: item.quantity });
         }
     }
 
-    return albums;
+    return cartAlbums;
 }
 
 function getTotalPrice(products) {
@@ -30,8 +27,7 @@ function getTotalPrice(products) {
     return totalPrice;
 }
 
-function emptyCart(userLogin, userUpdate, navigate, totalPrice){
-
+function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpdate){
     if (!userLogin.address.address || !userLogin.address.receiver || 
         !userLogin.card.number || !userLogin.card.holder || !userLogin.card.expiration){
         alert("Please fill all information related to your address and payment card.");
@@ -44,6 +40,20 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice){
                             total: parseFloat(totalPrice)};
 
     userLogin.orders.push(orderCompleted);
+    
+    userLogin.cart.forEach((item) => {
+        const albumIndex = albums.findIndex((album) => album.id === item.id);
+        if (albumIndex !== -1) {
+            if (albums[albumIndex].stock - item.quantity >= 0) {
+                albums[albumIndex].stock -= item.quantity;
+            } else {
+                albums[albumIndex].stock -= Math.min(albums[albumIndex].stock, item.quantity);
+            }
+        }
+    });
+
+    albumUpdate(albums); // Update albums
+
     userLogin.cart = [];
 
     userUpdate(userLogin);
@@ -53,8 +63,8 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice){
     window.scrollTo(0, 0);
 }
 
-function Payment({ userLogin, userUpdate }){
-    const [albums, setAlbums] = useState([]);
+function Payment({ userLogin, userUpdate, albums, albumUpdate }){
+    const [cartAlbums, setCartAlbums] = useState([]);
 
     let navigate = useNavigate();
 
@@ -66,12 +76,10 @@ function Payment({ userLogin, userUpdate }){
     }
 
     useEffect(() => {
-        getAlbums(userLogin.cart)
-        .then(products => setAlbums(products))
-        .catch(error => console.error(error));
+        setCartAlbums(getAlbums(userLogin.cart, albums));
     }, []);
 
-    if (albums.length === 0) {
+    if (cartAlbums.length === 0) {
         return (
             <div className="cart-page">
                 <div className="layer">
@@ -86,7 +94,7 @@ function Payment({ userLogin, userUpdate }){
         )
     }
 
-    let totalPrice = getTotalPrice(albums);
+    let totalPrice = getTotalPrice(cartAlbums);
 
     return (
         <div className="payment-page">
@@ -110,7 +118,7 @@ function Payment({ userLogin, userUpdate }){
                             </Link>
                         </div>
                         <p className="payment-price"> Total: ${totalPrice.toFixed(2)} </p>
-                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate, totalPrice.toFixed(2))} className="buy-btn">Buy</button>
+                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate, totalPrice.toFixed(2), albums, albumUpdate)} className="buy-btn">Buy</button>
                 </div>
             </div>
         </div>

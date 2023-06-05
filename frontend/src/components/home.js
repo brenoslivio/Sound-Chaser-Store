@@ -1,34 +1,14 @@
 import '../css/home.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-function date_sort(b, a) {
-    return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
-}
-
-async function getLatestAdditions() {
-    const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                        .then(response => response.json());
-
-    let sortedAlbums = products.albums.sort(date_sort).slice(0, 4);
-    
-    return sortedAlbums;
-}
-
-function Home({ userLogin, userUpdate }){
-    const [latestAdditions, setLatestAdditions] = useState([]);
+function Home({ userLogin, userUpdate, albums }){
     let navigate = useNavigate(); 
 
     const routeChange = () =>{ 
-        navigate("quiz");
+        navigate("/quiz");
         window.scrollTo(0, 0);
     }
-
-    useEffect(() => {
-        getLatestAdditions()
-        .then(additions => setLatestAdditions(additions))
-        .catch(error => console.error(error));
-    }, []);
 
     const addCart = (id, stock) =>{ 
         if (userLogin){
@@ -53,7 +33,7 @@ function Home({ userLogin, userUpdate }){
         }
     }
 
-    if (latestAdditions.length === 0) {
+    if (albums.length === 0) {
         return (
             <div>
                 <div className="banner">
@@ -80,6 +60,10 @@ function Home({ userLogin, userUpdate }){
         )
     }
 
+    let sortedAlbums = albums.sort((b, a) => {
+        return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
+    });
+
     return (
         <div>
             <div className="banner">
@@ -100,7 +84,7 @@ function Home({ userLogin, userUpdate }){
                     <div className="additions">
                         <div className="title"> Latest additions </div>
 
-                        {latestAdditions.map((album, index) => (
+                        {sortedAlbums.slice(0, 4).map((album, index) => (
                             <div className="main-card" key={index}>
                                 <Link to={'/product/' + album.id}>
                                 <div className="main-album">

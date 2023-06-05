@@ -1,12 +1,9 @@
 import '../css/store.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-async function getAlbums(sortCriteria) {
-    const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                            .then(response => response.json());
-
-    let sortedAlbums = products.albums.sort((a, b) => {
+function sortAlbums(albums, sortCriteria) {
+    let sortedAlbums = albums.sort((a, b) => {
         if (sortCriteria === "date") {
             return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
         } else if (sortCriteria === "artist") {
@@ -21,8 +18,7 @@ async function getAlbums(sortCriteria) {
     return sortedAlbums;
 }
 
-function Store({ searchValue }){
-    const [albums, setAlbums] = useState([]);
+function Store({ searchValue, albums }){
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [priceMin, setPriceMin] = useState("");
@@ -31,12 +27,6 @@ function Store({ searchValue }){
     const [yearMax, setYearMax] = useState("");
     const [sortCriteria, setSortCriteria] = useState("date");
     const albumsPerPage = 6;
-
-    useEffect(() => {
-        getAlbums(sortCriteria)
-          .then((products) => setAlbums(products))
-          .catch((error) => console.error(error));
-    }, [sortCriteria]);
       
     if (albums.length === 0) {
         return (
@@ -123,7 +113,9 @@ function Store({ searchValue }){
         setSortCriteria(e.target.value);
     };
 
-    const filteredItems = albums.filter((album) => {
+    const sortedAlbums = sortAlbums(albums, sortCriteria);
+
+    const filteredItems = sortedAlbums.filter((album) => {
         const isMatchedGenre = selectedGenres.length === 0 || selectedGenres.includes(album.genre.toLowerCase());
         const isWithinPriceRange =
             (priceMin === "" || album.price >= parseFloat(priceMin)) &&

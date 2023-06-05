@@ -63,7 +63,6 @@ function createUser(userId, newUser, navigate){
         alert(rules);
     } else {
         newUser(userLogin);
-        alert("User created!")
         navigate("/");
         window.scrollTo(0, 0);
     }
