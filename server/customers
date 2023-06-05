@@ -15,6 +15,18 @@
                         {"number": 2,"date": "2023-03-11", "status": "finished", "total": 49.99},
                         {"number": 3, "date": "2023-05-11", "status": "finished", "total": 49.99}],
             "cart": [{"id": 5, "quantity": 1}, {"id": 1, "quantity": 2}, {"id": 3, "quantity": 2}]
+        },
+        {
+            "id": 1,
+            "name": "Breno",
+            "email": "teste@mail.com",
+            "phone": "011888888888",
+            "password": "password",
+            "card": {"number": "", "holder": "",
+                    "expiration": "", "security": ""},
+            "address": {"address": "", "receiver": ""},
+            "orders": [],
+            "cart": []
         }
     ]
 }

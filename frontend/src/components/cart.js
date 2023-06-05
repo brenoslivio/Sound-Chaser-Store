@@ -43,7 +43,7 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
-function removeAlbum(userLogin, userUpdate, setAlbums, products, id) {
+function removeAlbum(userLogin, userUpdate, setAlbums, products, id, navigate) {
     const updatedProducts = products.filter(product => product.album.id !== id);
     setAlbums(updatedProducts);
     
@@ -56,9 +56,10 @@ function removeAlbum(userLogin, userUpdate, setAlbums, products, id) {
 
     userLogin.cart = usercart;
     userUpdate(userLogin);
+    navigate("/cart");
 }
 
-function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, newQuantity) {
+function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, newQuantity, navigate) {
     const updatedProducts = products.map((product) => {
       if (product.album.id === id) {
         return { ...product, quantity: newQuantity };
@@ -77,6 +78,7 @@ function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, new
 
     userLogin.cart = usercart;
     userUpdate(userLogin);
+    navigate("/cart");
 }
 
 function Cart({ userLogin, userUpdate }){
@@ -107,7 +109,7 @@ function Cart({ userLogin, userUpdate }){
                         <div className="title"> Cart </div>
                             <div className="products">
                             </div>
-                            <button onClick={() => alert("No products added to cart.")} className="proceed-btn">Proceed to payment</button>
+                            <button onClick={() => alert("No products added to the cart.")} className="proceed-btn">Proceed to payment</button>
                     </div>
                 </div>
             </div>
@@ -148,7 +150,7 @@ function Cart({ userLogin, userUpdate }){
                                         ${product.album.price}/pc
                                     </div>
                                     <div className="quantity">
-                                        <select value={product.quantity} onChange={(e) => updateAlbumQuantity(userLogin, userUpdate, setAlbums, albums, product.album.id, parseInt(e.target.value))} className={`qnt${product.album.id}`} id="qnt">
+                                        <select value={product.quantity} onChange={(e) => updateAlbumQuantity(userLogin, userUpdate, setAlbums, albums, product.album.id, parseInt(e.target.value), navigate)} className={`qnt${product.album.id}`} id="qnt">
                                             {optionsAvailable(product.album.stock)}
                                         </select>
                                         <br/>
@@ -156,7 +158,7 @@ function Cart({ userLogin, userUpdate }){
                                             ({product.album.stock} in stock)     
                                         </div>
                                     </div>
-                                    <div className="remove-cart" onClick={() => removeAlbum(userLogin, userUpdate, setAlbums, albums, product.album.id)}>
+                                    <div className="remove-cart" onClick={() => removeAlbum(userLogin, userUpdate, setAlbums, albums, product.album.id, navigate)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" className="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                                         </svg>

@@ -125,7 +125,9 @@ function UserPayment({ userLogin, signOut, userUpdate }){
 
                         <div className="input-card">
                             <label htmlFor="name">Card number:</label>
-                            <input placeholder= {`Finishing in ${userLogin.card.number.slice(-4)}`} type="text" id="card" name="card" />
+                            <input placeholder={userLogin.card.number ? (`Finishing in ${userLogin.card.number.slice(-4)}`) : ("")} 
+                            
+                            type="text" id="card" name="card" />
                         </div>
 
                         <div className="input-holder">

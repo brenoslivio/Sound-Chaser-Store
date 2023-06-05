@@ -26,7 +26,7 @@ function handleMouseUp(e){
     }
 }
 
-function Header({ onSearch, userLogin, cartCount }){
+function Header({ onSearch, userLogin }){
     let navigate = useNavigate(); 
 
     const handleKeyPress = (event) => {
@@ -75,7 +75,7 @@ function Header({ onSearch, userLogin, cartCount }){
                                 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
                             </svg>
                             <div className="items-cart">
-                                {cartCount}
+                                {userLogin.cart.length}
                             </div>
                         </Link>
                     ) : (

@@ -6,8 +6,7 @@ async function checkLogin(onLogin) {
     const email = document.getElementById('login_mail').value;
     const password = document.getElementById('login_password').value;
 
-    if (!email || !password) {
-        // Handle empty email or password
+    if (!email || !password) { // Handle empty email or password
         alert("Please enter both e-mail and password.");
         return;
     }

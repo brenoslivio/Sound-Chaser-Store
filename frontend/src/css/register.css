@@ -76,6 +76,7 @@
     border-radius: 5vw;
     color: #fff;
     background-color: #B583B3;
+    cursor: pointer;
 }
 
 #form-register-btn:hover {

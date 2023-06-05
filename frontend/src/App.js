@@ -18,7 +18,7 @@ import Footer from './components/footer';
 
 async function getUser(id) {
   const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
-                          .then(response => response.json());
+                            .then(response => response.json());
   
   const user = customers.users.find(cust => cust.id === id);
 
@@ -31,12 +31,11 @@ function App() {
   let local_user = JSON.parse(localStorage.getItem("user"));
 
   const [user, setUser] = useState('');
-  const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {
     if (local_user){
       getUser(local_user.id)
-      .then(login => {setUser(login); setCartCount(login.cart.length)})
+      .then(login => {setUser(login);})
       .catch(error => console.error(error));
     }
   }, []);
@@ -48,7 +47,6 @@ function App() {
   const handleUser = (value) => {
     localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
-    setCartCount(value.cart.length);
   };
 
   const handleSignOut = () => {
@@ -56,30 +54,25 @@ function App() {
     setUser("");
   };
 
-  const handleUserUpdate = (value) => {
-    setUser(value);
-    setCartCount(value.cart.length);
-  };
-
   return (
       <div>
     <BrowserRouter>
-        <Header onSearch={handleSearch} userLogin={user} cartCount={cartCount}/>
+        <Header onSearch={handleSearch} userLogin={user} />
         <Login onLogin={handleUser}/>
             <Routes>
-              <Route path="/" element={<Home userLogin={user} userUpdate={handleUserUpdate} />} />
+              <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} />} />
               <Route path="/quiz" element={<Quiz />} />
-              <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register newUser={handleUser}/>} />
               <Route path="/store" element={<Store searchValue={searchValue} />} />
-              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUserUpdate} />} />
+              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
-              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUserUpdate} />} />
-              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUserUpdate} />} />
+              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} />} />
+              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} />} />
 
-              <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUserUpdate}/>} />
-              <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUserUpdate}/>} />
+              <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
+              <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
               
             </Routes>

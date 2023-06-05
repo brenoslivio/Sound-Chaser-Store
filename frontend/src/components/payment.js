@@ -31,7 +31,17 @@ function getTotalPrice(products) {
 }
 
 function emptyCart(userLogin, userUpdate, navigate, totalPrice){
-    const orderCompleted = {number: userLogin.orders.slice(-1)[0].number + 1, date: new Date().toISOString().slice(0, 10), status: "finished", total: parseFloat(totalPrice)};
+
+    if (!userLogin.address.address || !userLogin.address.receiver || 
+        !userLogin.card.number || !userLogin.card.holder || !userLogin.card.expiration){
+        alert("Please fill all information related to your address and payment card.");
+        return;
+    }
+
+    const orderCompleted = {number: userLogin.orders.length ? (userLogin.orders.slice(-1)[0].number + 1) : 0, 
+                            date: new Date().toISOString().slice(0, 10), 
+                            status: "finished", 
+                            total: parseFloat(totalPrice)};
 
     userLogin.orders.push(orderCompleted);
     userLogin.cart = [];
@@ -91,9 +101,9 @@ function Payment({ userLogin, userUpdate }){
                             </div>
                             <p className="payment-title"> My payment method </p>
                             <div className="payment-card">
-                                <p className="payment-text"><b>Card number</b>: Finishing in {userLogin.card.number.slice(-4)}</p>
+                                <p className="payment-text"><b>Card number</b>: {userLogin.card.number ? (`Finishing in ${userLogin.card.number.slice(-4)}`) : ("")}</p>
                                 <p className="payment-text"><b>Holder</b>: {userLogin.card.holder}</p>
-                                <p className="payment-text"><b>Expiration date</b>: {new Date(userLogin.card.expiration).toLocaleDateString("en-US", {month: "2-digit", year: "2-digit"})}</p>
+                                <p className="payment-text"><b>Expiration date</b>: {userLogin.card.expiration ? (new Date(userLogin.card.expiration).toLocaleDateString("en-US", {month: "2-digit", year: "2-digit"})) : ("")}</p>
                             </div>
                             <Link to="/user/payment">
                                 <p className="change-payment"> Change address or payment method </p>

@@ -1,7 +1,85 @@
 import '../css/register.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 
-function Register(){
+async function getId() {
+    const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
+                            .then(response => response.json());
+
+    const userId = customers.users.slice(-1)[0].id + 1;
+
+    return userId;
+}
+
+function createUser(userId, newUser, navigate){
+    const name = document.getElementById("register_name").value;
+    const email = document.getElementById("register_mail").value;
+    const phone = document.getElementById("register_phone").value;
+    const password = document.getElementById("register_password").value;
+    const confirmPassword = document.getElementById("register_confirm").value;
+
+    let rules = "";
+
+    let userLogin = {id: userId, name: "", email: "", phone: "", password: "", 
+                        card: {number: "", holder: "", expiration: "", security: ""},
+                        address: {address: "", receiver: ""},
+                        orders: [], cart: []};
+
+    if (name.length >= 5 && name.length <= 32) {
+        userLogin.name = name;
+    } else {
+        rules += "Name must be between 5 and 32 characters.\n";
+    }
+
+    const phoneRegex = /^\d+$/; // Only digits allowed
+    if (phoneRegex.test(phone)) {
+        if (phone.length <= 32) {
+            userLogin.phone = phone;
+        } else {
+            rules += "Phone number must be between 1 and 32 digits.\n";
+        }
+    } else {
+        rules += "Invalid phone number. Only digits are allowed.\n";
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+    if (emailRegex.test(email)) {
+        userLogin.email = email;
+    } else {
+        rules += "Invalid email address.\n";
+    }
+    
+    if (password.length >= 8 && password.length <= 32) {
+        if (password === confirmPassword){
+            userLogin.password = password;
+        } else {
+            rules += "Passwords don't match.\n"
+        }
+    } else {
+        rules += "Password must be between 8 and 32 characters.\n";
+    }
+    
+    if (rules) {
+        alert(rules);
+    } else {
+        newUser(userLogin);
+        alert("User created!")
+        navigate("/");
+        window.scrollTo(0, 0);
+    }
+}
+
+function Register({ newUser }){
+
+    const [userId, setUserId] = useState('');
+
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        getId()
+        .then(id => {setUserId(id);})
+        .catch(error => console.error(error));
+    }, []);
 
     return (
         <div className="register-page">
@@ -19,11 +97,11 @@ function Register(){
                         
                         <input type="text" id="register_name" placeholder="Name"/>
                         <input type="text" id="register_mail" placeholder="E-mail"/>
-                        <input type="text" id="register_phone" placeholder="Phone number"/>
-                        <input type="text" id="register_password" placeholder="Password"/>
-                        <input type="text" id="register_confirm" placeholder="Confirm your password"/>
+                        <input type="text" id="register_phone" placeholder="Phone number (only digits)"/>
+                        <input type="password" id="register_password" placeholder="Password (at least 8 characters)"/>
+                        <input type="password" id="register_confirm" placeholder="Confirm your password"/>
                     
-                        <button id="form-register-btn">Register</button>
+                        <button onClick={() => createUser(userId, newUser, navigate)} id="form-register-btn">Register</button>
                     </div>
 
                 </div>

@@ -48,7 +48,7 @@ function updateInformation(userLogin, userUpdate, navigate){
 
     if (currentPassword.length > 0) {
         if (currentPassword === userLogin.password) {
-            if (newPassword.length > 8 && newPassword.length < 32) {
+            if (newPassword.length >= 8 && newPassword.length <= 32) {
                 if (newPassword === confirmPassword){
                     userLogin.password = newPassword;
                     updated = true;
