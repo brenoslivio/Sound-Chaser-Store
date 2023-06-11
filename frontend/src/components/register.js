@@ -2,6 +2,16 @@ import '../css/register.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Get all registered emails */
+async function getAllEmails() {
+    const users = await fetch("http://localhost:8000/users", {cache: "reload"})
+                            .then(response => response.json());
+    
+    const emails = users.map(user => user.email);
+
+    return emails;
+}
+
 /* Create id for new user based on last added user */
 async function getId() {
     const users = await fetch("http://localhost:8000/users", {cache: "reload"})
@@ -13,7 +23,7 @@ async function getId() {
 }
 
 /* Create new user checking for each input */
-function createUser(userId, newUser, navigate){
+function createUser(userId, newUser, navigate, registeredEmails){
     const name = document.getElementById("register_name").value;
     const email = document.getElementById("register_mail").value;
     const phone = document.getElementById("register_phone").value;
@@ -46,9 +56,14 @@ function createUser(userId, newUser, navigate){
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
     if (emailRegex.test(email)) {
-        userLogin.email = email;
+        const isRegistered = registeredEmails.includes(email);
+        if (isRegistered) {
+            rules += "Email address is already registered.\n";
+        } else {
+            userLogin.email = email;
+        }
     } else {
-        rules += "Invalid email address.\n";
+      rules += "Invalid email address.\n";
     }
     
     if (password.length >= 8 && password.length <= 32) {
@@ -74,12 +89,17 @@ function createUser(userId, newUser, navigate){
 function Register({ newUser }){
 
     const [userId, setUserId] = useState('');
-
+    const [registeredEmails, setRegisteredEmails] = useState([]);
+  
     let navigate = useNavigate();
-
+  
     useEffect(() => {
-        getId()
-        .then(id => {setUserId(id);})
+      getId()
+        .then(id => { setUserId(id); })
+        .catch(error => console.error(error));
+  
+      getAllEmails()
+        .then(emails => { setRegisteredEmails(emails); })
         .catch(error => console.error(error));
     }, []);
 
@@ -127,7 +147,7 @@ function Register({ newUser }){
                                 </span>
                         </div>
                     
-                        <button onClick={() => createUser(userId, newUser, navigate)} id="form-register-btn">Register</button>
+                        <button onClick={() => createUser(userId, newUser, navigate, registeredEmails)} id="form-register-btn">Register</button>
                     </div>
 
                 </div>

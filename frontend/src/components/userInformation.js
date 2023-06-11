@@ -1,9 +1,19 @@
 import '../css/userInformation.css';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Get all registered emails */
+async function getAllEmails() {
+    const users = await fetch("http://localhost:8000/users", {cache: "reload"})
+                            .then(response => response.json());
+    
+    const emails = users.map(user => user.email);
+
+    return emails;
+}
+
 /* Update user information based on allowed inputs */
-function updateInformation(userLogin, userUpdate, navigate){
+function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
@@ -37,14 +47,16 @@ function updateInformation(userLogin, userUpdate, navigate){
         }
     }
 
-    if (email.length > 0) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
-        if (emailRegex.test(email)) {
-            userLogin.email = email;
-            updated = true;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
+    if (emailRegex.test(email)) {
+        const isRegistered = registeredEmails.includes(email);
+        if (isRegistered) {
+            rules += "Email address is already registered.\n";
         } else {
-            rules += "Invalid email address.\n";
+            userLogin.email = email;
         }
+    } else {
+      rules += "Invalid email address.\n";
     }
 
     if (currentPassword.length > 0) {
@@ -87,6 +99,8 @@ function updateInformation(userLogin, userUpdate, navigate){
 /* Page for user change information */
 function UserInformation({ userLogin, signOut, userUpdate }){
 
+    const [registeredEmails, setRegisteredEmails] = useState([]);
+
     let navigate = useNavigate();
 
     if (!userLogin) {
@@ -95,6 +109,12 @@ function UserInformation({ userLogin, signOut, userUpdate }){
         });
         return;
     }
+
+    useEffect(() => {
+        getAllEmails()
+          .then(emails => { setRegisteredEmails(emails); })
+          .catch(error => console.error(error));
+    }, []);
 
     const handleSignOut = () => {
         navigate("/");
@@ -171,7 +191,7 @@ function UserInformation({ userLogin, signOut, userUpdate }){
                             </div>
                         </div>
 
-                        <button onClick={() => updateInformation(userLogin, userUpdate, navigate)} className="save-btn">Save</button>
+                        <button onClick={() => updateInformation(userLogin, userUpdate, navigate, registeredEmails)} className="save-btn">Save</button>
 
                     </div>
 

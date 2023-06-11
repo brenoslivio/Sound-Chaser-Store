@@ -1,6 +1,6 @@
 import '../css/store.css';
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from "react-router-dom";
 
 /* Sort albums based on specific criteria */
 function sortAlbums(albums, sortCriteria) {
@@ -21,15 +21,27 @@ function sortAlbums(albums, sortCriteria) {
 
 /* page to check and filter for products */
 function Store({ searchValue, albums }){
+
+
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const genreParam = queryParams.get('genre');
+    const [selectedGenres, setSelectedGenres] = useState(genreParam ? [genreParam] : []);
+
     const [currentPage, setCurrentPage] = useState(1);
-    const [selectedGenres, setSelectedGenres] = useState([]);
+
     const [priceMin, setPriceMin] = useState("");
     const [priceMax, setPriceMax] = useState("");
     const [yearMin, setYearMin] = useState("");
     const [yearMax, setYearMax] = useState("");
     const [sortCriteria, setSortCriteria] = useState("date");
     const albumsPerPage = 6;
-      
+
+    useEffect(() => {
+        setCurrentPage(1); // Reset currentPage to 1 when filtering changes
+    }, [searchValue, selectedGenres, priceMin, priceMax, yearMin, yearMax, sortCriteria]);
+    
+    console.log(selectedGenres);
     if (albums.length === 0) {
         return (
             <div className="store-page">
@@ -157,19 +169,19 @@ function Store({ searchValue, albums }){
                         <br/>
                         <div className="title">Genres</div>
                         <br/>
-                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic rock" onChange={handleGenreChange} />
+                        <input type="checkbox" id="classic_rock" name="classic_rock" value="classic rock" onChange={handleGenreChange} checked={selectedGenres.includes('classic rock')}/>
                         <label htmlFor="classic_rock"> Classic Rock </label><br/>
-                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative rock" onChange={handleGenreChange} />
+                        <input type="checkbox" id="alternative_rock" name="alternative_rock" value="alternative rock" onChange={handleGenreChange} checked={selectedGenres.includes('alternative rock')}/>
                         <label htmlFor="alternative_rock"> Alternative Rock </label><br/>
-                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive rock" onChange={handleGenreChange} />
+                        <input type="checkbox" id="progressive_rock" name="progressive_rock" value="progressive rock" onChange={handleGenreChange} checked={selectedGenres.includes('progressive rock')}/>
                         <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
-                        <input type="checkbox" id="jazz" name="jazz" value="jazz" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="jazz" name="jazz" value="jazz" onChange={handleGenreChange} checked={selectedGenres.includes('jazz')}/>
                         <label htmlFor="jazz"> Jazz </label><br/>
-                        <input type="checkbox" id="classical" name="classical" value="classical music" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="classical" name="classical" value="classical music" onChange={handleGenreChange} checked={selectedGenres.includes('classical music')}/>
                         <label htmlFor="classical"> Classical Music </label><br/>
-                        <input type="checkbox" id="pop" name="pop" value="pop" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="pop" name="pop" value="pop" onChange={handleGenreChange} checked={selectedGenres.includes('pop')}/>
                         <label htmlFor="pop"> Pop </label><br/>
-                        <input type="checkbox" id="rap" name="rap" value="rap" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="rap" name="rap" value="rap" onChange={handleGenreChange} checked={selectedGenres.includes('rap')}/>
                         <label htmlFor="rap"> Rap </label><br/>
                         <br/>
                         <div className="title">Price range</div>

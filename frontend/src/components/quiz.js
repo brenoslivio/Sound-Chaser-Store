@@ -41,8 +41,9 @@ function Quiz(){
             genre = "Pop";
         }
 
-        navigate("/store");
-        alert(`${genre} could be a very good genre for you. Apply the filter in our store! :)`)
+        alert(`${genre} could be a very good genre for you. Check these albums!`);
+        navigate(`/store?genre=${encodeURIComponent(genre.toLowerCase())}`);
+        window.scrollTo(0, 0);
     };
 
     const handleAnswerChange = (question, value) => {
