@@ -2,6 +2,7 @@ import '../css/userInformation.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Update user information based on allowed inputs */
 function updateInformation(userLogin, userUpdate, navigate){
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
@@ -83,6 +84,7 @@ function updateInformation(userLogin, userUpdate, navigate){
     document.getElementById("confirmPassword").value = "";
 }
 
+/* Page for user change information */
 function UserInformation({ userLogin, signOut, userUpdate }){
 
     let navigate = useNavigate();

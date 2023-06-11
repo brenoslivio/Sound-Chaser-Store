@@ -1,6 +1,7 @@
 import '../css/main.css';
 import React from 'react';
 
+/* Footer for all pages */
 function Footer(){
 
     return (

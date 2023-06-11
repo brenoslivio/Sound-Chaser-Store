@@ -1,7 +1,7 @@
 # Sound Chaser Store
 
 <p align="center">
-<img src="https://raw.githubusercontent.com/brenoslivio/Sound-Chaser-Store/main/src/imgs/logo.png" alt="alt text" width="200"/>
+<img src="https://raw.githubusercontent.com/brenoslivio/Sound-Chaser-Store/main/imgs/logo.png" alt="Logo Sound Chaser" width="200"/>
 </p>
 
 ---
@@ -11,10 +11,6 @@
 **Members (Group 29):**
 
 Breno Lívio Silva de Almeida, NUSP: 10276675.
-
-**Quick demos:**
-
-[Project Milestone 1: Store Mockups](https://brenoslivio.github.io/Sound-Chaser-Store/src/home.html)
 
 ---
 
@@ -26,7 +22,7 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
 
     - [1.2. Data Records](#1.2)
 
-    - [1.3. Extra Functionality](#1.3)
+    - [1.3. Extra Functionalities](#1.3)
 
 - [2. Project Description](#2)
 
@@ -37,6 +33,21 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
 - [3. Comments About the Code](#3)
 
     - [3.1. Milestone 1](#3.1)
+
+    - [3.2. Milestone 2](#3.2)
+
+- [4. Test Procedures](#4)
+
+    - [4.1. Test Plan](#4.1)
+
+    - [4.2. Test Results](#4.2)
+
+- [5. Build Procedures](#5)
+
+- [6. Problems](#6)
+
+- [7. Comments](#7)
+
 ---
 
 ## <a id="1" /> 1. System Requirements
@@ -82,17 +93,22 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
     - `id`: Identification number;
     - `name`: Customer's name;
     - `email`: Customer's e-mail;
-    - `phone`: Customer's phone number;
-    - `addresses`: Customer's multiple addresses;
-    - `orders`: Customer's multiple orders;
-    - `cards`: Customer's multiple credit cards;
     - `password`: Customer's password.
+    - `phone`: Customer's phone number;
+    - `address`: Customer's address;
+    - `orders`: Customer's multiple orders;
+    - `card`: Customer's credit card;
+    - `cart`: Customer's cart items;
 
-### <a id="1.3" /> 1.3. Extra Functionality
+### <a id="1.3" /> 1.3. Extra Functionalities
 
 **Quiz to filter for the most suitable albums for customers:**
 
 Music is a highly subjective and emotional experience, and different people have varying tastes and preferences. By taking into account the customer's mood, the significance of lyrics to them, and other aspects, the quiz can provide personalized recommendations and ensure that the customers purchase albums that resonate with them. It can also help customers discover new artists and genres that align with their musical preferences. Overall, the quiz can enhance the customer's shopping experience, provide a more personalized service, and increase the likelihood of repeat business for the record store.
+
+**Filtering and sorting:**
+
+The user have also the options to sort by the date added the albums were added, artist name, album name, and album year, alongside with filter for specific genres, price and album year ranges. 
 
 ## <a id="2" /> 2. Project Description
 
@@ -108,7 +124,7 @@ This project consists in developing an online application for a vinyl record sto
     
 - Customer and product management options exclusive to system administrators
     
-- Specific functionality: The website has a specific feature where customers can take a quiz that filters the most suitable albums for them. The quiz asks them to rate certain characteristics on a scale of 1 to 5, such as their current mood, the importance of song lyrics to them, their comfort level with longer songs, their tendency to dance to music, and their preference for virtuoso artists.
+- Specific functionalities: The website has a specific feature where customers can take a quiz that filters the most suitable albums for them. The quiz asks them to rate certain characteristics on a scale of 1 to 5, such as their current mood, the importance of song lyrics to them, their comfort level with longer songs, their tendency to dance to music, and their preference for virtuoso artists. The site has also many option to sort the albums, filter by genre and range of price and year the albums were released.
 
 ### <a id="2.1" /> 2.1. Mockups
 
@@ -122,9 +138,9 @@ Several HTML5/CSS3 files were created considering the project requirements and m
 
 We created the following navigation diagrams considering how the application will work with separate interfaces for the customer and administrators:
 
-![Nav Diagram Customer](./src/imgs/nav_diagram_customer.png)
+![Nav Diagram Customer](./imgs/nav_diagram_customer.png)
 
-![Nav Diagram Admin](./src/imgs/nav_diagram_admin.png)
+![Nav Diagram Admin](./imgs/nav_diagram_admin.png)
 
 Considering how the navigation bar is presented, we have bidirectional navigation occurring throughout the application (i.e. we can go back and forth in these portions).
 
@@ -138,3 +154,236 @@ For the first milestone, we created several HTML5/CSS3 files to develop the scre
 To properly adapt to different devices of different sizes, we adopted [viewport units](https://web.dev/viewport-units/) for the proper scaling of objects with CSS.
 
 Also, JavaScript was only used for login form overlay.
+
+### <a id="3.2" /> 3.2. Milestone 2
+
+The application was developed utilizing the React framework for the front-end implementation. The development process involved meticulous organization of the codebase into modular components, adhering to best practices for code structuring and maintainability. Additionally, the user interface design was carefully crafted to ensure a visually appealing and intuitive user experience.
+
+## <a id="4" /> 4. Test Procedures
+
+Manual tests will be performed for login and registration, insertions and management of products, users, filtering, searching, and also simulation of purchases in various scenarios. For Milestone 2, only client-side tests are considered. No additional frameworks will be used for the tests.
+
+### <a id="4.1" /> 4.1. Test Plan
+
+- Registration test
+
+    - Registration made with name less than 5 or more than 32 characters;
+
+    - Registration made with invalid email;
+
+    - Registration made with phone number using characters that are not digits;
+    
+    - Registration where the password has less than 8 or more than 32 characters;
+    
+    - Registration where the password field does not match the password confirmation field;
+
+    - Registration using the same e-mail as a previous registration;
+
+    - Registration correctly filled with valid data.
+
+- Login test
+
+    - Login made with empty fields;
+
+    - Login made with invalid fields;
+
+    - Login made with fields correctly filled out.
+
+- Search test
+
+    - Search with white spaces;
+
+    - Search with "Kilometers Davis" or "kilometers";
+
+    - Search with "villains".
+
+- Filter and sort test
+
+    - Sort by artist name while filtering for classic rock genre;
+
+    - Sort by album year while filtering for pop and rap genres;
+
+    - Sort by artist name while filtering for jazz and classical music genres, setting price range between 20 and 50;
+
+    - Sort by album name while filtering for progressive rock and alternative rock genres, setting year range to 2000 as max.
+
+- Navigation test
+
+    - User not logged in navigating the page;
+
+    - User enter a invalid page for the application;
+
+    - Customer navigation between pages.
+
+- Adding to cart test
+
+    - Adding product to cart while user is not logged in;
+
+    - Adding product to cart while user is logged in and have the same item in the cart;
+
+    - Adding product while user is logged in and doesn't have item in the cart.
+
+- Cart test
+
+    - Proceed to payment with no items;
+
+    - Proceed to payment with items;
+
+    - Buy without having registered the address;
+
+    - Buy without having registered the credit card;
+
+    - Buy after providing address and card information in the user area.
+
+- User information area
+
+    - Update to name less than 5 or more than 32 characters;
+
+    - Update to invalid email;
+
+    - Update to phone number using characters that are not digits;
+    
+    - Update to password less than 8 or more than 32 characters;
+
+    - Input wrong current password;
+    
+    - Update password when password field does not match the password confirmation field;
+
+    - Update using the same e-mail as a previous registration;
+
+    - Saving correctly filled with valid data.
+
+- User payment and address area
+
+    - Add/update to card less than 8 or more than 16 digits;
+
+    - Holder name less 5 and more than 32 characters;
+
+    - Expiration date not properly formatted;
+    
+    - Security code being different from 3 digits;
+
+    - Address less than 20 or more than 128 characters;
+    
+    - Receiver less 5 and more than 32 characters;
+
+    - Saving correctly filled with valid data.
+
+### <a id="4.2" /> 4.2. Test Results
+
+After carefully following the test plan, we had the following results:
+
+- Registration test
+
+    - **Registration made with name less than 5 or more than 32 characters**: The website will emit an alert indicating that the name must be between 5 and 32 characters long.
+    
+    - **Registration made with invalid email**: The website will emit an alert indicating that the email provided is invalid.
+    
+    - **Registration made with phone number using characters that are not digits**: The website will emit an alert indicating that the phone number should only contain digits.
+    
+    - **Registration where the password has less than 8 or more than 32 characters**: The website will emit an alert indicating that the password must be between 8 and 32 characters long.
+    
+    - **Registration where the password field does not match the password confirmation field**: The website will emit an alert indicating that the password and password confirmation fields do not match.
+    
+    - **Registration using the same e-mail as a previous registration**: The website will emit an alert indicating that the email has already been used for registration.
+    
+    - **Registration correctly filled with valid data**: The registration will proceed successfully without emitting any alerts.
+
+- Login test
+
+    - **Login made with empty fields**: The website will emit an alert indicating that both the email and password fields are required.
+    
+    - **Login made with invalid fields**: The website will emit an alert indicating that the login credentials are invalid.
+    
+    - **Login made with fields correctly filled out**: The login will proceed successfully without emitting any alerts.
+
+- Search test
+
+    - **Search with white spaces**: The filter won't be aplied.
+    
+    - **Search with "Kilometers Davis" or "kilometers"**: The same album is shown.
+    
+    - **Search with "villains" or "david**: The same album is shown.
+
+- Filter and sort test
+
+    - **Sort by artist name while filtering for classic rock genre**: Three albums are shown, sorting sucessfully.
+    
+    - **Sort by album year while filtering for pop and rap genres**: Four albums are shown, sorting sucessfully.
+    
+    - **Sort by artist name while filtering for jazz and classical music genres, setting price range between 20 and 50**: Only one album is shown, sorting and setting range sucessfully.
+    
+    - **Sort by album name while filtering for progressive rock and alternative rock genres, setting year range to 2000 as max**: Three albums are shown, sorting and setting range sucessfully.
+
+- Navigation test
+
+    - **User not logged in navigating the page**: After clicking the cart, it is shown the login form.
+
+    - **User enter a invalid page for the application:** They are redirect to the home page.
+
+    - **Customer navigation between pages**: No alert are emitted.
+
+- Adding to cart test
+
+    - **Adding product to cart while user is not logged in**: The website will emit an alert indicating that the user needs to be logged in to add items to the cart.
+    
+    - **Adding product to cart while user is logged in and have the same item in the cart**: The website will emit an alert indicating that the item is already in the cart.
+    
+    - **Adding product while user is logged in and doesn't have item in the cart**: The product will be added to the cart successfully without emitting any alerts and redirect the user to the cart.
+
+- Cart test
+
+    - **Proceed to payment with no items**: The website will emit an alert indicating that there are no items in the cart and the user cannot proceed to payment.
+    
+    - **Proceed to payment with items**: The user will be able to proceed to payment without emitting any alerts.
+    
+    - **Buy without having registered the address or cart**: The website will emit an alert indicating that the user needs to provide a valid address and card before proceeding with the purchase.
+    
+    - **Buy after providing address and card information in the user area**: The purchase will proceed successfully without emitting any alerts.
+
+- User information area
+
+    - **Update to name less than 5 or more than 32 characters**: The website will emit an alert indicating that the name must be between 5 and 32 characters long.
+    
+    - **Update to invalid e-mail**: The website will emit an alert indicating that the e-mail provided is invalid.
+    
+    - **Update to phone number using characters that are not digits**: The website will emit an alert indicating that the phone number should only contain digits.
+    
+    - **Update to password less than 8 or more than 32 characters**: The website will emit an alert indicating that the password must be between 8 and 32 characters long.
+    
+    - **Input wrong current password**: The website will emit an alert indicating that the current password provided is incorrect.
+    
+    - **Update password when password field does not match the password confirmation field**: The website will emit an alert indicating that the password and password confirmation fields do not match.
+    
+    - **Update using the same e-mail as a previous registration**: The website will emit an alert indicating that the email has already been used for registration.
+    
+    - **Saving correctly filled with valid data**: The user information will be saved successfully without emitting any alerts.
+
+- User payment and address area
+
+    - **Add/update to card less than 8 or more than 16 digits**: The website will emit an alert indicating that the card number must be between 8 and 16 digits long.
+    
+    - **Holder name less 5 and more than 32 characters**: The website will emit an alert indicating that the holder name must be between 5 and 32 characters long.
+    
+    - **Expiration date not properly formatted**: The website will emit an alert indicating that the expiration date should be properly formatted.
+    
+    - **Security code being different from 3 digits**: The website will emit an alert indicating that the security code should be 3 digits long.
+    
+    - **Address less than 20 or more than 128 characters**: The website will emit an alert indicating that the address must be between 20 and 128 characters long.
+    
+    - **Receiver less 5 and more than 32 characters**: The website will emit an alert indicating that the receiver name must be between 5 and 32 characters long.
+    
+    - **Saving correctly filled with valid data**: The payment and address information will be saved successfully without emitting any alerts.
+
+
+## <a id="5" /> 5. Build Procedures
+
+
+
+## <a id="6" /> 6. Problems
+
+No major problems were encountered.
+
+## <a id="7" /> 7. Comments
+
+Milestone 1 played a pivotal role in establishing the fundamental elements of the application, with a specific emphasis on HTML5 and CSS3 development. This initial milestone was crucial in laying the groundwork for subsequent milestones, particularly Milestone 2. In Milestone 2, we leveraged the pages created in the prior stage to construct a cohesive single-page application (SPA) within the context of contemporary web development frameworks. This milestone served to illuminate the significance of the Virtual DOM, a powerful concept that facilitates efficient rendering and updates within React applications. By delving into the Virtual DOM, we gained a deeper understanding of its integral role in optimizing the performance and responsiveness of the application.

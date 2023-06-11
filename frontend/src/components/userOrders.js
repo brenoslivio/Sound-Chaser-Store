@@ -2,6 +2,7 @@ import '../css/userOrders.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Page for user check their orders */
 function UserOrders({ userLogin, signOut }){
     const [currentPage, setCurrentPage] = useState(1);
     const ordersPerPage = 3;

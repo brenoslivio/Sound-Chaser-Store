@@ -2,15 +2,17 @@ import '../css/register.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Create id for new user based on last added user */
 async function getId() {
-    const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
+    const users = await fetch("http://localhost:8000/users", {cache: "reload"})
                             .then(response => response.json());
 
-    const userId = customers.users.slice(-1)[0].id + 1;
+    const userId = users.slice(-1)[0].id + 1;
 
     return userId;
 }
 
+/* Create new user checking for each input */
 function createUser(userId, newUser, navigate){
     const name = document.getElementById("register_name").value;
     const email = document.getElementById("register_mail").value;
@@ -68,6 +70,7 @@ function createUser(userId, newUser, navigate){
     }
 }
 
+/* Register page */
 function Register({ newUser }){
 
     const [userId, setUserId] = useState('');

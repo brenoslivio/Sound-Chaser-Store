@@ -11,17 +11,21 @@ async function checkLogin(onLogin) {
         return;
     }
 
-    const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
-                            .then(response => response.json());
-    
-    const user = customers.users.find(cust => cust.email === email && cust.password === password);
+    try {
+        const users = await fetch("http://localhost:8000/users", {cache: "reload"})
+                                .then(response => response.json());
 
-    if (user) {
-        console.log("Login successful");
-        onLogin(user); // Set the user
-        document.getElementsByClassName('login-container')[0].style.display = 'none';
-    } else {
-        alert("Invalid email or password.");
+        const user = users.find(cust => cust.email === email && cust.password === password);
+
+        if (user) {
+            console.log("Login successful");
+            onLogin(user); // Set the user
+            document.getElementsByClassName('login-container')[0].style.display = 'none';
+        } else {
+            alert("Invalid email or password.");
+        }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
     }
 }
 

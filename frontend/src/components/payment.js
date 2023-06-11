@@ -2,6 +2,7 @@ import '../css/payment.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
+/* Retrieve albums based if they are properly in stock */
 function getAlbums(cart, albums) {
     let cartAlbums = [];
 
@@ -16,6 +17,7 @@ function getAlbums(cart, albums) {
     return cartAlbums;
 }
 
+/* Calculate total price based on cart items */
 function getTotalPrice(products) {
     let totalPrice = 0;
 
@@ -27,6 +29,7 @@ function getTotalPrice(products) {
     return totalPrice;
 }
 
+/* Empty cart after payment */
 function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpdate){
     if (!userLogin.address.address || !userLogin.address.receiver || 
         !userLogin.card.number || !userLogin.card.holder || !userLogin.card.expiration){
@@ -52,7 +55,7 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
         }
     });
 
-    albumUpdate(albums); // Update albums
+    albumUpdate(albums); /* Update albums after emptying */
 
     userLogin.cart = [];
 
@@ -63,6 +66,7 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
     window.scrollTo(0, 0);
 }
 
+/* Payment page */
 function Payment({ userLogin, userUpdate, albums, albumUpdate }){
     const [cartAlbums, setCartAlbums] = useState([]);
 

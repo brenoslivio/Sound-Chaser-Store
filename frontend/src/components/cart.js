@@ -2,6 +2,7 @@ import '../css/cart.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
+/* Retrieve albums checking if they have stock */
 function getAlbums(cart, albums) {
     let cartAlbums = [];
 
@@ -16,6 +17,7 @@ function getAlbums(cart, albums) {
     return cartAlbums;
 }
 
+/* Calculate total price */
 function getTotalPrice(products) {
     let totalPrice = 0;
 
@@ -27,6 +29,7 @@ function getTotalPrice(products) {
     return totalPrice;
 }
 
+/* Based on the stock, create options available to user */
 function optionsAvailable(stock){
     const quantityOptions = [];
     const minimumQuantity = Math.min(stock, 5);
@@ -40,6 +43,7 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
+/* Remove album from cart */
 function removeAlbum(userLogin, userUpdate, setAlbums, products, id, navigate) {
     const updatedProducts = products.filter(product => product.album.id !== id);
     setAlbums(updatedProducts);
@@ -56,6 +60,7 @@ function removeAlbum(userLogin, userUpdate, setAlbums, products, id, navigate) {
     navigate("/cart")
 }
 
+/* Update album from cart */
 function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, newQuantity, navigate) {
     const updatedProducts = products.map((product) => {
       if (product.album.id === id) {
@@ -78,6 +83,7 @@ function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, new
     navigate("/cart")
 }
 
+/* Cart page */
 function Cart({ userLogin, userUpdate, albums }){
     const [cartAlbums, setCartAlbums] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -115,6 +121,7 @@ function Cart({ userLogin, userUpdate, albums }){
         setCurrentPage(pageNumber);
     };
 
+    /* Choosing which albums to show within the pagination system */
     const indexOfLastAlbum = currentPage * albumsPerPage;
     const indexOfFirstAlbum = indexOfLastAlbum - albumsPerPage;
     const currentAlbums = cartAlbums.slice(indexOfFirstAlbum, indexOfLastAlbum);
@@ -160,6 +167,7 @@ function Cart({ userLogin, userUpdate, albums }){
                                     </div>
                                 </div>
                             ))}
+                            {/* Pagination system for multiple cart items */}
                             <div className="pagination">
                                 {Array.from({ length: Math.ceil(cartAlbums.length / albumsPerPage) }, (_, i) => (
                                 <button

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 let login_form = false;
 
+/* Logic to show login form */
 function showLogin(){
 
     if (login_form === false) {
@@ -18,6 +19,7 @@ function showLogin(){
     }
 }
 
+/* Handling if user clicked outside login form */
 function handleMouseUp(e){
     const container = document.getElementsByClassName('login-container')[0];
     const loginButton = document.getElementById("login");
@@ -26,6 +28,7 @@ function handleMouseUp(e){
     }
 }
 
+/* Header for all pages */
 function Header({ onSearch, userLogin }){
     let navigate = useNavigate(); 
 

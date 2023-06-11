@@ -189,8 +189,8 @@ input[type=checkbox] {
     color: black;
     top: 3vw;
     text-align: center;
-    width: 10vw;
-    font-size: 1.25vw;
+    width: 9vw;
+    font-size: 1vw;
 }
 
 .store-page .pagination {

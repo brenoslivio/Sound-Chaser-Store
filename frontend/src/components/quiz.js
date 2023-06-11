@@ -2,6 +2,7 @@ import '../css/quiz.css';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+/* Quiz page */
 function Quiz(){
     const [answers, setAnswers] = useState({
         group1: '',
@@ -25,6 +26,7 @@ function Quiz(){
 
         let genre;
 
+        /* Subjective recommendation */
         if (group1 >= 4 && group2 >= 3 && group3 >= 3) {
             genre = "Progressive Rock";
         } else if (group2 >= 4 && group4 >= 4) {

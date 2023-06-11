@@ -2,6 +2,7 @@ import '../css/store.css';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+/* Sort albums based on specific criteria */
 function sortAlbums(albums, sortCriteria) {
     let sortedAlbums = albums.sort((a, b) => {
         if (sortCriteria === "date") {
@@ -18,6 +19,7 @@ function sortAlbums(albums, sortCriteria) {
     return sortedAlbums;
 }
 
+/* page to check and filter for products */
 function Store({ searchValue, albums }){
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedGenres, setSelectedGenres] = useState([]);
@@ -203,6 +205,7 @@ function Store({ searchValue, albums }){
                         </Link>
                     ))}
                 </div>
+                {/* Pagination ststem showing 6 albums per page */}
                 <div className="pagination">
                     {Array.from({ length: Math.ceil(filteredItems.length / albumsPerPage) }, (_, i) => (
                     <button

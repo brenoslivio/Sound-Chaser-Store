@@ -2,6 +2,7 @@ import '../css/userPayment.css';
 import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
+/* Update user payment based on allowed inputs */
 function updatePayment(userLogin, userUpdate, navigate){
     const card = document.getElementById("card").value;
     const holder = document.getElementById("holder").value;
@@ -98,6 +99,7 @@ function updatePayment(userLogin, userUpdate, navigate){
     document.getElementById("receiver").value = "";
 }
 
+/* Page where user can add payment and address information */
 function UserPayment({ userLogin, signOut, userUpdate }){
 
     let navigate = useNavigate(); 

@@ -1,4 +1,34 @@
 {
+    "users": [
+        {
+            "id": 0,
+            "name": "Antedeguemon",
+            "email": "antedeguemon@tutamail.com",
+            "phone": "011999999999",
+            "password": "password",
+            "card": {"number": "1234567812349999", "holder": "Antedeguemon",
+                    "expiration": "2025-10-31", "security": "999"},
+            "address": {"address": "Av. Trab. São Carlense, 400 - Centro, São Carlos - SP, 13566-590", 
+                        "receiver": "Antedeguemon"},
+            "orders": [{"number": 0, "date": "2023-01-11", "status": "finished", "total": 49.99},
+                        {"number": 1, "date": "2023-02-12", "status": "finished", "total": 99.98},
+                        {"number": 2,"date": "2023-03-11", "status": "finished", "total": 49.99},
+                        {"number": 3, "date": "2023-05-11", "status": "finished", "total": 49.99}],
+            "cart": [{"id": 5, "quantity": 1}, {"id": 1, "quantity": 2}, {"id": 3, "quantity": 1}]
+        },
+        {
+            "id": 1,
+            "name": "Breno",
+            "email": "teste@mail.com",
+            "phone": "011888888888",
+            "password": "password",
+            "card": {"number": "", "holder": "",
+                    "expiration": "", "security": ""},
+            "address": {"address": "", "receiver": ""},
+            "orders": [],
+            "cart": []
+        }
+    ],
     "albums": [
         {
             "id": 0,
@@ -137,7 +167,7 @@
             "year": 1973,
             "genre": "Classic Rock",
             "img": "/imgs/albums/lead_balloon.png",
-            "description": "Led Zeppelin IV is a classic rock album by Lead Balloon, featuring iconic tracks and mesmerizing guitar riffs.",
+            "description": "Lead Balloon IV is a classic rock album by Lead Balloon, featuring iconic tracks and mesmerizing guitar riffs.",
             "price": 39.99,
             "stock": 7,
             "sold": 2,
@@ -207,6 +237,19 @@
             "stock": 1,
             "sold": 2,
             "date_added": "2019-02-22"
+        },
+        {
+            "id": 16,
+            "name": "Fathers of Invention",
+            "artist": "Zappuccino",
+            "year": 1969,
+            "genre": "Progressive Rock",
+            "img": "/imgs/albums/zappa.png",
+            "description": "Fathers of Invention is a groundbreaking progressive rock album by Zappuccino, showcasing complex musical arrangements and thought-provoking lyrics.",
+            "price": 59.99,
+            "stock": 1,
+            "sold": 10,
+            "date_added": "2017-06-20"
         }
     ]
 }

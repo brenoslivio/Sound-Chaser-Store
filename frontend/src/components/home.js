@@ -2,6 +2,7 @@ import '../css/home.css';
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
+/* Home page */
 function Home({ userLogin, userUpdate, albums }){
     let navigate = useNavigate(); 
 
@@ -10,6 +11,7 @@ function Home({ userLogin, userUpdate, albums }){
         window.scrollTo(0, 0);
     }
 
+    /* Add to cart in the homepage */
     const addCart = (id, stock) =>{ 
         if (userLogin){
             if (stock > 0) {
@@ -60,6 +62,7 @@ function Home({ userLogin, userUpdate, albums }){
         )
     }
 
+    /* Sort albums for latest additions */
     let sortedAlbums = albums.sort((b, a) => {
         return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
     });

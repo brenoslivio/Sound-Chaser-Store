@@ -2,6 +2,7 @@ import '../css/product.css';
 import React, { useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
+/* Retrieve specific album based on id */
 function getAlbumById(albums, id) {
     for (let i = 0; i < albums.length; i++) {
 
@@ -13,6 +14,7 @@ function getAlbumById(albums, id) {
     return null;
 }
 
+/* Retrieve related albums based on genre */
 function getRelatedAlbums(albums, album) {
     let relatedAlbums = [];
 
@@ -26,6 +28,7 @@ function getRelatedAlbums(albums, album) {
     return relatedAlbums;
 }
 
+/* Options available based on the item's stock */
 function optionsAvailable(stock){
 
     const quantityOptions = [];
@@ -40,6 +43,7 @@ function optionsAvailable(stock){
     return quantityOptions;
 }
 
+/* Product page */
 function Product({ userLogin, userUpdate, albums }){
 
     const params = useParams();
@@ -127,6 +131,7 @@ function Product({ userLogin, userUpdate, albums }){
                             <div className="title">
                                 Related albums
                             </div>
+                            {/* Show four related albums based on genre */}
                             {relatedAlbums.slice(0, 4).map((relatedAlbum, index) => (
                                 <Link to={"/product/" + relatedAlbum.id} key={index}>
                                     <div id={`related-album${index + 1}`}>

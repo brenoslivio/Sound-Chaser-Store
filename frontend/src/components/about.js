@@ -1,6 +1,7 @@
 import '../css/about.css';
 import React from 'react';
 
+/* About page */
 function About(){
 
     return (

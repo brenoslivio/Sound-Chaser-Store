@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './components/home';
 import Store from './components/store';
 import Product from './components/product';
@@ -16,34 +16,33 @@ import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
 
+/* Retrieve albums from server */
 async function getAlbums() {
-  const products = await fetch("http://localhost:8000/albums", {cache: "reload"})
+  const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
                           .then(response => response.json());
 
-  let sortedAlbums = products.albums.sort((b, a) => {
-          return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
-  });
-  
-  return sortedAlbums;
+  return albums;
 }
 
+/* Retrieve specific user by id */
 async function getUser(id) {
-  const customers = await fetch("http://localhost:8000/customers", {cache: "reload"})
+  const user = await fetch("http://localhost:8000/users/" + id, {cache: "reload"})
                             .then(response => response.json());
-  
-  const user = customers.users.find(cust => cust.id === id);
 
   return user;
 }
 
 function App() {
-  const [searchValue, setSearchValue] = useState('');
-
+  
+  /* Check for user in local storage */
   let local_user = JSON.parse(localStorage.getItem("user"));
 
+  /* State for search bar, user and albums */
+  const [searchValue, setSearchValue] = useState('');
   const [user, setUser] = useState('');
   const [albums, setAlbums] = useState([]);
 
+  /* Retrieving user and albums */
   useEffect(() => {
     if (local_user){
       getUser(local_user.id)
@@ -55,6 +54,7 @@ function App() {
     .catch(error => console.error(error));
   }, []);
   
+  /* Handling functions to retrieve variables from other components */
   const handleSearch = (value) => {
     setSearchValue(value);
   };
@@ -79,6 +79,7 @@ function App() {
         <Header onSearch={handleSearch} userLogin={user} />
         <Login onLogin={handleUser}/>
             <Routes>
+              {/* Main components */}
               <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} albums={albums}/>} />
               <Route path="/quiz" element={<Quiz />} />
               <Route path="/register" element={<Register newUser={handleUser}/>} />
@@ -87,13 +88,17 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
+              {/* Cart and payment */}
               <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} albums={albums}/>} />
               <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} albums={albums} albumUpdate={handleAlbums}/>} />
 
+              {/* User area */}
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
               <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
               
+              {/* Redirect if page doesn't exist */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         <Footer />
     </BrowserRouter>
