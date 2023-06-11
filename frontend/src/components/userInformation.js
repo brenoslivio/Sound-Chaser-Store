@@ -48,15 +48,17 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
-    if (emailRegex.test(email)) {
-        const isRegistered = registeredEmails.includes(email);
-        if (isRegistered) {
-            rules += "Email address is already registered.\n";
+    if (email.length > 0) {
+        if (emailRegex.test(email)) {
+            const isRegistered = registeredEmails.includes(email);
+            if (isRegistered) {
+                rules += "Email address is already registered.\n";
+            } else {
+                userLogin.email = email;
+            }
         } else {
-            userLogin.email = email;
+        rules += "Invalid email address.\n";
         }
-    } else {
-      rules += "Invalid email address.\n";
     }
 
     if (currentPassword.length > 0) {

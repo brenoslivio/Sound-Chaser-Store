@@ -378,7 +378,23 @@ After carefully following the test plan, we had the following results:
 
 ## <a id="5" /> 5. Build Procedures
 
+To be able to run the site you need to have Node and its package manager npm installed, with json-server to properly load the JSON mock objects (which you can install with `npm install json-server`). After this, inside the `frontend` directory, use the following command:
 
+```bash
+npm install
+```
+
+Run the back-end with json-server:
+
+```bash
+npm run backend
+```
+
+Finally, run the front-end in another terminal:
+
+```bash
+npm start
+```
 
 ## <a id="6" /> 6. Problems
 

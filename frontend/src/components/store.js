@@ -21,11 +21,13 @@ function sortAlbums(albums, sortCriteria) {
 
 /* page to check and filter for products */
 function Store({ searchValue, albums }){
-
+    const genresList = ["classic rock", "alternative rock", "progressive rock", "jazz", 
+                        "classical music", "pop", "rap"];
 
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
-    const genreParam = queryParams.get('genre');
+    const genreParam = genresList.includes(queryParams.get('genre')) ? queryParams.get('genre') : null;
+
     const [selectedGenres, setSelectedGenres] = useState(genreParam ? [genreParam] : []);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -41,7 +43,6 @@ function Store({ searchValue, albums }){
         setCurrentPage(1); // Reset currentPage to 1 when filtering changes
     }, [searchValue, selectedGenres, priceMin, priceMax, yearMin, yearMax, sortCriteria]);
     
-    console.log(selectedGenres);
     if (albums.length === 0) {
         return (
             <div className="store-page">
