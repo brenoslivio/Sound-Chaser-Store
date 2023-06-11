@@ -163,7 +163,7 @@ function Store({ searchValue, albums }){
                         <label htmlFor="progressive_rock"> Progressive Rock </label><br/>
                         <input type="checkbox" id="jazz" name="jazz" value="jazz" onChange={handleGenreChange}/>
                         <label htmlFor="jazz"> Jazz </label><br/>
-                        <input type="checkbox" id="classical" name="classical" value="classical" onChange={handleGenreChange}/>
+                        <input type="checkbox" id="classical" name="classical" value="classical music" onChange={handleGenreChange}/>
                         <label htmlFor="classical"> Classical Music </label><br/>
                         <input type="checkbox" id="pop" name="pop" value="pop" onChange={handleGenreChange}/>
                         <label htmlFor="pop"> Pop </label><br/>
