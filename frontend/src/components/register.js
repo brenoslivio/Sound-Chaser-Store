@@ -93,12 +93,36 @@ function Register({ newUser }){
                     </div>
                     
                     <div class="form"> 
-                        
-                        <input type="text" id="register_name" placeholder="Name"/>
-                        <input type="text" id="register_mail" placeholder="E-mail"/>
-                        <input type="text" id="register_phone" placeholder="Phone number (only digits)"/>
-                        <input type="password" id="register_password" placeholder="Password (at least 8 characters)"/>
-                        <input type="password" id="register_confirm" placeholder="Confirm your password"/>
+                        <div class="tooltip-register">
+                            <input type="text" id="register_name" placeholder="Name"/>
+                                <span class="tooltiptext">
+                                Name between 5 and 32 characters
+                                </span>
+                        </div>
+                        <div class="tooltip-register">
+                            <input type="text" id="register_mail" placeholder="E-mail"/>
+                                <span class="tooltiptext">
+                                Enter a valid e-mail address
+                                </span>
+                        </div>
+                        <div class="tooltip-register">
+                            <input type="text" id="register_phone" placeholder="Phone number"/>
+                                <span class="tooltiptext">
+                                Enter only digits
+                                </span>
+                        </div>
+                        <div class="tooltip-register">
+                            <input type="password" id="register_password" placeholder="Password"/>
+                                <span class="tooltiptext">
+                                Enter a password between 8 and 32 characters
+                                </span>
+                        </div>
+                        <div class="tooltip-register">
+                            <input type="password" id="register_confirm" placeholder="Confirm your password"/>
+                                <span class="tooltiptext">
+                                Enter same password as above
+                                </span>
+                        </div>
                     
                         <button onClick={() => createUser(userId, newUser, navigate)} id="form-register-btn">Register</button>
                     </div>

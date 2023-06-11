@@ -275,3 +275,49 @@
 .userpayment .save-btn:active {
     background-color: #350808;
 }
+
+/* Tooltip container */
+
+.tooltip-payment {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip-payment .tooltiptext {
+    visibility: hidden;
+    width: 20vw;
+    background-color: #583257;
+    color: #fff;
+    text-align: center;
+    padding: 1vw 0;
+    border-radius: 0.5vw;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    top: 180%;
+    left: 40%;
+    font-size: 1vw;
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip-payment .tooltiptext::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -1vw;
+    border-width: 1vw;
+    border-style: solid;
+    border-color: transparent transparent #583257 transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip-payment:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+} 

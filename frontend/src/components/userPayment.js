@@ -124,24 +124,42 @@ function UserPayment({ userLogin, signOut, userUpdate }){
 
                         <div className="input-card">
                             <label htmlFor="name">Card number:</label>
-                            <input placeholder={userLogin.card.number ? (`Finishing in ${userLogin.card.number.slice(-4)}`) : ("")} 
-                            
-                            type="text" id="card" name="card" />
+                            <div class="tooltip-payment">
+                                <input placeholder={userLogin.card.number ? (`Finishing in ${userLogin.card.number.slice(-4)}`) : ("")} type="text" id="card" name="card" />
+                                    <span class="tooltiptext">
+                                    Enter between 8 and 16 digits
+                                    </span>
+                            </div>
                         </div>
 
                         <div className="input-holder">
                             <label htmlFor="holder">Card holder:</label>
+                            <div class="tooltip-payment">
                             <input placeholder={userLogin.card.holder} type="text" id="holder" name="holder" />
+                                    <span class="tooltiptext">
+                                    Name between 5 and 32 characters
+                                    </span>
+                            </div>
                         </div>
 
                         <div className="input-expiration">
                             <label htmlFor="expiration">Expiration date:</label>
+                            <div class="tooltip-payment">
                             <input defaultValue={userLogin.card.expiration} type="date" id="expiration" name="expiration" />
+                                    <span class="tooltiptext">
+                                    Enter the last day of month's expiration date
+                                    </span>
+                            </div>
                         </div>
 
                         <div className="input-security">
                             <label htmlFor="security">Security code:</label>
+                            <div class="tooltip-payment">
                             <input type="password" id="security" name="security" />
+                                    <span class="tooltiptext">
+                                    Enter security code of 3 digits
+                                    </span>
+                            </div>
                         </div>
 
                         <p className="address-title"> My address: </p>
@@ -155,7 +173,12 @@ function UserPayment({ userLogin, signOut, userUpdate }){
 
                         <div className="input-receiver">
                             <label htmlFor="receiver">Receiver:</label>
+                            <div class="tooltip-payment">
                             <input placeholder={userLogin.address.receiver} type="text" id="receiver" name="receiver" />
+                                    <span class="tooltiptext">
+                                    Name between 5 and 32 characters
+                                    </span>
+                            </div>
                         </div>
                     </div>
 
