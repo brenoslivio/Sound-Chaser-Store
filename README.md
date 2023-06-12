@@ -269,6 +269,15 @@ Manual tests will be performed for login and registration, insertions and manage
 
     - Saving correctly filled with valid data.
 
+- Admin area
+
+    - Visualize and remove admins in the site;
+
+    - Visualize and remove albums in the admin area;
+
+    - Visualize and remove users in the admin area.
+
+
 ### <a id="4.2" /> 4.2. Test Results
 
 After carefully following the test plan, we had the following results:
@@ -375,6 +384,13 @@ After carefully following the test plan, we had the following results:
     
     - **Saving correctly filled with valid data**: The payment and address information will be saved successfully without emitting any alerts.
 
+- Admin area
+
+    - **Visualize and remove admins in the site**: The admin can successfully view the admins and remove admins after providing their password.
+
+    - **Visualize and remove products in the admin area**: The admin can successfully view the products and remove products after providing their password.
+
+    - **Visualize and remove users in the admin area**: The admin can successfully view the users and remove users after providing their password.
 
 ## <a id="5" /> 5. Build Procedures
 
@@ -395,6 +411,15 @@ Finally, run the front-end in another terminal:
 ```bash
 npm start
 ```
+
+An user example you can use to access the site:
+
+`E-mail: antedeguemon@tutamail.com`, `Password: password`
+
+An admin example you can use to access the administration area in `http://localhost:3000/admin`:
+
+`E-mail: admin@soundchaser.com`, `Password: password`
+
 
 ## <a id="6" /> 6. Problems
 

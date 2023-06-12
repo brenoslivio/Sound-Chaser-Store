@@ -1,0 +1,91 @@
+.admin-page {
+    width: 100%;
+    height: 78vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for admin portion */
+
+.admin-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 70vw;
+    left: 10%;
+    top: 12vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.admin-container .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.icon-admin {
+    position: absolute;
+    width: 15vw;
+    top: 15vw;
+}
+
+.admin-container .form {
+    position: relative;
+    font-size: 2vw;
+    width: 60vw;
+    height: 40vw;
+    top: 34vw;
+    color: #ffffff;
+}
+
+#admin-login-btn {
+    position: relative;
+    font-size: 2vw;
+    top: 16vw;
+    width: 18vw;
+    height: 6vw;
+    border: none;
+    border-radius: 5vw;
+    color: #fff;
+    background-color: #B583B3;
+    cursor: pointer;
+}
+
+#admin-login-btn:hover {
+    background-color: #583257;
+}
+
+#admin-login-btn:active {
+    background-color: #350808;
+}
+
+#admin_mail, #admin_password {
+    position: relative;
+    display: block;
+    font-size: 2vw;
+    margin: 1vw auto;
+    top: 8vw;
+    width: 35vw;
+    right: 10vw;
+    color:rgb(255, 255, 255);
+    outline: 0;
+    border-width: 0 0 0.1vw;
+    border-color: rgb(255, 255, 255);
+    background-color:transparent;
+}
+

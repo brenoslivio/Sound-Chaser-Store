@@ -15,6 +15,11 @@ import Payment from './components/payment';
 import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
+import Admin from './components/admin';
+import AdminSelection from './components/adminSelection';
+import AdminsCRUD from './components/adminsCRUD';
+import ProductsCRUD from './components/productsCRUD';
+import UsersCRUD from './components/usersCRUD';
 
 /* Retrieve albums from server */
 async function getAlbums() {
@@ -40,6 +45,7 @@ function App() {
   /* State for search bar, user and albums */
   const [searchValue, setSearchValue] = useState('');
   const [user, setUser] = useState('');
+  const [admin, setAdmin] = useState('');
   const [albums, setAlbums] = useState([]);
 
   /* Retrieving user and albums */
@@ -62,6 +68,10 @@ function App() {
   const handleUser = (value) => {
     localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
+  };
+
+  const handleAdmin = (value) => {
+    setAdmin(value);
   };
 
   const handleAlbums = (value) => {
@@ -97,6 +107,13 @@ function App() {
               <Route path="/user/payment" element={<UserPayment userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />
               <Route path="/user/orders" element={<UserOrders userLogin={user} signOut={handleSignOut} />} />
               
+              {/* Admin area */}
+              <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
+              <Route path="/admin/administration" element={<AdminSelection admin={admin}/>} />
+              <Route path="/admin/admins" element={<AdminsCRUD admin={admin}/>} />
+              <Route path="/admin/products" element={<ProductsCRUD admin={admin}/>} />
+              <Route path="/admin/users" element={<UsersCRUD admin={admin}/>} />
+
               {/* Redirect if page doesn't exist */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

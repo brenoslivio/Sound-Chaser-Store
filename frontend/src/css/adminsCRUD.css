@@ -1,0 +1,265 @@
+.adminsCRUD-page {
+    width: 100%;
+    height: 78vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for admin portion */
+
+.adminsCRUD-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 70vw;
+    left: 10%;
+    top: 12vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.adminsCRUD-container .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.icon-adminsCRUD {
+    position: absolute;
+    width: 15vw;
+    top: 15vw;
+}
+
+.adminsCRUD-container .form {
+    position: relative;
+    font-size: 2vw;
+    width: 60vw;
+    height: 40vw;
+    top: 34vw;
+    color: #ffffff;
+}
+
+.adminsCRUD-page .container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 66vw;
+    height: 50vw;
+    left: 9%;
+    top: 20%;
+    border-radius: 2vw;
+    background: #d9d9d9;
+}
+
+.adminsCRUD-page .administration-text {
+    position: absolute;
+    left: 8%;
+    top: 5%;
+    font-size: 2.5vw;
+    color: #72366f;
+    text-decoration: underline;
+}
+
+.adminsCRUD-page .pagination {
+    position: absolute;
+    left: 4%;
+    bottom: 5%;
+}
+
+.adminsCRUD-page .admin-1 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 16%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.admin-1 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.admin-1 .remove-admin {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.adminsCRUD-page .admin-2 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 34%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.admin-2 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.admin-2 .remove-admin {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.adminsCRUD-page .admin-3 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 52%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.admin-3 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.admin-3 .remove-admin {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.adminsCRUD-page .admin-4 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 70%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.admin-4 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.admin-4 .remove-admin {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    background-color: #B583B3;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.overlay-content label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.overlay-content input {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.overlay-content button {
+    background-color: #72366f;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.overlay-content button:hover {
+    background-color: #583257;
+}
+
+.overlay-content button:active {
+    background-color: #350808;
+}
+
+.adminsCRUD-container .create-admin-button {
+    position: relative;
+    left: 40%;
+    top: 5%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    display: block;
+    border-radius: 100%;
+    color: white;
+    background-color: #72366f;
+    cursor: pointer;
+}

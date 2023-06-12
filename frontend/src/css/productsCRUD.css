@@ -1,0 +1,220 @@
+.productsCRUD-page {
+    width: 100%;
+    height: 78vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("/imgs/bgs/eric-krull-fi3_lDi3qPE-unsplash.jpg");
+}
+
+/* Gradient layer */
+
+.layer {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(251, 9, 183, 0.4));
+}
+
+/* Container for product portion */
+
+.productsCRUD-container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 80vw;
+    height: 70vw;
+    left: 10%;
+    top: 12vw;
+    background: rgba(114, 54, 111, 0.8);
+    border-radius: 2vw;
+    backdrop-filter: blur(0.5vw);
+}
+
+.productsCRUD-container .title {
+    position: absolute;
+    font-size: 4vw;
+    top: 4vw; 
+    color: #ffffff;
+}
+
+.icon-productsCRUD {
+    position: absolute;
+    width: 15vw;
+    top: 15vw;
+}
+
+.productsCRUD-container .form {
+    position: relative;
+    font-size: 2vw;
+    width: 60vw;
+    height: 40vw;
+    top: 34vw;
+    color: #ffffff;
+}
+
+.productsCRUD-page .container {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    text-align: center;
+    width: 66vw;
+    height: 50vw;
+    left: 9%;
+    top: 20%;
+    border-radius: 2vw;
+    background: #d9d9d9;
+}
+
+.productsCRUD-page .administration-text {
+    position: absolute;
+    left: 8%;
+    top: 5%;
+    font-size: 2.5vw;
+    color: #72366f;
+    text-decoration: underline;
+}
+
+.productsCRUD-page .pagination {
+    position: absolute;
+    left: 4%;
+    bottom: 5%;
+}
+
+.productsCRUD-page .product-1 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 16%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.product-1 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.product-1 .remove-product {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.productsCRUD-page .product-2 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 34%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.product-2 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.product-2 .remove-product {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.productsCRUD-page .product-3 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 52%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.product-3 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.product-3 .remove-product {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.productsCRUD-page .product-4 {
+    position: absolute;
+    width: 56vw;
+    height: 8vw;
+    left: 10%;
+    top: 70%;
+    border-radius: 1vw;
+    background: #B583B3;
+}
+
+.product-4 .text {
+    position: absolute;
+    left: 10%;
+    top: 40%;
+    white-space: nowrap;
+    font-size: 1.5vw;
+    color: #72366f;
+    cursor: pointer;
+}
+
+.product-4 .remove-product {
+    position: absolute;
+    left: -8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    color: white;
+    cursor: pointer;
+}
+
+.productsCRUD-container .create-product-button {
+    position: relative;
+    left: 40%;
+    top: 5%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
+    display: block;
+    border-radius: 100%;
+    color: white;
+    background-color: #72366f;
+    cursor: pointer;
+}

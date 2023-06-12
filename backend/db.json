@@ -1,4 +1,13 @@
-{
+{   
+    "admins": [
+        {
+            "id": 0,
+            "name": "admin",
+            "email": "admin@soundchaser.com",
+            "phone": "011999999999",
+            "password": "password"
+        }
+    ],
     "users": [
         {
             "id": 0,
