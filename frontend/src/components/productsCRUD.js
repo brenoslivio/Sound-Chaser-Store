@@ -1,6 +1,5 @@
 import '../css/productsCRUD.css';
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
 
 /* Retrieve albums from server */
 async function getAlbums() {
@@ -11,7 +10,7 @@ async function getAlbums() {
 }
 
 /* Admininistration page */
-function ProductsCRUD({ admin }){
+function ProductsCRUD({ userAdmin }){
 
     const [products, setProducts] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,19 +18,28 @@ function ProductsCRUD({ admin }){
 
     const [showRemoveOverlay, setShowRemoveOverlay] = useState(false);
     const [showCreateOverlay, setShowCreateOverlay] = useState(false);
-    const [password, setPassword] = useState('');
-    const [productIdToRemove, setProductIdToRemove] = useState(null);
-
     const [showEditOverlay, setShowEditOverlay] = useState(false);
 
-    let navigate = useNavigate();
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const genres = [
+        "Classic Rock",
+        "Alternative Rock",
+        "Progressive Rock",
+        "Jazz",
+        "Classical Music",
+        "Pop",
+        "Rap"
+    ];
+
+    const imageRef = useRef(null);
     
-    if (!admin) {
-        useEffect(() => {
-            navigate("/");
-        });
-        return;
-    }
+    // if (!userAdmin) {
+    //     useEffect(() => {
+    //         navigate("/");
+    //     });
+    //     return;
+    // }
 
     useEffect(() => {
         getAlbums()
@@ -56,6 +64,20 @@ function ProductsCRUD({ admin }){
         };
     }, [showRemoveOverlay, showCreateOverlay, showEditOverlay]);
 
+    useEffect(() => {
+        if (showEditOverlay) {
+            document.getElementById("edit-product-img-preview").src = selectedProduct.img;
+            document.getElementById("edit-product-name").value = selectedProduct.name;
+            document.getElementById("edit-product-artist").value = selectedProduct.artist;
+            document.getElementById("edit-product-year").value = selectedProduct.year;
+            document.getElementById("edit-product-genre").value = selectedProduct.genre;
+            document.getElementById("edit-product-description").value = selectedProduct.description;
+            document.getElementById("edit-product-price").value = selectedProduct.price;
+            document.getElementById("edit-product-stock").value = selectedProduct.stock;
+            document.getElementById("edit-product-sold").value = selectedProduct.sold;
+        }
+    }, [showEditOverlay]);
+
     if (products.length === 0) {
         return (
             <div className="productsCRUD-page">
@@ -76,8 +98,8 @@ function ProductsCRUD({ admin }){
         setCurrentPage(pageNumber);
     };
 
-    const handleRemoveProductClick = (productId) => {
-        setProductIdToRemove(productId);
+    const handleRemoveProductClick = (album) => {
+        setSelectedProduct(album);
         setShowRemoveOverlay(true);
     };
 
@@ -86,22 +108,115 @@ function ProductsCRUD({ admin }){
     };
 
     const handleEditProductClick = (album) => {
+        setSelectedProduct(album);
         setShowEditOverlay(true);
     };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
     const handleRemoveProductSubmit = () => {
+        const password = document.getElementById("remove-product-password").value;
 
-        if (admin.password === password) {
-            const updatedProducts = products.filter((album) => album.id !== productIdToRemove);
+        if (userAdmin.password === password) {
+            const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
             setProducts(updatedProducts);
             setShowRemoveOverlay(false);
         } else {
             alert('Incorrect password. Please try again.');
         }
+    };
+
+    const handleCreateProductSubmit = () => {
+        const productName = document.getElementById('create-product-name').value;
+        const artist = document.getElementById('create-product-artist').value;
+        const year = document.getElementById('create-product-year').value;
+        const genre = document.getElementById('create-product-genre').value;
+        const description = document.getElementById('create-product-description').value;
+        const price = document.getElementById('create-product-price').value;
+        const stock = document.getElementById('create-product-stock').value;
+        const sold = document.getElementById('create-product-sold').value;
+        const img = document.getElementById('create-product-img-preview').src;
+
+        if (
+            productName === '' ||
+            artist === '' ||
+            year === '' ||
+            genre === '' ||
+            description === '' ||
+            price === '' ||
+            stock === '' ||
+            sold === '' ||
+            img === ''
+        ) {
+            alert('Please fill in all the fields.');
+            return;
+        }
+
+        const newProduct = {
+            id: products.length,
+            name: productName,
+            artist: artist,
+            year: year,
+            genre: genre,
+            img: img,
+            description: description,
+            price: price,
+            stock: stock,
+            sold: sold
+        };
+
+        const updatedProducts = [...products, newProduct];
+        setProducts(updatedProducts);
+
+        setShowCreateOverlay(false);
+    };
+
+    const handleEditProductSubmit = () => {
+        const name = document.getElementById('edit-product-name').value;
+        const artist = document.getElementById('edit-product-artist').value;
+        const year = document.getElementById('edit-product-year').value;
+        const genre = document.getElementById('edit-product-genre').value;
+        const description = document.getElementById('edit-product-description').value;
+        const price = document.getElementById('edit-product-price').value;
+        const stock = document.getElementById('edit-product-stock').value;
+        const sold = document.getElementById('edit-product-sold').value;
+        const img = document.getElementById('edit-product-img-preview').src;
+        console.log(img);
+
+        if (
+            name === '' ||
+            artist === '' ||
+            year === '' ||
+            genre === '' ||
+            description === '' ||
+            price === '' ||
+            stock === '' ||
+            sold === '' ||
+            img === ''
+        ) {
+            alert('Please fill in all the fields.');
+            return;
+        }
+
+        const updatedProducts = [...products];
+        const index = updatedProducts.findIndex((product) => product.id === selectedProduct.id);
+
+        updatedProducts[index] = {
+            ...selectedProduct,
+            name: name,
+            artist: artist,
+            year: year,
+            genre: genre,
+            description: description,
+            price: price,
+            stock: stock,
+            sold: sold,
+            img: img
+        };
+
+        console.log(updatedProducts[index]);
+
+        setProducts(updatedProducts);
+
+        setShowEditOverlay(false);
     };
 
     /* Choosing which products to show within the pagination system */
@@ -114,20 +229,27 @@ function ProductsCRUD({ admin }){
             <div class="layer">
                 <div class="productsCRUD-container">
                     <div class="title"> Administration </div>
-
+                    
                     <div className="container">
                         <div class="administration-text"> Products </div>
                         {currentProducts.map((album, index) => (
                             <div className={`product-${index + 1}`}>
-                                <div className="text" onClick={() => handleEditProductClick(album.id)}>
-                                    id: {album.id}, name: {album.name}, artist: {album.name} 
+                                <div className="text">
+                                    id: {album.id} &emsp; name: {album.name} &emsp; stock: {album.stock} &emsp; sold: {album.sold}
                                 </div>
-                                <div className="remove-product" onClick={() => handleRemoveProductClick(album.id)}>
+                                <div className="remove-product" onClick={() => handleRemoveProductClick(album)}>
                                     <svg xmlns="http://www.w3.org/2000/svg"fill="#72366f" className="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
                                     </svg>
                                 </div>
+                                <div className="edit-product" onClick={() => handleEditProductClick(album)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                </div>
                             </div>
+                            
                         ))}
                         <div className="create-product-button" onClick={handleCreateProductClick} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-plus" viewBox="0 0 16 16">
@@ -159,8 +281,7 @@ function ProductsCRUD({ admin }){
                         <input
                             type="password"
                             placeholder="Enter password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            id="remove-product-password"
                         />
                         <div className="button-group">
                             <button onClick={handleRemoveProductSubmit}>Confirm</button>
@@ -173,7 +294,75 @@ function ProductsCRUD({ admin }){
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Create Product</h2>
-
+                        <div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                id="create-product-img"
+                                ref={imageRef}
+                                onChange={() => {
+                                    const file = imageRef.current.files[0];
+                                    const imgPreview = document.getElementById('create-product-img-preview');
+                                    if (file && imgPreview) {
+                                        const reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            imgPreview.src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                            <div>
+                                <label htmlFor="create-product-img">Choose Image</label>
+                                <img id="create-product-img-preview" alt="Preview" style={{ width: '10vw', height: '10vw' }} />
+                            </div>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            id="create-product-name"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Artist"
+                            id="create-product-artist"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Year"
+                            id="create-product-year"
+                        />
+                        <select id="create-product-genre">
+                            <option value="">Select Genre</option>
+                            {genres.map((genre) => (
+                                <option key={genre} value={genre}>{genre}</option>
+                            ))}
+                        </select>
+                        <br/>
+                        <textarea
+                            placeholder="Description"
+                            id="create-product-description"
+                            rows="5" cols="20" maxlength="128"
+                        ></textarea>
+                        <input
+                            type="text"
+                            placeholder="Price"
+                            id="create-product-price"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Stock"
+                            id="create-product-stock"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Sold"
+                            id="create-product-sold"
+                        />
+                        <div className="button-group">
+                            <button onClick={handleCreateProductSubmit}>Create</button>
+                            <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}
@@ -181,7 +370,101 @@ function ProductsCRUD({ admin }){
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Edit Product</h2>
-
+                        <div>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                id="edit-product-img"
+                                ref={imageRef}
+                                onChange={() => {
+                                const file = imageRef.current.files[0];
+                                const imgPreview = document.getElementById('edit-product-img-preview');
+                                    if (file && imgPreview) {
+                                        const reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            imgPreview.src = e.target.result;
+                                        };
+                                        reader.readAsDataURL(file);
+                                    }
+                                }}
+                            />
+                            <div>
+                                <label htmlFor="edit-product-img">Choose Image</label>
+                                <img id="edit-product-img-preview" alt="Preview" style={{ width: '10vw', height: '10vw' }} />
+                            </div>
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-name">Name</label>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                id="edit-product-name"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-artist">Artist</label>
+                            <input
+                                type="text"
+                                placeholder="Artist"
+                                id="edit-product-artist"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-year">Year</label>
+                            <input
+                                type="text"
+                                placeholder="Year"
+                                id="edit-product-year"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-genre">Genre</label>
+                            <select id="edit-product-genre">
+                                <option value="">Select Genre</option>
+                                {genres.map((genre) => (
+                                    <option key={genre} value={genre}>{genre}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-description">Description</label>
+                            <br/>
+                            <textarea
+                                placeholder="Description"
+                                id="edit-product-description"
+                                rows="5"
+                                cols="20"
+                                maxLength="128"
+                            ></textarea>
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-price">Price</label>
+                            <input
+                                type="text"
+                                placeholder="Price"
+                                id="edit-product-price"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-stock">Stock</label>
+                            <input
+                                type="text"
+                                placeholder="Stock"
+                                id="edit-product-stock"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-sold">Sold</label>
+                            <input
+                                type="text"
+                                placeholder="Sold"
+                                id="edit-product-sold"
+                            />
+                        </div>
+                        <div className="button-group">
+                            <button onClick={handleEditProductSubmit}>Save</button>
+                            <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}

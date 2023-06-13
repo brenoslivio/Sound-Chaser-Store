@@ -71,6 +71,7 @@ function App() {
   };
 
   const handleAdmin = (value) => {
+    setUser('');
     setAdmin(value);
   };
 
@@ -109,10 +110,10 @@ function App() {
               
               {/* Admin area */}
               <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
-              <Route path="/admin/administration" element={<AdminSelection admin={admin}/>} />
-              <Route path="/admin/admins" element={<AdminsCRUD admin={admin}/>} />
-              <Route path="/admin/products" element={<ProductsCRUD admin={admin}/>} />
-              <Route path="/admin/users" element={<UsersCRUD admin={admin}/>} />
+              <Route path="/admin/administration" element={<AdminSelection userAdmin={admin}/>} />
+              <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin}/>} />
+              <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin}/>} />
+              <Route path="/admin/users" element={<UsersCRUD userAdmin={admin}/>} />
 
               {/* Redirect if page doesn't exist */}
               <Route path="*" element={<Navigate to="/" replace />} />

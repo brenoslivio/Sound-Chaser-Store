@@ -98,7 +98,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .user-1 .remove-user {
@@ -108,7 +107,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.user-1 .edit-user {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -129,7 +137,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .user-2 .remove-user {
@@ -140,6 +147,16 @@
     height: 3vw;
     font-size: 2.5vw;
     color: white;
+    cursor: pointer;
+}
+
+.user-2 .edit-user {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -160,7 +177,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .user-3 .remove-user {
@@ -171,6 +187,16 @@
     height: 3vw;
     font-size: 2.5vw;
     color: white;
+    cursor: pointer;
+}
+
+.user-3 .edit-user {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -191,7 +217,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .user-4 .remove-user {
@@ -202,6 +227,16 @@
     height: 3vw;
     font-size: 2.5vw;
     color: white;
+    cursor: pointer;
+}
+
+.user-4 .edit-user {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -217,4 +252,16 @@
     color: white;
     background-color: #72366f;
     cursor: pointer;
+}
+
+.overlay-content .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.overlay-content .input-group label {
+    margin-right: 10px;
+    width: 80px;
+    text-align: left;
 }

@@ -1,6 +1,5 @@
 import '../css/adminsCRUD.css';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 
 /* Retrieve admins from server */
 async function getAdmins() {
@@ -11,31 +10,23 @@ async function getAdmins() {
 }
 
 /* Administration page */
-function AdminsCRUD({ admin }) {
+function AdminsCRUD({ userAdmin }) {
     const [admins, setAdmins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const adminsPerPage = 4;
 
     const [showRemoveOverlay, setShowRemoveOverlay] = useState(false);
     const [showCreateOverlay, setShowCreateOverlay] = useState(false);
-    const [password, setPassword] = useState('');
-    const [adminIdToRemove, setAdminIdToRemove] = useState(null);
-
-    const [selectedAdmin, setSelectedAdmin] = useState(null);
-    const [editAdminName, setEditAdminName] = useState('');
-    const [editAdminEmail, setEditAdminEmail] = useState('');
-    const [editAdminPhone, setEditAdminPhone] = useState('');
-    const [editAdminPassword, setEditAdminPassword] = useState('');
     const [showEditOverlay, setShowEditOverlay] = useState(false);
 
-    let navigate = useNavigate();
+    const [selectedAdmin, setSelectedAdmin] = useState(null);
 
-    if (!admin) {
-        useEffect(() => {
-            navigate("/");
-        });
-        return;
-    }
+    // if (!userAdmin) {
+    //     useEffect(() => {
+    //         navigate("/");
+    //     });
+    //     return;
+    // }
 
     useEffect(() => {
         getAdmins()
@@ -60,6 +51,15 @@ function AdminsCRUD({ admin }) {
         };
     }, [showRemoveOverlay, showCreateOverlay, showEditOverlay]);
 
+    useEffect(() => {
+        if (showEditOverlay) {
+            document.getElementById("edit-admin-name").value = selectedAdmin.name;
+            document.getElementById("edit-admin-email").value = selectedAdmin.email;
+            document.getElementById("edit-admin-phone").value = selectedAdmin.phone;
+            document.getElementById("edit-admin-password").value = selectedAdmin.password;
+        }
+    }, [showEditOverlay]);
+
     if (admins.length === 0) {
         return (
             <div className="adminsCRUD-page">
@@ -77,36 +77,29 @@ function AdminsCRUD({ admin }) {
         setCurrentPage(pageNumber);
     };
 
-    const handleRemoveAdminClick = (adminId) => {
-        if (adminId === 0 || admin.id === adminId) {
+    const handleRemoveAdminClick = (admin) => {
+        if (admin.id === 0 || userAdmin.id === admin.id) {
             alert("Cannot remove main admin or yourself.");
         } else {
-            setAdminIdToRemove(adminId);
+            setSelectedAdmin(admin);
             setShowRemoveOverlay(true);
         }
     };
 
-    const handleCreateAdminClick = () => {
+    const handleCreateAdminClick = (admin) => {
         setShowCreateOverlay(true);
     };
 
     const handleEditAdminClick = (admin) => {
         setSelectedAdmin(admin);
-        setEditAdminName(admin.name);
-        setEditAdminEmail(admin.email);
-        setEditAdminPhone(admin.phone);
-        setEditAdminPassword(admin.password);
         setShowEditOverlay(true);
     };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
     const handleRemoveAdminSubmit = () => {
+        const password = document.getElementById("remove-admin-password").value;
 
-        if (admin.password === password) {
-            const updatedAdmins = admins.filter((admin) => admin.id !== adminIdToRemove);
+        if (userAdmin.password === password) {
+            const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
             setAdmins(updatedAdmins);
             setShowRemoveOverlay(false);
         } else {
@@ -116,11 +109,16 @@ function AdminsCRUD({ admin }) {
 
     const handleCreateAdminSubmit = () => {
         // Perform validation for the new admin inputs
+        const name = document.getElementById("create-admin-name").value;
+        const email = document.getElementById("create-admin-name").value;
+        const phone = document.getElementById("create-admin-email").value;
+        const password = document.getElementById("create-admin-password").value;
+
         if (
-            editAdminName.trim() === '' ||
-            editAdminEmail.trim() === '' ||
-            editAdminPhone.trim() === '' ||
-            editAdminPassword.trim() === ''
+            name.trim() === '' ||
+            email.trim() === '' ||
+            phone.trim() === '' ||
+            password.trim() === ''
         ) {
             alert('Please fill in all the fields.');
             return;
@@ -128,46 +126,30 @@ function AdminsCRUD({ admin }) {
 
         const newAdmin = {
             id: admins.length,
-            name: editAdminName,
-            email: editAdminEmail,
-            phone: editAdminPhone,
-            password: editAdminPassword,
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
         };
 
         const updatedAdmins = [...admins, newAdmin];
         setAdmins(updatedAdmins);
 
-        setEditAdminName('');
-        setEditAdminEmail('');
-        setEditAdminPhone('');
-        setEditAdminPassword('');
-
         setShowCreateOverlay(false);
-    };
-
-    const handleEditAdminNameChange = (event) => {
-        setEditAdminName(event.target.value);
-    };
-
-    const handleEditAdminEmailChange = (event) => {
-        setEditAdminEmail(event.target.value);
-    };
-
-    const handleEditAdminPhoneChange = (event) => {
-        setEditAdminPhone(event.target.value);
-    };
-
-    const handleEditAdminPasswordChange = (event) => {
-        setEditAdminPassword(event.target.value);
     };
 
     const handleEditAdminSubmit = () => {
         // Perform validation for the edited admin inputs
+        const name = document.getElementById("edit-admin-name").value;
+        const email = document.getElementById("edit-admin-email").value;
+        const phone = document.getElementById("edit-admin-phone").value;
+        const password = document.getElementById("edit-admin-password").value;
+
         if (
-            editAdminName.trim() === '' ||
-            editAdminEmail.trim() === '' ||
-            editAdminPhone.trim() === '' ||
-            editAdminPassword.trim() === ''
+            name.trim() === '' ||
+            email.trim() === '' ||
+            phone.trim() === '' ||
+            password.trim() === ''
         ) {
             alert('Please fill in all the fields.');
             return;
@@ -178,18 +160,13 @@ function AdminsCRUD({ admin }) {
 
         updatedAdmins[index] = {
             ...selectedAdmin,
-            name: editAdminName,
-            email: editAdminEmail,
-            phone: editAdminPhone,
-            password: editAdminPassword,
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
         };
 
         setAdmins(updatedAdmins);
-
-        setEditAdminName('');
-        setEditAdminEmail('');
-        setEditAdminPhone('');
-        setEditAdminPassword('');
 
         setShowEditOverlay(false);
     };
@@ -208,13 +185,19 @@ function AdminsCRUD({ admin }) {
                         <div className="administration-text"> Admins </div>
                         {currentAdmins.map((admin, index) => (
                         <div className={`admin-${index + 1}`} key={admin.id}>
-                            <div className="text" onClick={() => handleEditAdminClick(admin)}>
-                            id: {admin.id}, name: {admin.name}, e-mail: {admin.email}
+                            <div className="text">
+                            id: {admin.id} &emsp; &emsp; name: {admin.name}
                             </div>
-                            <div className="remove-admin" onClick={() => handleRemoveAdminClick(admin.id)}>
+                            <div className="remove-admin" onClick={() => handleRemoveAdminClick(admin)}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" className="bi bi-x" viewBox="0 0 16 16">
                                 <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
                             </svg>
+                            </div>
+                            <div className="edit-admin" onClick={() => handleEditAdminClick(admin)}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
                             </div>
                         </div>
                         ))}
@@ -246,8 +229,7 @@ function AdminsCRUD({ admin }) {
                         <input
                             type="password"
                             placeholder="Enter password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            id="remove-admin-password"
                         />
                         <div className="button-group">
                             <button onClick={handleRemoveAdminSubmit}>Confirm</button>
@@ -263,22 +245,22 @@ function AdminsCRUD({ admin }) {
                         <input
                             type="text"
                             placeholder="Name"
-                            onChange={handleEditAdminNameChange}
+                            id="create-admin-name"
                         />
                         <input
                             type="text"
-                            placeholder="Email"
-                            onChange={handleEditAdminEmailChange}
+                            placeholder="E-mail"
+                            id="create-admin-email"
                         />
                         <input
                             type="text"
                             placeholder="Phone"
-                            onChange={handleEditAdminPhoneChange}
+                            id="create-admin-phone"
                         />
                         <input
                             type="password"
                             placeholder="Password"
-                            onChange={handleEditAdminPasswordChange}
+                            id="create-admin-password"
                         />
                         <div className="button-group">
                             <button onClick={handleCreateAdminSubmit}>Create</button>
@@ -291,30 +273,38 @@ function AdminsCRUD({ admin }) {
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Edit Admin</h2>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            value={editAdminName}
-                            onChange={handleEditAdminNameChange}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Email"
-                            value={editAdminEmail}
-                            onChange={handleEditAdminEmailChange}
-                        />
-                        <input
-                            type="text"
-                            placeholder="Phone"
-                            value={editAdminPhone}
-                            onChange={handleEditAdminPhoneChange}
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={editAdminPassword}
-                            onChange={handleEditAdminPasswordChange}
-                        />
+                        <div className="input-group">
+                            <label htmlFor="edit-admin-name">Name</label>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                id="edit-admin-name"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-admin-email">E-mail</label>
+                            <input
+                                type="text"
+                                placeholder="E-mail"
+                                id="edit-admin-email"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-admin-phone">Phone</label>
+                            <input
+                                type="text"
+                                placeholder="Phone"
+                                id="edit-admin-phone"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-admin-password">Password</label>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                id="edit-admin-password"
+                            />
+                        </div>
                         <div className="button-group">
                             <button onClick={handleEditAdminSubmit}>Save</button>
                             <button onClick={() => setShowEditOverlay(false)}>Cancel</button>

@@ -82,6 +82,7 @@
     font-size: 2vw;
     text-shadow: 0vw 0.1vw #000;
     color: white;
+    word-break: break-word;
 }
 
 .payment-info .change-payment {

@@ -93,12 +93,11 @@
 
 .product-1 .text {
     position: absolute;
-    left: 10%;
+    left: 5%;
     top: 40%;
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .product-1 .remove-product {
@@ -108,7 +107,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.product-1 .edit-product {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -124,12 +132,11 @@
 
 .product-2 .text {
     position: absolute;
-    left: 10%;
+    left: 5%;
     top: 40%;
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .product-2 .remove-product {
@@ -139,7 +146,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.product-2 .edit-product {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -155,12 +171,11 @@
 
 .product-3 .text {
     position: absolute;
-    left: 10%;
+    left: 5%;
     top: 40%;
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .product-3 .remove-product {
@@ -170,7 +185,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.product-3 .edit-product {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -186,12 +210,11 @@
 
 .product-4 .text {
     position: absolute;
-    left: 10%;
+    left: 5%;
     top: 40%;
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .product-4 .remove-product {
@@ -202,6 +225,16 @@
     height: 3vw;
     font-size: 2.5vw;
     color: white;
+    cursor: pointer;
+}
+
+.product-4 .edit-product {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -217,4 +250,31 @@
     color: white;
     background-color: #72366f;
     cursor: pointer;
+}
+
+.overlay-content #create-product-img {
+    width: 160px;
+}
+
+.overlay-content #edit-product-img {
+    width: 160px;
+}
+
+.overlay-content textarea {
+    width: 150px;
+    resize: none;
+    border-color: #72366f;
+    background-color:white;
+}
+
+.overlay-content .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.overlay-content .input-group label {
+    margin-right: 10px;
+    width: 80px;
+    text-align: left;
 }

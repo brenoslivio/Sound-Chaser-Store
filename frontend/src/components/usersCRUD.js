@@ -1,6 +1,5 @@
 import '../css/usersCRUD.css';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
 
 /* Retrieve users from server */
 async function getUsers() {
@@ -11,7 +10,7 @@ async function getUsers() {
 }
 
 /* Admininistration page */
-function UsersCRUD({ admin }){
+function UsersCRUD({ userAdmin }){
 
     const [users, setUsers] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,19 +18,16 @@ function UsersCRUD({ admin }){
 
     const [showRemoveOverlay, setShowRemoveOverlay] = useState(false);
     const [showCreateOverlay, setShowCreateOverlay] = useState(false);
-    const [password, setPassword] = useState('');
-    const [userIdToRemove, setUserIdToRemove] = useState(null);
-
     const [showEditOverlay, setShowEditOverlay] = useState(false);
 
-    let navigate = useNavigate();
+    const [selectedUser, setSelectedUser] = useState(null);
     
-    if (!admin) {
-        useEffect(() => {
-            navigate("/");
-        });
-        return;
-    }
+    // if (!userAdmin) {
+    //     useEffect(() => {
+    //         navigate("/");
+    //     });
+    //     return;
+    // }
 
     useEffect(() => {
         getUsers()
@@ -56,6 +52,15 @@ function UsersCRUD({ admin }){
         };
     }, [showRemoveOverlay, showCreateOverlay, showEditOverlay]);
 
+    useEffect(() => {
+        if (showEditOverlay) {
+            document.getElementById("edit-user-name").value = selectedUser.name;
+            document.getElementById("edit-user-email").value = selectedUser.email;
+            document.getElementById("edit-user-phone").value = selectedUser.phone;
+            document.getElementById("edit-user-password").value = selectedUser.password;
+        }
+    }, [showEditOverlay]);
+
     if (users.length === 0) {
         return (
             <div className="usersCRUD-page">
@@ -76,8 +81,8 @@ function UsersCRUD({ admin }){
         setCurrentPage(pageNumber);
     };
 
-    const handleRemoveUserClick = (productId) => {
-        setUserIdToRemove(productId);
+    const handleRemoveUserClick = (user) => {
+        setSelectedUser(user);
         setShowRemoveOverlay(true);
     };
 
@@ -85,23 +90,85 @@ function UsersCRUD({ admin }){
         setShowCreateOverlay(true);
     };
 
-    const handleEditUserClick = (album) => {
+    const handleEditUserClick = (user) => {
+        setSelectedUser(user);
         setShowEditOverlay(true);
     };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
     const handleRemoveUserSubmit = () => {
+        const password = document.getElementById("remove-user-password").value;
 
-        if (admin.password === password) {
-            const updatedUsers = users.filter((user) => user.id !== userIdToRemove);
+        if (userAdmin.password === password) {
+            const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
             setUsers(updatedUsers);
             setShowRemoveOverlay(false);
         } else {
             alert('Incorrect password. Please try again.');
         }
+    };
+
+    const handleCreateUserSubmit = () => {
+        // Perform validation for the new user inputs
+        const name = document.getElementById("create-user-name").value;
+        const email = document.getElementById("create-user-name").value;
+        const phone = document.getElementById("create-user-email").value;
+        const password = document.getElementById("create-user-password").value;
+
+        if (
+            name.trim() === '' ||
+            email.trim() === '' ||
+            phone.trim() === '' ||
+            password.trim() === ''
+        ) {
+            alert('Please fill in all the fields.');
+            return;
+        }
+
+        const newUser = {
+            id: users.length,
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
+        };
+
+        const updatedUsers = [...users, newUser];
+        setUsers(updatedUsers);
+
+        setShowCreateOverlay(false);
+    };
+
+    const handleEditUserSubmit = () => {
+        // Perform validation for the edited user inputs
+        const name = document.getElementById("edit-user-name").value;
+        const email = document.getElementById("edit-user-email").value;
+        const phone = document.getElementById("edit-user-phone").value;
+        const password = document.getElementById("edit-user-password").value;
+
+        if (
+            name.trim() === '' ||
+            email.trim() === '' ||
+            phone.trim() === '' ||
+            password.trim() === ''
+        ) {
+            alert('Please fill in all the fields.');
+            return;
+        }
+
+        const updatedUsers = [...users];
+        const index = updatedUsers.findIndex((user) => user.id === selectedUser.id);
+
+        updatedUsers[index] = {
+            ...selectedUser,
+            name: name,
+            email: email,
+            phone: phone,
+            password: password,
+        };
+
+        setUsers(updatedUsers);
+
+        setShowEditOverlay(false);
     };
 
     /* Choosing which users to show within the pagination system */
@@ -119,12 +186,18 @@ function UsersCRUD({ admin }){
                         <div class="administration-text"> Users </div>
                         {currentUsers.map((user, index) => (
                             <div className={`user-${index + 1}`}>
-                                <div className="text" onClick={() => handleEditUserClick(user.id)}>
-                                    id: {user.id}, name: {user.name}, e-mail: {user.email} 
+                                <div className="text">
+                                    id: {user.id} &emsp; &emsp; name: {user.name} 
                                 </div>
-                                <div className="remove-user" onClick={() => handleRemoveUserClick(user.id)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg"fill="#72366f" className="bi bi-x" viewBox="0 0 16 16">
+                                <div className="remove-user" onClick={() => handleRemoveUserClick(user)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" className="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                    </svg>
+                                </div>
+                                <div className="edit-user" onClick={() => handleEditUserClick(user)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                 </div>
                             </div>
@@ -158,8 +231,7 @@ function UsersCRUD({ admin }){
                         <input
                             type="password"
                             placeholder="Enter password"
-                            value={password}
-                            onChange={handlePasswordChange}
+                            id="remove-user-password"
                         />
                         <div className="button-group">
                             <button onClick={handleRemoveUserSubmit}>Confirm</button>
@@ -172,7 +244,30 @@ function UsersCRUD({ admin }){
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Create User</h2>
-                        
+                        <input
+                            type="text"
+                            placeholder="Name"
+                            id="create-user-name"
+                        />
+                        <input
+                            type="text"
+                            placeholder="E-mail"
+                            id="create-user-email"
+                        />
+                        <input
+                            type="text"
+                            placeholder="Phone"
+                            id="create-user-phone"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            id="create-user-password"
+                        />
+                        <div className="button-group">
+                            <button onClick={handleCreateUserSubmit}>Create</button>
+                            <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}
@@ -180,7 +275,42 @@ function UsersCRUD({ admin }){
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Edit User</h2>
-                        
+                        <div className="input-group">
+                            <label htmlFor="edit-user-name">Name</label>
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                id="edit-user-name"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-user-email">E-mail</label>
+                            <input
+                                type="text"
+                                placeholder="E-mail"
+                                id="edit-user-email"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-user-phone">Phone</label>
+                            <input
+                                type="text"
+                                placeholder="Phone"
+                                id="edit-user-phone"
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-user-password">Password</label>
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                id="edit-user-password"
+                            />
+                        </div>
+                        <div className="button-group">
+                            <button onClick={handleEditUserSubmit}>Save</button>
+                            <button onClick={() => setShowEditOverlay(false)}>Cancel</button>
+                        </div>
                     </div>
                 </div>
             )}

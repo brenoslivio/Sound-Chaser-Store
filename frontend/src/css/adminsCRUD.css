@@ -98,7 +98,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .admin-1 .remove-admin {
@@ -108,7 +107,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.admin-1 .edit-admin {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -129,7 +137,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .admin-2 .remove-admin {
@@ -139,7 +146,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.admin-2 .edit-admin {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -160,7 +176,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .admin-3 .remove-admin {
@@ -170,7 +185,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.admin-3 .edit-admin {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -191,7 +215,6 @@
     white-space: nowrap;
     font-size: 1.5vw;
     color: #72366f;
-    cursor: pointer;
 }
 
 .admin-4 .remove-admin {
@@ -201,7 +224,16 @@
     width: 3vw;
     height: 3vw;
     font-size: 2.5vw;
-    color: white;
+    cursor: pointer;
+}
+
+.admin-4 .edit-admin {
+    position: absolute;
+    right: 8%;
+    top: 35%;
+    width: 3vw;
+    height: 3vw;
+    font-size: 2.5vw;
     cursor: pointer;
 }
 
@@ -219,7 +251,7 @@
 
 .overlay-content {
     background-color: #B583B3;
-    padding: 20px;
+    padding: 5px 20px 20px 20px;
     border-radius: 4px;
 }
 
@@ -239,6 +271,7 @@
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
+    margin: 2px;
     cursor: pointer;
 }
 
@@ -262,4 +295,16 @@
     color: white;
     background-color: #72366f;
     cursor: pointer;
+}
+
+.overlay-content .input-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.overlay-content .input-group label {
+    margin-right: 10px;
+    width: 80px;
+    text-align: left;
 }

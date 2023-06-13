@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 /* Admininistration page */
-function AdminSelection({ admin }){
+function AdminSelection({ userAdmin }){
 
     let navigate = useNavigate(); 
     
-    if (!admin) {
+    if (!userAdmin) {
         useEffect(() => {
             navigate("/");
         });
