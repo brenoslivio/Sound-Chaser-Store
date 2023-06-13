@@ -271,11 +271,23 @@ Manual tests will be performed for login and registration, insertions and manage
 
 - Admin area
 
-    - Visualize and remove admins in the site;
+    - Create admins in the admin area;
 
-    - Visualize and remove albums in the admin area;
+    - Create products in the admin area;
 
-    - Visualize and remove users in the admin area.
+    - Create users in the admin area;
+
+    - Read/Edit admins in the admin area;
+
+    - Read/Edit products in the admin area;
+
+    - Read/Edit users in the admin area;
+
+    - Remove admins in the admin area;
+
+    - Remove products in the admin area;
+
+    - Remove users in the admin area.
 
 
 ### <a id="4.2" /> 4.2. Test Results
