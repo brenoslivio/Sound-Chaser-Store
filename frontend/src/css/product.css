@@ -61,9 +61,16 @@ main {
     top: 4vw;
 }
 
-.product-album img {
+.product .product-album img {
     display: block;
-    width: 100%;
+    width: 18vw; 
+    height: 18vw;
+}
+
+.related .product-album img {
+    display: block;
+    width: 10vw; 
+    height: 10vw;
 }
 
 .product .title {

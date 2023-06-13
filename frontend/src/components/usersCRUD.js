@@ -1,5 +1,6 @@
 import '../css/usersCRUD.css';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* Retrieve users from server */
 async function getUsers() {
@@ -22,12 +23,14 @@ function UsersCRUD({ userAdmin }){
 
     const [selectedUser, setSelectedUser] = useState(null);
     
-    // if (!userAdmin) {
-    //     useEffect(() => {
-    //         navigate("/");
-    //     });
-    //     return;
-    // }
+    let navigate = useNavigate(); 
+
+    if (!userAdmin) {
+        useEffect(() => {
+            navigate("/admin");
+        });
+        return;
+    }
 
     useEffect(() => {
         getUsers()
@@ -61,26 +64,6 @@ function UsersCRUD({ userAdmin }){
         }
     }, [showEditOverlay]);
 
-    if (users.length === 0) {
-        return (
-            <div className="usersCRUD-page">
-            <div class="layer">
-                <div class="usersCRUD-container">
-                    <div class="title"> Administration </div>
-
-                    <div className="container">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        )
-    }
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
-
     const handleRemoveUserClick = (user) => {
         setSelectedUser(user);
         setShowRemoveOverlay(true);
@@ -94,38 +77,56 @@ function UsersCRUD({ userAdmin }){
         setSelectedUser(user);
         setShowEditOverlay(true);
     };
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     const handleRemoveUserSubmit = () => {
-        const password = document.getElementById("remove-user-password").value;
+        const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
+        setUsers(updatedUsers);
+        setShowRemoveOverlay(false);
 
-        if (userAdmin.password === password) {
-            const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
-            setUsers(updatedUsers);
-            setShowRemoveOverlay(false);
-        } else {
-            alert('Incorrect password. Please try again.');
+        const lastPageIndex = Math.ceil(updatedUsers.length / 4);
+        if (currentPage > lastPageIndex) {
+            setCurrentPage(lastPageIndex);
         }
     };
 
     const handleCreateUserSubmit = () => {
         // Perform validation for the new user inputs
         const name = document.getElementById("create-user-name").value;
-        const email = document.getElementById("create-user-name").value;
-        const phone = document.getElementById("create-user-email").value;
+        const email = document.getElementById("create-user-email").value;
+        const phone = document.getElementById("create-user-phone").value;
         const password = document.getElementById("create-user-password").value;
 
-        if (
-            name.trim() === '' ||
-            email.trim() === '' ||
-            phone.trim() === '' ||
-            password.trim() === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate name
+        if (name.trim().length < 5 || name.trim().length > 32) {
+            alert("Name must be between 5 and 32 characters.");
+            return;
+        }
+        
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+        
+        // Validate phone
+        if (!/^\d+$/.test(phone)) {
+            alert("Phone must contain only digits.");
+            return;
+        }
+        
+        // Validate password
+        if (password.length < 8 || password.length > 32) {
+            alert("Password must be between 8 and 32 characters.");
             return;
         }
 
+        const lastUserId = users.length > 0 ? users[users.length - 1].id : 0;
         const newUser = {
-            id: users.length,
+            id: lastUserId + 1,
             name: name,
             email: email,
             phone: phone,
@@ -145,13 +146,28 @@ function UsersCRUD({ userAdmin }){
         const phone = document.getElementById("edit-user-phone").value;
         const password = document.getElementById("edit-user-password").value;
 
-        if (
-            name.trim() === '' ||
-            email.trim() === '' ||
-            phone.trim() === '' ||
-            password.trim() === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate name
+        if (name.trim().length < 5 || name.trim().length > 32) {
+            alert("Name must be between 5 and 32 characters.");
+            return;
+        }
+        
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+        
+        // Validate phone
+        if (!/^\d+$/.test(phone)) {
+            alert("Phone must contain only digits.");
+            return;
+        }
+        
+        // Validate password
+        if (password.length < 8 || password.length > 32) {
+            alert("Password must be between 8 and 32 characters.");
             return;
         }
 
@@ -184,7 +200,7 @@ function UsersCRUD({ userAdmin }){
 
                     <div className="container">
                         <div class="administration-text"> Users </div>
-                        {currentUsers.map((user, index) => (
+                        {currentUsers ? (currentUsers.map((user, index) => (
                             <div className={`user-${index + 1}`}>
                                 <div className="text">
                                     id: {user.id} &emsp; &emsp; name: {user.name} 
@@ -201,7 +217,7 @@ function UsersCRUD({ userAdmin }){
                                     </svg>
                                 </div>
                             </div>
-                        ))}
+                        ))) : null}
                         <div className="create-user-button" onClick={handleCreateUserClick} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -228,11 +244,6 @@ function UsersCRUD({ userAdmin }){
                     <div className="overlay-content">
                         <h2>Remove User</h2>
                         <p>Are you sure you want to remove this user?</p>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            id="remove-user-password"
-                        />
                         <div className="button-group">
                             <button onClick={handleRemoveUserSubmit}>Confirm</button>
                             <button onClick={() => setShowRemoveOverlay(false)}>Cancel</button>

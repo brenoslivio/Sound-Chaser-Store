@@ -9,7 +9,7 @@ function AdminSelection({ userAdmin }){
     
     if (!userAdmin) {
         useEffect(() => {
-            navigate("/");
+            navigate("/admin");
         });
         return;
     }

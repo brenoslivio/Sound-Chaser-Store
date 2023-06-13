@@ -46,6 +46,8 @@ function Header({ onSearch, userLogin }){
         document.removeEventListener('mouseup', handleMouseUp);
     }
     
+    
+
     return (
         <div>
             <header>

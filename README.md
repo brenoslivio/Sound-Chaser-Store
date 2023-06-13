@@ -328,7 +328,7 @@ After carefully following the test plan, we had the following results:
 
     - **User not logged in navigating the page**: After clicking the cart, it is shown the login form.
 
-    - **User enter a invalid page for the application:** They are redirect to the home page.
+    - **User enter a invalid page for the application:** They are redirected to the home page.
 
     - **Customer navigation between pages**: No alert are emitted.
 
@@ -386,11 +386,23 @@ After carefully following the test plan, we had the following results:
 
 - Admin area
 
-    - **Visualize and remove admins in the site**: The admin can successfully view the admins and remove admins after providing their password.
+    - **Create admins in the admin area**: Admins can successfully create admins putting valid name, e-mail, phone and password.
 
-    - **Visualize and remove products in the admin area**: The admin can successfully view the products and remove products after providing their password.
+    - **Create products in the admin area**: Admins can successfully create products putting valid image, name, artist, year, genre, description, price, stock and number sold.
 
-    - **Visualize and remove users in the admin area**: The admin can successfully view the users and remove users after providing their password.
+    - **Create users in the admin area**: Admins can successfully create users putting valid name, e-mail, phone and password.
+
+    - **Read/Edit admins in the admin area**: Admins can successfully read and edit admins putting valid name, e-mail, phone and password.
+
+    - **Read/Edit products in the admin area**: Admins can successfully read and edit products putting valid image, name, artist, year, genre, description, price, stock and number sold.
+
+    - **Read/Edit users in the admin area**: Admins can successfully read and edit users putting valid name, e-mail, phone and password.
+
+    - **Remove admins in the admin area**: Admins can successfully remove admins except for themselves and the main admin.
+
+    - **Remove products in the admin area**: Admins can successfully remove products.
+
+    - **Remove users in the admin area**: Admins can successfully remove users.
 
 ## <a id="5" /> 5. Build Procedures
 

@@ -1,5 +1,6 @@
 import '../css/productsCRUD.css';
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* Retrieve albums from server */
 async function getAlbums() {
@@ -10,7 +11,7 @@ async function getAlbums() {
 }
 
 /* Admininistration page */
-function ProductsCRUD({ userAdmin }){
+function ProductsCRUD({ userAdmin, albumUpdate }){
 
     const [products, setProducts] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -33,13 +34,15 @@ function ProductsCRUD({ userAdmin }){
     ];
 
     const imageRef = useRef(null);
+
+    let navigate = useNavigate();
     
-    // if (!userAdmin) {
-    //     useEffect(() => {
-    //         navigate("/");
-    //     });
-    //     return;
-    // }
+    if (!userAdmin) {
+        useEffect(() => {
+            navigate("/admin");
+        });
+        return;
+    }
 
     useEffect(() => {
         getAlbums()
@@ -75,24 +78,9 @@ function ProductsCRUD({ userAdmin }){
             document.getElementById("edit-product-price").value = selectedProduct.price;
             document.getElementById("edit-product-stock").value = selectedProduct.stock;
             document.getElementById("edit-product-sold").value = selectedProduct.sold;
+            document.getElementById("edit-product-date").value = selectedProduct.date_added;
         }
     }, [showEditOverlay]);
-
-    if (products.length === 0) {
-        return (
-            <div className="productsCRUD-page">
-            <div class="layer">
-                <div class="productsCRUD-container">
-                    <div class="title"> Administration </div>
-
-                    <div className="container">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        )
-    }
 
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -113,19 +101,19 @@ function ProductsCRUD({ userAdmin }){
     };
 
     const handleRemoveProductSubmit = () => {
-        const password = document.getElementById("remove-product-password").value;
+        const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
+        setProducts(updatedProducts);
+        albumUpdate(updatedProducts);
+        setShowRemoveOverlay(false);
 
-        if (userAdmin.password === password) {
-            const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
-            setProducts(updatedProducts);
-            setShowRemoveOverlay(false);
-        } else {
-            alert('Incorrect password. Please try again.');
+        const lastPageIndex = Math.ceil(updatedProducts.length / 4);
+        if (currentPage > lastPageIndex) {
+            setCurrentPage(lastPageIndex);
         }
     };
 
     const handleCreateProductSubmit = () => {
-        const productName = document.getElementById('create-product-name').value;
+        const name = document.getElementById('create-product-name').value;
         const artist = document.getElementById('create-product-artist').value;
         const year = document.getElementById('create-product-year').value;
         const genre = document.getElementById('create-product-genre').value;
@@ -135,36 +123,79 @@ function ProductsCRUD({ userAdmin }){
         const sold = document.getElementById('create-product-sold').value;
         const img = document.getElementById('create-product-img-preview').src;
 
-        if (
-            productName === '' ||
-            artist === '' ||
-            year === '' ||
-            genre === '' ||
-            description === '' ||
-            price === '' ||
-            stock === '' ||
-            sold === '' ||
-            img === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate artist
+        if (name.trim().length < 1 || name.trim().length > 30) {
+            alert("Album name must be between 1 and 30 characters.");
+            return;
+        }
+        // Validate artist
+        if (artist.trim().length < 1 || artist.trim().length > 30) {
+            alert("Artist name must be between 1 and 30 characters.");
+            return;
+        }
+        
+        // Validate year
+        if (!/^\d+$/.test(year)) {
+            alert("Year must contain only digits.");
             return;
         }
 
+        if (genre === '') {
+            alert("Select a genre.");
+            return;
+        }
+
+        // Validate description
+        if (description.trim().length < 10) {
+            alert("Description must be at least 10 characters long.");
+            return;
+        }
+
+        // Validate price
+        const parsedPrice = parseFloat(price);
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            alert("Please enter a valid price.");
+            return;
+        }
+
+        // Validate stock
+        const parsedStock = parseInt(stock);
+        if (isNaN(parsedStock) || parsedStock < 0) {
+            alert("Please enter a valid stock quantity.");
+            return;
+        }
+
+        // Validate sold
+        const parsedSold = parseInt(sold);
+        if (isNaN(parsedSold) || parsedSold < 0) {
+            alert("Please enter a valid sold quantity.");
+            return;
+        }
+
+        // Validate image
+        if (img === '') {
+            alert('Please enter a valid image.');
+            return;
+        }
+
+        const lastProductId = products.length > 0 ? products[products.length - 1].id : 0;
         const newProduct = {
-            id: products.length,
-            name: productName,
+            id: lastProductId + 1,
+            name: name,
             artist: artist,
             year: year,
             genre: genre,
             img: img,
             description: description,
             price: price,
-            stock: stock,
-            sold: sold
+            stock: parsedStock,
+            sold: parsedSold,
+            date_added: new Date().toISOString().split('T')[0]
         };
 
         const updatedProducts = [...products, newProduct];
         setProducts(updatedProducts);
+        albumUpdate(updatedProducts);
 
         setShowCreateOverlay(false);
     };
@@ -179,20 +210,59 @@ function ProductsCRUD({ userAdmin }){
         const stock = document.getElementById('edit-product-stock').value;
         const sold = document.getElementById('edit-product-sold').value;
         const img = document.getElementById('edit-product-img-preview').src;
-        console.log(img);
 
-        if (
-            name === '' ||
-            artist === '' ||
-            year === '' ||
-            genre === '' ||
-            description === '' ||
-            price === '' ||
-            stock === '' ||
-            sold === '' ||
-            img === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate artist
+        if (name.trim().length < 1 || name.trim().length > 30) {
+            alert("Album name must be between 1 and 30 characters.");
+            return;
+        }
+        // Validate artist
+        if (artist.trim().length < 1 || artist.trim().length > 30) {
+            alert("Artist name must be between 1 and 30 characters.");
+            return;
+        }
+
+        // Validate year
+        if (!/^\d+$/.test(year)) {
+            alert("Year must contain only digits.");
+            return;
+        }
+
+        if (genre === '') {
+            alert("Select a genre.");
+            return;
+        }
+
+        // Validate description
+        if (description.trim().length < 10) {
+            alert("Description must be at least 10 characters long.");
+            return;
+        }
+
+        // Validate price
+        const parsedPrice = parseFloat(price);
+        if (isNaN(parsedPrice) || parsedPrice <= 0) {
+            alert("Please enter a valid price.");
+            return;
+        }
+
+        // Validate stock
+        const parsedStock = parseInt(stock);
+        if (isNaN(parsedStock) || parsedStock < 0) {
+            alert("Please enter a valid stock quantity.");
+            return;
+        }
+
+        // Validate sold
+        const parsedSold = parseInt(sold);
+        if (isNaN(parsedSold) || parsedSold < 0) {
+            alert("Please enter a valid sold quantity.");
+            return;
+        }
+
+        // Validate image
+        if (img === '') {
+            alert('Please enter a valid image.');
             return;
         }
 
@@ -207,14 +277,13 @@ function ProductsCRUD({ userAdmin }){
             genre: genre,
             description: description,
             price: price,
-            stock: stock,
-            sold: sold,
+            stock: parsedStock,
+            sold: parsedSold,
             img: img
         };
 
-        console.log(updatedProducts[index]);
-
         setProducts(updatedProducts);
+        albumUpdate(updatedProducts);
 
         setShowEditOverlay(false);
     };
@@ -232,7 +301,7 @@ function ProductsCRUD({ userAdmin }){
                     
                     <div className="container">
                         <div class="administration-text"> Products </div>
-                        {currentProducts.map((album, index) => (
+                        {currentProducts ? (currentProducts.map((album, index) => (
                             <div className={`product-${index + 1}`}>
                                 <div className="text">
                                     id: {album.id} &emsp; name: {album.name} &emsp; stock: {album.stock} &emsp; sold: {album.sold}
@@ -250,7 +319,7 @@ function ProductsCRUD({ userAdmin }){
                                 </div>
                             </div>
                             
-                        ))}
+                        ))) : null}
                         <div className="create-product-button" onClick={handleCreateProductClick} >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -278,11 +347,6 @@ function ProductsCRUD({ userAdmin }){
                     <div className="overlay-content">
                         <h2>Remove Product</h2>
                         <p>Are you sure you want to remove this product?</p>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            id="remove-product-password"
-                        />
                         <div className="button-group">
                             <button onClick={handleRemoveProductSubmit}>Confirm</button>
                             <button onClick={() => setShowRemoveOverlay(false)}>Cancel</button>
@@ -314,7 +378,7 @@ function ProductsCRUD({ userAdmin }){
                             />
                             <div>
                                 <label htmlFor="create-product-img">Choose Image</label>
-                                <img id="create-product-img-preview" alt="Preview" style={{ width: '10vw', height: '10vw' }} />
+                                <img id="create-product-img-preview" alt="Preview"/>
                             </div>
                         </div>
                         <input
@@ -390,7 +454,7 @@ function ProductsCRUD({ userAdmin }){
                             />
                             <div>
                                 <label htmlFor="edit-product-img">Choose Image</label>
-                                <img id="edit-product-img-preview" alt="Preview" style={{ width: '10vw', height: '10vw' }} />
+                                <img id="edit-product-img-preview" alt="Preview"/>
                             </div>
                         </div>
                         <div className="input-group">
@@ -461,9 +525,16 @@ function ProductsCRUD({ userAdmin }){
                                 id="edit-product-sold"
                             />
                         </div>
+                        <div className="input-group">
+                            <label htmlFor="edit-product-date">Date added</label>
+                            <input
+                                type="date"
+                                id="edit-product-date"
+                            />
+                        </div>
                         <div className="button-group">
                             <button onClick={handleEditProductSubmit}>Save</button>
-                            <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
+                            <button onClick={() => setShowEditOverlay(false)}>Cancel</button>
                         </div>
                     </div>
                 </div>

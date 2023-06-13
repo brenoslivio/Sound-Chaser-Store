@@ -39,7 +39,7 @@ async function getUser(id) {
 
 function App() {
   
-  /* Check for user in local storage */
+  /* Check for user in local storage (it will be properly implemented in Milestone 3) */
   let local_user = JSON.parse(localStorage.getItem("user"));
 
   /* State for search bar, user and albums */
@@ -66,7 +66,14 @@ function App() {
   };
 
   const handleUser = (value) => {
-    localStorage.setItem("user", JSON.stringify(value));
+    if (value.cart.length > 0) {
+      // Filter out items that don't exist in albums
+      const updatedCart = value.cart.filter(cartItem =>
+        albums.some(album => album.id === cartItem.id)
+      );
+      // Update the user's cart with the filtered items
+      value.cart = updatedCart;
+    }
     setUser(value);
   };
 
@@ -77,6 +84,7 @@ function App() {
 
   const handleAlbums = (value) => {
     setAlbums(value);
+    // Update in the server - Milestone 3
   };
 
   const handleSignOut = () => {
@@ -112,7 +120,7 @@ function App() {
               <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
               <Route path="/admin/administration" element={<AdminSelection userAdmin={admin}/>} />
               <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin}/>} />
-              <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin}/>} />
+              <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin} albumUpdate={handleAlbums}/>} />
               <Route path="/admin/users" element={<UsersCRUD userAdmin={admin}/>} />
 
               {/* Redirect if page doesn't exist */}

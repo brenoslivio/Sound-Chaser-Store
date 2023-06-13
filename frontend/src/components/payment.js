@@ -85,13 +85,12 @@ function Payment({ userLogin, userUpdate, albums, albumUpdate }){
 
     if (cartAlbums.length === 0) {
         return (
-            <div className="cart-page">
+            <div className="payment-page">
                 <div className="layer">
-                    <div className="cart-container">
-                        <div className="title"> Cart </div>
-                            <div className="products">
+                    <div className="payment-container">
+                        <div className="title"> Payment </div>
+                            <div className="payment-info">
                             </div>
-                            <button  className="proceed-btn">Proceed to payment</button>
                     </div>
                 </div>
             </div>

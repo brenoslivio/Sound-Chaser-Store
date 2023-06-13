@@ -2,7 +2,7 @@ import '../css/main.css';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-async function checkLogin(onLogin) {
+async function checkLogin(onLogin, navigate) {
     const email = document.getElementById('login_mail').value;
     const password = document.getElementById('login_password').value;
 
@@ -21,6 +21,7 @@ async function checkLogin(onLogin) {
             console.log("Login successful");
             onLogin(user); // Set the user
             document.getElementsByClassName('login-container')[0].style.display = 'none';
+            navigate("/");
         } else {
             alert("Invalid email or password.");
         }
@@ -50,7 +51,7 @@ function Login({ onLogin }){
                 <input type="text" id="login_mail" placeholder="E-mail" onKeyDown={handleKeyPress}/>
                 <input type="password" id="login_password" placeholder="Password" onKeyDown={handleKeyPress}/>
 
-                <button onClick={() => checkLogin(onLogin)} id="login-btn">Login</button>
+                <button onClick={() => checkLogin(onLogin, navigate)} id="login-btn">Login</button>
                 <div className="register">
                     I don't have an account yet
                 </div>

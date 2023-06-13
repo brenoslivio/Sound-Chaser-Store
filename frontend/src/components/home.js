@@ -35,33 +35,6 @@ function Home({ userLogin, userUpdate, albums }){
         }
     }
 
-    if (albums.length === 0) {
-        return (
-            <div>
-                <div className="banner">
-                    <div className="banner-img"></div>
-                    <div className="title"> Discover music lost to time...</div>
-                    <div className="text"> 
-                        From avant-garde jazz to <br/>
-                        progressive rock, we have everything! <br/>
-                        <br/>
-                        Answer our quiz, and we will recommend <br/>
-                        the best kinds of music to your taste!
-                    </div>
-                    <button onClick={routeChange} className="banner-btn">Take the quiz!</button>
-                </div>
-
-                <div className="home-page">
-                    <div className="layer">
-                        <div className="additions">
-                            <div className="title"> Latest additions </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     /* Sort albums for latest additions */
     let sortedAlbums = albums.sort((b, a) => {
         return new Date(a.date_added).getTime() - new Date(b.date_added).getTime();
@@ -87,7 +60,7 @@ function Home({ userLogin, userUpdate, albums }){
                     <div className="additions">
                         <div className="title"> Latest additions </div>
 
-                        {sortedAlbums.slice(0, 4).map((album, index) => (
+                        {sortedAlbums ? (sortedAlbums.slice(0, 4).map((album, index) => (
                             <div className="main-card" key={index}>
                                 <Link to={'/product/' + album.id}>
                                 <div className="main-album">
@@ -103,7 +76,7 @@ function Home({ userLogin, userUpdate, albums }){
                                 <div className="main-card-price">${album.price}</div>
                                 <button onClick={() => addCart(album.id, album.stock)} className="card-btn">Add to cart</button>
                             </div>
-                        ))}
+                        ))) : null}
                     </div>
                 </div>
             </div>

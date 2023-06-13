@@ -37,7 +37,7 @@ function createUser(userId, newUser, navigate, registeredEmails){
                         address: {address: "", receiver: ""},
                         orders: [], cart: []};
 
-    if (name.length >= 5 && name.length <= 32) {
+    if (name.trim().length >= 5 && name.trim().length <= 32) {
         userLogin.name = name;
     } else {
         rules += "Name must be between 5 and 32 characters.\n";
@@ -75,7 +75,7 @@ function createUser(userId, newUser, navigate, registeredEmails){
     } else {
         rules += "Password must be between 8 and 32 characters.\n";
     }
-    
+
     if (rules) {
         alert(rules);
     } else {

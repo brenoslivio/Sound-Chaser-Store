@@ -174,14 +174,14 @@ input[type=checkbox] {
 
 .album img {
     display: block;
-    width: 100%;
+    width: 10vw; 
+    height: 10vw;
 }
 
 .card {
     position: absolute;
-    width: 50%;
     top: 2vw;
-    left: 4.5vw;
+    left: 4.1vw;
 }
 
 .card .text{

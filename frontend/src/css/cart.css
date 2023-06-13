@@ -98,9 +98,10 @@
     color: #72366f;
 }
 
-.album img {
+.cart-container .album img {
     display: block;
-    width: 100%;
+    width: 8vw;
+    height: 8vw;
 }
 
 .cart-product1 .album {

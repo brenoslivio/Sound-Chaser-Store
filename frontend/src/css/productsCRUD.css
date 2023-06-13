@@ -260,6 +260,11 @@
     width: 160px;
 }
 
+#create-product-img-preview, #edit-product-img-preview {
+    width: 150px;
+    height: 150px;
+}
+
 .overlay-content textarea {
     width: 150px;
     resize: none;

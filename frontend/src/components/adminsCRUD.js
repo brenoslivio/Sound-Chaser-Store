@@ -1,5 +1,6 @@
 import '../css/adminsCRUD.css';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* Retrieve admins from server */
 async function getAdmins() {
@@ -21,12 +22,14 @@ function AdminsCRUD({ userAdmin }) {
 
     const [selectedAdmin, setSelectedAdmin] = useState(null);
 
-    // if (!userAdmin) {
-    //     useEffect(() => {
-    //         navigate("/");
-    //     });
-    //     return;
-    // }
+    let navigate = useNavigate(); 
+
+    if (!userAdmin) {
+        useEffect(() => {
+            navigate("/admin");
+        });
+        return;
+    }
 
     useEffect(() => {
         getAdmins()
@@ -60,19 +63,6 @@ function AdminsCRUD({ userAdmin }) {
         }
     }, [showEditOverlay]);
 
-    if (admins.length === 0) {
-        return (
-            <div className="adminsCRUD-page">
-                <div className="layer">
-                    <div className="adminsCRUD-container">
-                        <div className="title"> Administration </div>
-                        <div className="container"></div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -86,7 +76,7 @@ function AdminsCRUD({ userAdmin }) {
         }
     };
 
-    const handleCreateAdminClick = (admin) => {
+    const handleCreateAdminClick = () => {
         setShowCreateOverlay(true);
     };
 
@@ -96,36 +86,51 @@ function AdminsCRUD({ userAdmin }) {
     };
 
     const handleRemoveAdminSubmit = () => {
-        const password = document.getElementById("remove-admin-password").value;
+        const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
+        setAdmins(updatedAdmins);
+        setShowRemoveOverlay(false);
 
-        if (userAdmin.password === password) {
-            const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
-            setAdmins(updatedAdmins);
-            setShowRemoveOverlay(false);
-        } else {
-            alert('Incorrect password. Please try again.');
+        const lastPageIndex = Math.ceil(updatedAdmins.length / 4);
+        if (currentPage > lastPageIndex) {
+            setCurrentPage(lastPageIndex);
         }
     };
 
     const handleCreateAdminSubmit = () => {
         // Perform validation for the new admin inputs
         const name = document.getElementById("create-admin-name").value;
-        const email = document.getElementById("create-admin-name").value;
-        const phone = document.getElementById("create-admin-email").value;
+        const email = document.getElementById("create-admin-email").value;
+        const phone = document.getElementById("create-admin-phone").value;
         const password = document.getElementById("create-admin-password").value;
 
-        if (
-            name.trim() === '' ||
-            email.trim() === '' ||
-            phone.trim() === '' ||
-            password.trim() === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate name
+        if (name.trim().length < 5 || name.trim().length > 32) {
+            alert("Name must be between 5 and 32 characters.");
             return;
         }
 
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // Validate phone
+        if (!/^\d+$/.test(phone)) {
+            alert("Phone must contain only digits.");
+            return;
+        }
+
+        // Validate password
+        if (password.length < 8 || password.length > 32) {
+            alert("Password must be between 8 and 32 characters.");
+            return;
+        }
+
+        const lastAdminId = admins.length > 0 ? admins[admins.length - 1].id : 0;
         const newAdmin = {
-            id: admins.length,
+            id: lastAdminId + 1,
             name: name,
             email: email,
             phone: phone,
@@ -145,13 +150,28 @@ function AdminsCRUD({ userAdmin }) {
         const phone = document.getElementById("edit-admin-phone").value;
         const password = document.getElementById("edit-admin-password").value;
 
-        if (
-            name.trim() === '' ||
-            email.trim() === '' ||
-            phone.trim() === '' ||
-            password.trim() === ''
-        ) {
-            alert('Please fill in all the fields.');
+        // Validate name
+        if (name.trim().length < 5 || name.trim().length > 32) {
+            alert("Name must be between 5 and 32 characters.");
+            return;
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
+
+        // Validate phone
+        if (!/^\d+$/.test(phone)) {
+            alert("Phone must contain only digits.");
+            return;
+        }
+
+        // Validate password
+        if (password.length < 8 || password.length > 32) {
+            alert("Password must be between 8 and 32 characters.");
             return;
         }
 
@@ -183,7 +203,7 @@ function AdminsCRUD({ userAdmin }) {
                     <div className="title">Administration</div>
                     <div className="container">
                         <div className="administration-text"> Admins </div>
-                        {currentAdmins.map((admin, index) => (
+                        {currentAdmins ? (currentAdmins.map((admin, index) => (
                         <div className={`admin-${index + 1}`} key={admin.id}>
                             <div className="text">
                             id: {admin.id} &emsp; &emsp; name: {admin.name}
@@ -200,7 +220,7 @@ function AdminsCRUD({ userAdmin }) {
                                 </svg>
                             </div>
                         </div>
-                        ))}
+                        ))) : null}
                         <div className="create-admin-button" onClick={handleCreateAdminClick}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
@@ -226,11 +246,6 @@ function AdminsCRUD({ userAdmin }) {
                     <div className="overlay-content">
                         <h2>Remove Admin</h2>
                         <p>Are you sure you want to remove this admin?</p>
-                        <input
-                            type="password"
-                            placeholder="Enter password"
-                            id="remove-admin-password"
-                        />
                         <div className="button-group">
                             <button onClick={handleRemoveAdminSubmit}>Confirm</button>
                             <button onClick={() => setShowRemoveOverlay(false)}>Cancel</button>

@@ -91,6 +91,11 @@ function Product({ userLogin, userUpdate, albums }){
 
     let album = getAlbumById(albums, params.id);
 
+    if (album === null) {
+        navigate("/", {replace: true});
+        return;
+    }
+
     let relatedAlbums = getRelatedAlbums(albums, album);
 
     return (

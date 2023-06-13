@@ -24,8 +24,8 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
     let rules = "";
     let updated = false;
 
-    if (name.length > 0) {
-        if (name.length >= 5 && name.length <= 32) {
+    if (name.trim().length > 0) {
+        if (name.trim().length >= 5 && name.trim().length <= 32) {
             userLogin.name = name;
             updated = true;
         } else {
