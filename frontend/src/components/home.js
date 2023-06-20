@@ -1,9 +1,18 @@
 import '../css/home.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
+/* Retrieve albums from server */
+async function getAlbums() {
+    const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                            .then(response => response.json());
+  
+    return albums;
+}  
+
 /* Home page */
-function Home({ userLogin, userUpdate, albums }){
+function Home({ userLogin, userUpdate }){
+    const [albums, setAlbums] = useState([]);
     let navigate = useNavigate(); 
 
     const routeChange = () =>{ 
@@ -34,6 +43,12 @@ function Home({ userLogin, userUpdate, albums }){
             alert("Login required to add to cart.");
         }
     }
+
+    useEffect(() => {
+        getAlbums()
+        .then(products => {setAlbums(products);})
+        .catch(error => console.error(error));
+    }, []);
 
     /* Sort albums for latest additions */
     let sortedAlbums = albums.sort((b, a) => {

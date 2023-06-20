@@ -1,21 +1,19 @@
 import '../css/product.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
 /* Retrieve specific album based on id */
-function getAlbumById(albums, id) {
-    for (let i = 0; i < albums.length; i++) {
-
-        if (albums[i].id === parseInt(id)) {
-            return albums[i];
-        }
-    }
-
-    return null;
+async function getAlbumById(id) {
+    const album = await fetch(`http://localhost:8000/albums/${id}`, {cache: "reload"})
+        .then(response => response.json());
+    
+    return album;
 }
 
 /* Retrieve related albums based on genre */
-function getRelatedAlbums(albums, album) {
+async function getRelatedAlbums(album) {
+    const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                            .then(response => response.json());
     let relatedAlbums = [];
 
     for (let i = 0; i < albums.length; i++) {
@@ -44,28 +42,15 @@ function optionsAvailable(stock){
 }
 
 /* Product page */
-function Product({ userLogin, userUpdate, albums }){
+function Product({ userLogin, userUpdate }){
 
     const params = useParams();
 
+    const [album, setAlbum] = useState([]);
+    const [relatedAlbums, setRelatedAlbums] = useState([]);
     const [quantity, setQuantity] = useState(1);
 
     let navigate = useNavigate(); 
-
-    if (albums.length === 0) {
-        return (
-            <main>
-                <div className="layer">
-                    <div className="product-albums">
-                        <div className="product">
-                        </div>
-                        <div className="related">
-                        </div>
-                    </div>
-                </div>
-            </main>
-        )
-    }
 
     const addCart = (id, stock) =>{ 
         if (userLogin){
@@ -89,14 +74,37 @@ function Product({ userLogin, userUpdate, albums }){
         }
     }
 
-    let album = getAlbumById(albums, params.id);
+    useEffect(() => {
+        getAlbumById(params.id)
+        .then(product => {setAlbum(product);})
+        .catch(error => console.error(error));
+    }, [params.id]);
 
-    if (album === null) {
-        navigate("/", {replace: true});
-        return;
+    useEffect(() => {
+        getRelatedAlbums(album)
+        .then(products => {setRelatedAlbums(products);})
+        .catch(error => console.error(error));
+    }, [album]);
+
+    // if (album === null) {
+    //     navigate("/", {replace: true});
+    //     return;
+    // }
+
+    if (album.length === 0) {
+        return (
+            <main>
+                <div className="layer">
+                    <div className="product-albums">
+                        <div className="product">
+                        </div>
+                        <div className="related">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        )
     }
-
-    let relatedAlbums = getRelatedAlbums(albums, album);
 
     return (
         <main>

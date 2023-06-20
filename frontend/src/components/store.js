@@ -2,6 +2,14 @@ import '../css/store.css';
 import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from "react-router-dom";
 
+/* Retrieve albums from server */
+async function getAlbums() {
+    const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                            .then(response => response.json());
+  
+    return albums;
+}  
+
 /* Sort albums based on specific criteria */
 function sortAlbums(albums, sortCriteria) {
     let sortedAlbums = albums.sort((a, b) => {
@@ -20,7 +28,7 @@ function sortAlbums(albums, sortCriteria) {
 }
 
 /* page to check and filter for products */
-function Store({ searchValue, albums }){
+function Store({ searchValue }){
     const genresList = ["classic rock", "alternative rock", "progressive rock", "jazz", 
                         "classical music", "pop", "rap"];
 
@@ -28,6 +36,7 @@ function Store({ searchValue, albums }){
     const queryParams = new URLSearchParams(location.search);
     const genreParam = genresList.includes(queryParams.get('genre')) ? queryParams.get('genre') : null;
 
+    const [albums, setAlbums] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState(genreParam ? [genreParam] : []);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,6 +51,12 @@ function Store({ searchValue, albums }){
     useEffect(() => {
         setCurrentPage(1); // Reset currentPage to 1 when filtering changes
     }, [searchValue, selectedGenres, priceMin, priceMax, yearMin, yearMax, sortCriteria]);
+
+    useEffect(() => {
+        getAlbums()
+        .then(products => {setAlbums(products);})
+        .catch(error => console.error(error));
+    }, []);
     
     if (albums.length === 0) {
         return (

@@ -21,14 +21,6 @@ import AdminsCRUD from './components/adminsCRUD';
 import ProductsCRUD from './components/productsCRUD';
 import UsersCRUD from './components/usersCRUD';
 
-/* Retrieve albums from server */
-async function getAlbums() {
-  const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
-                          .then(response => response.json());
-
-  return albums;
-}
-
 /* Retrieve specific user by id */
 async function getUser(id) {
   const user = await fetch("http://localhost:8000/users/" + id, {cache: "reload"})
@@ -38,7 +30,6 @@ async function getUser(id) {
 }
 
 function App() {
-  
   /* Check for user in local storage (it will be properly implemented in Milestone 3) */
   let local_user = JSON.parse(localStorage.getItem("user"));
 
@@ -48,16 +39,13 @@ function App() {
   const [admin, setAdmin] = useState('');
   const [albums, setAlbums] = useState([]);
 
-  /* Retrieving user and albums */
+  /* Retrieving user */
   useEffect(() => {
     if (local_user){
       getUser(local_user.id)
       .then(login => {setUser(login);})
       .catch(error => console.error(error));
     }
-    getAlbums()
-    .then(products => {setAlbums(products);})
-    .catch(error => console.error(error));
   }, []);
   
   /* Handling functions to retrieve variables from other components */
@@ -99,11 +87,11 @@ function App() {
         <Login onLogin={handleUser}/>
             <Routes>
               {/* Main components */}
-              <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} albums={albums}/>} />
+              <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} />} />
               <Route path="/quiz" element={<Quiz />} />
-              <Route path="/register" element={<Register newUser={handleUser}/>} />
-              <Route path="/store" element={<Store searchValue={searchValue} albums={albums}/>} />
-              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} albums={albums}/>} />
+              <Route path="/register" element={<Register newUser={handleUser} />} />
+              <Route path="/store" element={<Store searchValue={searchValue} />} />
+              <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
