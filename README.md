@@ -83,6 +83,7 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
     - `artist`: Album's artist name;
     - `year`: Album's year;
     - `genre`: Album's genre;
+    - `img`: Album's image;
     - `description`: Album's description;
     - `price`: Album's price;
     - `stock`: In stock quantity;
@@ -288,7 +289,6 @@ Manual tests will be performed for login and registration, insertions and manage
     - Remove products in the admin area;
 
     - Remove users in the admin area.
-
 
 ### <a id="4.2" /> 4.2. Test Results
 
