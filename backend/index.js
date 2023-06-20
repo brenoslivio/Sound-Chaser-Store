@@ -23,13 +23,13 @@ app.use(
 app.use(express.json());
 
 // API routes
+const adminRoutes = require('./routes/adminRoutes');
+const userRoutes = require('./routes/userRoutes');
 const albumRoutes = require('./routes/albumRoutes');
 
+app.use('/admins', adminRoutes)
+app.use('/users', userRoutes)
 app.use('/albums', albumRoutes)
-
-app.get('/', (req, res) => {
-    res.json({ message: 'Hello'})
-});
 
 const DB_USER = process.env.DB_USER;
 const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD);
@@ -48,10 +48,28 @@ mongoose
         console.log("Successfully connected to MongoDB");
         await mongoose.connection.db.dropDatabase();
 
-        const Model = mongoose.model('Album');
-        Model.insertMany(data.albums)
+        const Admin = mongoose.model('Admin');
+        Admin.insertMany(data.admins)
             .then(() => {
-                console.log('Data loaded successfully!');
+                console.log('Admins loaded successfully!');
+            })
+            .catch((error) => {
+                console.error('Error loading data:', error);
+            });
+
+        const User = mongoose.model('User');
+        User.insertMany(data.users)
+            .then(() => {
+                console.log('Customers loaded successfully!');
+            })
+            .catch((error) => {
+                console.error('Error loading data:', error);
+            });
+    
+        const Album = mongoose.model('Album');
+        Album.insertMany(data.albums)
+            .then(() => {
+                console.log('Products loaded successfully!');
             })
             .catch((error) => {
                 console.error('Error loading data:', error);
