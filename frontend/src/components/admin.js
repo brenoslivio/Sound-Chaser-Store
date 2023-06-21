@@ -20,7 +20,7 @@ async function checkLogin(onLogin, navigate) {
         if (admin) {
             console.log("Login successful");
             onLogin(admin); // Set the admin
-            navigate("/admin/administration")
+            navigate("/admin/products");
         } else {
             alert("Invalid email or password.");
         }
@@ -36,7 +36,7 @@ function Admin({ onLogin }){
 
     const handleKeyPress = (event) => {
         if (event.keyCode === 13) {
-            checkLogin(onLogin);
+            checkLogin(onLogin, navigate);
         }
     };
 

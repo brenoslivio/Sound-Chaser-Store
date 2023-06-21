@@ -23,7 +23,7 @@
     justify-content: center;
     text-align: center;
     width: 80vw;
-    height: 70vw;
+    height: 72vw;
     left: 10%;
     top: 12vw;
     background: rgba(114, 54, 111, 0.8);
@@ -36,6 +36,57 @@
     font-size: 4vw;
     top: 4vw; 
     color: #ffffff;
+}
+
+/* Admin area navigation */
+
+.productsCRUD-container .navigation-buttons {
+    position: absolute;
+    display: inline-block;
+    justify-content: center;
+    top: 11vw;
+    width: 100%;
+}
+
+.productsCRUD-container .navigation-buttons .products-btn {
+    border-radius: 0.5vw;
+    padding: 1vw;
+    border: none;
+    color: white;
+    background: #b583b3;
+    font-size: 1.5vw;
+    cursor: pointer;
+    margin: 0 2%;
+}
+
+.productsCRUD-container .navigation-buttons .users-btn {
+    padding: 1vw;
+    border: none;
+    color: white;
+    background: none;
+    font-size: 1.5vw;
+    cursor: pointer;
+    margin: 0 2%;
+    transition: border-bottom 0.2s linear;
+}
+
+.productsCRUD-container .navigation-buttons .users-btn:hover {
+    border-bottom: 0.2vw solid #72366F;
+}
+
+.productsCRUD-container .navigation-buttons .admins-btn {
+    padding: 1vw;
+    border: none;
+    color: white;
+    background: none;
+    font-size: 1.5vw;
+    cursor: pointer;
+    margin: 0 2%;
+    transition: border-bottom 0.2s linear;
+}
+
+.productsCRUD-container .navigation-buttons .admins-btn:hover {
+    border-bottom: 0.2vw solid #72366F;
 }
 
 .icon-productsCRUD {
@@ -61,7 +112,7 @@
     width: 66vw;
     height: 50vw;
     left: 9%;
-    top: 20%;
+    top: 24%;
     border-radius: 2vw;
     background: #d9d9d9;
 }

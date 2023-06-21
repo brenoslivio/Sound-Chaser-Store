@@ -11,7 +11,7 @@ async function getAlbums() {
 }
 
 /* Admininistration page */
-function ProductsCRUD({ userAdmin, albumUpdate }){
+function ProductsCRUD({ userAdmin }){
 
     const [products, setProducts] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -101,15 +101,31 @@ function ProductsCRUD({ userAdmin, albumUpdate }){
     };
 
     const handleRemoveProductSubmit = () => {
+        fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Album deleted successfully:', data);
+              // Handle the deleted album data
+            })
+            .catch((error) => {
+              console.error('Error deleting album:', error);
+              // Handle the error
+            });
+
         const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
         setProducts(updatedProducts);
-        albumUpdate(updatedProducts);
-        setShowRemoveOverlay(false);
-
+        
         const lastPageIndex = Math.ceil(updatedProducts.length / 4);
         if (currentPage > lastPageIndex) {
             setCurrentPage(lastPageIndex);
         }
+
+        setShowRemoveOverlay(false);
     };
 
     const handleCreateProductSubmit = () => {
@@ -193,9 +209,25 @@ function ProductsCRUD({ userAdmin, albumUpdate }){
             date_added: new Date().toISOString().split('T')[0]
         };
 
+        fetch(`http://localhost:8000/albums`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newProduct),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Album created successfully:', data);
+              // Handle the created album data
+            })
+            .catch((error) => {
+              console.error('Error creating album:', error);
+              // Handle the error
+            });
+
         const updatedProducts = [...products, newProduct];
         setProducts(updatedProducts);
-        albumUpdate(updatedProducts);
 
         setShowCreateOverlay(false);
     };
@@ -282,8 +314,24 @@ function ProductsCRUD({ userAdmin, albumUpdate }){
             img: img
         };
 
+        fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedProducts[index]),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Album updated successfully:', data);
+              // Handle the updated album data
+            })
+            .catch((error) => {
+              console.error('Error updating album:', error);
+              // Handle the error
+            });
+
         setProducts(updatedProducts);
-        albumUpdate(updatedProducts);
 
         setShowEditOverlay(false);
     };
@@ -298,7 +346,12 @@ function ProductsCRUD({ userAdmin, albumUpdate }){
             <div class="layer">
                 <div class="productsCRUD-container">
                     <div class="title"> Administration </div>
-                    
+                    {/* Navigation in admin area */}
+                    <div className="navigation-buttons">
+                        <button onClick={() => navigate("/admin/products")} className="products-btn" >Products</button>
+                        <button onClick={() => navigate("/admin/users")} className="users-btn" >Users</button>
+                        <button onClick={() => navigate("/admin/admins")} className="admins-btn" >Admins</button>
+                    </div>
                     <div className="container">
                         <div class="administration-text"> Products </div>
                         {currentProducts ? (currentProducts.map((album, index) => (

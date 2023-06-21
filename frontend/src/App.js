@@ -16,7 +16,6 @@ import Quiz from './components/quiz';
 import Register from './components/register';
 import Footer from './components/footer';
 import Admin from './components/admin';
-import AdminSelection from './components/adminSelection';
 import AdminsCRUD from './components/adminsCRUD';
 import ProductsCRUD from './components/productsCRUD';
 import UsersCRUD from './components/usersCRUD';
@@ -55,21 +54,13 @@ function App() {
   };
 
   const handleUser = (value) => {
-    // if (value.cart.length > 0) {
-    //   // Filter out items that don't exist in albums
-    //   const updatedCart = value.cart.filter(cartItem =>
-    //     albums.some(album => album.id === cartItem.id)
-    //   );
-    //   // Update the user's cart with the filtered items
-    //   value.cart = updatedCart;
-    // }
     fetch(`http://localhost:8000/users/${value.id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(value),
-    })
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log('User updated successfully:', data);
@@ -90,7 +81,7 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(value),
-    })
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log('User created successfully:', data);
@@ -116,7 +107,7 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(value),
-    })
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log('Albums updated successfully:', data);
@@ -159,7 +150,6 @@ function App() {
               
               {/* Admin area */}
               <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
-              <Route path="/admin/administration" element={<AdminSelection userAdmin={admin}/>} />
               <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin} />} />
               <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin} albumUpdate={handleAlbums}/>} />
               <Route path="/admin/users" element={<UsersCRUD userAdmin={admin}/>} />

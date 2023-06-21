@@ -9,6 +9,16 @@ async function getAlbums(cart) {
     const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
                     .then(response => response.json());
 
+    // to check if album exists or have stock
+    // if (value.cart.length > 0) {
+    //   // Filter out items that don't exist in albums
+    //   const updatedCart = value.cart.filter(cartItem =>
+    //     albums.some(album => album.id === cartItem.id)
+    //   );
+    //   // Update the user's cart with the filtered items
+    //   value.cart = updatedCart;
+    // }
+
     for (const item of cart) {
         const album = albums.find((product) => product.id === item.id);
         

@@ -91,18 +91,16 @@ function AdminsCRUD({ userAdmin }) {
             headers: {
               'Content-Type': 'application/json',
             }
-          })
+            })
             .then((response) => response.json())
             .then((data) => {
-              console.log('Admin delete successfully:', data);
-              // Handle the updated admin data
+              console.log('Admin deleted successfully:', data);
+              // Handle the deleted admin data
             })
             .catch((error) => {
               console.error('Error deleting admin:', error);
               // Handle the error
             });
-
-        setShowRemoveOverlay(false);
 
         const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
 
@@ -112,6 +110,8 @@ function AdminsCRUD({ userAdmin }) {
         if (currentPage > lastPageIndex) {
             setCurrentPage(lastPageIndex);
         }
+
+        setShowRemoveOverlay(false);
     };
 
     const handleCreateAdminSubmit = () => {
@@ -161,7 +161,7 @@ function AdminsCRUD({ userAdmin }) {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(newAdmin),
-          })
+            })
             .then((response) => response.json())
             .then((data) => {
               console.log('Admin created successfully:', data);
@@ -227,7 +227,7 @@ function AdminsCRUD({ userAdmin }) {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(updatedAdmins[index]),
-          })
+            })
             .then((response) => response.json())
             .then((data) => {
               console.log('Admin updated successfully:', data);
@@ -253,6 +253,12 @@ function AdminsCRUD({ userAdmin }) {
             <div className="layer">
                 <div className="adminsCRUD-container">
                     <div className="title">Administration</div>
+                    {/* Navigation in admin area */}
+                    <div className="navigation-buttons">
+                        <button onClick={() => navigate("/admin/products")} className="products-btn" >Products</button>
+                        <button onClick={() => navigate("/admin/users")} className="users-btn" >Users</button>
+                        <button onClick={() => navigate("/admin/admins")} className="admins-btn" >Admins</button>
+                    </div>
                     <div className="container">
                         <div className="administration-text"> Admins </div>
                         {currentAdmins ? (currentAdmins.map((admin, index) => (

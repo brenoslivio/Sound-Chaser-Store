@@ -82,14 +82,31 @@ function UsersCRUD({ userAdmin }){
     };
 
     const handleRemoveUserSubmit = () => {
+        fetch(`http://localhost:8000/users/${selectedUser.id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('User deleted successfully:', data);
+              // Handle the deleted user data
+            })
+            .catch((error) => {
+              console.error('Error deleting user:', error);
+              // Handle the error
+            });
+
         const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
         setUsers(updatedUsers);
-        setShowRemoveOverlay(false);
-
+        
         const lastPageIndex = Math.ceil(updatedUsers.length / 4);
         if (currentPage > lastPageIndex) {
             setCurrentPage(lastPageIndex);
         }
+
+        setShowRemoveOverlay(false);
     };
 
     const handleCreateUserSubmit = () => {
@@ -132,6 +149,23 @@ function UsersCRUD({ userAdmin }){
             phone: phone,
             password: password,
         };
+
+        fetch(`http://localhost:8000/users`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newUser),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('User created successfully:', data);
+              // Handle the created user data
+            })
+            .catch((error) => {
+              console.error('Error creating user:', error);
+              // Handle the error
+            });
 
         const updatedUsers = [...users, newUser];
         setUsers(updatedUsers);
@@ -182,6 +216,23 @@ function UsersCRUD({ userAdmin }){
             password: password,
         };
 
+        fetch(`http://localhost:8000/users/${selectedUser.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUsers[index]),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Album updated successfully:', data);
+              // Handle the updated album data
+            })
+            .catch((error) => {
+              console.error('Error updating album:', error);
+              // Handle the error
+            });
+
         setUsers(updatedUsers);
 
         setShowEditOverlay(false);
@@ -197,7 +248,12 @@ function UsersCRUD({ userAdmin }){
             <div class="layer">
                 <div class="usersCRUD-container">
                     <div class="title"> Administration </div>
-
+                    {/* Navigation in admin area */}
+                    <div className="navigation-buttons">
+                        <button onClick={() => navigate("/admin/products")} className="products-btn" >Products</button>
+                        <button onClick={() => navigate("/admin/users")} className="users-btn" >Users</button>
+                        <button onClick={() => navigate("/admin/admins")} className="admins-btn" >Admins</button>
+                    </div>
                     <div className="container">
                         <div class="administration-text"> Users </div>
                         {currentUsers ? (currentUsers.map((user, index) => (
@@ -254,31 +310,43 @@ function UsersCRUD({ userAdmin }){
             {showCreateOverlay && (
                 <div className="overlay">
                     <div className="overlay-content">
-                        <h2>Create User</h2>
+                    <h2>Create User</h2>
+                    <div className="input-group">
+                        <label htmlFor="create-user-name">Name</label>
                         <input
-                            type="text"
-                            placeholder="Name"
-                            id="create-user-name"
+                        type="text"
+                        placeholder="Name"
+                        id="create-user-name"
                         />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="create-user-email">E-mail</label>
                         <input
-                            type="text"
-                            placeholder="E-mail"
-                            id="create-user-email"
+                        type="text"
+                        placeholder="E-mail"
+                        id="create-user-email"
                         />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="create-user-phone">Phone</label>
                         <input
-                            type="text"
-                            placeholder="Phone"
-                            id="create-user-phone"
+                        type="text"
+                        placeholder="Phone"
+                        id="create-user-phone"
                         />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="create-user-password">Password</label>
                         <input
-                            type="password"
-                            placeholder="Password"
-                            id="create-user-password"
+                        type="password"
+                        placeholder="Password"
+                        id="create-user-password"
                         />
-                        <div className="button-group">
-                            <button onClick={handleCreateUserSubmit}>Create</button>
-                            <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
-                        </div>
+                    </div>
+                    <div className="button-group">
+                        <button onClick={handleCreateUserSubmit}>Create</button>
+                        <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
+                    </div>
                     </div>
                 </div>
             )}
