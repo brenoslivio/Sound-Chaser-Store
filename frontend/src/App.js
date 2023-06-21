@@ -25,19 +25,20 @@ import UsersCRUD from './components/usersCRUD';
 async function getUser(id) {
   const user = await fetch("http://localhost:8000/users/" + id, {cache: "reload"})
                             .then(response => response.json());
-
+  if (!user) {
+    return;
+  }
+  
   return user;
 }
 
 function App() {
-  /* Check for user in local storage (it will be properly implemented in Milestone 3) */
   let local_user = JSON.parse(localStorage.getItem("user"));
 
   /* State for search bar, user and albums */
   const [searchValue, setSearchValue] = useState('');
   const [user, setUser] = useState('');
   const [admin, setAdmin] = useState('');
-  const [albums, setAlbums] = useState([]);
 
   /* Retrieving user */
   useEffect(() => {
@@ -54,14 +55,52 @@ function App() {
   };
 
   const handleUser = (value) => {
-    if (value.cart.length > 0) {
-      // Filter out items that don't exist in albums
-      const updatedCart = value.cart.filter(cartItem =>
-        albums.some(album => album.id === cartItem.id)
-      );
-      // Update the user's cart with the filtered items
-      value.cart = updatedCart;
-    }
+    // if (value.cart.length > 0) {
+    //   // Filter out items that don't exist in albums
+    //   const updatedCart = value.cart.filter(cartItem =>
+    //     albums.some(album => album.id === cartItem.id)
+    //   );
+    //   // Update the user's cart with the filtered items
+    //   value.cart = updatedCart;
+    // }
+    fetch(`http://localhost:8000/users/${value.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(value),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('User updated successfully:', data);
+        // Handle the updated user data
+      })
+      .catch((error) => {
+        console.error('Error updating user:', error);
+        // Handle the error
+      });
+    localStorage.setItem("user", JSON.stringify(value));
+    setUser(value);
+  };
+
+  const handleRegister = (value) => {
+    fetch(`http://localhost:8000/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(value),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('User created successfully:', data);
+        // Handle the updated user data
+      })
+      .catch((error) => {
+        console.error('Error updating user:', error);
+        // Handle the error
+      });
+    localStorage.setItem("user", JSON.stringify(value));
     setUser(value);
   };
 
@@ -71,8 +110,22 @@ function App() {
   };
 
   const handleAlbums = (value) => {
-    setAlbums(value);
-    // Update in the server - Milestone 3
+    fetch(`http://localhost:8000/albums`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(value),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Albums updated successfully:', data);
+        // Handle the updated albums data
+      })
+      .catch((error) => {
+        console.error('Error updating albums:', error);
+        // Handle the error
+      });
   };
 
   const handleSignOut = () => {
@@ -89,15 +142,15 @@ function App() {
               {/* Main components */}
               <Route path="/" element={<Home userLogin={user} userUpdate={handleUser} />} />
               <Route path="/quiz" element={<Quiz />} />
-              <Route path="/register" element={<Register newUser={handleUser} />} />
+              <Route path="/register" element={<Register newUser={handleRegister} userLogin={user} />} />
               <Route path="/store" element={<Store searchValue={searchValue} />} />
               <Route path="/product/:id" element={<Product userLogin={user} userUpdate={handleUser} />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               
               {/* Cart and payment */}
-              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} albums={albums}/>} />
-              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} albums={albums} albumUpdate={handleAlbums}/>} />
+              <Route path="/cart" element={<Cart userLogin={user} userUpdate={handleUser} />} />
+              <Route path="/cart/payment" element={<Payment userLogin={user} userUpdate={handleUser} albumUpdate={handleAlbums}/>} />
 
               {/* User area */}
               <Route path="/user" element={<UserInformation userLogin={user} signOut={handleSignOut} userUpdate={handleUser}/>} />

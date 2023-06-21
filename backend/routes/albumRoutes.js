@@ -54,7 +54,7 @@ router.get('/:id', async (req, res) => {
         const album = await Album.findOne({ id: id });
 
         if (!album) {
-            res.status(422).json({ message: 'Album not found' });
+            res.status(422).json(null);
             return;
         }
 
@@ -65,11 +65,45 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update
-router.patch('/:id', async (req, res) => {
-    const pid = req.params.id;
-    console.log(`GET: /albums/${id}`);
 
-    const {id, name, artist, year, genre, img, description, price, stock, sold, date_added} = req.body;
+// All albums
+router.put('/', async (req, res) => {
+    console.log('PUT: /albums');
+
+    const albumsToUpdate = req.body; // Array of album objects to update
+
+    try {
+        for (const album of albumsToUpdate) {
+            const { id, name, artist, year, genre, img, description, price, stock, sold, date_added } = album;
+    
+            const updatedAlbum = {
+            name,
+            artist,
+            year,
+            genre,
+            img,
+            description,
+            price,
+            stock,
+            sold,
+            date_added
+            };
+    
+            await Album.updateOne({ id: id }, updatedAlbum);
+        }
+
+        res.status(200).json({ message: 'Albums updated successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
+
+// By Id
+router.put('/:id', async (req, res) => {
+    const pid = req.params.id;
+    console.log(`PUT: /albums/${id}`);
+
+    const { id, name, artist, year, genre, img, description, price, stock, sold, date_added } = req.body;
 
     const album = {
         id, 
@@ -93,7 +127,7 @@ router.patch('/:id', async (req, res) => {
             return;
         }
 
-        res.status(200).json(album);
+        res.status(200).json({ message: 'Album updated successfully' });
     } catch (error) {
         res.stauts(500).json({ error: error })
     }

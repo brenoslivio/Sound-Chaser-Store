@@ -2,8 +2,16 @@ import '../css/payment.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-/* Retrieve albums based if they are properly in stock */
-function getAlbums(cart, albums) {
+/* Retrieve albums */
+async function getAlbums() {
+    const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                    .then(response => response.json());
+
+    return albums;
+}
+
+/* Retrieve albums checking if they have stock */
+async function getCartAlbums(cart, albums) {
     let cartAlbums = [];
 
     for (const item of cart) {
@@ -49,9 +57,12 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
         if (albumIndex !== -1) {
             if (albums[albumIndex].stock - item.quantity >= 0) {
                 albums[albumIndex].stock -= item.quantity;
+                albums[albumIndex].sold += item.quantity;
             } else {
                 albums[albumIndex].stock -= Math.min(albums[albumIndex].stock, item.quantity);
+                albums[albumIndex].sold += Math.min(albums[albumIndex].stock, item.quantity);
             }
+
         }
     });
 
@@ -67,7 +78,8 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
 }
 
 /* Payment page */
-function Payment({ userLogin, userUpdate, albums, albumUpdate }){
+function Payment({ userLogin, userUpdate, albumUpdate }){
+    const [albums, setAlbums] = useState([]);
     const [cartAlbums, setCartAlbums] = useState([]);
 
     let navigate = useNavigate();
@@ -80,8 +92,16 @@ function Payment({ userLogin, userUpdate, albums, albumUpdate }){
     }
 
     useEffect(() => {
-        setCartAlbums(getAlbums(userLogin.cart, albums));
+        getAlbums(userLogin.cart)
+        .then(products => {setAlbums(products);})
+        .catch(error => console.error(error));
     }, []);
+
+    useEffect(() => {
+        getCartAlbums(userLogin.cart, albums)
+        .then(cart => {setCartAlbums(cart);})
+        .catch(error => console.error(error));
+    }, [albums]);
 
     if (cartAlbums.length === 0) {
         return (

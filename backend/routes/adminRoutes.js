@@ -60,9 +60,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const pid = req.params.id;
-    console.log(`PATCH: /admins/${pid}`);
+    console.log(`PUT: /admins/${pid}`);
 
     const { id, name, email, phone, password } = req.body;
 

@@ -20,6 +20,7 @@ async function checkLogin(onLogin, navigate) {
         if (user) {
             console.log("Login successful");
             onLogin(user); // Set the user
+            
             document.getElementsByClassName('login-container')[0].style.display = 'none';
             navigate("/");
         } else {

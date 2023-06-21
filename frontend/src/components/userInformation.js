@@ -89,13 +89,6 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
     } else {
         alert("No information was updated.")
     }
-
-    document.getElementById("name").value = "";
-    document.getElementById("phone").value = "";
-    document.getElementById("email").value = "";
-    document.getElementById("currentPassword").value = "";
-    document.getElementById("newPassword").value = "";
-    document.getElementById("confirmPassword").value = "";
 }
 
 /* Page for user change information */

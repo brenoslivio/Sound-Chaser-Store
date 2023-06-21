@@ -53,7 +53,7 @@ router.get('/:id', async (req, res) => {
         const user = await User.findOne({ id: id });
 
         if (!user) {
-            res.status(422).json({ message: 'User not found' });
+            res.status(422).json(null);
             return;
         }
 
@@ -64,9 +64,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Update
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
     const pid = req.params.id;
-    console.log(`PATCH: /users/${pid}`);
+    console.log(`PUT: /users/${pid}`);
 
     const { id, name, email, phone, password, card, address, orders, cart } = req.body;
 

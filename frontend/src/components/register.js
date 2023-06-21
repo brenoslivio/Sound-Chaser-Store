@@ -86,12 +86,19 @@ function createUser(userId, newUser, navigate, registeredEmails){
 }
 
 /* Register page */
-function Register({ newUser }){
+function Register({ newUser, userLogin }){
 
     const [userId, setUserId] = useState('');
     const [registeredEmails, setRegisteredEmails] = useState([]);
   
     let navigate = useNavigate();
+
+    if (userLogin) {
+        useEffect(() => {
+            navigate("/");
+        });
+        return;
+    }
   
     useEffect(() => {
       getId()

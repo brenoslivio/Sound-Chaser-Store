@@ -233,9 +233,7 @@
 }
 
 .userorders .pagination {
-    position: absolute;
-    bottom: 4vw;
-    right: 34vw;
-    width: 50vw;
+    position: relative;
+    top: 52vw;
 }
 

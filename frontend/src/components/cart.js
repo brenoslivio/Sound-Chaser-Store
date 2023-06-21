@@ -3,8 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
 /* Retrieve albums checking if they have stock */
-function getAlbums(cart, albums) {
+async function getAlbums(cart) {
     let cartAlbums = [];
+
+    const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
+                    .then(response => response.json());
 
     for (const item of cart) {
         const album = albums.find((product) => product.id === item.id);
@@ -58,9 +61,9 @@ function removeAlbum(userLogin, userUpdate, setAlbums, products, id, currentPage
     userLogin.cart = usercart;
     userUpdate(userLogin);
 
-    if (updatedProducts.length === 0) {
-        navigate("/cart");
-    } else {
+    navigate("/cart");
+
+    if (updatedProducts.length !== 0) {
         const lastPageIndex = Math.ceil(updatedProducts.length / 2);
         if (currentPage > lastPageIndex) {
             setCurrentPage(lastPageIndex);
@@ -88,11 +91,12 @@ function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, new
 
     userLogin.cart = usercart;
     userUpdate(userLogin);
+
     navigate("/cart")
 }
 
 /* Cart page */
-function Cart({ userLogin, userUpdate, albums }){
+function Cart({ userLogin, userUpdate }){
     const [cartAlbums, setCartAlbums] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const albumsPerPage = 2;
@@ -107,7 +111,9 @@ function Cart({ userLogin, userUpdate, albums }){
     }
 
     useEffect(() => {
-        setCartAlbums(getAlbums(userLogin.cart, albums));
+        getAlbums(userLogin.cart)
+        .then(products => {setCartAlbums(products);})
+        .catch(error => console.error(error));
     }, []);
 
     if (cartAlbums.length === 0) {

@@ -92,11 +92,6 @@ function updatePayment(userLogin, userUpdate, navigate){
     } else {
         alert("No information was updated.")
     }
-
-    document.getElementById("card").value = "";
-    document.getElementById("holder").value = "";
-    document.getElementById("security").value = "";
-    document.getElementById("receiver").value = "";
 }
 
 /* Page where user can add payment and address information */
@@ -157,7 +152,7 @@ function UserPayment({ userLogin, signOut, userUpdate }){
                         <div className="input-security">
                             <label htmlFor="security">Security code:</label>
                             <div class="tooltip-payment">
-                            <input type="password" id="security" name="security" />
+                            <input defaultValue={userLogin.card.security} type="password" id="security" name="security" />
                                     <span class="tooltiptext">
                                     Enter security code of 3 digits
                                     </span>

@@ -86,10 +86,10 @@ function Product({ userLogin, userUpdate }){
         .catch(error => console.error(error));
     }, [album]);
 
-    // if (album === null) {
-    //     navigate("/", {replace: true});
-    //     return;
-    // }
+    if (album === null) {
+        navigate("/", {replace: true});
+        return;
+    }
 
     if (album.length === 0) {
         return (
