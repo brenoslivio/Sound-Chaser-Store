@@ -53,46 +53,56 @@ function App() {
     setSearchValue(value);
   };
 
-  const handleUser = (value) => {
-    fetch(`http://localhost:8000/users/${value.id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(value),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('User updated successfully:', data);
-        // Handle the updated user data
-      })
-      .catch((error) => {
-        console.error('Error updating user:', error);
-        // Handle the error
+  const handleUser = async (value) => {
+    try {
+      const response = await fetch(`http://localhost:8000/users/${value.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(value),
       });
-    localStorage.setItem("user", JSON.stringify(value));
-    setUser(value);
+  
+      if (!response.ok) {
+        throw new Error('Error updating user');
+      }
+  
+      const data = await response.json();
+      console.log('User updated successfully:', data);
+      // Handle the updated user data
+  
+      localStorage.setItem("user", JSON.stringify(value));
+      setUser(value);
+    } catch (error) {
+      console.error('Error updating user:', error);
+      // Handle the error
+    }
   };
 
-  const handleRegister = (value) => {
-    fetch(`http://localhost:8000/users`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(value),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('User created successfully:', data);
-        // Handle the updated user data
-      })
-      .catch((error) => {
-        console.error('Error updating user:', error);
-        // Handle the error
+  const handleRegister = async (value) => {
+    try {
+      const response = await fetch(`http://localhost:8000/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(value),
       });
-    localStorage.setItem("user", JSON.stringify(value));
-    setUser(value);
+  
+      if (!response.ok) {
+        throw new Error('Error updating user');
+      }
+  
+      const data = await response.json();
+      console.log('User created successfully:', data);
+      // Handle the updated user data
+  
+      localStorage.setItem("user", JSON.stringify(value));
+      setUser(value);
+    } catch (error) {
+      console.error('Error updating user:', error);
+      // Handle the error
+    }
   };
 
   const handleAdmin = (value) => {
@@ -100,23 +110,27 @@ function App() {
     setAdmin(value);
   };
 
-  const handleAlbums = (value) => {
-    fetch(`http://localhost:8000/albums`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(value),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Albums updated successfully:', data);
-        // Handle the updated albums data
-      })
-      .catch((error) => {
-        console.error('Error updating albums:', error);
-        // Handle the error
+  const handleAlbums = async (value) => {
+    try {
+      const response = await fetch(`http://localhost:8000/albums`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(value),
       });
+  
+      if (!response.ok) {
+        throw new Error('Error updating albums');
+      }
+  
+      const data = await response.json();
+      console.log('Albums updated successfully:', data);
+      // Handle the updated albums data
+    } catch (error) {
+      console.error('Error updating albums:', error);
+      // Handle the error
+    }
   };
 
   const handleSignOut = () => {

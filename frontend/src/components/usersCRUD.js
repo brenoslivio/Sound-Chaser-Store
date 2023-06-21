@@ -81,35 +81,33 @@ function UsersCRUD({ userAdmin }){
         setCurrentPage(pageNumber);
     };
 
-    const handleRemoveUserSubmit = () => {
-        fetch(`http://localhost:8000/users/${selectedUser.id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('User deleted successfully:', data);
-              // Handle the deleted user data
-            })
-            .catch((error) => {
-              console.error('Error deleting user:', error);
-              // Handle the error
+    const handleRemoveUserSubmit = async () => {
+        try {
+            await fetch(`http://localhost:8000/users/${selectedUser.id}`, {
+                method: 'DELETE',
+                headers: {
+                'Content-Type': 'application/json',
+                },
             });
-
-        const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
-        setUsers(updatedUsers);
         
-        const lastPageIndex = Math.ceil(updatedUsers.length / 4);
-        if (currentPage > lastPageIndex) {
-            setCurrentPage(lastPageIndex);
+            console.log('User deleted successfully');
+        
+            const updatedUsers = users.filter((user) => user.id !== selectedUser.id);
+            setUsers(updatedUsers);
+        
+            const lastPageIndex = Math.ceil(updatedUsers.length / 4);
+            if (currentPage > lastPageIndex) {
+                setCurrentPage(lastPageIndex);
+            }
+        
+            setShowRemoveOverlay(false);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            // Handle the error
         }
-
-        setShowRemoveOverlay(false);
     };
 
-    const handleCreateUserSubmit = () => {
+    const handleCreateUserSubmit = async () => {
         // Perform validation for the new user inputs
         const name = document.getElementById("create-user-name").value;
         const email = document.getElementById("create-user-email").value;
@@ -148,32 +146,40 @@ function UsersCRUD({ userAdmin }){
             email: email,
             phone: phone,
             password: password,
+            card: {number: "", holder: "", expiration: "", security: ""},
+            address: {address: "", receiver: ""},
+            orders: [],
+            cart: []
         };
 
-        fetch(`http://localhost:8000/users`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newUser),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('User created successfully:', data);
-              // Handle the created user data
-            })
-            .catch((error) => {
-              console.error('Error creating user:', error);
-              // Handle the error
+        try {
+            const response = await fetch(`http://localhost:8000/users`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUser),
             });
-
-        const updatedUsers = [...users, newUser];
-        setUsers(updatedUsers);
-
-        setShowCreateOverlay(false);
+        
+            if (!response.ok) {
+                throw new Error('Error creating user');
+            }
+        
+            const data = await response.json();
+            console.log('User created successfully:', data);
+            // Handle the created user data
+        
+            const updatedUsers = [...users, newUser];
+            setUsers(updatedUsers);
+        
+            setShowCreateOverlay(false);
+        } catch (error) {
+            console.error('Error creating user:', error);
+            // Handle the error
+        }
     };
 
-    const handleEditUserSubmit = () => {
+    const handleEditUserSubmit = async () => {
         // Perform validation for the edited user inputs
         const name = document.getElementById("edit-user-name").value;
         const email = document.getElementById("edit-user-email").value;
@@ -216,26 +222,29 @@ function UsersCRUD({ userAdmin }){
             password: password,
         };
 
-        fetch(`http://localhost:8000/users/${selectedUser.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedUsers[index]),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Album updated successfully:', data);
-              // Handle the updated album data
-            })
-            .catch((error) => {
-              console.error('Error updating album:', error);
-              // Handle the error
+        try {
+            const response = await fetch(`http://localhost:8000/users/${selectedUser.id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedUsers[index]),
             });
-
-        setUsers(updatedUsers);
-
-        setShowEditOverlay(false);
+        
+            if (!response.ok) {
+                throw new Error('Error updating user');
+            }
+        
+            const data = await response.json();
+            console.log('User updated successfully:', data);
+            // Handle the updated user data
+        
+            setUsers(updatedUsers);
+        
+            setShowEditOverlay(false);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
     };
 
     /* Choosing which users to show within the pagination system */

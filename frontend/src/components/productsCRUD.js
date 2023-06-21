@@ -100,35 +100,33 @@ function ProductsCRUD({ userAdmin }){
         setShowEditOverlay(true);
     };
 
-    const handleRemoveProductSubmit = () => {
-        fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Album deleted successfully:', data);
-              // Handle the deleted album data
-            })
-            .catch((error) => {
-              console.error('Error deleting album:', error);
-              // Handle the error
+    const handleRemoveProductSubmit = async () => {
+        try {
+            await fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
+                method: 'DELETE',
+                headers: {
+                'Content-Type': 'application/json',
+                },
             });
-
-        const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
-        setProducts(updatedProducts);
+            console.log('Album deleted successfully.');
+            // Handle the deleted album data
         
-        const lastPageIndex = Math.ceil(updatedProducts.length / 4);
-        if (currentPage > lastPageIndex) {
-            setCurrentPage(lastPageIndex);
+            const updatedProducts = products.filter((album) => album.id !== selectedProduct.id);
+            setProducts(updatedProducts);
+        
+            const lastPageIndex = Math.ceil(updatedProducts.length / 4);
+            if (currentPage > lastPageIndex) {
+                setCurrentPage(lastPageIndex);
+            }
+        
+            setShowRemoveOverlay(false);
+        } catch (error) {
+            console.error('Error deleting album:', error);
+            // Handle the error
         }
-
-        setShowRemoveOverlay(false);
     };
 
-    const handleCreateProductSubmit = () => {
+    const handleCreateProductSubmit = async () => {
         const name = document.getElementById('create-product-name').value;
         const artist = document.getElementById('create-product-artist').value;
         const year = document.getElementById('create-product-year').value;
@@ -209,30 +207,36 @@ function ProductsCRUD({ userAdmin }){
             date_added: new Date().toISOString().split('T')[0]
         };
 
-        fetch(`http://localhost:8000/albums`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newProduct),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Album created successfully:', data);
-              // Handle the created album data
-            })
-            .catch((error) => {
-              console.error('Error creating album:', error);
-              // Handle the error
+        try {
+            const response = await fetch(`http://localhost:8000/albums`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newProduct),
             });
+        
+            if (!response.ok) {
+                throw new Error('Error creating album');
+            }
 
-        const updatedProducts = [...products, newProduct];
-        setProducts(updatedProducts);
+            const data = await response.json();
+            console.log('Album created successfully:', data);
+            // Handle the created album data
 
-        setShowCreateOverlay(false);
+            const updatedProducts = [...products, newProduct];
+            setProducts(updatedProducts);
+            
+            setShowCreateOverlay(false);
+        } catch (error) {
+            console.error('Error creating album:', error);
+            // Handle the error
+            return;
+        }
+        
     };
 
-    const handleEditProductSubmit = () => {
+    const handleEditProductSubmit = async () => {
         const name = document.getElementById('edit-product-name').value;
         const artist = document.getElementById('edit-product-artist').value;
         const year = document.getElementById('edit-product-year').value;
@@ -314,26 +318,31 @@ function ProductsCRUD({ userAdmin }){
             img: img
         };
 
-        fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedProducts[index]),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Album updated successfully:', data);
-              // Handle the updated album data
-            })
-            .catch((error) => {
-              console.error('Error updating album:', error);
-              // Handle the error
+        try {
+            const response = await fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedProducts[index]),
             });
+        
+            if (!response.ok) {
+                throw new Error('Error updating album');
+            }
 
-        setProducts(updatedProducts);
+            const data = await response.json();
+            console.log('Album updated successfully:', data);
+            // Handle the updated album data
 
-        setShowEditOverlay(false);
+            setProducts(updatedProducts);
+
+            setShowEditOverlay(false);
+        } catch (error) {
+            console.error('Error updating album:', error);
+            // Handle the error
+            return;
+        }
     };
 
     /* Choosing which products to show within the pagination system */

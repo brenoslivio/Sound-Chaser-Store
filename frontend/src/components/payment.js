@@ -11,7 +11,7 @@ async function getAlbums() {
 }
 
 /* Retrieve albums checking if they have stock */
-async function getCartAlbums(cart, albums) {
+function getCartAlbums(cart, albums) {
     let cartAlbums = [];
 
     for (const item of cart) {

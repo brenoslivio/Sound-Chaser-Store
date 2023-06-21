@@ -85,67 +85,64 @@ function AdminsCRUD({ userAdmin }) {
         setShowEditOverlay(true);
     };
 
-    const handleRemoveAdminSubmit = () => {
-        fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Admin deleted successfully:', data);
-              // Handle the deleted admin data
-            })
-            .catch((error) => {
-              console.error('Error deleting admin:', error);
-              // Handle the error
+    const handleRemoveAdminSubmit = async () => {
+        try {
+            await fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
+                method: 'DELETE',
+                headers: {
+                'Content-Type': 'application/json',
+                },
             });
-
-        const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
-
-        setAdmins(updatedAdmins);
-
-        const lastPageIndex = Math.ceil(updatedAdmins.length / 4);
-        if (currentPage > lastPageIndex) {
-            setCurrentPage(lastPageIndex);
+        
+            console.log('Admin deleted successfully');
+        
+            const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
+            setAdmins(updatedAdmins);
+        
+            const lastPageIndex = Math.ceil(updatedAdmins.length / 4);
+            if (currentPage > lastPageIndex) {
+                setCurrentPage(lastPageIndex);
+            }
+        
+            setShowRemoveOverlay(false);
+        } catch (error) {
+          console.error('Error deleting admin:', error);
+          // Handle the error
         }
-
-        setShowRemoveOverlay(false);
     };
-
-    const handleCreateAdminSubmit = () => {
+      
+    const handleCreateAdminSubmit = async () => {
         // Perform validation for the new admin inputs
         const name = document.getElementById("create-admin-name").value;
         const email = document.getElementById("create-admin-email").value;
         const phone = document.getElementById("create-admin-phone").value;
         const password = document.getElementById("create-admin-password").value;
-
+    
         // Validate name
         if (name.trim().length < 5 || name.trim().length > 32) {
             alert("Name must be between 5 and 32 characters.");
             return;
         }
-
+    
         // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert("Please enter a valid email address.");
             return;
         }
-
+    
         // Validate phone
         if (!/^\d+$/.test(phone)) {
             alert("Phone must contain only digits.");
             return;
         }
-
+    
         // Validate password
         if (password.length < 8 || password.length > 32) {
             alert("Password must be between 8 and 32 characters.");
             return;
         }
-
+    
         const lastAdminId = admins.length > 0 ? admins[admins.length - 1].id : 0;
         const newAdmin = {
             id: lastAdminId + 1,
@@ -154,31 +151,35 @@ function AdminsCRUD({ userAdmin }) {
             phone: phone,
             password: password,
         };
-
-        fetch(`http://localhost:8000/admins`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newAdmin),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Admin created successfully:', data);
-              // Handle the created admin data
-            })
-            .catch((error) => {
-              console.error('Error creating admin:', error);
-              // Handle the error
+    
+        try {
+            const response = await fetch(`http://localhost:8000/admins`, {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newAdmin),
             });
-
-        const updatedAdmins = [...admins, newAdmin];
-        setAdmins(updatedAdmins);
-
-        setShowCreateOverlay(false);
+        
+            if (!response.ok) {
+                throw new Error('Error creating admin');
+            }
+        
+            const data = await response.json();
+            console.log('Admin created successfully:', data);
+            // Handle the created admin data
+        
+            const updatedAdmins = [...admins, newAdmin];
+            setAdmins(updatedAdmins);
+        
+            setShowCreateOverlay(false);
+        } catch (error) {
+            console.error('Error creating admin:', error);
+            // Handle the error
+        }
     };
-
-    const handleEditAdminSubmit = () => {
+      
+    const handleEditAdminSubmit = async () => {
         // Perform validation for the edited admin inputs
         const name = document.getElementById("edit-admin-name").value;
         const email = document.getElementById("edit-admin-email").value;
@@ -221,26 +222,30 @@ function AdminsCRUD({ userAdmin }) {
             password: password,
         };
 
-        fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedAdmins[index]),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-              console.log('Admin updated successfully:', data);
-              // Handle the updated admin data
-            })
-            .catch((error) => {
-              console.error('Error updating admin:', error);
-              // Handle the error
+        try {
+            const response = await fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedAdmins[index]),
             });
-
-        setAdmins(updatedAdmins);
-
-        setShowEditOverlay(false);
+        
+            if (!response.ok) {
+                throw new Error('Error updating admin');
+            }
+        
+            const data = await response.json();
+            console.log('Admin updated successfully:', data);
+            // Handle the updated admin data
+        
+            setAdmins(updatedAdmins);
+        
+            setShowEditOverlay(false);
+        } catch (error) {
+            console.error('Error updating admin:', error);
+            // Handle the error
+        }
     };
 
     // Logic for displaying admins
