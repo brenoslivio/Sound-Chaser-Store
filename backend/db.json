@@ -6,6 +6,13 @@
             "email": "admin@soundchaser.com",
             "phone": "011999999999",
             "password": "password"
+        },
+        {
+            "id": 1,
+            "name": "admina",
+            "email": "admina@soundchaser.com",
+            "phone": "011999999999",
+            "password": "password"
         }
     ],
     "users": [

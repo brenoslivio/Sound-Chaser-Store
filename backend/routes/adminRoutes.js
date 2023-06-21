@@ -91,6 +91,7 @@ router.put('/:id', async (req, res) => {
 // Delete
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
+    console.log('DELETE: /admins/id');
 
     const admin = await Admin.findOne({ id: id });
 

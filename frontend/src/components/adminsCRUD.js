@@ -86,9 +86,27 @@ function AdminsCRUD({ userAdmin }) {
     };
 
     const handleRemoveAdminSubmit = () => {
-        const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
-        setAdmins(updatedAdmins);
+        fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            }
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Admin delete successfully:', data);
+              // Handle the updated admin data
+            })
+            .catch((error) => {
+              console.error('Error deleting admin:', error);
+              // Handle the error
+            });
+
         setShowRemoveOverlay(false);
+
+        const updatedAdmins = admins.filter((admin) => admin.id !== selectedAdmin.id);
+
+        setAdmins(updatedAdmins);
 
         const lastPageIndex = Math.ceil(updatedAdmins.length / 4);
         if (currentPage > lastPageIndex) {
@@ -136,6 +154,23 @@ function AdminsCRUD({ userAdmin }) {
             phone: phone,
             password: password,
         };
+
+        fetch(`http://localhost:8000/admins`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newAdmin),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Admin created successfully:', data);
+              // Handle the created admin data
+            })
+            .catch((error) => {
+              console.error('Error creating admin:', error);
+              // Handle the error
+            });
 
         const updatedAdmins = [...admins, newAdmin];
         setAdmins(updatedAdmins);
@@ -185,6 +220,23 @@ function AdminsCRUD({ userAdmin }) {
             phone: phone,
             password: password,
         };
+
+        fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedAdmins[index]),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log('Admin updated successfully:', data);
+              // Handle the updated admin data
+            })
+            .catch((error) => {
+              console.error('Error updating admin:', error);
+              // Handle the error
+            });
 
         setAdmins(updatedAdmins);
 
@@ -257,26 +309,38 @@ function AdminsCRUD({ userAdmin }) {
                 <div className="overlay">
                     <div className="overlay-content">
                         <h2>Create Admin</h2>
-                        <input
+                        <div className="input-group">
+                            <label htmlFor="create-admin-name">Name</label>
+                            <input
                             type="text"
                             placeholder="Name"
                             id="create-admin-name"
-                        />
-                        <input
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-admin-email">E-mail</label>
+                            <input
                             type="text"
                             placeholder="E-mail"
                             id="create-admin-email"
-                        />
-                        <input
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-admin-phone">Phone</label>
+                            <input
                             type="text"
                             placeholder="Phone"
                             id="create-admin-phone"
-                        />
-                        <input
+                            />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-admin-password">Password</label>
+                            <input
                             type="password"
                             placeholder="Password"
                             id="create-admin-password"
-                        />
+                            />
+                        </div>
                         <div className="button-group">
                             <button onClick={handleCreateAdminSubmit}>Create</button>
                             <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>

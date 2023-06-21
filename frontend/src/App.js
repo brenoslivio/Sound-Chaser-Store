@@ -160,7 +160,7 @@ function App() {
               {/* Admin area */}
               <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
               <Route path="/admin/administration" element={<AdminSelection userAdmin={admin}/>} />
-              <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin}/>} />
+              <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin} />} />
               <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin} albumUpdate={handleAlbums}/>} />
               <Route path="/admin/users" element={<UsersCRUD userAdmin={admin}/>} />
 

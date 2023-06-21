@@ -62,7 +62,6 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
                 albums[albumIndex].stock -= Math.min(albums[albumIndex].stock, item.quantity);
                 albums[albumIndex].sold += Math.min(albums[albumIndex].stock, item.quantity);
             }
-
         }
     });
 
