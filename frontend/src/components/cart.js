@@ -2,27 +2,26 @@ import '../css/cart.css';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 
-/* Retrieve albums checking if they have stock */
-async function getAlbums(cart) {
+/* Retrieve albums checking if they have stock, refreshing user's cart */
+async function getAlbums(userLogin, userUpdate, navigate) {
     let cartAlbums = [];
 
     const albums = await fetch("http://localhost:8000/albums", {cache: "reload"})
                     .then(response => response.json());
 
     // to check if album exists or have stock
-    // if (value.cart.length > 0) {
-    //   // Filter out items that don't exist in albums
-    //   const updatedCart = value.cart.filter(cartItem =>
-    //     albums.some(album => album.id === cartItem.id)
-    //   );
-    //   // Update the user's cart with the filtered items
-    //   value.cart = updatedCart;
-    // }
+    if (userLogin.cart.length > 0) {
+        const updatedCart = userLogin.cart.filter(cartItem =>
+            albums.some(album => album.id === cartItem.id && album.stock > 0)
+        );
+        // Update the user's cart with the filtered items
+        userLogin.cart = updatedCart;
+        userUpdate(userLogin);
+        navigate("/cart");
 
-    for (const item of cart) {
-        const album = albums.find((product) => product.id === item.id);
-        
-        if (album && album.stock > 0) {
+        for (const item of userLogin.cart) {
+            const album = albums.find((product) => product.id === item.id);
+            
             cartAlbums.push({ album, quantity: item.quantity });
         }
     }
@@ -121,7 +120,7 @@ function Cart({ userLogin, userUpdate }){
     }
 
     useEffect(() => {
-        getAlbums(userLogin.cart)
+        getAlbums(userLogin, userUpdate, navigate)
         .then(products => {setCartAlbums(products);})
         .catch(error => console.error(error));
     }, []);

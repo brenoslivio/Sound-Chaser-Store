@@ -11,15 +11,32 @@ async function getAlbums() {
 }
 
 /* Retrieve albums checking if they have stock */
-function getCartAlbums(cart, albums) {
+function getCartAlbums(userLogin, albums, userUpdate, navigate) {
     let cartAlbums = [];
 
-    for (const item of cart) {
-        const album = albums.find((product) => product.id === item.id);
-        
-        if (album && album.stock > 0) {
+    // to check if album exists or have stock
+    if (userLogin.cart.length > 0) {
+        const updatedCart = userLogin.cart.filter(cartItem =>
+            albums.some(album => album.id === cartItem.id && album.stock > 0)
+        );
+        // Update the user's cart with the filtered items
+        userLogin.cart = updatedCart;
+        userUpdate(userLogin);
+        navigate("/cart/payment");
+
+        for (const item of userLogin.cart) {
+            const album = albums.find((product) => product.id === item.id);
+            
             cartAlbums.push({ album, quantity: item.quantity });
         }
+    }
+
+    console.log(cartAlbums);
+
+    if (cartAlbums.length === 0) {
+        alert("Items out of stock!");
+        navigate("/cart");
+        return;
     }
 
     return cartAlbums;
@@ -91,16 +108,14 @@ function Payment({ userLogin, userUpdate, albumUpdate }){
     }
 
     useEffect(() => {
-        getAlbums(userLogin.cart)
-        .then(products => {setAlbums(products);})
+        getAlbums()
+        .then(products => {
+            setAlbums(products);
+            setCartAlbums(getCartAlbums(userLogin, products, userUpdate, navigate));
+        })
         .catch(error => console.error(error));
     }, []);
 
-    useEffect(() => {
-        getCartAlbums(userLogin.cart, albums)
-        .then(cart => {setCartAlbums(cart);})
-        .catch(error => console.error(error));
-    }, [albums]);
 
     if (cartAlbums.length === 0) {
         return (

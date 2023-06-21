@@ -119,11 +119,11 @@ function App() {
         },
         body: JSON.stringify(value),
       });
-  
+
       if (!response.ok) {
         throw new Error('Error updating albums');
       }
-  
+
       const data = await response.json();
       console.log('Albums updated successfully:', data);
       // Handle the updated albums data
