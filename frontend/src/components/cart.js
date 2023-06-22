@@ -165,7 +165,7 @@ function Cart({ userLogin, userUpdate }){
                                 <div className={`cart-product${index + 1}`}>
                                     <Link to={"/product/" + product.album.id} key={index}>
                                         <div className="album">
-                                            <img src={product.album.img} alt={product.album.name} />
+                                            <img src={product.album.img + "?cache=" + (Math.random() * 99999999)} alt={product.album.name} />
                                         </div>
                                     </Link>
                                     <div className="text">

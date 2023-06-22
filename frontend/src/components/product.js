@@ -112,7 +112,7 @@ function Product({ userLogin, userUpdate }){
                 <div className="product-albums">
                     <div className="product">
                         <div className="product-album">
-                            <img src={album.img} alt={album.name}/>
+                            <img src={album.img + "?cache=" + (Math.random() * 99999999)} alt={album.name}/>
                         </div>
                         <div className="title">
                             {album.name} ({album.year}) - {album.artist}
@@ -149,7 +149,7 @@ function Product({ userLogin, userUpdate }){
                                 <Link to={"/product/" + relatedAlbum.id} key={index}>
                                     <div id={`related-album${index + 1}`}>
                                     <div className="product-album">
-                                        <img src={relatedAlbum.img} alt={relatedAlbum.name} />
+                                        <img src={relatedAlbum.img + "?cache=" + (Math.random() * 99999999)} alt={relatedAlbum.name} />
                                     </div>
                                     <div className="text">
                                         {relatedAlbum.name} <br />

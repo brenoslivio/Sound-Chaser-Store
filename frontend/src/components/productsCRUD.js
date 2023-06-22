@@ -22,6 +22,7 @@ function ProductsCRUD({ userAdmin }){
     const [showEditOverlay, setShowEditOverlay] = useState(false);
 
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [cacheBust, setCacheBust] = useState(0);
 
     const genres = [
         "Classic Rock",
@@ -69,7 +70,7 @@ function ProductsCRUD({ userAdmin }){
 
     useEffect(() => {
         if (showEditOverlay) {
-            document.getElementById("edit-product-img-preview").src = selectedProduct.img;
+            document.getElementById("edit-product-img-preview").src = selectedProduct.img + "?cache=" + (Math.random() * 99999999);
             document.getElementById("edit-product-name").value = selectedProduct.name;
             document.getElementById("edit-product-artist").value = selectedProduct.artist;
             document.getElementById("edit-product-year").value = selectedProduct.year;
@@ -136,7 +137,7 @@ function ProductsCRUD({ userAdmin }){
         const stock = document.getElementById('create-product-stock').value;
         const sold = document.getElementById('create-product-sold').value;
         const img = document.getElementById('create-product-img-preview').src;
-
+    
         // Validate artist
         if (name.trim().length < 1 || name.trim().length > 30) {
             alert("Album name must be between 1 and 30 characters.");
@@ -221,8 +222,11 @@ function ProductsCRUD({ userAdmin }){
             }
 
             const data = await response.json();
+
             console.log('Album created successfully:', data);
             // Handle the created album data
+
+            newProduct.img = data.img_file;
 
             const updatedProducts = [...products, newProduct];
             setProducts(updatedProducts);
@@ -246,7 +250,7 @@ function ProductsCRUD({ userAdmin }){
         const stock = document.getElementById('edit-product-stock').value;
         const sold = document.getElementById('edit-product-sold').value;
         const img = document.getElementById('edit-product-img-preview').src;
-
+        
         // Validate artist
         if (name.trim().length < 1 || name.trim().length > 30) {
             alert("Album name must be between 1 and 30 characters.");
@@ -335,6 +339,9 @@ function ProductsCRUD({ userAdmin }){
             console.log('Album updated successfully:', data);
             // Handle the updated album data
 
+            updatedProducts[index].img = data.img_file;
+            setCacheBust(cacheBust + 1);
+
             setProducts(updatedProducts);
 
             setShowEditOverlay(false);
@@ -352,9 +359,9 @@ function ProductsCRUD({ userAdmin }){
 
     return (
         <div className="productsCRUD-page">
-            <div class="layer">
-                <div class="productsCRUD-container">
-                    <div class="title"> Administration </div>
+            <div className="layer">
+                <div className="productsCRUD-container">
+                    <div className="title"> Administration </div>
                     {/* Navigation in admin area */}
                     <div className="navigation-buttons">
                         <button onClick={() => navigate("/admin/products")} className="products-btn" >Products</button>
@@ -362,7 +369,7 @@ function ProductsCRUD({ userAdmin }){
                         <button onClick={() => navigate("/admin/admins")} className="admins-btn" >Admins</button>
                     </div>
                     <div className="container">
-                        <div class="administration-text"> Products </div>
+                        <div className="administration-text"> Products </div>
                         {currentProducts ? (currentProducts.map((album, index) => (
                             <div className={`product-${index + 1}`}>
                                 <div className="text">
@@ -374,7 +381,7 @@ function ProductsCRUD({ userAdmin }){
                                     </svg>
                                 </div>
                                 <div className="edit-product" onClick={() => handleEditProductClick(album)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#72366f" className="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
@@ -383,7 +390,7 @@ function ProductsCRUD({ userAdmin }){
                             
                         ))) : null}
                         <div className="create-product-button" onClick={handleCreateProductClick} >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-plus" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" className="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                         </div>
@@ -468,7 +475,7 @@ function ProductsCRUD({ userAdmin }){
                         <textarea
                             placeholder="Description"
                             id="create-product-description"
-                            rows="5" cols="20" maxlength="128"
+                            rows="5" cols="20" maxLength="128"
                         ></textarea>
                         <input
                             type="text"

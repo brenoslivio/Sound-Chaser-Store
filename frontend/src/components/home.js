@@ -79,7 +79,7 @@ function Home({ userLogin, userUpdate }){
                             <div className="main-card" key={index}>
                                 <Link to={'/product/' + album.id}>
                                 <div className="main-album">
-                                    <img src={album.img} alt={album.name} />
+                                    <img src={album.img + "?cache=" + (Math.random() * 99999999)} alt={album.name} />
                                 </div>
                                 <div className="main-card-text">
                                     <b>Album:</b> {album.name} <br/>

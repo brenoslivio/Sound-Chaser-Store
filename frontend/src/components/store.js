@@ -220,7 +220,7 @@ function Store({ searchValue }){
                             <div id={`container${index + 1}`}>
                                 <div className="card">
                                     <div className="album">
-                                        <img src={album.img} alt={album.name} />
+                                        <img src={album.img + "?cache=" + (Math.random() * 99999999)} alt={album.name} />
                                     </div>
                                     <div className="text">
                                         {album.name} ({album.year}) <br />
