@@ -1,9 +1,8 @@
-const router = require('express').Router();
 const fs = require('fs');
 const Album = require('../models/Album');
 
 // Create
-router.post('/', async (req, res) => {
+exports.post = async (req, res) => {
     console.log("POST: /albums");
 
     const {id, name, artist, year, genre, img, description, price, stock, sold, date_added} = req.body;
@@ -49,10 +48,10 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error })
     }
-});
+}
 
 // Read
-router.get('/', async (req, res) => {
+exports.get = async (req, res) => {
     console.log("GET: /albums");
     try {
         const albums = await Album.find()
@@ -60,9 +59,9 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
-router.get('/:id', async (req, res) => {
+exports.getById = async (req, res) => {
     const id = req.params.id;
     console.log(`GET: /albums/${id}`);
 
@@ -78,12 +77,12 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.stauts(500).json({ error: error })
     }
-});
+}
 
 // Update
 
 // All albums
-router.put('/', async (req, res) => {
+exports.put = async (req, res) => {
     console.log('PUT: /albums');
 
     const albumsToUpdate = req.body; // Array of album objects to update
@@ -112,10 +111,10 @@ router.put('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // By Id
-router.put('/:id', async (req, res) => {
+exports.putById = async (req, res) => {
     const pid = req.params.id;
     console.log(`PUT: /albums/${pid}`);
 
@@ -170,10 +169,10 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
         res.stauts(500).json({ error: error })
     }
-});
+}
 
 // Delete
-router.delete('/:id', async (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
 
     const album = await Album.findOne({ id: id });
@@ -190,6 +189,4 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
-
-module.exports = router;
+}

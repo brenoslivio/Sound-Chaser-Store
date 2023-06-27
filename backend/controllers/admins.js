@@ -1,9 +1,7 @@
-const router = require('express').Router();
-
 const Admin = require('../models/Admin');
 
 // Create
-router.post('/', async (req, res) => {
+exports.post = async (req, res) => {
     console.log("POST: /admins");
 
     const { id, name, email, phone, password } = req.body;
@@ -28,10 +26,10 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Read
-router.get('/', async (req, res) => {
+exports.get = async (req, res) => {
     console.log("GET: /admins");
     try {
         const admins = await Admin.find();
@@ -39,9 +37,9 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
-router.get('/:id', async (req, res) => {
+exports.getById = async (req, res) => {
     const id = req.params.id;
     console.log(`GET: /admins/${id}`);
 
@@ -57,10 +55,10 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Update
-router.put('/:id', async (req, res) => {
+exports.put = async (req, res) => {
     const pid = req.params.id;
     console.log(`PUT: /admins/${pid}`);
 
@@ -86,10 +84,10 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Delete
-router.delete('/:id', async (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
     console.log('DELETE: /admins/id');
 
@@ -107,6 +105,4 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
-
-module.exports = router;
+}

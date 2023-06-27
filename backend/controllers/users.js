@@ -1,9 +1,7 @@
-const router = require('express').Router();
-
 const User = require('../models/User');
 
 // Create
-router.post('/', async (req, res) => {
+exports.post = async (req, res) => {
     console.log("POST: /users");
 
     const { id, name, email, phone, password, card, address, orders, cart } = req.body;
@@ -32,10 +30,10 @@ router.post('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Read
-router.get('/', async (req, res) => {
+exports.get = async (req, res) => {
     console.log("GET: /users");
     try {
         const users = await User.find();
@@ -43,9 +41,9 @@ router.get('/', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
-router.get('/:id', async (req, res) => {
+exports.getById = async (req, res) => {
     const id = req.params.id;
     console.log(`GET: /users/${id}`);
 
@@ -61,10 +59,10 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Update
-router.put('/:id', async (req, res) => {
+exports.put = async (req, res) => {
     const pid = req.params.id;
     console.log(`PUT: /users/${pid}`);
 
@@ -94,10 +92,10 @@ router.put('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
+}
 
 // Delete
-router.delete('/:id', async (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
 
     const user = await User.findOne({ id: id });
@@ -114,6 +112,4 @@ router.delete('/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error });
     }
-});
-
-module.exports = router;
+}

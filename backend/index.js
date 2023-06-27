@@ -23,9 +23,9 @@ app.use(
 app.use(express.json());
 
 // API routes
-const adminRoutes = require('./routes/adminRoutes');
-const userRoutes = require('./routes/userRoutes');
-const albumRoutes = require('./routes/albumRoutes');
+const adminRoutes = require('./routes/admins');
+const userRoutes = require('./routes/users');
+const albumRoutes = require('./routes/albums');
 
 app.use('/admins', adminRoutes)
 app.use('/users', userRoutes)
