@@ -104,10 +104,7 @@ function ProductsCRUD({ userAdmin }){
     const handleRemoveProductSubmit = async () => {
         try {
             await fetch(`http://localhost:8000/albums/${selectedProduct.id}`, {
-                method: 'DELETE',
-                headers: {
-                'Content-Type': 'application/json',
-                },
+                method: 'DELETE'
             });
             console.log('Album deleted successfully.');
             // Handle the deleted album data

@@ -84,10 +84,7 @@ function UsersCRUD({ userAdmin }){
     const handleRemoveUserSubmit = async () => {
         try {
             await fetch(`http://localhost:8000/users/${selectedUser.id}`, {
-                method: 'DELETE',
-                headers: {
-                'Content-Type': 'application/json',
-                },
+                method: 'DELETE'
             });
         
             console.log('User deleted successfully');

@@ -1,17 +1,54 @@
 const mongoose = require('mongoose');
 
-const Album = mongoose.model('Album', {
-    id: Number,
-    name: String,
-    artist: String,
-    year: Number,
-    genre: String,
-    img: String,
-    description: String,
-    price: Number,
-    stock: Number,
-    sold: Number,
-    date_added: String
-});
+const Schema = mongoose.Schema;
 
-module.exports = Album;
+const schema = new Schema({
+    id : {
+        type: Number,
+        required: true,
+        index: true,
+        unique: true
+    },
+    name : {
+        type: String,
+        required: true,
+    },
+    artist : {
+        type: String,
+        required: true,
+    },
+    year : {
+        type: Number,
+        required: true,
+    },
+    genre : {
+        type: String,
+        required: true,
+    },
+    img : {
+        type: String,
+        required: true,
+    },
+    description : {
+        type: String,
+        required: true,
+    },
+    price : {
+        type: Number,
+        required: true,
+    },
+    stock : {
+        type: Number,
+        required: true,
+    },
+    sold : {
+        type: Number,
+        required: true,
+    },
+    date_added : {
+        type: String,
+        required: true,
+    }
+})
+
+module.exports = mongoose.model('Album', schema);

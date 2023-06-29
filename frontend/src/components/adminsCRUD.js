@@ -88,10 +88,7 @@ function AdminsCRUD({ userAdmin }) {
     const handleRemoveAdminSubmit = async () => {
         try {
             await fetch(`http://localhost:8000/admins/${selectedAdmin.id}`, {
-                method: 'DELETE',
-                headers: {
-                'Content-Type': 'application/json',
-                },
+                method: 'DELETE'
             });
         
             console.log('Admin deleted successfully');
