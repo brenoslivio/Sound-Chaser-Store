@@ -321,7 +321,6 @@ function UsersCRUD({ userAdmin }){
                         <label htmlFor="create-user-name">Name</label>
                         <input
                         type="text"
-                        placeholder="Name"
                         id="create-user-name"
                         />
                     </div>
@@ -329,7 +328,6 @@ function UsersCRUD({ userAdmin }){
                         <label htmlFor="create-user-email">E-mail</label>
                         <input
                         type="text"
-                        placeholder="E-mail"
                         id="create-user-email"
                         />
                     </div>
@@ -337,7 +335,6 @@ function UsersCRUD({ userAdmin }){
                         <label htmlFor="create-user-phone">Phone</label>
                         <input
                         type="text"
-                        placeholder="Phone"
                         id="create-user-phone"
                         />
                     </div>
@@ -345,7 +342,6 @@ function UsersCRUD({ userAdmin }){
                         <label htmlFor="create-user-password">Password</label>
                         <input
                         type="password"
-                        placeholder="Password"
                         id="create-user-password"
                         />
                     </div>
@@ -364,7 +360,6 @@ function UsersCRUD({ userAdmin }){
                             <label htmlFor="edit-user-name">Name</label>
                             <input
                                 type="text"
-                                placeholder="Name"
                                 id="edit-user-name"
                             />
                         </div>
@@ -372,7 +367,6 @@ function UsersCRUD({ userAdmin }){
                             <label htmlFor="edit-user-email">E-mail</label>
                             <input
                                 type="text"
-                                placeholder="E-mail"
                                 id="edit-user-email"
                             />
                         </div>
@@ -380,7 +374,6 @@ function UsersCRUD({ userAdmin }){
                             <label htmlFor="edit-user-phone">Phone</label>
                             <input
                                 type="text"
-                                placeholder="Phone"
                                 id="edit-user-phone"
                             />
                         </div>
@@ -388,7 +381,6 @@ function UsersCRUD({ userAdmin }){
                             <label htmlFor="edit-user-password">Password</label>
                             <input
                                 type="password"
-                                placeholder="Password"
                                 id="edit-user-password"
                             />
                         </div>

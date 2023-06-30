@@ -304,20 +304,21 @@
 }
 
 .overlay-content #create-product-img {
-    width: 160px;
+    width: 200px;
+    font-size: 17px;
 }
 
 .overlay-content #edit-product-img {
-    width: 160px;
+    width: 200px;
+    font-size: 17px;
 }
 
 #create-product-img-preview, #edit-product-img-preview {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
 }
 
 .overlay-content textarea {
-    width: 150px;
     resize: none;
     border-color: #72366f;
     background-color:white;
@@ -329,8 +330,9 @@
     margin-bottom: 10px;
 }
 
-.overlay-content .input-group label {
-    margin-right: 10px;
-    width: 80px;
+.overlay-content label {
+    margin-right: 15px;
     text-align: left;
+    font-size: 17px;
+    font-weight: bold;
 }

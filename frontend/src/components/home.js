@@ -13,6 +13,8 @@ async function getAlbums() {
 /* Home page */
 function Home({ userLogin, userUpdate }){
     const [albums, setAlbums] = useState([]);
+    const [messageAlert, setMessageAlert] = useState("");
+
     let navigate = useNavigate(); 
 
     const routeChange = () =>{ 
@@ -33,14 +35,14 @@ function Home({ userLogin, userUpdate }){
                     navigate("../cart", {replace: true});
                     window.scrollTo(0, 0);
                 } else {
-                    alert("Item already added to the cart!");
+                    setMessageAlert("Item already added to the cart!");
                 }
                 
             } else {
-                alert("Album out of stock!");
+                setMessageAlert("Album out of stock!");
             }
         } else {
-            alert("Login required to add to cart.");
+            setMessageAlert("Login required to add to cart.")
         }
     }
 
@@ -92,9 +94,18 @@ function Home({ userLogin, userUpdate }){
                                 <button onClick={() => addCart(album.id, album.stock)} className="card-btn">Add to cart</button>
                             </div>
                         ))) : null}
+                        
                     </div>
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+              </div>
+            )}
         </div>
     )
 }

@@ -56,7 +56,7 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
 
 - The system has 2 types of users: Clients and Administrators
 
-    - Administrators are responsible for registering/managing administrators, customers, and products/services provided. The application already comes with an account `admin` with the password `admin`.
+    - Administrators are responsible for registering/managing administrators, customers, and products/services provided. The application already comes with an account `admin@soundchaser.com` with the password `password`.
     
     - Customers are users who access the system to buy products/services.
 
@@ -418,23 +418,19 @@ After carefully following the test plan, we had the following results:
 
 ## <a id="5" /> 5. Build Procedures
 
-To be able to run the site you need to have Node and its package manager npm installed, with json-server to properly load the JSON mock objects (which you can install with `npm install json-server`). After this, inside the `frontend` directory, use the following command:
+To be able to run the site you need to have Node and its package manager npm installed. After this, inside the `backend` directory, use the following command:
 
 ```bash
 npm install
 ```
 
-Run the back-end with json-server:
-
-```bash
-npm run backend
-```
-
-Finally, run the front-end in another terminal:
+Run the back-end with:
 
 ```bash
 npm start
 ```
+
+Now go to the `frontend` directory and apply the same steps to install and start the application.
 
 An user example you can use to access the site:
 

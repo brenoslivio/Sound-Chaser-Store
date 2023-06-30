@@ -447,48 +447,51 @@ function ProductsCRUD({ userAdmin }){
                                 <img id="create-product-img-preview" alt="Preview"/>
                             </div>
                         </div>
-                        <input
-                            type="text"
-                            placeholder="Name"
-                            id="create-product-name"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Artist"
-                            id="create-product-artist"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Year"
-                            id="create-product-year"
-                        />
-                        <select id="create-product-genre">
+                        <div className="input-group">
+                            <label htmlFor="create-product-name">Name</label>
+                            <input type="text" id="create-product-name" />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-artist">Artist</label>
+                            <input type="text" id="create-product-artist" />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-year">Year</label>
+                            <input type="text" id="create-product-year" />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-genre">Genre</label>
+                            <select id="create-product-genre">
                             <option value="">Select Genre</option>
                             {genres.map((genre) => (
-                                <option key={genre} value={genre}>{genre}</option>
+                                <option key={genre} value={genre}>
+                                {genre}
+                                </option>
                             ))}
-                        </select>
-                        <br/>
-                        <textarea
-                            placeholder="Description"
+                            </select>
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-description">Description</label>
+                            <br />
+                            <textarea
                             id="create-product-description"
-                            rows="5" cols="20" maxLength="128"
-                        ></textarea>
-                        <input
-                            type="text"
-                            placeholder="Price"
-                            id="create-product-price"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Stock"
-                            id="create-product-stock"
-                        />
-                        <input
-                            type="text"
-                            placeholder="Sold"
-                            id="create-product-sold"
-                        />
+                            rows="5"
+                            cols="20"
+                            maxLength="128"
+                            ></textarea>
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-price">Price</label>
+                            <input type="text" id="create-product-price" />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-stock">Stock</label>
+                            <input type="text" id="create-product-stock" />
+                        </div>
+                        <div className="input-group">
+                            <label htmlFor="create-product-sold">Sold</label>
+                            <input type="text" id="create-product-sold" />
+                        </div>
                         <div className="button-group">
                             <button onClick={handleCreateProductSubmit}>Create</button>
                             <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
@@ -527,7 +530,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-name">Name</label>
                             <input
                                 type="text"
-                                placeholder="Name"
                                 id="edit-product-name"
                             />
                         </div>
@@ -535,7 +537,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-artist">Artist</label>
                             <input
                                 type="text"
-                                placeholder="Artist"
                                 id="edit-product-artist"
                             />
                         </div>
@@ -543,7 +544,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-year">Year</label>
                             <input
                                 type="text"
-                                placeholder="Year"
                                 id="edit-product-year"
                             />
                         </div>
@@ -560,7 +560,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-description">Description</label>
                             <br/>
                             <textarea
-                                placeholder="Description"
                                 id="edit-product-description"
                                 rows="5"
                                 cols="20"
@@ -571,7 +570,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-price">Price</label>
                             <input
                                 type="text"
-                                placeholder="Price"
                                 id="edit-product-price"
                             />
                         </div>
@@ -579,7 +577,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-stock">Stock</label>
                             <input
                                 type="text"
-                                placeholder="Stock"
                                 id="edit-product-stock"
                             />
                         </div>
@@ -587,7 +584,6 @@ function ProductsCRUD({ userAdmin }){
                             <label htmlFor="edit-product-sold">Sold</label>
                             <input
                                 type="text"
-                                placeholder="Sold"
                                 id="edit-product-sold"
                             />
                         </div>

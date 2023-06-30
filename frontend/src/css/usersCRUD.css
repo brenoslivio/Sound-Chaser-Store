@@ -312,8 +312,9 @@
     margin-bottom: 10px;
 }
 
-.overlay-content .input-group label {
-    margin-right: 10px;
-    width: 80px;
+.overlay-content label {
+    margin-right: 15px;
     text-align: left;
+    font-size: 17px;
+    font-weight: bold;
 }

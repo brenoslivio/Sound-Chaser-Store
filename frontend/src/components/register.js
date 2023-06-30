@@ -23,14 +23,12 @@ async function getId() {
 }
 
 /* Create new user checking for each input */
-function createUser(userId, newUser, navigate, registeredEmails){
+function createUser(userId, newUser, navigate, registeredEmails, setMessageAlert){
     const name = document.getElementById("register_name").value;
     const email = document.getElementById("register_mail").value;
     const phone = document.getElementById("register_phone").value;
     const password = document.getElementById("register_password").value;
     const confirmPassword = document.getElementById("register_confirm").value;
-
-    let rules = "";
 
     let userLogin = {id: userId, name: "", email: "", phone: "", password: "", 
                         card: {number: "", holder: "", expiration: "", security: ""},
@@ -40,7 +38,8 @@ function createUser(userId, newUser, navigate, registeredEmails){
     if (name.trim().length >= 5 && name.trim().length <= 32) {
         userLogin.name = name;
     } else {
-        rules += "Name must be between 5 and 32 characters.\n";
+        setMessageAlert("Name must be between 5 and 32 characters.");
+        return;
     }
 
     const phoneRegex = /^\d+$/; // Only digits allowed
@@ -48,48 +47,50 @@ function createUser(userId, newUser, navigate, registeredEmails){
         if (phone.length <= 32) {
             userLogin.phone = phone;
         } else {
-            rules += "Phone number must be between 1 and 32 digits.\n";
+            setMessageAlert("Phone number must be between 1 and 32 digits.");
+            return;
         }
     } else {
-        rules += "Invalid phone number. Only digits are allowed.\n";
+        setMessageAlert("Invalid phone number. Only digits are allowed.");
+        return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation regex
     if (emailRegex.test(email)) {
         const isRegistered = registeredEmails.includes(email);
         if (isRegistered) {
-            rules += "Email address is already registered.\n";
+            setMessageAlert("Email address is already registered.");
+            return;
         } else {
             userLogin.email = email;
         }
     } else {
-      rules += "Invalid email address.\n";
+      setMessageAlert("Invalid email address.");
+      return;
     }
     
     if (password.length >= 8 && password.length <= 32) {
         if (password === confirmPassword){
             userLogin.password = password;
         } else {
-            rules += "Passwords don't match.\n"
+            setMessageAlert("Passwords don't match.");
+            return;
         }
     } else {
-        rules += "Password must be between 8 and 32 characters.\n";
+        setMessageAlert("Password must be between 8 and 32 characters.");
+        return;
     }
 
-    if (rules) {
-        alert(rules);
-    } else {
-        newUser(userLogin);
-        navigate("/");
-        window.scrollTo(0, 0);
-    }
+    newUser(userLogin);
+    navigate("/");
+    window.scrollTo(0, 0);
 }
 
 /* Register page */
 function Register({ newUser, userLogin }){
-
     const [userId, setUserId] = useState('');
     const [registeredEmails, setRegisteredEmails] = useState([]);
+    const [messageAlert, setMessageAlert] = useState("");
   
     let navigate = useNavigate();
 
@@ -154,11 +155,19 @@ function Register({ newUser, userLogin }){
                                 </span>
                         </div>
                     
-                        <button onClick={() => createUser(userId, newUser, navigate, registeredEmails)} id="form-register-btn">Register</button>
+                        <button onClick={() => createUser(userId, newUser, navigate, registeredEmails, setMessageAlert)} id="form-register-btn">Register</button>
                     </div>
 
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+              </div>
+            )}
         </div>
     )
 }

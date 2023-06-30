@@ -321,7 +321,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="create-admin-name">Name</label>
                             <input
                             type="text"
-                            placeholder="Name"
                             id="create-admin-name"
                             />
                         </div>
@@ -329,7 +328,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="create-admin-email">E-mail</label>
                             <input
                             type="text"
-                            placeholder="E-mail"
                             id="create-admin-email"
                             />
                         </div>
@@ -337,7 +335,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="create-admin-phone">Phone</label>
                             <input
                             type="text"
-                            placeholder="Phone"
                             id="create-admin-phone"
                             />
                         </div>
@@ -345,7 +342,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="create-admin-password">Password</label>
                             <input
                             type="password"
-                            placeholder="Password"
                             id="create-admin-password"
                             />
                         </div>
@@ -364,7 +360,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="edit-admin-name">Name</label>
                             <input
                                 type="text"
-                                placeholder="Name"
                                 id="edit-admin-name"
                             />
                         </div>
@@ -372,7 +367,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="edit-admin-email">E-mail</label>
                             <input
                                 type="text"
-                                placeholder="E-mail"
                                 id="edit-admin-email"
                             />
                         </div>
@@ -380,7 +374,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="edit-admin-phone">Phone</label>
                             <input
                                 type="text"
-                                placeholder="Phone"
                                 id="edit-admin-phone"
                             />
                         </div>
@@ -388,7 +381,6 @@ function AdminsCRUD({ userAdmin }) {
                             <label htmlFor="edit-admin-password">Password</label>
                             <input
                                 type="password"
-                                placeholder="Password"
                                 id="edit-admin-password"
                             />
                         </div>
