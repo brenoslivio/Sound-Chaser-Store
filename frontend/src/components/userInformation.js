@@ -13,7 +13,7 @@ async function getAllEmails() {
 }
 
 /* Update user information based on allowed inputs */
-function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
+function updateInformation(userLogin, userUpdate, navigate, registeredEmails, setMessageAlert){
     const name = document.getElementById("name").value;
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
@@ -21,7 +21,6 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    let rules = "";
     let updated = false;
 
     if (name.trim().length > 0) {
@@ -29,7 +28,8 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
             userLogin.name = name;
             updated = true;
         } else {
-            rules += "Name must be between 5 and 32 characters.\n";
+            setMessageAlert("Name must be between 5 and 32 characters.");
+            return;
         }
     }
 
@@ -40,10 +40,12 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
                 userLogin.phone = phone;
                 updated = true;
             } else {
-                rules += "Phone number must be between 1 and 32 digits.\n";
+                setMessageAlert("Phone number must be between 1 and 32 digits.");
+                return;
             }
         } else {
-            rules += "Invalid phone number. Only digits are allowed.\n";
+            setMessageAlert("Invalid phone number. Only digits are allowed.");
+            return;
         }
     }
 
@@ -52,12 +54,14 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
         if (emailRegex.test(email)) {
             const isRegistered = registeredEmails.includes(email);
             if (isRegistered) {
-                rules += "Email address is already registered.\n";
+                setMessageAlert("Email address is already registered.");
+                return;
             } else {
                 userLogin.email = email;
             }
         } else {
-        rules += "Invalid email address.\n";
+            setMessageAlert("Invalid email address.");
+            return;
         }
     }
 
@@ -68,32 +72,29 @@ function updateInformation(userLogin, userUpdate, navigate, registeredEmails){
                     userLogin.password = newPassword;
                     updated = true;
                 } else {
-                    rules += "Passwords don't match.\n"
+                    setMessageAlert("Passwords don't match.");
+                    return;
                 }
             } else {
-                rules += "New password must be between 8 and 32 characters.\n";
+                setMessageAlert("New password must be between 8 and 32 characters.");
+                return;
             }
         } else {
-            rules += "Wrong current password.\n";
+            setMessageAlert("Wrong current password.");
+            return;
         }
     }
 
-    if (rules) {
-        alert(rules);
-    } 
-
     if (updated) {
         userUpdate(userLogin);
-        alert("Information updated.")
+        setMessageAlert("Information updated.")
         navigate("/user");
-    } else {
-        alert("No information was updated.")
     }
 }
 
 /* Page for user change information */
 function UserInformation({ userLogin, signOut, userUpdate }){
-
+    const [messageAlert, setMessageAlert] = useState("");
     const [registeredEmails, setRegisteredEmails] = useState([]);
 
     let navigate = useNavigate();
@@ -186,7 +187,7 @@ function UserInformation({ userLogin, signOut, userUpdate }){
                             </div>
                         </div>
 
-                        <button onClick={() => updateInformation(userLogin, userUpdate, navigate, registeredEmails)} className="save-btn">Save</button>
+                        <button onClick={() => updateInformation(userLogin, userUpdate, navigate, registeredEmails, setMessageAlert)} className="save-btn">Save</button>
 
                     </div>
 
@@ -200,6 +201,14 @@ function UserInformation({ userLogin, signOut, userUpdate }){
 
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

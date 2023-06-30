@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 /* Quiz page */
 function Quiz(){
+    const [messageAlert, setMessageAlert] = useState("");
+    const [genre, setGenre] = useState("");
     const [answers, setAnswers] = useState({
         group1: '',
         group2: '',
@@ -17,34 +19,38 @@ function Quiz(){
     const handleQuizSubmit = () => {
         // Check if any question is unanswered
         if (Object.values(answers).some(value => value === '')) {
-            alert("Please answer all the questions.");
+            setMessageAlert("Please answer all the questions.");
             return;
         }
 
         // Determine the recommended genre based on the ratings
         const { group1, group2, group3, group4, group5 } = answers;
-
-        let genre;
+        
+        let genreChoice;
 
         /* Subjective recommendation */
         if (group1 >= 4 && group2 >= 3 && group3 >= 3) {
-            genre = "Progressive Rock";
+            genreChoice = "Progressive Rock";
         } else if (group2 >= 4 && group4 >= 4) {
-            genre = "Rap";
+            genreChoice = "Rap";
         } else if (group2 <= 2 && group3 <= 2 && group4 <= 2) {
-            genre = "Classical Music";
+            genreChoice = "Classical Music";
         } else if (group1 >= 3 && group4 >= 3 && group5 >= 3) {
-            genre = "Alternative Rock";
+            genreChoice = "Alternative Rock";
         } else if (group1 <= 2 && group4 <= 2 && group5 <= 2) {
-            genre = "Jazz";
+            genreChoice = "Jazz";
         } else {
-            genre = "Pop";
+            genreChoice = "Pop";
         }
 
-        alert(`${genre} could be a very good genre for you. Check these albums!`);
+        setGenre(genreChoice);
+        setMessageAlert(`${genreChoice} could be a very good genre for you. Check these albums!`);
+    };
+
+    const storeRedirect = () => {
         navigate(`/store?genre=${encodeURIComponent(genre.toLowerCase())}`);
         window.scrollTo(0, 0);
-    };
+    }
 
     const handleAnswerChange = (question, value) => {
         setAnswers(prevAnswers => ({...prevAnswers, [question]: value
@@ -141,6 +147,14 @@ function Quiz(){
                     <button id="quiz-btn" onClick={handleQuizSubmit}>Send</button>
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => genre ? storeRedirect() : setMessageAlert("")}> OK </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

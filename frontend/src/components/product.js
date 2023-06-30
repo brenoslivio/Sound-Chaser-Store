@@ -43,7 +43,7 @@ function optionsAvailable(stock){
 
 /* Product page */
 function Product({ userLogin, userUpdate }){
-
+    const [messageAlert, setMessageAlert] = useState("");
     const params = useParams();
 
     const [album, setAlbum] = useState([]);
@@ -63,14 +63,14 @@ function Product({ userLogin, userUpdate }){
                     userUpdate(userLogin);
                     navigate("../cart", {replace: true});
                 } else {
-                    alert("Item already added to the cart!");
+                    setMessageAlert("Item already added to the cart!");
                 }
                 
             } else {
-                alert("Album out of stock!");
+                setMessageAlert("Album out of stock!");
             }
         } else {
-            alert("Login required to add to cart.");
+            setMessageAlert("Login required to add to cart.");
         }
     }
 
@@ -163,6 +163,14 @@ function Product({ userLogin, userUpdate }){
 
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+                </div>
+            )}
         </main>
     )
 }

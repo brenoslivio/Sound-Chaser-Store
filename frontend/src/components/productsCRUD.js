@@ -12,7 +12,7 @@ async function getAlbums() {
 
 /* Admininistration page */
 function ProductsCRUD({ userAdmin }){
-
+    const [messageAlert, setMessageAlert] = useState("");
     const [products, setProducts] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 4;
@@ -137,56 +137,56 @@ function ProductsCRUD({ userAdmin }){
     
         // Validate artist
         if (name.trim().length < 1 || name.trim().length > 30) {
-            alert("Album name must be between 1 and 30 characters.");
+            setMessageAlert("Album name must be between 1 and 30 characters.");
             return;
         }
         // Validate artist
         if (artist.trim().length < 1 || artist.trim().length > 30) {
-            alert("Artist name must be between 1 and 30 characters.");
+            setMessageAlert("Artist name must be between 1 and 30 characters.");
             return;
         }
         
         // Validate year
         if (!/^\d+$/.test(year)) {
-            alert("Year must contain only digits.");
+            setMessageAlert("Year must contain only digits.");
             return;
         }
 
         if (genre === '') {
-            alert("Select a genre.");
+            setMessageAlert("Select a genre.");
             return;
         }
 
         // Validate description
         if (description.trim().length < 10) {
-            alert("Description must be at least 10 characters long.");
+            setMessageAlert("Description must be at least 10 characters long.");
             return;
         }
 
         // Validate price
         const parsedPrice = parseFloat(price);
         if (isNaN(parsedPrice) || parsedPrice <= 0) {
-            alert("Please enter a valid price.");
+            setMessageAlert("Please enter a valid price.");
             return;
         }
 
         // Validate stock
         const parsedStock = parseInt(stock);
         if (isNaN(parsedStock) || parsedStock < 0) {
-            alert("Please enter a valid stock quantity.");
+            setMessageAlert("Please enter a valid stock quantity.");
             return;
         }
 
         // Validate sold
         const parsedSold = parseInt(sold);
         if (isNaN(parsedSold) || parsedSold < 0) {
-            alert("Please enter a valid sold quantity.");
+            setMessageAlert("Please enter a valid sold quantity.");
             return;
         }
 
         // Validate image
         if (img === '') {
-            alert('Please enter a valid image.');
+            setMessageAlert('Please enter a valid image.');
             return;
         }
 
@@ -250,56 +250,56 @@ function ProductsCRUD({ userAdmin }){
         
         // Validate artist
         if (name.trim().length < 1 || name.trim().length > 30) {
-            alert("Album name must be between 1 and 30 characters.");
+            setMessageAlert("Album name must be between 1 and 30 characters.");
             return;
         }
         // Validate artist
         if (artist.trim().length < 1 || artist.trim().length > 30) {
-            alert("Artist name must be between 1 and 30 characters.");
+            setMessageAlert("Artist name must be between 1 and 30 characters.");
             return;
         }
 
         // Validate year
         if (!/^\d+$/.test(year)) {
-            alert("Year must contain only digits.");
+            setMessageAlert("Year must contain only digits.");
             return;
         }
 
         if (genre === '') {
-            alert("Select a genre.");
+            setMessageAlert("Select a genre.");
             return;
         }
 
         // Validate description
         if (description.trim().length < 10) {
-            alert("Description must be at least 10 characters long.");
+            setMessageAlert("Description must be at least 10 characters long.");
             return;
         }
 
         // Validate price
         const parsedPrice = parseFloat(price);
         if (isNaN(parsedPrice) || parsedPrice <= 0) {
-            alert("Please enter a valid price.");
+            setMessageAlert("Please enter a valid price.");
             return;
         }
 
         // Validate stock
         const parsedStock = parseInt(stock);
         if (isNaN(parsedStock) || parsedStock < 0) {
-            alert("Please enter a valid stock quantity.");
+            setMessageAlert("Please enter a valid stock quantity.");
             return;
         }
 
         // Validate sold
         const parsedSold = parseInt(sold);
         if (isNaN(parsedSold) || parsedSold < 0) {
-            alert("Please enter a valid sold quantity.");
+            setMessageAlert("Please enter a valid sold quantity.");
             return;
         }
 
         // Validate image
         if (img === '') {
-            alert('Please enter a valid image.');
+            setMessageAlert('Please enter a valid image.');
             return;
         }
 
@@ -598,6 +598,14 @@ function ProductsCRUD({ userAdmin }){
                             <button onClick={handleEditProductSubmit}>Save</button>
                             <button onClick={() => setShowEditOverlay(false)}>Cancel</button>
                         </div>
+                    </div>
+                </div>
+            )}
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
                     </div>
                 </div>
             )}

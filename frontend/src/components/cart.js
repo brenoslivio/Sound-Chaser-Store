@@ -106,6 +106,7 @@ function updateAlbumQuantity(userLogin, userUpdate, setAlbums, products, id, new
 
 /* Cart page */
 function Cart({ userLogin, userUpdate }){
+    const [messageAlert, setMessageAlert] = useState("");
     const [cartAlbums, setCartAlbums] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const albumsPerPage = 2;
@@ -133,9 +134,17 @@ function Cart({ userLogin, userUpdate }){
                         <div className="title"> Cart </div>
                             <div className="products">
                             </div>
-                            <button onClick={() => alert("No products added to the cart.")} className="proceed-btn">Proceed to payment</button>
+                            <button onClick={() => setMessageAlert("No products added to the cart.")} className="proceed-btn">Proceed to payment</button>
                     </div>
                 </div>
+                {messageAlert && (
+                    <div className="overlay">
+                        <div className="alert-content">
+                            <div className="message">{messageAlert}</div>
+                            <button onClick={() => setMessageAlert("")}> OK </button>
+                        </div>
+                    </div>
+                )}
             </div>
         )
     }

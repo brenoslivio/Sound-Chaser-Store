@@ -1,13 +1,13 @@
 import '../css/admin.css';
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
-async function checkLogin(onLogin, navigate) {
+async function checkLogin(onLogin, navigate, setMessageAlert) {
     const email = document.getElementById('admin_mail').value;
     const password = document.getElementById('admin_password').value;
 
     if (!email || !password) { // Handle empty email or password
-        alert("Please enter both e-mail and password.");
+        setMessageAlert("Please enter both e-mail and password.");
         return;
     }
 
@@ -22,7 +22,7 @@ async function checkLogin(onLogin, navigate) {
             onLogin(admin); // Set the admin
             navigate("/admin/products");
         } else {
-            alert("Invalid email or password.");
+            setMessageAlert("Invalid email or password.");
         }
     } catch (error) {
         console.error("Error fetching user data:", error);
@@ -31,12 +31,12 @@ async function checkLogin(onLogin, navigate) {
 
 /* Admin page */
 function Admin({ onLogin }){
-
+    const [messageAlert, setMessageAlert] = useState("");
     let navigate = useNavigate();
 
     const handleKeyPress = (event) => {
         if (event.keyCode === 13) {
-            checkLogin(onLogin, navigate);
+            setMessageAlert(onLogin, navigate);
         }
     };
 
@@ -54,11 +54,19 @@ function Admin({ onLogin }){
                         <input type="text" id="admin_mail" placeholder="E-mail" onKeyDown={handleKeyPress}/>
                         <input type="password" id="admin_password" placeholder="Password" onKeyDown={handleKeyPress}/>
                     
-                        <button onClick={() => checkLogin(onLogin, navigate)} id="admin-login-btn">Login</button>
+                        <button onClick={() => checkLogin(onLogin, navigate, setMessageAlert)} id="admin-login-btn">Login</button>
                     </div>
 
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

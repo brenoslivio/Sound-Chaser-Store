@@ -11,7 +11,7 @@ async function getAlbums() {
 }
 
 /* Retrieve albums checking if they have stock */
-function getCartAlbums(userLogin, albums, userUpdate, navigate) {
+function getCartAlbums(userLogin, albums, userUpdate, navigate, setMessageAlert) {
     let cartAlbums = [];
 
     // to check if album exists or have stock
@@ -34,7 +34,7 @@ function getCartAlbums(userLogin, albums, userUpdate, navigate) {
     console.log(cartAlbums);
 
     if (cartAlbums.length === 0) {
-        alert("Items out of stock!");
+        setMessageAlert("Items out of stock!");
         navigate("/cart");
         return;
     }
@@ -55,10 +55,10 @@ function getTotalPrice(products) {
 }
 
 /* Empty cart after payment */
-function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpdate){
+function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpdate, setMessageAlert){
     if (!userLogin.address.address || !userLogin.address.receiver || 
         !userLogin.card.number || !userLogin.card.holder || !userLogin.card.expiration){
-        alert("Please fill all information related to your address and payment card.");
+        setMessageAlert("Please fill all information related to your address and payment card.");
         return;
     }
 
@@ -83,18 +83,16 @@ function emptyCart(userLogin, userUpdate, navigate, totalPrice, albums, albumUpd
     });
 
     albumUpdate(albums); /* Update albums after emptying */
-
     userLogin.cart = [];
 
     userUpdate(userLogin);
-    alert("Successful payment!")
 
-    navigate("/");
-    window.scrollTo(0, 0);
+    setMessageAlert("Successful payment!");
 }
 
 /* Payment page */
 function Payment({ userLogin, userUpdate, albumUpdate }){
+    const [messageAlert, setMessageAlert] = useState("");
     const [albums, setAlbums] = useState([]);
     const [cartAlbums, setCartAlbums] = useState([]);
 
@@ -111,11 +109,16 @@ function Payment({ userLogin, userUpdate, albumUpdate }){
         getAlbums()
         .then(products => {
             setAlbums(products);
-            setCartAlbums(getCartAlbums(userLogin, products, userUpdate, navigate));
+            setCartAlbums(getCartAlbums(userLogin, products, userUpdate, navigate, setMessageAlert));
         })
         .catch(error => console.error(error));
     }, []);
 
+    const successPay = () => {
+        setMessageAlert("");
+        navigate("/");
+        window.scrollTo(0, 0);
+    };
 
     if (cartAlbums.length === 0) {
         return (
@@ -127,6 +130,14 @@ function Payment({ userLogin, userUpdate, albumUpdate }){
                             </div>
                     </div>
                 </div>
+                {messageAlert && (
+                    <div className="overlay">
+                        <div className="alert-content">
+                            <div className="message">{messageAlert}</div>
+                            <button onClick={() => setMessageAlert("")}> OK </button>
+                        </div>
+                    </div>
+                )}
             </div>
         )
     }
@@ -155,9 +166,19 @@ function Payment({ userLogin, userUpdate, albumUpdate }){
                             </Link>
                         </div>
                         <p className="payment-price"> Total: ${totalPrice.toFixed(2)} </p>
-                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate, totalPrice.toFixed(2), albums, albumUpdate)} className="buy-btn">Buy</button>
+                        <button onClick={() => emptyCart(userLogin, userUpdate, navigate, totalPrice.toFixed(2), albums, albumUpdate, setMessageAlert)} className="buy-btn">Buy</button>
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                            <button onClick={() => 
+                                messageAlert === "Successful payment!" ? successPay() : setMessageAlert("")}> OK 
+                            </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

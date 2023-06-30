@@ -1,9 +1,9 @@
 import '../css/userPayment.css';
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 
 /* Update user payment based on allowed inputs */
-function updatePayment(userLogin, userUpdate, navigate){
+function updatePayment(userLogin, userUpdate, navigate, setMessageAlert){
     const card = document.getElementById("card").value;
     const holder = document.getElementById("holder").value;
     const expiration = document.getElementById("expiration").value;
@@ -11,7 +11,6 @@ function updatePayment(userLogin, userUpdate, navigate){
     const address = document.getElementById("address").value;
     const receiver = document.getElementById("receiver").value;
 
-    let rules = "";
     let updated = false;
 
     if (card.length > 0) {
@@ -21,10 +20,12 @@ function updatePayment(userLogin, userUpdate, navigate){
                 userLogin.card.number = card;
                 updated = true;
             } else {
-                rules += "Card number must be between 8 and 16 digits.\n";
+                setMessageAlert("Card number must be between 8 and 16 digits.");
+                return;
             }
         } else {
-            rules += "Invalid credit card number. Only digits are allowed.\n";
+            setMessageAlert("Invalid credit card number. Only digits are allowed.");
+            return;
         }
     }
 
@@ -33,7 +34,8 @@ function updatePayment(userLogin, userUpdate, navigate){
             userLogin.card.holder = holder;
             updated = true;
         } else {
-            rules += "Holder name must be between 5 and 32 characters.\n";
+            setMessageAlert("Holder name must be between 5 and 32 characters.");
+            return;
         }
     }
 
@@ -45,7 +47,8 @@ function updatePayment(userLogin, userUpdate, navigate){
             userLogin.card.expiration = d.toISOString().slice(0, 10);
             updated = true;
         } else {
-            rules += "Invalid date. Choose month and year properly.\n";
+            setMessageAlert("Invalid date. Choose month and year properly.");
+            return;
         }
     }
 
@@ -56,10 +59,12 @@ function updatePayment(userLogin, userUpdate, navigate){
                 userLogin.card.security = security;
                 updated = true;
             } else {
-                rules += "Security code must be 3 digits.\n";
+                setMessageAlert("Security code must be 3 digits.");
+                return;
             }
         } else {
-            rules += "Invalid security code. Only digits are allowed.\n";
+            setMessageAlert("Invalid security code. Only digits are allowed.");
+            return;
         }
     }
 
@@ -68,7 +73,8 @@ function updatePayment(userLogin, userUpdate, navigate){
             userLogin.address.address = address;
             updated = true;
         } else {
-            rules += "Address name must be between 20 and 128 characters.\n";
+            setMessageAlert("Address name must be between 20 and 128 characters.");
+            return;
         }
     }
 
@@ -77,26 +83,21 @@ function updatePayment(userLogin, userUpdate, navigate){
             userLogin.address.receiver = receiver;
             updated = true;
         } else {
-            rules += "Receiver name must be between 5 and 32 characters.\n";
+            setMessageAlert("Receiver name must be between 5 and 32 characters.");
+            return;
         }
     }
 
-    if (rules) {
-        alert(rules);
-    } 
-
     if (updated) {
         userUpdate(userLogin);
-        alert("Information updated.")
+        setMessageAlert("Information updated.");
         navigate("/user/payment");
-    } else {
-        alert("No information was updated.")
     }
 }
 
 /* Page where user can add payment and address information */
 function UserPayment({ userLogin, signOut, userUpdate }){
-
+    const [messageAlert, setMessageAlert] = useState("");
     let navigate = useNavigate(); 
 
     if (!userLogin) {
@@ -152,7 +153,7 @@ function UserPayment({ userLogin, signOut, userUpdate }){
                         <div className="input-security">
                             <label htmlFor="security">Security code:</label>
                             <div class="tooltip-payment">
-                            <input defaultValue={userLogin.card.security} type="password" id="security" name="security" />
+                            <input placeholder={userLogin.card.security ? "Code registered" : ""} type="password" id="security" name="security" />
                                     <span class="tooltiptext">
                                     Enter security code of 3 digits
                                     </span>
@@ -187,10 +188,18 @@ function UserPayment({ userLogin, signOut, userUpdate }){
 
                     <button onClick={() => handleSignOut()} className="signout-btn">Sign out</button>
 
-                    <button onClick={() => updatePayment(userLogin, userUpdate, navigate)} className="save-btn">Save</button>
+                    <button onClick={() => updatePayment(userLogin, userUpdate, navigate, setMessageAlert)} className="save-btn">Save</button>
 
                 </div>
             </div>
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

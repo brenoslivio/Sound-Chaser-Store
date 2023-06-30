@@ -12,6 +12,7 @@ async function getAdmins() {
 
 /* Administration page */
 function AdminsCRUD({ userAdmin }) {
+    const [messageAlert, setMessageAlert] = useState("");
     const [admins, setAdmins] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const adminsPerPage = 4;
@@ -69,7 +70,7 @@ function AdminsCRUD({ userAdmin }) {
 
     const handleRemoveAdminClick = (admin) => {
         if (admin.id === 0 || userAdmin.id === admin.id) {
-            alert("Cannot remove main admin or yourself.");
+            setMessageAlert("Cannot remove main admin or yourself.");
         } else {
             setSelectedAdmin(admin);
             setShowRemoveOverlay(true);
@@ -117,26 +118,26 @@ function AdminsCRUD({ userAdmin }) {
     
         // Validate name
         if (name.trim().length < 5 || name.trim().length > 32) {
-            alert("Name must be between 5 and 32 characters.");
+            setMessageAlert("Name must be between 5 and 32 characters.");
             return;
         }
     
         // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address.");
+            setMessageAlert("Please enter a valid email address.");
             return;
         }
     
         // Validate phone
         if (!/^\d+$/.test(phone)) {
-            alert("Phone must contain only digits.");
+            setMessageAlert("Phone must contain only digits.");
             return;
         }
     
         // Validate password
         if (password.length < 8 || password.length > 32) {
-            alert("Password must be between 8 and 32 characters.");
+            setMessageAlert("Password must be between 8 and 32 characters.");
             return;
         }
     
@@ -185,26 +186,26 @@ function AdminsCRUD({ userAdmin }) {
 
         // Validate name
         if (name.trim().length < 5 || name.trim().length > 32) {
-            alert("Name must be between 5 and 32 characters.");
+            setMessageAlert("Name must be between 5 and 32 characters.");
             return;
         }
 
         // Validate email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address.");
+            setMessageAlert("Please enter a valid email address.");
             return;
         }
 
         // Validate phone
         if (!/^\d+$/.test(phone)) {
-            alert("Phone must contain only digits.");
+            setMessageAlert("Phone must contain only digits.");
             return;
         }
 
         // Validate password
         if (password.length < 8 || password.length > 32) {
-            alert("Password must be between 8 and 32 characters.");
+            setMessageAlert("Password must be between 8 and 32 characters.");
             return;
         }
 
@@ -390,6 +391,14 @@ function AdminsCRUD({ userAdmin }) {
                         </div>
                     </div>
                 </div>
+            )}
+            {messageAlert && (
+                <div className="overlay">
+                    <div className="alert-content">
+                        <div className="message">{messageAlert}</div>
+                        <button onClick={() => setMessageAlert("")}> OK </button>
+                    </div>
+              </div>
             )}
         </div>
     );

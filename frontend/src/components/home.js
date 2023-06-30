@@ -12,8 +12,8 @@ async function getAlbums() {
 
 /* Home page */
 function Home({ userLogin, userUpdate }){
-    const [albums, setAlbums] = useState([]);
     const [messageAlert, setMessageAlert] = useState("");
+    const [albums, setAlbums] = useState([]);
 
     let navigate = useNavigate(); 
 
@@ -37,7 +37,6 @@ function Home({ userLogin, userUpdate }){
                 } else {
                     setMessageAlert("Item already added to the cart!");
                 }
-                
             } else {
                 setMessageAlert("Album out of stock!");
             }
@@ -104,7 +103,7 @@ function Home({ userLogin, userUpdate }){
                         <div className="message">{messageAlert}</div>
                         <button onClick={() => setMessageAlert("")}> OK </button>
                     </div>
-              </div>
+                </div>
             )}
         </div>
     )
