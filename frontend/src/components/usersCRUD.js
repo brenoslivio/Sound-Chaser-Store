@@ -93,7 +93,7 @@ function UsersCRUD({ onLogin, userAdmin }){
         }
     };
 
-    const handleCreateUserSubmit = async () => {
+    const handleCreateUserSubmit = async (users) => {
         // Perform validation for the new user inputs
         const name = document.getElementById("create-user-name").value;
         const email = document.getElementById("create-user-email").value;
@@ -111,6 +111,14 @@ function UsersCRUD({ onLogin, userAdmin }){
         if (!emailRegex.test(email)) {
             setMessageAlert("Please enter a valid email address.");
             return;
+        } else {
+            const emails = users.map(user => user.email);
+
+            const isRegistered = emails.includes(email);
+            if (isRegistered) {
+                setMessageAlert("Email address is already registered.");
+                return;
+            }
         }
         
         // Validate phone
@@ -165,7 +173,7 @@ function UsersCRUD({ onLogin, userAdmin }){
         }
     };
 
-    const handleEditUserSubmit = async () => {
+    const handleEditUserSubmit = async (users) => {
         // Perform validation for the edited user inputs
         const name = document.getElementById("edit-user-name").value;
         const email = document.getElementById("edit-user-email").value;
@@ -183,6 +191,14 @@ function UsersCRUD({ onLogin, userAdmin }){
         if (!emailRegex.test(email)) {
             setMessageAlert("Please enter a valid email address.");
             return;
+        } else {
+            const emails = users.map(user => user.email);
+
+            const isRegistered = emails.includes(email);
+            if (isRegistered) {
+                setMessageAlert("Email address is already registered.");
+                return;
+            }
         }
         
         // Validate phone
@@ -341,7 +357,7 @@ function UsersCRUD({ onLogin, userAdmin }){
                         />
                     </div>
                     <div className="button-group">
-                        <button onClick={handleCreateUserSubmit}>Create</button>
+                        <button onClick={() => handleCreateUserSubmit(users)}>Create</button>
                         <button onClick={() => setShowCreateOverlay(false)}>Cancel</button>
                     </div>
                     </div>
@@ -380,7 +396,7 @@ function UsersCRUD({ onLogin, userAdmin }){
                             />
                         </div>
                         <div className="button-group">
-                            <button onClick={handleEditUserSubmit}>Save</button>
+                            <button onClick={() => handleEditUserSubmit(users)}>Save</button>
                             <button onClick={() => setShowEditOverlay(false)}>Cancel</button>
                         </div>
                     </div>
