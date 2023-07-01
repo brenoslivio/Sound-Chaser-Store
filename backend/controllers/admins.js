@@ -14,6 +14,7 @@ exports.post = async (req, res) => {
         password
     };
 
+    // proper id is required
     if (!id) {
         res.status(422).json({ error: 'Invalid id' });
         return;
@@ -46,6 +47,7 @@ exports.getById = async (req, res) => {
     try {
         const admin = await Admin.findOne({ id: id });
 
+        // if we don't have an admin with that id
         if (!admin) {
             res.status(422).json({ message: 'Admin not found' });
             return;
@@ -74,7 +76,8 @@ exports.put = async (req, res) => {
 
     try {
         const updatedAdmin = await Admin.updateOne({ id: pid }, admin);
-
+        
+        // if we don't have an admin with that id
         if (updatedAdmin.matchedCount === 0) {
             res.status(422).json({ message: 'Admin not found' });
             return;
@@ -93,6 +96,7 @@ exports.delete = async (req, res) => {
 
     const admin = await Admin.findOne({ id: id });
 
+    // if we don't have an admin with that id
     if (!admin) {
         res.status(422).json({ message: 'Admin not found' });
         return;

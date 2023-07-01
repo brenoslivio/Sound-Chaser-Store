@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+// schema for album
 const schema = new Schema({
     id : {
         type: Number,

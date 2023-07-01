@@ -36,6 +36,8 @@ Breno Lívio Silva de Almeida, NUSP: 10276675.
 
     - [3.2. Milestone 2](#3.2)
 
+    - [3.3. Final Release](#3.3)
+
 - [4. Test Procedures](#4)
 
     - [4.1. Test Plan](#4.1)
@@ -147,7 +149,6 @@ Considering how the navigation bar is presented, we have bidirectional navigatio
 
 ## <a id="3" /> 3. Comments About the Code
 
-
 ### <a id="3.1" /> 3.1. Milestone 1
 
 For the first milestone, we created several HTML5/CSS3 files to develop the screens for the Single Page Application (SPA). 
@@ -160,9 +161,13 @@ Also, JavaScript was only used for login form overlay.
 
 The application was developed utilizing the React framework for the front-end implementation. The development process involved meticulous organization of the codebase into modular components, adhering to best practices for code structuring and maintainability. Additionally, the user interface design was carefully crafted to ensure a visually appealing and intuitive user experience.
 
+### <a id="3.3" /> 3.3. Final Release
+
+In the final version of our project, we took a significant step forward by integrating MongoDB as the backend for our React application using Node.js. This integration allowed us to seamlessly store, retrieve, and manipulate data, enhancing the overall functionality and user experience of our application.
+
 ## <a id="4" /> 4. Test Procedures
 
-Manual tests will be performed for login and registration, insertions and management of products, users, filtering, searching, and also simulation of purchases in various scenarios. For Milestone 2, only client-side tests are considered. No additional frameworks will be used for the tests.
+Manual tests will be performed for login and registration, insertions and management of products, users, filtering, searching, and also simulation of purchases in various scenarios. No additional frameworks will be used for the tests. These tests were implemented in the Milestone 2 and also verified in the final version with the MongoDB integration.
 
 ### <a id="4.1" /> 4.1. Test Plan
 
@@ -398,17 +403,17 @@ After carefully following the test plan, we had the following results:
 
 - Admin area
 
-    - **Create admins in the admin area**: Admins can successfully create admins putting valid name, e-mail, phone and password.
+    - **Create admins in the admin area**: Admins can successfully create admins putting valid name, e-mail (also checking if it's already registered), phone and password.
 
     - **Create products in the admin area**: Admins can successfully create products putting valid image, name, artist, year, genre, description, price, stock and number sold.
 
-    - **Create users in the admin area**: Admins can successfully create users putting valid name, e-mail, phone and password.
+    - **Create users in the admin area**: Admins can successfully create users putting valid name, e-mail (also checking if it's already registered), phone and password.
 
-    - **Read/Edit admins in the admin area**: Admins can successfully read and edit admins putting valid name, e-mail, phone and password.
+    - **Read/Edit admins in the admin area**: Admins can successfully read and edit admins putting valid name, e-mail (also checking if it's already registered), phone and password.
 
     - **Read/Edit products in the admin area**: Admins can successfully read and edit products putting valid image, name, artist, year, genre, description, price, stock and number sold.
 
-    - **Read/Edit users in the admin area**: Admins can successfully read and edit users putting valid name, e-mail, phone and password.
+    - **Read/Edit users in the admin area**: Admins can successfully read and edit users putting valid name, e-mail (also checking if it's already registered), phone and password.
 
     - **Remove admins in the admin area**: Admins can successfully remove admins except for themselves and the main admin.
 
@@ -440,6 +445,7 @@ An admin example you can use to access the administration area in `http://localh
 
 `E-mail: admin@soundchaser.com`, `Password: password`
 
+**Observation:** Note that every time the back-end is started, it will be uploaded a JSON file to populate the database with the intent of testing the application.
 
 ## <a id="6" /> 6. Problems
 
@@ -448,3 +454,5 @@ No major problems were encountered.
 ## <a id="7" /> 7. Comments
 
 Milestone 1 played a pivotal role in establishing the fundamental elements of the application, with a specific emphasis on HTML5 and CSS3 development. This initial milestone was crucial in laying the groundwork for subsequent milestones, particularly Milestone 2. In Milestone 2, we leveraged the pages created in the prior stage to construct a cohesive single-page application (SPA) within the context of contemporary web development frameworks. This milestone served to illuminate the significance of the Virtual DOM, a powerful concept that facilitates efficient rendering and updates within React applications. By delving into the Virtual DOM, we gained a deeper understanding of its integral role in optimizing the performance and responsiveness of the application.
+
+Following Milestone 2, for the final version, we embarked on integrating the React application with a MongoDB database, marking a significant step in our project's evolution. The integration between these two technologies enabled us to store and retrieve data seamlessly, enhancing the overall functionality and user experience of the application. Leveraging the power of React's component-based architecture, we were able to create dynamic and interactive user interfaces that seamlessly interacted with the MongoDB backend. This integration brought forth numerous advantages, such as efficient data management, real-time updates, and scalability. By leveraging React's declarative nature and MongoDB's flexible document model, we achieved a harmonious synergy between front-end and back-end development, enabling smooth data flow and ensuring data consistency. This integration played a pivotal role in transforming our project into a robust and feature-rich application, laying the foundation for future enhancements and expansions.

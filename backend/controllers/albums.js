@@ -7,15 +7,17 @@ exports.post = async (req, res) => {
 
     const {id, name, artist, year, genre, img, description, price, stock, sold, date_added} = req.body;
 
+    // properly deal with base64 encoded image data
     const base64Data = img.replace(/^data:image\/\w+;base64,/, '');
     const buffer = Buffer.from(base64Data, 'base64');
 
     const filePath = `../frontend/public/imgs/albums/${name.toLowerCase().replace(/\s/g, '_')}_${id}.png`;
 
+    // logic to save image data as file
     fs.writeFile(filePath, buffer, (error) => {
+        // Handle the error
         if (error) {
           console.error('Error creating image file:', error);
-          // Handle the error
           return;
         }
         console.log('Image file created successfully');
@@ -37,6 +39,7 @@ exports.post = async (req, res) => {
         date_added
     };
 
+    // proper id is required
     if (!id) {
         res.status(422).json({ error: 'Invalid id' });
     }
@@ -68,6 +71,7 @@ exports.getById = async (req, res) => {
     try {
         const album = await Album.findOne({ id: id });
 
+        // if we don't have an album with that id
         if (!album) {
             res.status(422).json(null);
             return;
@@ -81,7 +85,7 @@ exports.getById = async (req, res) => {
 
 // Update
 
-// All albums
+// Update all albums
 exports.put = async (req, res) => {
     console.log('PUT: /albums');
 
@@ -122,6 +126,7 @@ exports.putById = async (req, res) => {
 
     let img_file;
 
+    // logic to save image data as file
     if (img.includes("/imgs/albums")) {
         const parts = img.split("/");  // Split the URL by slashes
         img_file = `/imgs/albums/${parts.pop()}`; 
@@ -160,6 +165,7 @@ exports.putById = async (req, res) => {
     try {
         const updatedAlbum = await Album.updateOne({ id: pid }, album);
 
+        // if we don't have an album with that id
         if (updatedAlbum.matchedCount === 0) {
             res.status(422).json({ message: 'Album not found' });
             return;
@@ -177,6 +183,7 @@ exports.delete = async (req, res) => {
 
     const album = await Album.findOne({ id: id });
 
+    // if we don't have an album with that id
     if (!album) {
         res.status(422).json({ message: 'Album not found' });
         return;

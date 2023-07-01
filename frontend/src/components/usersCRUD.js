@@ -191,7 +191,10 @@ function UsersCRUD({ onLogin, userAdmin }){
         if (!emailRegex.test(email)) {
             setMessageAlert("Please enter a valid email address.");
             return;
-        } else {
+        } 
+        
+        // Check if admin wants to edit email
+        if (selectedUser.email !== email) {
             const emails = users.map(user => user.email);
 
             const isRegistered = emails.includes(email);

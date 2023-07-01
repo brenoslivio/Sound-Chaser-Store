@@ -18,6 +18,7 @@ exports.post = async (req, res) => {
         cart
     };
 
+    // proper id is required
     if (!id) {
         res.status(422).json({ error: 'Invalid id' });
         return;
@@ -50,6 +51,7 @@ exports.getById = async (req, res) => {
     try {
         const user = await User.findOne({ id: id });
 
+        // if we don't have an user with that id
         if (!user) {
             res.status(422).json(null);
             return;
@@ -83,6 +85,7 @@ exports.put = async (req, res) => {
     try {
         const updatedUser = await User.updateOne({ id: pid }, user);
 
+        // if we don't have an user with that id
         if (updatedUser.matchedCount === 0) {
             res.status(422).json({ message: 'User not found' });
             return;
@@ -100,6 +103,7 @@ exports.delete = async (req, res) => {
 
     const user = await User.findOne({ id: id });
 
+    // if we don't have an user with that id
     if (!user) {
         res.status(422).json({ message: 'User not found' });
         return;

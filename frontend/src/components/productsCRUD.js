@@ -472,7 +472,7 @@ function ProductsCRUD({ onLogin, userAdmin, customerLogin }){
                             id="create-product-description"
                             rows="5"
                             cols="20"
-                            maxLength="128"
+                            maxLength="256"
                             ></textarea>
                         </div>
                         <div className="input-group">
@@ -558,7 +558,7 @@ function ProductsCRUD({ onLogin, userAdmin, customerLogin }){
                                 id="edit-product-description"
                                 rows="5"
                                 cols="20"
-                                maxLength="128"
+                                maxLength="256"
                             ></textarea>
                         </div>
                         <div className="input-group">
