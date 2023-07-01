@@ -1,6 +1,17 @@
 import '../css/admin.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+
+/* Retrieve specific admin by id */
+async function getAdmin(id) {
+    const admin = await fetch(`http://localhost:8000/admins/${id}`, {cache: "reload"})
+                              .then(response => response.json());
+    if (!admin) {
+      return;
+    }
+    
+    return admin;
+  }
 
 async function checkLogin(onLogin, navigate, setMessageAlert) {
     const email = document.getElementById('admin_mail').value;
@@ -39,6 +50,19 @@ function Admin({ onLogin }){
             setMessageAlert(onLogin, navigate);
         }
     };
+
+    useEffect(() => {
+        let local_admin = JSON.parse(localStorage.getItem("admin"));
+        if (local_admin) {
+            getAdmin(local_admin.id)
+            .then(login => {
+                console.log("Login successful");
+                onLogin(login); // Set the admin
+                navigate("/admin/products");
+            })
+            .catch(error => console.error(error));
+        }
+    }, []);
 
     return (
         <div className="admin-page">

@@ -22,7 +22,7 @@ import UsersCRUD from './components/usersCRUD';
 
 /* Retrieve specific user by id */
 async function getUser(id) {
-  const user = await fetch("http://localhost:8000/users/" + id, {cache: "reload"})
+  const user = await fetch(`http://localhost:8000/users/${id}`, {cache: "reload"})
                             .then(response => response.json());
   if (!user) {
     return;
@@ -107,6 +107,7 @@ function App() {
 
   const handleAdmin = (value) => {
     setUser('');
+    localStorage.setItem("admin", JSON.stringify(value));
     setAdmin(value);
   };
 
@@ -164,10 +165,10 @@ function App() {
               
               {/* Admin area */}
               <Route path="/admin" element={<Admin onLogin={handleAdmin}/>} />
-              <Route path="/admin/admins" element={<AdminsCRUD userAdmin={admin} />} />
-              <Route path="/admin/products" element={<ProductsCRUD userAdmin={admin} albumUpdate={handleAlbums}/>} />
-              <Route path="/admin/users" element={<UsersCRUD userAdmin={admin}/>} />
-
+              <Route path="/admin/products" element={<ProductsCRUD onLogin={handleAdmin} userAdmin={admin} albumUpdate={handleAlbums} customerLogin={setUser}/>} />
+              <Route path="/admin/users" element={<UsersCRUD onLogin={handleAdmin} userAdmin={admin}/>} />
+              <Route path="/admin/admins" element={<AdminsCRUD onLogin={handleAdmin} userAdmin={admin} />} />
+              
               {/* Redirect if page doesn't exist */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

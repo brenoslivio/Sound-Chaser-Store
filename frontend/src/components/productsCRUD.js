@@ -11,7 +11,7 @@ async function getAlbums() {
 }
 
 /* Admininistration page */
-function ProductsCRUD({ userAdmin }){
+function ProductsCRUD({ onLogin, userAdmin, customerLogin }){
     const [messageAlert, setMessageAlert] = useState("");
     const [products, setProducts] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,26 +47,12 @@ function ProductsCRUD({ userAdmin }){
 
     useEffect(() => {
         getAlbums()
-        .then(albums => {setProducts(albums)})
+        .then(albums => {
+            customerLogin("");
+            setProducts(albums);
+        })
         .catch(error => console.error(error));
     }, []);
-
-    useEffect(() => {
-        const handleClickOutside = (e) => {
-            const overlayContent = document.querySelector('.overlay-content');
-            if (overlayContent && !overlayContent.contains(e.target)) {
-                setShowRemoveOverlay(false);
-                setShowCreateOverlay(false);
-                setShowEditOverlay(false);
-            }
-        };
-
-        window.addEventListener('mousedown', handleClickOutside);
-
-        return () => {
-            window.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [showRemoveOverlay, showCreateOverlay, showEditOverlay]);
 
     useEffect(() => {
         if (showEditOverlay) {
@@ -99,6 +85,11 @@ function ProductsCRUD({ userAdmin }){
     const handleEditProductClick = (album) => {
         setSelectedProduct(album);
         setShowEditOverlay(true);
+    };
+
+    const handleSignOutClick = () => {
+        onLogin("");
+        navigate("/admin");
     };
 
     const handleRemoveProductSubmit = async () => {
@@ -391,6 +382,12 @@ function ProductsCRUD({ userAdmin }){
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
                         </div>
+                        <div className="signout-button" onClick={handleSignOutClick} >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="#FFFFFF" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                            <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                        </div>
                         {/* Pagination system for multiple products */}
                         <div className="pagination">
                             {Array.from({ length: Math.ceil(products.length / productsPerPage) }, (_, i) => (
@@ -404,8 +401,6 @@ function ProductsCRUD({ userAdmin }){
                             ))}
                         </div>
                     </div>
-  
-
                 </div>
             </div>
             {showRemoveOverlay && (
@@ -592,6 +587,7 @@ function ProductsCRUD({ userAdmin }){
                             <input
                                 type="date"
                                 id="edit-product-date"
+                                // onClick={(e) => e.preventDefault()}
                             />
                         </div>
                         <div className="button-group">

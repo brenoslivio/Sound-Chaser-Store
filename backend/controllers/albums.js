@@ -123,7 +123,7 @@ exports.putById = async (req, res) => {
     let img_file;
 
     if (img.includes("/imgs/albums")) {
-        const parts = url.split("/");  // Split the URL by slashes
+        const parts = img.split("/");  // Split the URL by slashes
         img_file = `/imgs/albums/${parts.pop()}`; 
     } else {
         const base64Data = img.replace(/^data:image\/\w+;base64,/, '');
